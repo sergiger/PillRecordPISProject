@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Today" android:id="@+id/action_Today"/>
+    <item android:title="Calendar" android:id="@+id/action_calendar"/>
+    <item android:title="Statistcs" android:id="@+id/action_statistcs"/>
+    <item android:title="Team" android:id="@+id/action_team"/>
+    <item android:title="Pills" android:id="@+id/action_pills"/>
+</menu>
