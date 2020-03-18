@@ -8,9 +8,22 @@
     android:weightSum="3"
     tools:context=".MainActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="TODAY"
+
+        />
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,13 +57,12 @@
     </android.support.constraint.ConstraintLayout>
 
 
-
-
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigationBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/dialog_holo_light_frame"
+        android:background="@android:color/background_light"
+        android:fadingEdge="horizontal"
         android:scrollbarAlwaysDrawHorizontalTrack="false"
         android:visibility="visible"
         app:labelVisibilityMode="labeled"
