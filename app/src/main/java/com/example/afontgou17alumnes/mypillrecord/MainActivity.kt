@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
@@ -26,6 +27,8 @@ class MainActivity : AppCompatActivity() {
            R.id.action_calendar->{
                replaceFragment(Calendar_fragment())
                return@OnNavigationItemSelectedListener true
+               //val new_intent = Intent(this, TempActivity::class.java)
+               //startActivity(new_intent)
            }
            R.id.action_team->{
                replaceFragment(Team_fragment())
