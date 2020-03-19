@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity_Register4"></activity>
+        <activity android:name=".ajustes_activity"></activity>
+        <activity android:name=".activity_Register4" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
-        <activity android:name=".TempActivity"></activity>
-        <activity android:name=".MainActivity">
+            android:label="MyPillRecord" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".TempActivity" />
+        <activity android:name=".MainActivity"></activity>
     </application>
-
 </manifest>
