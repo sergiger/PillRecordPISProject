@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.app.ActivityCompat
+import android.view.Menu
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.ui.login.*
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar)
 
         navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         replaceFragment(Today_Fragment())
@@ -59,5 +62,9 @@ class MainActivity : AppCompatActivity() {
         val fragmentTransaction  = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)
         fragmentTransaction.commit()
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu,menu)
+        return true
     }
 }
