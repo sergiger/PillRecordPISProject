@@ -1,18 +1,16 @@
 package com.example.afontgou17alumnes.mypillrecord
 
-import android.app.Activity
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import android.support.v4.app.ActivityCompat
 import android.view.Menu
-import android.widget.ImageView
-import android.widget.Toast
-import com.example.afontgou17alumnes.mypillrecord.ui.login.*
+import com.example.afontgou17alumnes.mypillrecord.Pill.Pill_fragment
+import com.example.afontgou17alumnes.mypillrecord.calendar.Calendar_fragment
+import com.example.afontgou17alumnes.mypillrecord.statistics.Statistics_fragment
+import com.example.afontgou17alumnes.mypillrecord.team.Team_fragment
+import com.example.afontgou17alumnes.mypillrecord.today.Today_Fragment
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.today__fragment.*
 
 
 class MainActivity : AppCompatActivity() {

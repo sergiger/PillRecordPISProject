@@ -1,4 +1,4 @@
-package com.example.afontgou17alumnes.mypillrecord.ui.login
+package com.example.afontgou17alumnes.mypillrecord.statistics
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -9,24 +9,23 @@ import android.view.ViewGroup
 
 import com.example.afontgou17alumnes.mypillrecord.R
 
-class Team_fragment : Fragment() {
+class Statistics_fragment : Fragment() {
 
     companion object {
-        fun newInstance() = Team_fragment()
+        fun newInstance() =
+            Statistics_fragment()
     }
 
-    private lateinit var viewModel: TeamFragmentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.team_fragment_fragment, container, false)
+        return inflater.inflate(R.layout.statistics_fragment_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(TeamFragmentViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
