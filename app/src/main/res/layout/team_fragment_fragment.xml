@@ -8,6 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="team" />
+        android:text="team"
+        android:background="@color/cardview_light_background"/>
 
 </FrameLayout>

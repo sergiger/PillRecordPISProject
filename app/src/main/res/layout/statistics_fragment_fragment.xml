@@ -8,6 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Statistics" />
+        android:text="Statistics"
+        android:background="@color/colorApp3"/>
 
 </FrameLayout>

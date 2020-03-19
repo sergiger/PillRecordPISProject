@@ -8,6 +8,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="today" />
+        android:text="today"
+        android:background="@color/cardview_dark_background"/>
+
+    <Button
+        android:id="@+id/btnProvetes"
+        android:layout_width="352dp"
+        android:layout_height="283dp"
+        android:background="@color/colorApp3"
+        android:text="Button" />
 
 </FrameLayout>

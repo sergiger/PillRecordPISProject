@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.ui.login.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.today__fragment.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -52,11 +53,7 @@ class MainActivity : AppCompatActivity() {
         navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         replaceFragment(Today_Fragment())
 
-        btnProvetes.setOnClickListener {
-            Toast.makeText(this, "Primera prova", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, activity_Register4::class.java)
-            startActivity(intent);
-        }
+
     }
     private fun replaceFragment(fragment: Fragment){
         val fragmentTransaction  = supportFragmentManager.beginTransaction()
