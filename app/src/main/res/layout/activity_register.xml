@@ -121,9 +121,9 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Confirm"
             android:onClick="confirmInput"
             tools:ignore="OnClick"
+            android:text="Confirm"
             android:background="@drawable/button_background"></Button>
     </LinearLayout>
 
