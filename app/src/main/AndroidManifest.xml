@@ -10,22 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity_Register4"></activity>
-        <activity android:name=".activity_today" />
-        <activity android:name=".activity_register3" />
-        <activity android:name=".Activity_register" />
+        <activity android:name=".activity_today"></activity>
+        <activity android:name=".activity_register3"></activity>
+        <activity android:name=".Activity_register"></activity>
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login"></activity>
-
-            android:label="@string/title_activity_login" />
         <activity
             android:name=".Main2Activity"
-            android:label="@string/title_activity_main2" />
-        <activity android:name=".TempActivity" />
+            android:label="@string/title_activity_main2"></activity>
+        <activity android:name=".TempActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

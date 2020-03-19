@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.afontgou17alumnes.mypillrecord.R
+import kotlinx.android.synthetic.main.calendar_fragment_fragment.*
+
 
 class Calendar_fragment : Fragment() {
 
@@ -16,6 +18,7 @@ class Calendar_fragment : Fragment() {
             Calendar_fragment()
     }
 
+    private lateinit var viewModel: CalendarFragmentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +29,14 @@ class Calendar_fragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        // Alteracions abaix
+        toolBar.setTitle("TabLayout")
+        // setSupportActionBar(toolBar)
+        //val fragmentAdapter = PagerAdapter(supportFragmentManager)
+        //viewPager.adapter = fragmentAdapter
+        tabLayout.setupWithViewPager(viewPager)
+        // Fins aqui
+        viewModel = ViewModelProviders.of(this).get(CalendarFragmentViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
