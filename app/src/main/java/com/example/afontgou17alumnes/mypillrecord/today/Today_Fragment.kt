@@ -9,6 +9,7 @@ import android.view.ViewGroup
 
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.activity_Register4
+import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.today__fragment.*
 
 /**
@@ -30,6 +31,13 @@ class Today_Fragment : Fragment() {
             override fun onClick(view: View): Unit {
                 // Handler code here.
                 val intent = Intent(context, activity_Register4::class.java);
+                startActivity(intent);
+            }
+        })
+        btnProvetes2.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(view: View): Unit {
+                // Handler code here.
+                val intent = Intent(context, LoginActivity::class.java);
                 startActivity(intent);
             }
         })
