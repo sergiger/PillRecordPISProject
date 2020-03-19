@@ -18,4 +18,12 @@
         android:background="@color/colorApp3"
         android:text="Button" />
 
+    <Button
+        android:id="@+id/btnProvetes2"
+        android:layout_width="352dp"
+        android:layout_height="283dp"
+        android:background="@color/colorApp3"
+        android:text="Button2"
+        android:layout_gravity="bottom"/>
+
 </FrameLayout>

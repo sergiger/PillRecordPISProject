@@ -118,6 +118,7 @@
             android:text="Confirm"
             android:onClick="confirmInput"
             tools:ignore="OnClick"
-            android:background="@drawable/button_background"></Button>
+            android:background="@drawable/button_background"
+            android:id="@+id/btn_confirm_register"></Button>
     </LinearLayout>
 </android.support.v7.widget.LinearLayoutCompat>

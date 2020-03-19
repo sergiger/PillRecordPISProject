@@ -3,6 +3,7 @@ package com.example.afontgou17alumnes.mypillrecord.ui.login
 import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v7.app.AppCompatActivity
@@ -14,8 +15,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.example.afontgou17alumnes.mypillrecord.MainActivity
 
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.activity_Register4
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -93,6 +97,13 @@ class LoginActivity : AppCompatActivity() {
             login.setOnClickListener {
                 loading.visibility = View.VISIBLE
                 loginViewModel.login(username.text.toString(), password.text.toString())
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                startActivity(intent);
+            }
+            btn_register.setOnClickListener {
+
+                val intent = Intent(this@LoginActivity, activity_Register4::class.java)
+                startActivity(intent);
             }
         }
     }
