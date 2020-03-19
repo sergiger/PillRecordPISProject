@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout"
+    android:id="@+id/fragmentContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="3"
@@ -71,5 +71,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation_menu"
         tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnProvetes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ButtonProves"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="282dp" />
 
 </android.support.constraint.ConstraintLayout>
