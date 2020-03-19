@@ -5,7 +5,11 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.view.Menu
+import com.example.afontgou17alumnes.mypillrecord.Pill.Pill_fragment
 import com.example.afontgou17alumnes.mypillrecord.calendar.Calendar_fragment
+import com.example.afontgou17alumnes.mypillrecord.statistics.Statistics_fragment
+import com.example.afontgou17alumnes.mypillrecord.team.Team_fragment
+import com.example.afontgou17alumnes.mypillrecord.today.Today_Fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.login.*
 import kotlinx.android.synthetic.main.activity_main.*
 
