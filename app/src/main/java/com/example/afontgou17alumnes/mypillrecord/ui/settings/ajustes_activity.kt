@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.ListView
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
+import com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation.legal_main
 import kotlinx.android.synthetic.main.ajustes_activity.*
 
 class ajustes_activity : AppCompatActivity() {
@@ -44,7 +45,8 @@ class ajustes_activity : AppCompatActivity() {
                 //a entrar a la conta amb el mateix user
             }
             else if(position==3){//Legal information
-
+                val intent = Intent(this, legal_main::class.java);
+                startActivity(intent);
             }
             else if(position==4){//versió, aquí no sé que posar-hi ara
 
