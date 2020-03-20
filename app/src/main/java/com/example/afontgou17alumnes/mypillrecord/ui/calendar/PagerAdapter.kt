@@ -1,4 +1,4 @@
-package com.example.afontgou17alumnes.mypillrecord.calendar
+package com.example.afontgou17alumnes.mypillrecord.ui.calendar
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

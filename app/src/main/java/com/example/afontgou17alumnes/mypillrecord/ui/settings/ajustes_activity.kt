@@ -1,7 +1,8 @@
-package com.example.afontgou17alumnes.mypillrecord
+package com.example.afontgou17alumnes.mypillrecord.ui.settings
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.afontgou17alumnes.mypillrecord.R
 
 class ajustes_activity : AppCompatActivity() {
 

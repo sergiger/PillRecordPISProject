@@ -18,7 +18,7 @@ import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.activity_Register4
+import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {

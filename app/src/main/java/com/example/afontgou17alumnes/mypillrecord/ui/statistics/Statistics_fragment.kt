@@ -1,4 +1,4 @@
-package com.example.afontgou17alumnes.mypillrecord.statistics
+package com.example.afontgou17alumnes.mypillrecord.ui.statistics
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,8 +10,6 @@ import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
-import java.text.DateFormat
-import java.time.LocalDate
 import java.util.*
 
 
