@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -24,9 +25,15 @@ class Pill_fragment : Fragment() {
         return inflater.inflate(R.layout.pill_fragment_fragment, container, false)
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         // TODO: Use the ViewModel
+    }
+    fun afegirTherapy(view: View) {
+
+        //val intent = Intent(this,pillPlanificar_fragment::class.java)
+        //startActivity(intent)
     }
 
 }
