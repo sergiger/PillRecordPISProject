@@ -24,6 +24,12 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/back_icon"
                 android:id="@+id/back_legal_icon"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LEGAL INFORM"
+                android:textSize="30dp">
+            </TextView>
         </android.support.v7.widget.Toolbar>
         <LinearLayout
             android:layout_width="match_parent"
