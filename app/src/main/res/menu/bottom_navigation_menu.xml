@@ -2,24 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_Today"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="Today"
+        android:icon="@drawable/today_icon"
+        android:title="---------------------------"
         android:visible="true" />
     <item
-        android:title="Calendar"
+        android:title="---------------------------"
         android:id="@+id/action_calendar"
-        android:icon="@drawable/ic_home_black_24dp"/>
+        android:icon="@drawable/calendar_icon"
+        android:visible="true"/>
     <item
         android:id="@+id/action_statistcs"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="Statistcs"
-        android:visible="true" />
+        android:icon="@drawable/statistics_icon"
+        android:title="---------------------------"
+        android:visible="true"
+        />
     <item
-        android:title="Team"
+        android:title="---------------------------"
         android:id="@+id/action_team"
-        android:icon="@drawable/ic_home_black_24dp"/>
+        android:icon="@drawable/team_icon"
+        android:visible="true"/>
     <item
-        android:title="Pills"
+        android:title="---------------------------"
         android:id="@+id/action_pills"
-        android:icon="@drawable/ic_home_black_24dp"/>
+        android:icon="@drawable/pills_icon"
+        android:visible="true" />
 </menu>

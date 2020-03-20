@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.afontgou17alumnes.mypillrecord.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 class Pill_fragment : Fragment() {
 
