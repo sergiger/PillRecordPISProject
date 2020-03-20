@@ -24,24 +24,29 @@ class MainActivity : AppCompatActivity() {
        when(item.itemId){
            R.id.action_Today->{
                replaceFragment(Today_Fragment())
+               Toast.makeText(this,"Today",Toast.LENGTH_SHORT).show()
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_calendar->{
                replaceFragment(Calendar_fragment())
+               Toast.makeText(this,"Calendar",Toast.LENGTH_SHORT).show()
                return@OnNavigationItemSelectedListener true
                //val new_intent = Intent(this, TempActivity::class.java)
                //startActivity(new_intent)
            }
            R.id.action_team->{
                replaceFragment(Team_fragment())
+               Toast.makeText(this,"Team",Toast.LENGTH_SHORT).show()
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_pills->{
                replaceFragment(Pill_fragment())
+               Toast.makeText(this,"Add",Toast.LENGTH_SHORT).show()
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_statistcs-> {
                replaceFragment(Statistics_fragment())
+               Toast.makeText(this,"Statistics",Toast.LENGTH_SHORT).show()
                return@OnNavigationItemSelectedListener true
            }
        }
