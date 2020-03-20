@@ -1,10 +1,11 @@
 package com.example.afontgou17alumnes.mypillrecord
 
+import android.app.PendingIntent.getActivity
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -25,11 +26,13 @@ class MainActivity : AppCompatActivity() {
            R.id.action_Today->{
                replaceFragment(Today_Fragment())
                Toast.makeText(this,"Today",Toast.LENGTH_SHORT).show()
+               toolbar.title = "TODAY"
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_calendar->{
                replaceFragment(Calendar_fragment())
                Toast.makeText(this,"Calendar",Toast.LENGTH_SHORT).show()
+               toolbar.title ="CALENDAR"
                return@OnNavigationItemSelectedListener true
                //val new_intent = Intent(this, TempActivity::class.java)
                //startActivity(new_intent)
@@ -37,16 +40,19 @@ class MainActivity : AppCompatActivity() {
            R.id.action_team->{
                replaceFragment(Team_fragment())
                Toast.makeText(this,"Team",Toast.LENGTH_SHORT).show()
+               toolbar.title ="TEAM"
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_pills->{
                replaceFragment(Pill_fragment())
                Toast.makeText(this,"Add",Toast.LENGTH_SHORT).show()
+               toolbar.title ="PILLS"
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_statistcs-> {
                replaceFragment(Statistics_fragment())
                Toast.makeText(this,"Statistics",Toast.LENGTH_SHORT).show()
+               toolbar.title ="STATISTICS"
                return@OnNavigationItemSelectedListener true
            }
        }
@@ -79,6 +85,9 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this,"opcions",Toast.LENGTH_SHORT).show()
             val intent = Intent(this, ajustes_activity::class.java);
             startActivity(intent);
+        }
+        if(id== R.id.pdf_item){
+            Toast.makeText(this,"PDF is being generated",Toast.LENGTH_LONG).show()
         }
         return super.onOptionsItemSelected(item)
     }
