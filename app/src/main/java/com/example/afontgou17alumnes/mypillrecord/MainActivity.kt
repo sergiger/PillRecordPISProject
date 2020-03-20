@@ -8,12 +8,12 @@ import android.support.v4.app.Fragment
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import com.example.afontgou17alumnes.mypillrecord.Pill.Pill_fragment
-import com.example.afontgou17alumnes.mypillrecord.calendar.Calendar_fragment
-import com.example.afontgou17alumnes.mypillrecord.statistics.Statistics_fragment
-import com.example.afontgou17alumnes.mypillrecord.team.Team_fragment
-import com.example.afontgou17alumnes.mypillrecord.today.Today_Fragment
-import com.example.afontgou17alumnes.mypillrecord.ui.login.*
+import com.example.afontgou17alumnes.mypillrecord.ui.Pill.Pill_fragment
+import com.example.afontgou17alumnes.mypillrecord.ui.calendar.Calendar_fragment
+import com.example.afontgou17alumnes.mypillrecord.ui.settings.ajustes_activity
+import com.example.afontgou17alumnes.mypillrecord.ui.statistics.Statistics_fragment
+import com.example.afontgou17alumnes.mypillrecord.ui.team.Team_fragment
+import com.example.afontgou17alumnes.mypillrecord.ui.today.Today_Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 

@@ -1,4 +1,4 @@
-package com.example.afontgou17alumnes.mypillrecord.calendar
+package com.example.afontgou17alumnes.mypillrecord.ui.calendar
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,14 +11,14 @@ import com.example.afontgou17alumnes.mypillrecord.R
 /**
  * A simple [Fragment] subclass.
  */
-class FragmentThree : Fragment() {
+class FragmentOne : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_three, container, false)
+        return inflater.inflate(R.layout.fragment_one, container, false)
     }
 
 }

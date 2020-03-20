@@ -1,8 +1,10 @@
-package com.example.afontgou17alumnes.mypillrecord
+package com.example.afontgou17alumnes.mypillrecord.ui.register
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.afontgou17alumnes.mypillrecord.MainActivity
+import com.example.afontgou17alumnes.mypillrecord.R
 import kotlinx.android.synthetic.main.activity__register4.*
 
 class activity_Register4 : AppCompatActivity() {
