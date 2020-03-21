@@ -27,11 +27,7 @@ class FragmentTwo : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val calendar : CalendarView? = view?.findViewById(R.id.calendarView)
         createMonthList()
-        calendar?.setOnClickListener{
-            createMonthList()
-        }
     }
 
     fun createMonthList() {
