@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
            R.id.action_pills->{
                replaceFragment(Pill_fragment())
                Toast.makeText(this,"Add",Toast.LENGTH_SHORT).show()
-               toolbar.title ="PILLS"
+               toolbar.title ="THERAPY"
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_statistcs-> {
