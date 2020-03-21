@@ -44,7 +44,6 @@ class Calendar_fragment : Fragment() {
         viewPager!!.adapter = adapter
 
         viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
-
         tabLayout!!.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab) {
                 viewPager!!.currentItem = tab.position
