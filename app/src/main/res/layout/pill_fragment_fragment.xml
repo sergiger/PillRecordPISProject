@@ -28,22 +28,19 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="2"
+                android:backgroundTint="@color/cardview_light_background"
                 android:text="    +       Add"
                 android:textAlignment="textStart"
                 android:textAllCaps="false"
                 android:textSize="20dp"
-                android:backgroundTint="@color/cardview_light_background"
-                android:onClick="afegirTherapy"
-                ></Button>
-
-            <TextView
+               ></Button>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPagerTherapy"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tests"
-                android:layout_gravity="center"
-                android:textSize="30dp"
-                android:layout_weight="2"
-                />
+                android:layout_height="0dp"
+                android:layout_weight="30"
+                >
+            </android.support.v4.view.ViewPager>
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 
