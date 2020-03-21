@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
                replaceFragment(Calendar_fragment())
                Toast.makeText(this,"Calendar",Toast.LENGTH_SHORT).show()
                toolbar.title ="CALENDAR"
+               //Calendar_fragment().viewPager!!.setCurrentItem(0)
                return@OnNavigationItemSelectedListener true
                //val new_intent = Intent(this, TempActivity::class.java)
                //startActivity(new_intent)
