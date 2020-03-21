@@ -2,6 +2,7 @@ package com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.R
 import kotlinx.android.synthetic.main.legal_main_activity.*
@@ -14,12 +15,9 @@ class extra_information : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.extra_information_activity)
 
-        back_legal_icon.setOnClickListener {
+        val image_view = findViewById(R.id.back_icon) as ImageView
+        image_view.setOnClickListener {
             onBackPressed()
-        }
-
-        print_icon.setOnClickListener {
-            Toast.makeText(this,"downloading PDF", Toast.LENGTH_SHORT).show()
         }
     }
 }

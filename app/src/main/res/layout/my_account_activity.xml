@@ -8,7 +8,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="10"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
@@ -30,7 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/back_icon"
-                    android:id="@+id/back_icon" />
+                    android:id="@+id/back_iicon" />
                 <TextView
                     android:layout_weight="6"
                     android:layout_width="wrap_content"
@@ -40,19 +39,16 @@
                     android:textAlignment="center">
                 </TextView>
             </LinearLayout>
+
+
         </android.support.v7.widget.Toolbar>
-        <LinearLayout
+
+        <ListView
+            android:id="@+id/opcions_menuu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            tools:ignore="MissingConstraints">
-            <ListView
-                android:id="@+id/opcions_menu"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="6"></ListView>
-        </LinearLayout>
+            android:layout_height="wrap_content">
+
+        </ListView>
     </LinearLayout>
 
 

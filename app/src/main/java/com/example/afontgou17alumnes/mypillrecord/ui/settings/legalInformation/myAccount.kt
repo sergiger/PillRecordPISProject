@@ -4,11 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.ajustes_activity.*
+import kotlinx.android.synthetic.main.extra_information_activity.*
 import kotlinx.android.synthetic.main.legal_main_activity.*
+import kotlinx.android.synthetic.main.my_account_activity.*
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import android.widget.Toast
+
 
 class myAccount : AppCompatActivity() {
 
@@ -16,22 +22,22 @@ class myAccount : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_account_activity)
 
-        back_icon.setOnClickListener {
+        back_iicon.setOnClickListener {
             onBackPressed()
         }
 
         val arrayAdapter: ArrayAdapter<*>
         val users = arrayOf("Change Pasword", "Close Session",
             "Extra information","Gender","Year of birth", "Height","weight")
-
         // access the listView from xml file
         var mListView = findViewById<ListView>(R.id.opcions_menu)
         arrayAdapter = ArrayAdapter(this,
             android.R.layout.simple_list_item_1, users)
-        mListView.adapter = arrayAdapter
-        opcions_menu.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+        opcions_menuu.adapter = arrayAdapter
+        opcions_menuu.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             onSelectedMenu(position)
         }
+
     }
     private fun onSelectedMenu(position: Int){
         if(position==0){//Change Pasword
@@ -43,7 +49,7 @@ class myAccount : AppCompatActivity() {
             Toast.makeText(this,"sesion closed", Toast.LENGTH_SHORT).show()
         }
         else if(position==2){//Extra information
-            val intent = Intent(this, LoginActivity::class.java);
+            val intent = Intent(this, extra_information::class.java);
             startActivity(intent);
             //Aqui s'haurà de posar que el user i la contrassenya son null, per a que no puguis tornar
             //a entrar a la conta amb el mateix user
