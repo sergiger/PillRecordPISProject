@@ -8,24 +8,25 @@
     android:background="@color/colorApp3">
 
     <LinearLayout
-        android:weightSum="40"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="top"
         android:orientation="vertical"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:weightSum="80"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_weight="10"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
                 android:id="@+id/left_arrow"
@@ -39,9 +40,81 @@
                 android:text="           TO PLAN"
                 android:textColor="@color/cardview_light_background"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                ></TextView>
+                android:textStyle="bold"></TextView>
         </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"></TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="20">
+
+            <Button
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="19"
+                android:backgroundTint="@color/cardview_light_background"
+                android:drawableLeft="@drawable/pill"
+                android:text="     Medication"
+                android:textAlignment="textStart"
+                android:textSize="20dp"
+                android:textAllCaps="false"
+                android:id="@+id/btn_medicacio"
+                >
+            </Button>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="20">
+
+            <Button
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="19"
+                android:backgroundTint="@color/cardview_light_background"
+                android:drawableLeft="@drawable/pulse"
+                android:text="     Measurements"
+                android:textAlignment="textStart"
+                android:textSize="20dp"
+                android:textAllCaps="false"
+                ></Button>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="20">
+
+            <Button
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="19"
+                android:backgroundTint="@color/cardview_light_background"
+                android:drawableLeft="@drawable/olimpic"
+                android:text="     Activity"
+                android:textAlignment="textStart"
+                android:textSize="20dp"
+                android:textAllCaps="false"
+                ></Button>
+        </LinearLayout>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
