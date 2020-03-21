@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter
 class PagerAdapter(val myContext: Calendar_fragment, fm: FragmentManager?, internal var totalTabs: Int) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
-        return when (position) {
+        when (position) {
             0-> { return FragmentOne() }
             1-> { return FragmentTwo() }
             else-> { return FragmentThree() }
