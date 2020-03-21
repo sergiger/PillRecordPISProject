@@ -5,8 +5,11 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
 
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.model.BasicMedicineReminder
+import java.time.LocalTime
 
 /**
  * A simple [Fragment] subclass.
@@ -21,4 +24,31 @@ class FragmentOne : Fragment() {
         return inflater.inflate(R.layout.fragment_one, container, false)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        createWeekList()
+    }
+
+    fun createWeekList(){
+        val medicineList = arrayOf(
+            BasicMedicineReminder("Ibuprofeno", 1, LocalTime.of(16,4,0)),
+            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
+            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
+            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
+            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
+            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
+            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
+            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
+            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
+            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
+            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
+            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
+            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0))
+        )
+        val medicineListView : ListView? = view?.findViewById(R.id.week_list)
+        val medicineAdapter : MedicineListAdapter= MedicineListAdapter(this,medicineList)
+        if (medicineListView != null) {
+            medicineListView.adapter = medicineAdapter
+        }
+    }
 }
