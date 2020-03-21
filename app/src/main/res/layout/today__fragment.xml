@@ -5,10 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.today.Today_Fragment">
 
-    <TextView
+    <ListView
+        android:id="@+id/today_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="today"
-        android:background="@color/cardview_dark_background"/>
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginBottom="?attr/actionBarSize"
+        />
 
 </FrameLayout>
