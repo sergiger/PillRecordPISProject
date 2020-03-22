@@ -6,27 +6,30 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="10dp">
-    <EditText
-        android:layout_width="match_parent"
+
+    <TimePicker
+        android:id="@+id/time_Picker"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="Actual gender"
-        android:id="@+id/input_gender"></EditText>
+        android:headerBackground="@color/colorApp3"
+        android:numbersSelectorColor="@color/colorApp2" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="left">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/OK"
-            android:text="Upload"/>
+        android:gravity="right">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cancel"
             android:text="Cancel"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/OK"
+            android:text="OK"/>
+
     </LinearLayout>
 
 </LinearLayout>
