@@ -84,8 +84,23 @@ class AddUnplannedMedicine : AppCompatActivity() {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
                 mAlertDialog.dismiss()
             }
+        }
+        medicine_name_button.setOnClickListener{
+            val mDialogView = LayoutInflater.from(this).inflate(R.layout.search_dialog, null)
 
-
+            //AlertDialogBuilder
+            val mBuilder = AlertDialog.Builder(this)
+                .setView(mDialogView)
+                .setTitle("Set medicine")
+            val mAlertDialog = mBuilder.show()
+            mDialogView.OK.setOnClickListener {
+                Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
+                mAlertDialog.dismiss()
+            }
+            mDialogView.cancel.setOnClickListener {
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+                mAlertDialog.dismiss()
+            }
         }
     }
 
