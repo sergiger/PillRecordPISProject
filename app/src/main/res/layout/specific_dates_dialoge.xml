@@ -10,22 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Start"/>
+
     <DatePicker
         android:id="@+id/date_Picker_ini"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:datePickerMode = "spinner"
-        android:calendarViewShown="false"/>
+        android:layout_height="223dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="End"/>
+
     <DatePicker
         android:id="@+id/date_Picker_end"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:datePickerMode = "spinner"
-        android:calendarViewShown="false"/>
+        android:layout_height="233dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
