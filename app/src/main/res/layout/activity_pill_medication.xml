@@ -13,15 +13,14 @@
         android:weightSum="80"
         tools:layout_editor_absoluteX="86dp"
         tools:layout_editor_absoluteY="0dp"
-        android:background="@color/cardview_light_background">
+        android:background="@color/gris">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="8"
+            android:layout_weight="9"
             android:background="?attr/colorPrimary"
-            android:elevation="4dp"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,5 +41,127 @@
                 android:textSize="20dp"
                 android:textStyle="bold"></TextView>
         </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="20">
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:hint="Medicine"
+                android:inputType="text"
+                android:layout_weight="12"
+                android:textColor="@color/cardview_dark_background"
+                android:textColorHint="@color/cardview_dark_background"
+                >
+            </android.support.design.widget.TextInputEditText>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <!--per separar-->
+            </TextView>
+            <Button
+                android:id="@+id/btn_scan"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:text="Scan"></Button>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="20">
+            <Button
+                android:id="@+id/btn_from"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="19"
+                android:backgroundTint="@color/cardview_light_background"
+                android:text="     From/To"
+                android:textAllCaps="false"
+                android:textAlignment="textStart"
+                >
+            </Button>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/text_view_dates"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:text="EXAMPLE 21/03/2020 to 25/03/2020"
+            android:gravity="center"></TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="20">
+
+            <Button
+                android:id="@+id/btn_frequency"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="19"
+                android:backgroundTint="@color/cardview_light_background"
+                android:text="     Frequency"
+                android:textAllCaps="false"
+                android:textAlignment="textStart"
+                ></Button>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/text_view_frequency"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:text="(Frequency)"
+            android:gravity="center"></TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="20">
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:hint="Notes"
+                android:inputType="text"
+                android:layout_weight="19"
+                android:textColor="@color/cardview_dark_background"
+                android:textColorHint="@color/cardview_dark_background"
+                >
+            </android.support.design.widget.TextInputEditText>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="20">
+
+            <Button
+                android:id="@+id/btn_Save"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:background="@drawable/button_background"
+                android:text="SAVE"
+                android:textAllCaps="false"
+                android:textAlignment="center"
+                android:textColor="@color/cardview_light_background"
+                ></Button>
+        </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -23,7 +23,8 @@ class PillMesurements_temperature : AppCompatActivity() {
         }
         btn_from.setOnClickListener {
             //dialoge_date()
-            val mDialogView = LayoutInflater.from(this).inflate(R.layout.specific_dates_dialoge, null)
+            val mDialogView =
+                LayoutInflater.from(this).inflate(R.layout.specific_dates_dialoge, null)
             //AlertDialogBuilder
             val mBuilder = AlertDialog.Builder(this)
                 .setView(mDialogView)
@@ -49,15 +50,15 @@ class PillMesurements_temperature : AppCompatActivity() {
                 mAlertDialog.dismiss()
                 Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show()
             }
-            btn_frequency.setOnClickListener {
-                val intent = Intent(this, PillFrequency::class.java)
-                startActivity(intent)
-            }
-            btn_Save.setOnClickListener {
-                Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }
+        }
+        btn_frequency.setOnClickListener {
+            val intent = Intent(this, PillFrequency::class.java)
+            startActivity(intent)
+        }
+        btn_Save.setOnClickListener {
+            Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 }
