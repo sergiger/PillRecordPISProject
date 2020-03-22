@@ -40,6 +40,22 @@ class AddUnplannedMedicine : AppCompatActivity() {
                 mAlertDialog.dismiss()
             }
         }
+        hour_button_unplanned_medicine.setOnClickListener{
+            val mDialogView = LayoutInflater.from(this).inflate(R.layout.time_dialog, null)
+            //AlertDialogBuilder
+            val mBuilder = AlertDialog.Builder(this)
+                .setView(mDialogView)
+                .setTitle("Set date")
+            val mAlertDialog = mBuilder.show()
+            mDialogView.OK.setOnClickListener {
+                Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
+                mAlertDialog.dismiss()
+            }
+            mDialogView.cancel.setOnClickListener {
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+                mAlertDialog.dismiss()
+            }
+        }
     }
 
 }
