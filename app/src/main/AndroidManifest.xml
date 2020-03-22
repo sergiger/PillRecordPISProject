@@ -27,6 +27,7 @@
         <activity android:name=".ui.settings.legalInformation.legal_main" />
         <activity android:name=".ui.register.activity_Register4" />
         <activity android:name=".ui.Pill.Pill_fragment" />
+        <activity android:name=".ui.Pill.PillFrequency"/>
         <activity android:name=".ui.calendar.Calendar_fragment" />
         <activity android:name=".ui.settings.ajustes_activity" />
         <activity android:name=".ui.statistics.Statistics_fragment" />
