@@ -25,5 +25,21 @@ class PillMesurements : AppCompatActivity() {
             startActivity(intent)
 
         }
+        btn_glucoseBefore.setOnClickListener {
+            val intent = Intent(this,PillMesurements_glucosaLevelBefore::class.java)
+            startActivity(intent)
+        }
+        btn_heartRate.setOnClickListener {
+            val intent = Intent(this,PillMesurements_heartFrequency::class.java)
+            startActivity(intent)
+        }
+        btn_temperature.setOnClickListener {
+            val intent = Intent(this,PillMesurements_temperature::class.java)
+            startActivity(intent)
+        }
+        btn_weight.setOnClickListener {
+            val intent = Intent(this,PillMesurements_weight::class.java)
+            startActivity(intent)
+        }
     }
 }
