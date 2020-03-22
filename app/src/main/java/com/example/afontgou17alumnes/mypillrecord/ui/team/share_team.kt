@@ -69,7 +69,12 @@ class share_team : AppCompatActivity() {
                     }
                     mDialogView.cancel.setOnClickListener {
                         mAlertDialog.dismiss()
+                        Toast.makeText(this,"Cancel",Toast.LENGTH_SHORT).show()
                     }
+                }else{
+                    val intent = Intent(this, MainActivity::class.java);
+                    startActivity(intent);
+                    Toast.makeText(this,"Shared succesfully",Toast.LENGTH_SHORT).show()
                 }
             }else{
                 // If no radio button checked in this radio group

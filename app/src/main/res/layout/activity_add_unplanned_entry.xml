@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/popup_background"
+    android:orientation="vertical"
+    android:layout_margin="1dp"
+    tools:context=".ui.today.AddUnplannedEntry"
+    android:elevation="16dp">
+
+    <TextView
+        android:id="@+id/unplanned_entry_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Unplanned entry"
+        android:gravity="center_horizontal"
+        android:textAllCaps="true"
+        android:textColor="#ff000000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/medicine_entry_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/transparent"
+        android:drawableLeft="@drawable/pill"
+        android:text="\t\t\t\tMedicine"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/measurement_entry_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/transparent"
+        android:text="\t\t\t\tMeasurement"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:drawableLeft="@drawable/pulse"
+        android:textAllCaps="false"
+        />
+
+    <Button
+        android:id="@+id/activity_entry_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/transparent"
+        android:text="\t\t\t\tActivity"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:drawableLeft="@drawable/olimpic"
+        android:textAllCaps="false"
+        />
+
+</LinearLayout>
