@@ -2,7 +2,9 @@ package com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import com.example.afontgou17alumnes.mypillrecord.R
@@ -14,6 +16,13 @@ import kotlinx.android.synthetic.main.my_account_activity.*
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
+import kotlinx.android.synthetic.main.change_pasword_dialogue.view.*
+import kotlinx.android.synthetic.main.gender_dialoge.view.*
+import kotlinx.android.synthetic.main.height_dialoge.view.*
+import kotlinx.android.synthetic.main.height_dialoge.view.cancel
+import kotlinx.android.synthetic.main.weight_dialoge.view.*
+import kotlinx.android.synthetic.main.year_of_birth_dialoge.view.*
+import kotlinx.android.synthetic.main.year_of_birth_dialoge.view.OK
 
 
 class myAccount : AppCompatActivity() {
@@ -41,7 +50,33 @@ class myAccount : AppCompatActivity() {
     }
     private fun onSelectedMenu(position: Int){
         if(position==0){//Change Pasword
-            Toast.makeText(this,"change pasword", Toast.LENGTH_SHORT).show()
+            //Inflate the dialog with custom view
+            val mDialogView = LayoutInflater.from(this).inflate(R.layout.change_pasword_dialogue, null)
+            //AlertDialogBuilder
+            val mBuilder = AlertDialog.Builder(this)
+                .setView(mDialogView)
+                .setTitle("Change pasword")
+            //show dialog
+            val  mAlertDialog = mBuilder.show()
+            //login button click of custom layout
+            mDialogView.OK.setOnClickListener {
+                //get text from EditTexts of custom layout
+                val old_pasword = mDialogView.input_old_pasword.text.toString() //aquesta variable servirà per actualitzar l'edat
+                val new_pasword = mDialogView.input_new_pasword.text.toString()
+                val new_repeat_pasword = mDialogView.input_repeat_new_pasword.text.toString()
+                if(new_pasword==new_repeat_pasword){
+                    //dismiss dialog
+                    mAlertDialog.dismiss()
+                }else{
+                    Toast.makeText(this,"Wrong repeated pasword",Toast.LENGTH_LONG).show()
+                }
+            }
+            //cancel button click of custom layout
+            mDialogView.cancel.setOnClickListener {
+                Toast.makeText(this,"cancel",Toast.LENGTH_SHORT).show()
+                //dismiss dialog
+                mAlertDialog.dismiss()
+            }
         }
         else if(position==1){//Close Session
             val intent = Intent(this, LoginActivity::class.java);
@@ -55,16 +90,104 @@ class myAccount : AppCompatActivity() {
             //a entrar a la conta amb el mateix user
         }
         else if(position==3){//Gender
+            //Inflate the dialog with custom view
+            val mDialogView = LayoutInflater.from(this).inflate(R.layout.gender_dialoge, null)
+            //AlertDialogBuilder
+            val mBuilder = AlertDialog.Builder(this)
+                .setView(mDialogView)
+                .setTitle("New gender")
+            //show dialog
+            val  mAlertDialog = mBuilder.show()
+            //login button click of custom layout
+            mDialogView.OK.setOnClickListener {
+                //dismiss dialog
+                mAlertDialog.dismiss()
+                //get text from EditTexts of custom layout
+                val new_gender = mDialogView.input_gender.text.toString() //aquesta variable servirà per actualitzar l'edat
 
+
+            }
+            //cancel button click of custom layout
+            mDialogView.cancel.setOnClickListener {
+                Toast.makeText(this,"cancel",Toast.LENGTH_SHORT).show()
+                //dismiss dialog
+                mAlertDialog.dismiss()
+            }
         }
         else if(position==4){//Year of birth
-            Toast.makeText(this,"Ueeeep, piloooootes!!!", Toast.LENGTH_SHORT).show()
-        }
-        else if(position==4){//Height
-            //Toast.makeText(this,"Ueeep", Toast.LENGTH_SHORT).show()
-        }
-        else if(position==4){//weight
+            //Inflate the dialog with custom view
+            val mDialogView = LayoutInflater.from(this).inflate(R.layout.year_of_birth_dialoge, null)
+            //AlertDialogBuilder
+            val mBuilder = AlertDialog.Builder(this)
+                .setView(mDialogView)
+                .setTitle("Year of birth")
+            //show dialog
+            val  mAlertDialog = mBuilder.show()
+            //login button click of custom layout
+            mDialogView.OK.setOnClickListener {
+                //dismiss dialog
+                mAlertDialog.dismiss()
+                //get text from EditTexts of custom layout
+                val new_year_of_birth = mDialogView.input.text.toString() //aquesta variable servirà per actualitzar l'edat
 
+
+            }
+            //cancel button click of custom layout
+            mDialogView.cancel.setOnClickListener {
+                Toast.makeText(this,"cancel",Toast.LENGTH_SHORT).show()
+                //dismiss dialog
+                mAlertDialog.dismiss()
+            }
+        }
+        else if(position==5){//Height
+            //Inflate the dialog with custom view
+            val mDialogView = LayoutInflater.from(this).inflate(R.layout.height_dialoge, null)
+            //AlertDialogBuilder
+            val mBuilder = AlertDialog.Builder(this)
+                .setView(mDialogView)
+                .setTitle("Height")
+            //show dialog
+            val  mAlertDialog = mBuilder.show()
+            //login button click of custom layout
+            mDialogView.OK_height.setOnClickListener {
+                //dismiss dialog
+                mAlertDialog.dismiss()
+                //get text from EditTexts of custom layout
+                val new_height = mDialogView.input_height.text.toString() //aquesta variable servirà per actualitzar l'edat
+
+
+            }
+            //cancel button click of custom layout
+            mDialogView.cancel.setOnClickListener {
+                Toast.makeText(this,"cancel",Toast.LENGTH_SHORT).show()
+                //dismiss dialog
+                mAlertDialog.dismiss()
+            }
+        }
+        else if(position==6){//weight
+            //Inflate the dialog with custom view
+            val mDialogView = LayoutInflater.from(this).inflate(R.layout.weight_dialoge, null)
+            //AlertDialogBuilder
+            val mBuilder = AlertDialog.Builder(this)
+                .setView(mDialogView)
+                .setTitle("Weight")
+            //show dialog
+            val  mAlertDialog = mBuilder.show()
+            //login button click of custom layout
+            mDialogView.OK_weight.setOnClickListener {
+                //dismiss dialog
+                mAlertDialog.dismiss()
+                //get text from EditTexts of custom layout
+                val new_weight = mDialogView.input_weight.text.toString() //aquesta variable servirà per actualitzar l'edat
+
+
+            }
+            //cancel button click of custom layout
+            mDialogView.cancel.setOnClickListener {
+                Toast.makeText(this,"cancel",Toast.LENGTH_SHORT).show()
+                //dismiss dialog
+                mAlertDialog.dismiss()
+            }
         }
     }
 }
