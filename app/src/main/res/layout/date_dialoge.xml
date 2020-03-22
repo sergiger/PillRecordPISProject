@@ -6,43 +6,30 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="10dp">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Start"/>
 
     <DatePicker
-        android:id="@+id/date_Picker_ini"
-        android:layout_width="match_parent"
+        android:id="@+id/date_Picker"
+        android:layout_width="wrap_content"
         android:layout_height="223dp"
         android:calendarViewShown="false"
         android:datePickerMode="spinner" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="End"/>
 
-    <DatePicker
-        android:id="@+id/date_Picker_end"
-        android:layout_width="match_parent"
-        android:layout_height="233dp"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="left">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/OK"
-            android:text="Upload"/>
+        android:gravity="right">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cancel"
             android:text="Cancel"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/OK"
+            android:text="OK"/>
+
     </LinearLayout>
 
 </LinearLayout>

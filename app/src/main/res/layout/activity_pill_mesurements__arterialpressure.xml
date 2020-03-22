@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Pill.PillSports">
+    tools:context=".ui.Pill.PillMesurements_Arterialpressure">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,49 +36,49 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="           ACTIVITY"
+                android:text="           ARTERIAL PRESSURE"
                 android:textColor="@color/cardview_light_background"
                 android:textSize="20dp"
                 android:textStyle="bold"></TextView>
         </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="20">
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:hint="Activity"
-            android:inputType="text"
-            android:layout_weight="19"
-            android:textColor="@color/cardview_dark_background"
-            android:textColorHint="@color/cardview_dark_background"
-            >
-        </android.support.design.widget.TextInputEditText>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="20">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="20">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="mmHg"
+                android:textAlignment="center"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:layout_weight="19">
+
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="20">
             <Button
-            android:id="@+id/btn_from"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="19"
-            android:backgroundTint="@color/cardview_light_background"
-            android:text="     From/To"
-            android:textAllCaps="false"
-            android:textAlignment="textStart"
-            >
+                android:id="@+id/btn_from"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="19"
+                android:backgroundTint="@color/cardview_light_background"
+                android:text="     From/To"
+                android:textAllCaps="false"
+                android:textAlignment="textStart"
+                >
             </Button>
-    </LinearLayout>
+        </LinearLayout>
         <TextView
             android:id="@+id/text_view_dates"
             android:layout_width="match_parent"
@@ -86,32 +86,32 @@
             android:layout_weight="4"
             android:text="EXAMPLE 21/03/2020 to 25/03/2020"
             android:gravity="center"></TextView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="20">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="20">
 
-        <Button
-            android:id="@+id/btn_frequency"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="19"
-            android:backgroundTint="@color/cardview_light_background"
-            android:text="     Frequency"
-            android:textAllCaps="false"
-            android:textAlignment="textStart"
-            ></Button>
-    </LinearLayout>
-    <TextView
-        android:id="@+id/text_view_frequency"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
-        android:text="(Frequency)"
-        android:gravity="center"></TextView>
+            <Button
+                android:id="@+id/btn_frequency"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="19"
+                android:backgroundTint="@color/cardview_light_background"
+                android:text="     Frequency"
+                android:textAllCaps="false"
+                android:textAlignment="textStart"
+                ></Button>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/text_view_frequency"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:text="(Frequency)"
+            android:gravity="center"></TextView>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
