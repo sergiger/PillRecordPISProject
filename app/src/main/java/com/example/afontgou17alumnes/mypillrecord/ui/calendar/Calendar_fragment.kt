@@ -40,7 +40,7 @@ class Calendar_fragment : Fragment() {
         tabLayout!!.addTab(tabLayout!!.newTab().setText("List"))
         tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
 
-        val adapter = PagerAdapter(this,fragmentManager,tabLayout!!.tabCount)
+        val adapter = PagerAdapter(fragmentManager)
         viewPager!!.adapter = adapter
 
         viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
