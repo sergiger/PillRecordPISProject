@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Pill.PillMedication">
+    tools:context=".ui.Pill.PillMesurements">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,10 +36,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="           Medication"
+                android:text="           Measurements"
                 android:textColor="@color/cardview_light_background"
                 android:textSize="20dp"
                 android:textStyle="bold"></TextView>
         </android.support.v7.widget.Toolbar>
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

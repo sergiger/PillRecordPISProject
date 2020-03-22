@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.widget.ImageButton
 import com.example.afontgou17alumnes.mypillrecord.R
 
-class PillMedication : AppCompatActivity() {
+class PillMesurements : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pill_medication)
+        setContentView(R.layout.activity_pill_mesurements)
         val image_view = findViewById(R.id.left_arrow) as ImageButton
         image_view.setOnClickListener {
             onBackPressed()

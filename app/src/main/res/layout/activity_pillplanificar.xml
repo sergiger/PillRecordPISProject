@@ -91,6 +91,7 @@
                 android:textAlignment="textStart"
                 android:textSize="20dp"
                 android:textAllCaps="false"
+                android:id="@+id/btn_mesurements"
                 ></Button>
         </LinearLayout>
 
@@ -113,6 +114,7 @@
                 android:textAlignment="textStart"
                 android:textSize="20dp"
                 android:textAllCaps="false"
+                android:id="@+id/btn_sports"
                 ></Button>
         </LinearLayout>
     </LinearLayout>

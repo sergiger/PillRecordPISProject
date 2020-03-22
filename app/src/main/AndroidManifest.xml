@@ -10,10 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.Pill.PillMedication"></activity>
+        <activity android:name=".ui.Pill.PillSports"></activity>
+        <activity android:name=".ui.Pill.PillMesurements" />
+        <activity android:name=".ui.Pill.PillMedication" />
         <activity android:name=".ui.Pill.Pillplanificar" />
         <activity android:name=".ui.settings.legalInformation.myAccount" />
-        <activity android:name=".ui.settings.legalInformation.extra_information"></activity>
+        <activity android:name=".ui.settings.legalInformation.extra_information" />
         <activity android:name=".ui.settings.legalInformation.privacy" />
         <activity android:name=".ui.settings.legalInformation.userRequirements" />
         <activity android:name=".ui.settings.legalInformation.smartPatients" />

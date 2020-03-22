@@ -20,6 +20,14 @@ class Pillplanificar : AppCompatActivity() {
             val intent = Intent(this,PillMedication::class.java)
             startActivity(intent)
         }
+        btn_mesurements.setOnClickListener {
+            val intent = Intent(this,PillMesurements::class.java)
+            startActivity(intent)
+        }
+        btn_sports.setOnClickListener {
+            val intent = Intent(this,PillSports::class.java)
+            startActivity(intent)
+        }
 
     }
 }
