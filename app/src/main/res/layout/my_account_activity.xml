@@ -5,37 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.settings.legalInformation.myAccount">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar2"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="10">
-            <ImageView
-                android:layout_weight="2"
-                android:layout_width="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/back_icon"
-                android:id="@+id/back_icon" />
-            <TextView
-                android:layout_weight="6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="MY ACCOUNT"
-                android:textSize="20dp"
-                android:textAlignment="center">
-            </TextView>
-        </LinearLayout>
+                android:weightSum="10">
+                <ImageView
+                    android:layout_weight="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow_left2"
+                    android:id="@+id/back_iicon" />
+                <TextView
+                    android:layout_weight="6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MY ACCOUNT"
+                    android:textSize="20dp"
+                    android:textAlignment="center">
+                </TextView>
+            </LinearLayout>
 
 
-    </android.support.v7.widget.Toolbar>
+        </android.support.v7.widget.Toolbar>
+
+        <ListView
+            android:id="@+id/opcions_menuu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>

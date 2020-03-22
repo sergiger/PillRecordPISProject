@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.settings.legalInformation.userRequirements">
+    tools:context=".ui.settings.legalInformation.extra_information">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,41 +28,28 @@
                     android:layout_weight="2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/back_icon"
-                    android:id="@+id/back_legal_icon"/>
+                    android:src="@drawable/arrow_left2"
+                    android:id="@+id/back_icon" />
                 <TextView
                     android:layout_weight="6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="USER REQUIREMENTS"
+                    android:text="EXTRA INFO"
                     android:textSize="20dp"
                     android:textAlignment="center">
                 </TextView>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="right"
-                    android:layout_weight="2">
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/printer_icon"
-                        android:id="@+id/print_icon"></ImageView>
-                </LinearLayout>
             </LinearLayout>
-
-
         </android.support.v7.widget.Toolbar>
 
         <TextView
-            android:layout_weight="6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TO BE CONTINUED"
-            android:textSize="20dp"
-            android:textAlignment="center">
-        </TextView>
+            android:text="To be continued"
+            android:textSize="@android:dimen/app_icon_size"
+            tools:ignore="MissingConstraints" />
+
     </LinearLayout>
+
 
 
 </android.support.constraint.ConstraintLayout>

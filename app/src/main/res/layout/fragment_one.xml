@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="#AAA"
     tools:context=".ui.calendar.FragmentOne"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/layout_principal">
 
     <!-- TODO: Update blank fragment layout -->
 

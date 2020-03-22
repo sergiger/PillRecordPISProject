@@ -41,6 +41,7 @@ class Statistics_fragment : Fragment() {
             val intent = Intent(activity, AddMeasurement::class.java)
             startActivity(intent)
         }
+
     }
 
 

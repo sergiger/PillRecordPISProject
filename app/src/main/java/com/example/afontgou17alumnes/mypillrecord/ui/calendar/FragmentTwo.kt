@@ -40,6 +40,7 @@ class FragmentTwo : Fragment() {
             BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
             BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0))
         )
+
         val medicineListView : ListView? = view?.findViewById(R.id.month_list)
         val medicineAdapter = MedicineListAdapter(this,medicineList)
         if (medicineListView != null) {
