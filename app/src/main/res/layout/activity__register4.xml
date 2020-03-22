@@ -7,100 +7,130 @@
     android:layout_height="match_parent"
     android:weightSum="11"
     android:orientation="vertical"
-    android:background="#fff"
-    tools:context=".ui.register.activity_Register4">
+    android:background="@color/colorApp3"
+    tools:context=".ui.register.activity_Register4"
+    android:padding="10dp">
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:background="#33aaff">
-        <ImageView
-            android:padding="10dp"
-            android:layout_width="match_parent"
+
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imatge_logo"
-            android:src="@drawable/pill_logo"
-            android:contentDescription="TODO">
-        </ImageView>
+            android:text="@string/app_name"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="40dp"
+            android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7"
+        android:layout_weight="8"
+        android:weightSum="8"
         android:orientation="vertical">
-        <android.support.design.widget.TextInputLayout
+
+        <EditText
+            android:layout_weight="1"
             android:id="@+id/text_input_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true">
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="email"
-                android:inputType="textEmailAddress">
-            </android.support.design.widget.TextInputEditText>
-            ></android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
+            android:layout_height="0dp"
+            android:backgroundTint="@color/cardview_light_background"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:selectAllOnFocus="true"
+            android:textColor="@android:color/background_light"
+            android:textColorHint="@android:color/background_light" />
+
+        <EditText
+            android:layout_weight="1"
             android:id="@+id/text_input_username"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            app:counterEnabled="true"
-            app:counterMaxLength="15">
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="username"
-                android:inputType="textEmailAddress">
-            </android.support.design.widget.TextInputEditText>
-            ></android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
+            android:layout_height="0dp"
+            android:backgroundTint="@color/cardview_light_background"
+            android:hint="Username"
+            android:inputType="text"
+            android:selectAllOnFocus="true"
+            android:textColor="@android:color/background_light"
+            android:textColorHint="@android:color/background_light"
+            android:maxLength="15"/>
+
+        <EditText
+            android:layout_weight="1"
             android:id="@+id/text_input_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            app:passwordToggleEnabled="true">
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="pasword"
-                android:inputType="textPassword"></android.support.design.widget.TextInputEditText>
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input_age"
+            android:layout_height="0dp"
+            android:backgroundTint="@color/cardview_light_background"
+            android:hint="Pasword"
+            android:inputType="textPassword"
+            android:selectAllOnFocus="true"
+            android:textColor="@android:color/background_light"
+            android:textColorHint="@android:color/background_light"
+            />
+
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/text_input_repeat_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true">
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="age"
-                android:inputType="numberDecimal"
-                android:maxLength="3"></android.support.design.widget.TextInputEditText>
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input_weight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true">
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/weight"
-                android:inputType="numberDecimal"
-                android:maxLength="6"></android.support.design.widget.TextInputEditText>
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
+            android:layout_height="0dp"
+            android:backgroundTint="@color/cardview_light_background"
+            android:hint="Repeat Pasword"
+            android:inputType="textPassword"
+            android:selectAllOnFocus="true"
+            android:textColor="@android:color/background_light"
+            android:textColorHint="@android:color/background_light"
+            />
+
+        <EditText
+            android:layout_weight="1"
             android:id="@+id/text_input_sex"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true">
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="sex"
-                android:inputType="text"></android.support.design.widget.TextInputEditText>
-        </android.support.design.widget.TextInputLayout>
+            android:layout_height="0dp"
+            android:backgroundTint="@color/cardview_light_background"
+            android:hint="Gender"
+            android:inputType="text"
+            android:selectAllOnFocus="true"
+            android:textColor="@android:color/background_light"
+            android:textColorHint="@android:color/background_light" />
+
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/text_input_age"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:backgroundTint="@color/cardview_light_background"
+            android:hint="Age"
+            android:inputType="numberDecimal"
+            android:selectAllOnFocus="true"
+            android:textColor="@android:color/background_light"
+            android:textColorHint="@android:color/background_light"
+            android:maxLength="3" />
+
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/text_input_weight"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:backgroundTint="@color/cardview_light_background"
+            android:hint="Weight in kg"
+            android:inputType="numberDecimal"
+            android:selectAllOnFocus="true"
+            android:textColor="@android:color/background_light"
+            android:textColorHint="@android:color/background_light"
+            android:maxLength="6" />
+
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/text_input_height"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:backgroundTint="@color/cardview_light_background"
+            android:hint="Height in cm"
+            android:inputType="numberDecimal"
+            android:selectAllOnFocus="true"
+            android:textColor="@android:color/background_light"
+            android:textColorHint="@android:color/background_light" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -118,7 +148,6 @@
             android:text="Confirm"
             android:onClick="confirmInput"
             tools:ignore="OnClick"
-            android:background="@drawable/button_background"
             android:id="@+id/btn_confirm_register"></Button>
     </LinearLayout>
 </android.support.v7.widget.LinearLayoutCompat>
