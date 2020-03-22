@@ -5,13 +5,9 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.AdapterView
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
-import kotlinx.android.synthetic.main.ajustes_activity.*
-import kotlinx.android.synthetic.main.extra_information_activity.*
-import kotlinx.android.synthetic.main.legal_main_activity.*
 import kotlinx.android.synthetic.main.my_account_activity.*
 import android.widget.ArrayAdapter
 import android.widget.ListView
@@ -26,6 +22,10 @@ import kotlinx.android.synthetic.main.year_of_birth_dialoge.view.OK
 
 
 class myAccount : AppCompatActivity() {
+    var gender="Masculin"
+    var birth_year=1999
+    var height=181
+    var weight=67
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +34,17 @@ class myAccount : AppCompatActivity() {
         back_iicon.setOnClickListener {
             onBackPressed()
         }
+        val arrayAdapter2: ArrayAdapter<*>
+
+        val users2= arrayOf("","","",gender,birth_year,height,weight)
+
+        //getActualMyAccount()
+        // access the listView from xml file
+        var mListView2 = findViewById<ListView>(R.id.opcions_menuu_actual)
+        arrayAdapter2 = ArrayAdapter(this,
+            android.R.layout.simple_list_item_1, users2)
+        opcions_menuu_actual.adapter = arrayAdapter2
+
 
         val arrayAdapter: ArrayAdapter<*>
         val users = arrayOf("Change Pasword", "Close Session",
@@ -44,11 +55,16 @@ class myAccount : AppCompatActivity() {
             android.R.layout.simple_list_item_1, users)
         opcions_menuu.adapter = arrayAdapter
         opcions_menuu.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-            onSelectedMenu(position)
+            onSelectedMenu(position,users2, arrayAdapter2)
         }
 
+
+
+
+
+
     }
-    private fun onSelectedMenu(position: Int){
+    private fun onSelectedMenu(position: Int, users2: kotlin.Array<Any>, arrayAdapter2:ArrayAdapter<*>){
         if(position==0){//Change Pasword
             //Inflate the dialog with custom view
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.change_pasword_dialogue, null)
@@ -106,8 +122,10 @@ class myAccount : AppCompatActivity() {
                 val new_gender = mDialogView.input_gender.text.toString() //aquesta variable servirà per actualitzar l'edat
                 if(!new_gender.equals("")){
                     Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show()
+                    gender=new_gender
                     //dismiss dialog
                     mAlertDialog.dismiss()
+                    refreshMyAccount(users2,arrayAdapter2)
                 }
             }
             //cancel button click of custom layout
@@ -132,8 +150,10 @@ class myAccount : AppCompatActivity() {
                 val new_year_of_birth = mDialogView.input.text.toString() //aquesta variable servirà per actualitzar l'edat
                 if(!new_year_of_birth.equals("")){
                     Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show()
+                    birth_year=new_year_of_birth.toInt()
                     //dismiss dialog
                     mAlertDialog.dismiss()
+                    refreshMyAccount(users2,arrayAdapter2)
                 }
             }
             //cancel button click of custom layout
@@ -157,8 +177,10 @@ class myAccount : AppCompatActivity() {
                 val new_height = mDialogView.input_height.text.toString() //aquesta variable servirà per actualitzar l'edat
                 if(!new_height.equals("")) {
                     Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show()
+                    height=new_height.toInt()
                     //dismiss dialog
                     mAlertDialog.dismiss()
+                    refreshMyAccount(users2,arrayAdapter2)
                 }
 
 
@@ -184,8 +206,10 @@ class myAccount : AppCompatActivity() {
                 val new_weight = mDialogView.input_weight.text.toString() //aquesta variable servirà per actualitzar l'edat
                 if(!new_weight.equals("")){
                     //dismiss dialog
+                    weight=new_weight.toInt()
                     Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show()
                     mAlertDialog.dismiss()
+                    refreshMyAccount(users2,arrayAdapter2)
                 }
             }
             //cancel button click of custom layout
@@ -195,5 +219,14 @@ class myAccount : AppCompatActivity() {
                 mAlertDialog.dismiss()
             }
         }
+    }
+
+    private fun refreshMyAccount(users2: Array<Any>, arrayAdapter2:ArrayAdapter<*>){
+
+        users2.set(3,gender)
+        users2.set(4,birth_year)
+        users2.set(5,height)
+        users2.set(6,weight)
+        arrayAdapter2.notifyDataSetChanged()
     }
 }
