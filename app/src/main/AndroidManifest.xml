@@ -10,6 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.today.AddUnplannedActivity"></activity>
+        <activity android:name=".ui.today.AddUnplannedMeasurement" />
+        <activity android:name=".ui.today.AddUnplannedMedicine" />
         <activity android:name=".ui.Pill.PillMesurements_temperature"></activity>
         <activity android:name=".ui.Pill.PillMesurements_glucosaLevelAfter" />
         <activity android:name=".ui.Pill.PillMesurements_glucosaLevelBefore" />
@@ -18,10 +21,15 @@
         <activity android:name=".ui.Pill.PillMesurements_weight" />
         <activity android:name=".ui.team.agenda_team" />
         <activity android:name=".ui.team.share_team" />
+        <activity
+            android:name=".ui.today.AddUnplannedEntry"
+            android:theme="@style/AppTheme.PopUpTheme" />
         <activity android:name=".ui.Pill.PillSports" />
         <activity android:name=".ui.Pill.PillMesurements" />
         <activity android:name=".ui.Pill.PillMedication" />
         <activity android:name=".ui.Pill.Pillplanificar" />
+        <activity android:name=".ui.Pill.PillFrequency"/>
+        <activity android:name=".ui.Pill.Pill_fragment" />
         <activity android:name=".ui.settings.legalInformation.myAccount" />
         <activity android:name=".ui.settings.legalInformation.extra_information" />
         <activity android:name=".ui.settings.legalInformation.privacy" />
@@ -32,8 +40,6 @@
             android:theme="@style/AppTheme.PopUpTheme" />
         <activity android:name=".ui.settings.legalInformation.legal_main" />
         <activity android:name=".ui.register.activity_Register4" />
-        <activity android:name=".ui.Pill.Pill_fragment" />
-        <activity android:name=".ui.Pill.PillFrequency"/>
         <activity android:name=".ui.calendar.Calendar_fragment" />
         <activity android:name=".ui.settings.ajustes_activity" />
         <activity android:name=".ui.statistics.Statistics_fragment" />
