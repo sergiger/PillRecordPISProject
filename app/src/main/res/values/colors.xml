@@ -7,4 +7,5 @@
     <color name="colorApp2">#4e9fe6</color>
     <color name="colorApp3">#3c78ad</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="gris">	#F5F5F5</color>
 </resources>

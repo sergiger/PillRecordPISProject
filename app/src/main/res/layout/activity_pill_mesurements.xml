@@ -13,7 +13,7 @@
         android:weightSum="80"
         tools:layout_editor_absoluteX="86dp"
         tools:layout_editor_absoluteY="0dp"
-        android:background="@color/cardview_light_background">
+        android:background="@color/gris">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar2"
@@ -36,11 +36,79 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="           Measurements"
+                android:text="           MEASUREMENTS"
                 android:textColor="@color/cardview_light_background"
                 android:textSize="20dp"
                 android:textStyle="bold"></TextView>
         </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:text="Choose one:"
+            android:textSize="30dp"></TextView>
+        <Button
+            android:id="@+id/btn_weight"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:backgroundTint="@color/cardview_light_background"
+            android:text="     Weight"
+            android:textAllCaps="false"
+            android:textAlignment="textStart"
+            ></Button>
+        <Button
+            android:id="@+id/btn_heartRate"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:backgroundTint="@color/cardview_light_background"
+            android:text="     Heart rate"
+            android:textAllCaps="false"
+            android:textAlignment="textStart"
+            ></Button>
+        <Button
+            android:id="@+id/btn_arterialPressure"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:backgroundTint="@color/cardview_light_background"
+            android:text="     Arterial pressure"
+            android:textAllCaps="false"
+            android:textAlignment="textStart"
+            ></Button>
+        <Button
+            android:id="@+id/btn_temperature"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:backgroundTint="@color/cardview_light_background"
+            android:text="     Temperature"
+            android:textAllCaps="false"
+            android:textAlignment="textStart"
+            ></Button>
+        <Button
+            android:id="@+id/btn_glucoseBefore"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:backgroundTint="@color/cardview_light_background"
+            android:text="     Glucose level (before eating)"
+            android:textAllCaps="false"
+            android:textAlignment="textStart"
+            ></Button>
+        <Button
+            android:id="@+id/glucoseAfter"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:backgroundTint="@color/cardview_light_background"
+            android:text="     Glucose level (after eating)"
+            android:textAllCaps="false"
+            android:textAlignment="textStart"
+            ></Button>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
