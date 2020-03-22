@@ -13,13 +13,22 @@ import com.example.afontgou17alumnes.mypillrecord.data.model.BasicMedicineRemind
 import com.example.afontgou17alumnes.mypillrecord.ui.calendar.MedicineListAdapter
 import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
 import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
+import com.example.afontgou17alumnes.mypillrecord.ui.statistics.AddMeasurement
+import com.example.afontgou17alumnes.mypillrecord.ui.statistics.Statistics_fragment
+import kotlinx.android.synthetic.main.statistics_fragment_fragment.*
 import kotlinx.android.synthetic.main.today__fragment.*
+import kotlinx.android.synthetic.main.today__fragment.add_button
 import java.time.LocalTime
 
 /**
  * A simple [Fragment] subclass.
  */
 class Today_Fragment : Fragment() {
+
+    companion object {
+        fun newInstance() =
+            Today_Fragment()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +41,10 @@ class Today_Fragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         createTodayList()
+        add_button.setOnClickListener {
+            val intent = Intent(activity, AddUnplannedEntry::class.java)
+            startActivity(intent)
+        }
     }
 
     fun createTodayList(){
