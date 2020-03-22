@@ -20,5 +20,10 @@ class PillMesurements : AppCompatActivity() {
             val intent = Intent(this,PillMesurements_Arterialpressure::class.java)
             startActivity(intent)
         }
+        btn_glucoseAfter.setOnClickListener {
+            val intent = Intent(this,PillMesurements_glucosaLevelAfter::class.java)
+            startActivity(intent)
+
+        }
     }
 }
