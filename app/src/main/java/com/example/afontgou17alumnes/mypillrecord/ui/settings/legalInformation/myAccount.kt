@@ -65,8 +65,10 @@ class myAccount : AppCompatActivity() {
                 val new_pasword = mDialogView.input_new_pasword.text.toString()
                 val new_repeat_pasword = mDialogView.input_repeat_new_pasword.text.toString()
                 if(new_pasword==new_repeat_pasword){
-                    //dismiss dialog
-                    mAlertDialog.dismiss()
+                    if(!new_pasword.equals("")) {
+                        //dismiss dialog
+                        mAlertDialog.dismiss()
+                    }
                 }else{
                     Toast.makeText(this,"Wrong repeated pasword",Toast.LENGTH_LONG).show()
                 }
@@ -100,12 +102,13 @@ class myAccount : AppCompatActivity() {
             val  mAlertDialog = mBuilder.show()
             //login button click of custom layout
             mDialogView.OK.setOnClickListener {
-                //dismiss dialog
-                mAlertDialog.dismiss()
                 //get text from EditTexts of custom layout
                 val new_gender = mDialogView.input_gender.text.toString() //aquesta variable servirà per actualitzar l'edat
-
-
+                if(!new_gender.equals("")){
+                    Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show()
+                    //dismiss dialog
+                    mAlertDialog.dismiss()
+                }
             }
             //cancel button click of custom layout
             mDialogView.cancel.setOnClickListener {
@@ -125,12 +128,13 @@ class myAccount : AppCompatActivity() {
             val  mAlertDialog = mBuilder.show()
             //login button click of custom layout
             mDialogView.OK.setOnClickListener {
-                //dismiss dialog
-                mAlertDialog.dismiss()
                 //get text from EditTexts of custom layout
                 val new_year_of_birth = mDialogView.input.text.toString() //aquesta variable servirà per actualitzar l'edat
-
-
+                if(!new_year_of_birth.equals("")){
+                    Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show()
+                    //dismiss dialog
+                    mAlertDialog.dismiss()
+                }
             }
             //cancel button click of custom layout
             mDialogView.cancel.setOnClickListener {
@@ -150,10 +154,12 @@ class myAccount : AppCompatActivity() {
             val  mAlertDialog = mBuilder.show()
             //login button click of custom layout
             mDialogView.OK_height.setOnClickListener {
-                //dismiss dialog
-                mAlertDialog.dismiss()
-                //get text from EditTexts of custom layout
                 val new_height = mDialogView.input_height.text.toString() //aquesta variable servirà per actualitzar l'edat
+                if(!new_height.equals("")) {
+                    Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show()
+                    //dismiss dialog
+                    mAlertDialog.dismiss()
+                }
 
 
             }
@@ -175,12 +181,12 @@ class myAccount : AppCompatActivity() {
             val  mAlertDialog = mBuilder.show()
             //login button click of custom layout
             mDialogView.OK_weight.setOnClickListener {
-                //dismiss dialog
-                mAlertDialog.dismiss()
-                //get text from EditTexts of custom layout
                 val new_weight = mDialogView.input_weight.text.toString() //aquesta variable servirà per actualitzar l'edat
-
-
+                if(!new_weight.equals("")){
+                    //dismiss dialog
+                    Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show()
+                    mAlertDialog.dismiss()
+                }
             }
             //cancel button click of custom layout
             mDialogView.cancel.setOnClickListener {
