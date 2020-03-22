@@ -28,4 +28,10 @@
         <item>Glucosa</item>
         <item>Temperatura</item>
     </string-array>
+    <string name="frequencia_prompt">Select the frequency</string>
+    <string-array name="frequencia_array">
+        <item>Daily, (X) times  per day</item>
+        <item>Each (X) days</item>
+        <item>Specific week days</item>
+    </string-array>
 </resources>
