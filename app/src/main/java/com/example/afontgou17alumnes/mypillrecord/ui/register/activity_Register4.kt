@@ -25,19 +25,22 @@ class activity_Register4 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__register4)
         //Això és per a veure el flow, no és per a fer que funcionin els botons de veritat
+
+
         btn_confirm_register.setOnClickListener {
+            /*
+            NO HE CONSEGUIT QUE EM FUNCIONI, SI POSO AIXÒ EL BOTÓ EM PETA I NO SÉ PERQUE
+            I NO VEIG ON POT ESTAR L'ERROR
+
             email=input_email.text.toString()
-            username=input_new_pasword.text.toString()
-            pasword=input_repeat_new_pasword.text.toString()
-            pasword_repeat=text_input_username.text.toString()
+            pasword=input_new_pasword.text.toString()
+            pasword_repeat=input_repeat_new_pasword.text.toString()
+            username=text_input_username.text.toString()
             gender=input_gender.text.toString()
             age=text_input_age.text.toString().toInt()
             weight=text_input_weight.text.toString().toInt()
-            height=text_input_height.text.toString().toInt()
-            //Aqui ara utilitzariem aquestes variables per fer totes les
-            // restriccions que volguéssim avans de fer el canvi d'activitat
-            //com per exemple, que l'email no estigui enregistrat, que les dos
-            //paswords siguin identiques...
+            height=text_input_height.text.toString().toInt()*/
+            //Aqui ara utilitzariem aquestes variables per fer totes les restriccions que volguéssim avans
             // Handler code here.
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent);
