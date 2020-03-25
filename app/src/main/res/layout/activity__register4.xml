@@ -84,13 +84,14 @@
 
         <EditText
             android:layout_weight="1"
-            android:id="@+id/text_input_sex"
+            android:id="@+id/text_input_gender"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:backgroundTint="@color/cardview_light_background"
             android:hint="Gender"
             android:inputType="text"
-            android:selectAllOnFocus="true"
+            android:selectAllOnFocus="false"
+            android:focusable="false"
             android:textColor="@android:color/background_light"
             android:textColorHint="@android:color/background_light" />
 

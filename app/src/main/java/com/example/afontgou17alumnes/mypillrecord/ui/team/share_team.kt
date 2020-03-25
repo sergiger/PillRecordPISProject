@@ -18,6 +18,15 @@ import java.util.*
 
 class share_team : AppCompatActivity() {
 
+    var email=""
+    var ini_day=0
+    var ini_month=0
+    var ini_year=0
+    var end_day=0
+    var end_month=0
+    var end_year=0
+    //Aquestes variables ja funcionen
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.share_team_activity)
@@ -36,50 +45,33 @@ class share_team : AppCompatActivity() {
 
         btn_share.setOnClickListener{
             // Get the checked radio button id from radio group
-            var id: Int = radio_group.checkedRadioButtonId
-            if (id!=-1){ // If any radio button checked from radio group
-                // Get the instance of radio button using id
-                val radio:RadioButton = findViewById(id)
-                Toast.makeText(applicationContext,"On button click : ${radio.text}",
-                    Toast.LENGTH_SHORT).show()
-                //En cas que haguem d'escollir dates concretes, treuré un dialogue
-                if(radio.text.equals("Specific dates")){
-                    //dialoge_date()
-                    val mDialogView = LayoutInflater.from(this).inflate(R.layout.specific_dates_dialoge, null)
-                    //AlertDialogBuilder
-                    val mBuilder = AlertDialog.Builder(this)
-                        .setView(mDialogView)
-                        .setTitle("Set specific dates")
-                    //show dialog
-                    val  mAlertDialog = mBuilder.show()
-                    mDialogView.OK.setOnClickListener {
-                        /*val datePicker_ini = findViewById<DatePicker>(R.id.date_Picker_ini)
-                        val today = Calendar.getInstance()
-                        datePicker_ini.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
-                            today.get(Calendar.DAY_OF_MONTH)
-
-                        ) { view, year, month, day ->
-                            val month = month + 1
-                            val msg = "You Selected: $day/$month/$year"
-                            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-                        }*/
-                        Toast.makeText(this,"work in progress",Toast.LENGTH_LONG)
-                        val intent = Intent(this, MainActivity::class.java);
-                        startActivity(intent);
-                    }
-                    mDialogView.cancel.setOnClickListener {
-                        mAlertDialog.dismiss()
-                        Toast.makeText(this,"Cancel",Toast.LENGTH_SHORT).show()
+            var new_email=input_email.text.toString()
+            if(new_email_exists(new_email)) {
+                var id: Int = radio_group.checkedRadioButtonId
+                if (id!=-1){ // If any radio button checked from radio group
+                    // Get the instance of radio button using id
+                    val radio:RadioButton = findViewById(id)
+                    Toast.makeText(applicationContext,"On button click : ${radio.text}",
+                        Toast.LENGTH_SHORT).show()
+                    when(radio.text){
+                        "Day"->{//Day
+                            go_home_succesfully()
+                            }
+                        "Week"-> {//Week
+                            go_home_succesfully()
+                        }
+                        "Month"->{//Month
+                            go_home_succesfully()
+                        }
+                        "Specific dates"->{//Special date
+                            select_start_end_dates()
+                        }
                     }
                 }else{
-                    val intent = Intent(this, MainActivity::class.java);
-                    startActivity(intent);
-                    Toast.makeText(this,"Shared succesfully",Toast.LENGTH_SHORT).show()
+                    // If no radio button checked in this radio group
+                    Toast.makeText(applicationContext,"On button click : nothing selected",
+                        Toast.LENGTH_SHORT).show()
                 }
-            }else{
-                // If no radio button checked in this radio group
-                Toast.makeText(applicationContext,"On button click : nothing selected",
-                    Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -92,8 +84,20 @@ class share_team : AppCompatActivity() {
             Toast.LENGTH_SHORT).show()
     }
 
-    fun dialoge_date(){
-        //Inflate the dialog with custom view
+
+    fun go_home(){
+        val intent = Intent(this, MainActivity::class.java);
+        startActivity(intent);
+    }
+
+    fun go_home_succesfully(){
+        Toast.makeText(this,"Shared succesfully",Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, MainActivity::class.java);
+        startActivity(intent);
+    }
+
+    fun select_start_end_dates(){
+
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.specific_dates_dialoge, null)
         //AlertDialogBuilder
         val mBuilder = AlertDialog.Builder(this)
@@ -101,27 +105,52 @@ class share_team : AppCompatActivity() {
             .setTitle("Set specific dates")
         //show dialog
         val  mAlertDialog = mBuilder.show()
-
-        //login button click of custom layout
-        /*mDialogView.OK.setOnClickListener {
-            //get text from EditTexts of custom layout
-            val old_pasword = mDialogView.input_old_pasword.text.toString() //aquesta variable servirà per actualitzar l'edat
-            val new_pasword = mDialogView.input_new_pasword.text.toString()
-            val new_repeat_pasword = mDialogView.input_repeat_new_pasword.text.toString()
-            if(new_pasword==new_repeat_pasword){
-                if(!new_pasword.equals("")) {
-                    //dismiss dialog
-                    mAlertDialog.dismiss()
-                }
-            }else{
-                Toast.makeText(this,"Wrong repeated pasword",Toast.LENGTH_LONG).show()
-            }
+        //Aqui guardo la data INI seleccionada
+        //i també poso la data correcta al DatePicker de INICI amb la data d'avui
+        val datePicker_ini = mDialogView.findViewById<DatePicker>(R.id.date_Picker_ini)
+        val today = Calendar.getInstance()
+        datePicker_ini.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH)
+        ) { view, year, month, day ->
+            val month = month + 1
+            ini_day=day
+            ini_month=month
+            ini_year=year
+            //val msg = "You Selected: $day/$month/$year"
+            //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
         }
-        //cancel button click of custom layout
+        //Aqui guardo la data END seleccionada
+        //i també poso la data correcta al DatePicker de END amb la data d'avui
+        val datePicker_end = mDialogView.findViewById<DatePicker>(R.id.date_Picker_end)
+        datePicker_end.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH)
+        ) { view, year, month, day ->
+            val month = month + 1
+            end_day=day
+            end_month=month
+            end_year=year
+            //val msg = "You Selected: $day/$month/$year"
+            //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        }
+
+        //Aqui faig els listeners dels dos botons
+        mDialogView.OK.setOnClickListener {
+            Toast.makeText(this,"work in progress",Toast.LENGTH_LONG).show()
+            //Ara ja estan les hores agafades correctament, ara hauriem de compartir
+            //Les terapies actives i no actives entre aquestes dates
+            go_home()
+        }
         mDialogView.cancel.setOnClickListener {
-            Toast.makeText(this,"cancel",Toast.LENGTH_SHORT).show()
-            //dismiss dialog
             mAlertDialog.dismiss()
-        }*/
+            Toast.makeText(this,"Cancel",Toast.LENGTH_SHORT).show()
+        }
     }
+
+    fun new_email_exists(new_email: String) :Boolean{
+        var retorn= true
+        //Aqui conectariem amb la base de dades i buscariem si aquest email existeix
+        //Ara per ara simplement li poso true per a poder treballar i fer proves
+        return retorn
+    }
+
 }

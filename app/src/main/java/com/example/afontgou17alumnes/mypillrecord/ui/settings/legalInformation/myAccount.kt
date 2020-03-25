@@ -5,14 +5,14 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
-import android.widget.AdapterView
+import android.view.View
+import android.widget.*
+
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.my_account_activity.*
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.Toast
 import kotlinx.android.synthetic.main.change_pasword_dialogue.view.*
+import kotlinx.android.synthetic.main.gender_dialoge.*
 import kotlinx.android.synthetic.main.gender_dialoge.view.*
 import kotlinx.android.synthetic.main.height_dialoge.view.*
 import kotlinx.android.synthetic.main.height_dialoge.view.cancel
@@ -30,6 +30,7 @@ class myAccount : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_account_activity)
+
 
         back_iicon.setOnClickListener {
             onBackPressed()
@@ -116,13 +117,17 @@ class myAccount : AppCompatActivity() {
                 .setTitle("New gender")
             //show dialog
             val  mAlertDialog = mBuilder.show()
+
+            mDialogView.input_gender.setOnClickListener{
+                showPopupMenu(it)
+                mDialogView.input_gender.setText(gender.toString())
+            }
             //login button click of custom layout
             mDialogView.OK.setOnClickListener {
                 //get text from EditTexts of custom layout
                 val new_gender = mDialogView.input_gender.text.toString() //aquesta variable servirà per actualitzar l'edat
                 if(!new_gender.equals("")){
                     Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show()
-                    gender=new_gender
                     //dismiss dialog
                     mAlertDialog.dismiss()
                     refreshMyAccount(users2,arrayAdapter2)
@@ -228,5 +233,15 @@ class myAccount : AppCompatActivity() {
         users2.set(5,height)
         users2.set(6,weight)
         arrayAdapter2.notifyDataSetChanged()
+    }
+
+    fun showPopupMenu(view: View) = PopupMenu(view.context, view).run {
+        menuInflater.inflate(R.menu.gender_popup_menu, menu)
+        setOnMenuItemClickListener { item ->
+            Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
+            gender=item.title.toString()
+            true
+        }
+        show()
     }
 }

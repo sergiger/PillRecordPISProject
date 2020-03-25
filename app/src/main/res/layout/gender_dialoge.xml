@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:hint="Actual gender"
+        android:focusable="false"
         android:id="@+id/input_gender"></EditText>
     <LinearLayout
         android:layout_width="match_parent"

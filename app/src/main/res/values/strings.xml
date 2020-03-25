@@ -16,6 +16,10 @@
     <string name="username">username</string>
     <string name="email">email</string>
     <string name="weight">weight</string>
+    <string name="action_other">Other</string>
+    <string name="action_masculin">Masculin</string>
+    <string name="action_femenin">Femenin</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
