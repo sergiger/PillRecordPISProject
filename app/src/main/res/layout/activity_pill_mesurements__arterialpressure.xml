@@ -67,6 +67,16 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="20">
+            <TextView
+                android:id="@+id/date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="From/To"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@id/btn_from"
+                app:layout_constraintTop_toTopOf="@id/btn_from"
+                app:layout_constraintBottom_toBottomOf="@id/btn_from"/>
             <Button
                 android:id="@+id/btn_from"
                 android:layout_width="0dp"
@@ -75,7 +85,7 @@
                 android:backgroundTint="@color/cardview_light_background"
                 android:text="     From/To"
                 android:textAllCaps="false"
-                android:textAlignment="textStart"
+                android:textAlignment="textEnd"
                 >
             </Button>
         </LinearLayout>
@@ -93,6 +103,16 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="20">
+            <TextView
+                android:id="@+id/ferquency_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Frequency"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@id/btn_frequency"
+                app:layout_constraintTop_toTopOf="@id/btn_frequency"
+                app:layout_constraintBottom_toBottomOf="@id/btn_frequency"/>
 
             <Button
                 android:id="@+id/btn_frequency"
@@ -100,9 +120,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="19"
                 android:backgroundTint="@color/cardview_light_background"
-                android:text="     Frequency"
+                android:text=""
                 android:textAllCaps="false"
-                android:textAlignment="textStart"
+                android:textAlignment="textEnd"
                 ></Button>
         </LinearLayout>
         <TextView

@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/fisical_training"
+        android:title="Fisical_training"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/Walking"
+        android:title="Walking"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/Fisiotherapy"
+        android:title="Fisiotherapy"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/Running"
+        android:title="Running"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/Cicling"
+        android:title="Cicling"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/Other"
+        android:title="Other"
+        app:showAsAction="never"/>
 </menu>

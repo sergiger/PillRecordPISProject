@@ -9,6 +9,7 @@ import android.widget.DatePicker
 import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import kotlinx.android.synthetic.main.activity_add_unplanned_activity.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_measurement.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_measurement.back_arrow
 import kotlinx.android.synthetic.main.activity_add_unplanned_measurement.date_button
@@ -21,9 +22,9 @@ import java.util.*
 
 class AddUnplannedMeasurement : AppCompatActivity() {
 
-    var day=0
-    var month=0
-    var year=0
+    var day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+    var month=Calendar.getInstance().get(Calendar.MONTH)+1
+    var year=Calendar.getInstance().get(Calendar.YEAR)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,9 +81,9 @@ class AddUnplannedMeasurement : AppCompatActivity() {
     }
 
     fun select_date(){
-        var new_day=0
-        var new_month=0
-        var new_year=0
+        var new_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        var new_month=Calendar.getInstance().get(Calendar.MONTH)+1
+        var new_year=Calendar.getInstance().get(Calendar.YEAR)
 
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.date_dialoge, null)
         //AlertDialogBuilder
@@ -122,6 +123,7 @@ class AddUnplannedMeasurement : AppCompatActivity() {
         this.day=ini_day
         this.month=ini_month
         this.year=ini_year
+        date_button.setText(this.day.toString()+"//"+this.month.toString()+"//"+this.year.toString())
     }
 
     fun go_home(){

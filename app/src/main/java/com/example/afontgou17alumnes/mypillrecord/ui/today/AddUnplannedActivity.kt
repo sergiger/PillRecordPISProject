@@ -5,14 +5,18 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.DatePicker
+import android.widget.PopupMenu
 import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.back_arrow
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.date_button
+import kotlinx.android.synthetic.main.activity_add_unplanned_activity.view.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
+import kotlinx.android.synthetic.main.activity_pill_sports.view.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
@@ -21,9 +25,10 @@ import java.util.*
 
 class AddUnplannedActivity : AppCompatActivity() {
 
-    var day=0
-    var month=0
-    var year=0
+    var day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+    var month=Calendar.getInstance().get(Calendar.MONTH)+1
+    var year=Calendar.getInstance().get(Calendar.YEAR)
+    var new_activity=""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +42,7 @@ class AddUnplannedActivity : AppCompatActivity() {
             go_home()
         }
         date_button.setOnClickListener{
-            select_date()
+            select_date(it)
         }
         hour_button_unplanned_activity.setOnClickListener{
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.time_dialog, null)
@@ -79,7 +84,8 @@ class AddUnplannedActivity : AppCompatActivity() {
 
         }
         activity_name_button.setOnClickListener{
-            val mDialogView = LayoutInflater.from(this).inflate(R.layout.text_dialog, null)
+            showPopupMenu(it)
+            /*val mDialogView = LayoutInflater.from(this).inflate(R.layout.text_dialog, null)
 
             //AlertDialogBuilder
             val mBuilder = AlertDialog.Builder(this)
@@ -93,14 +99,14 @@ class AddUnplannedActivity : AppCompatActivity() {
             mDialogView.cancel.setOnClickListener {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
                 mAlertDialog.dismiss()
-            }
+            }*/
         }
     }
 
-    fun select_date(){
-        var new_day=0
-        var new_month=0
-        var new_year=0
+    fun select_date(it: View){
+        var new_day=this.day
+        var new_month=this.month
+        var new_year=this.year
 
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.date_dialoge, null)
         //AlertDialogBuilder
@@ -127,7 +133,7 @@ class AddUnplannedActivity : AppCompatActivity() {
         //Aqui faig els listeners dels dos botons
         mDialogView.OK.setOnClickListener {
             Toast.makeText(this,"work in progress",Toast.LENGTH_LONG).show()
-            set_ok_date(new_day,new_month,new_year)
+            set_ok_date(new_day,new_month,new_year,it)
             mAlertDialog.dismiss()
         }
         mDialogView.cancel.setOnClickListener {
@@ -136,10 +142,11 @@ class AddUnplannedActivity : AppCompatActivity() {
         }
     }
 
-    fun set_ok_date(ini_day:Int,ini_month:Int,ini_year:Int){
+    fun set_ok_date(ini_day:Int,ini_month:Int,ini_year:Int,it: View){
         this.day=ini_day
         this.month=ini_month
         this.year=ini_year
+        date_button.setText(this.day.toString()+"//"+this.month.toString()+"//"+this.year.toString())
     }
 
     fun go_home(){
@@ -152,4 +159,15 @@ class AddUnplannedActivity : AppCompatActivity() {
     }
 
     fun save(){}//cal completar
+
+    private fun showPopupMenu(view: View) = PopupMenu(view.context, view).run {
+        menuInflater.inflate(R.menu.activity_popup_menu, menu)
+        setOnMenuItemClickListener { item ->
+            Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
+            new_activity=item.title.toString()
+            view.activity_name_button.setText(new_activity.toString())
+            true
+        }
+        show()
+    }
 }

@@ -95,7 +95,7 @@ class PillMesurements_temperature : AppCompatActivity() {
         mDialogView.OK.setOnClickListener {
             Toast.makeText(this,"work in progress",Toast.LENGTH_LONG).show()
             set_ok_date(new_ini_day,new_ini_month,new_ini_year,new_end_day,new_end_month,new_end_year)
-            go_home()
+            mAlertDialog.dismiss()
         }
         mDialogView.cancel.setOnClickListener {
             mAlertDialog.dismiss()

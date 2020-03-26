@@ -20,18 +20,21 @@ import java.util.*
 
 class PillMedication : AppCompatActivity() {
 
-    var ini_day=0
-    var ini_month=0
-    var ini_year=0
-    var end_day=0
-    var end_month=0
-    var end_year=0
+    var ini_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+    var ini_month=Calendar.getInstance().get(Calendar.MONTH)+1
+    var ini_year=Calendar.getInstance().get(Calendar.YEAR)
+    var end_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+    var end_month=Calendar.getInstance().get(Calendar.YEAR)
+    var end_year=Calendar.getInstance().get(Calendar.YEAR)
     var medicine= ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pill_medication)
         val image_view = findViewById(R.id.left_arrow) as ImageButton
+
+        btn_from.setText("")
+
         image_view.setOnClickListener {
             go_back()
         }
@@ -53,12 +56,12 @@ class PillMedication : AppCompatActivity() {
     }
 
     fun select_start_end_dates(){
-        var new_ini_day=0
-        var new_ini_month=0
-        var new_ini_year=0
-        var new_end_day=0
-        var new_end_month=0
-        var new_end_year=0
+        var new_ini_day=this.ini_day
+        var new_ini_month=this.ini_month
+        var new_ini_year=this.ini_year
+        var new_end_day=this.end_day
+        var new_end_month=this.end_month
+        var new_end_year=this.end_year
 
 
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.specific_dates_dialoge, null)
@@ -100,7 +103,7 @@ class PillMedication : AppCompatActivity() {
         mDialogView.OK.setOnClickListener {
             Toast.makeText(this,"work in progress",Toast.LENGTH_LONG).show()
             set_ok_date(new_ini_day,new_ini_month,new_ini_year,new_end_day,new_end_month,new_end_year)
-            go_home()
+            mAlertDialog.dismiss()
         }
         mDialogView.cancel.setOnClickListener {
             mAlertDialog.dismiss()
@@ -113,9 +116,15 @@ class PillMedication : AppCompatActivity() {
         this.end_month=end_month
         this.end_year=end_year
 
+        var data_ini=this.ini_day.toString()+"//"+this.ini_month.toString()+"//"+this.ini_year.toString()
+
         this.ini_day=ini_day
         this.ini_month=ini_month
         this.ini_year=ini_year
+
+        var data_end=this.end_day.toString()+"//"+this.end_month.toString()+"//"+this.end_year.toString()
+
+        btn_from.setText(data_ini+" to "+data_end)
     }
 
 
