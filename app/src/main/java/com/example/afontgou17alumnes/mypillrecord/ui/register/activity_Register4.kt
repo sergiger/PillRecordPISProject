@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import kotlinx.android.synthetic.main.activity__register4.*
+import kotlinx.android.synthetic.main.activity__register4.view.*
 import kotlinx.android.synthetic.main.change_pasword_dialogue.*
 import kotlinx.android.synthetic.main.gender_dialoge.*
 import kotlinx.android.synthetic.main.share_team_activity.*
@@ -31,7 +32,7 @@ class activity_Register4 : AppCompatActivity() {
         //Això és per a veure el flow, no és per a fer que funcionin els botons de veritat
         text_input_gender.setOnClickListener {
             showPopupMenu(it)
-            text_input_gender.setText(gender.toString(),TextView.BufferType.EDITABLE)
+            text_input_gender.setText(gender.toString())
         }
 
         btn_confirm_register.setOnClickListener {
@@ -57,8 +58,9 @@ class activity_Register4 : AppCompatActivity() {
     fun showPopupMenu(view: View) = PopupMenu(view.context, view).run {
         menuInflater.inflate(R.menu.gender_popup_menu, menu)
         setOnMenuItemClickListener { item ->
-            Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
             gender=item.title.toString()
+            view.text_input_gender.setText(gender.toString())
             true
         }
         show()

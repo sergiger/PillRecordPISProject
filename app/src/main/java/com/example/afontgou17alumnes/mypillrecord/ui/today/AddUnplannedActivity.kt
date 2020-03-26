@@ -21,9 +21,9 @@ import java.util.*
 
 class AddUnplannedActivity : AppCompatActivity() {
 
-    var new_day=0
-    var new_month=0
-    var new_year=0
+    var day=0
+    var month=0
+    var year=0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,6 +98,9 @@ class AddUnplannedActivity : AppCompatActivity() {
     }
 
     fun select_date(){
+        var new_day=0
+        var new_month=0
+        var new_year=0
 
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.date_dialoge, null)
         //AlertDialogBuilder
@@ -114,9 +117,9 @@ class AddUnplannedActivity : AppCompatActivity() {
             today.get(Calendar.DAY_OF_MONTH)
         ) { view, year, month, day ->
             val month = month + 1
-            this.new_day=day
-            this.new_month=month
-            this.new_year=year
+            new_day=day
+            new_month=month
+            new_year=year
             //val msg = "You Selected: $day/$month/$year"
             //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
         }
@@ -124,14 +127,19 @@ class AddUnplannedActivity : AppCompatActivity() {
         //Aqui faig els listeners dels dos botons
         mDialogView.OK.setOnClickListener {
             Toast.makeText(this,"work in progress",Toast.LENGTH_LONG).show()
-            //Ara ja estan les hores agafades correctament, ara hauriem de compartir
-            //Les terapies actives i no actives entre aquestes dates
+            set_ok_date(new_day,new_month,new_year)
             mAlertDialog.dismiss()
         }
         mDialogView.cancel.setOnClickListener {
             mAlertDialog.dismiss()
             Toast.makeText(this,"Cancel",Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun set_ok_date(ini_day:Int,ini_month:Int,ini_year:Int){
+        this.day=ini_day
+        this.month=ini_month
+        this.year=ini_year
     }
 
     fun go_home(){

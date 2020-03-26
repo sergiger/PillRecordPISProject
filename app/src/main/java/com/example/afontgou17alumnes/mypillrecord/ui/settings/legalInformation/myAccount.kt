@@ -26,6 +26,7 @@ class myAccount : AppCompatActivity() {
     var birth_year=1999
     var height=181
     var weight=67
+    var new_gender=gender.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,19 +121,18 @@ class myAccount : AppCompatActivity() {
 
             mDialogView.input_gender.setOnClickListener{
                 showPopupMenu(it)
-                mDialogView.input_gender.setText(gender.toString())
+                mDialogView.input_gender.setText(new_gender.toString())
                 mDialogView.input_gender.refreshDrawableState()
             }
             //login button click of custom layout
             mDialogView.OK.setOnClickListener {
                 //get text from EditTexts of custom layout
-                val new_gender = mDialogView.input_gender.text.toString() //aquesta variable servirà per actualitzar l'edat
-                if(!new_gender.equals("")){
-                    Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show()
-                    //dismiss dialog
-                    mAlertDialog.dismiss()
-                    refreshMyAccount(users2,arrayAdapter2)
-                }
+                gender=new_gender.toString()
+                Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show()
+                //dismiss dialog
+                mAlertDialog.dismiss()
+                refreshMyAccount(users2,arrayAdapter2)
+
             }
             //cancel button click of custom layout
             mDialogView.cancel.setOnClickListener {
@@ -236,11 +236,12 @@ class myAccount : AppCompatActivity() {
         arrayAdapter2.notifyDataSetChanged()
     }
 
-    fun showPopupMenu(view: View) = PopupMenu(view.context, view).run {
+    private fun showPopupMenu(view: View) = PopupMenu(view.context, view).run {
         menuInflater.inflate(R.menu.gender_popup_menu, menu)
         setOnMenuItemClickListener { item ->
             Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
-            gender=item.title.toString()
+            new_gender=item.title.toString()
+            view.input_gender.setText(new_gender.toString())
             true
         }
         show()

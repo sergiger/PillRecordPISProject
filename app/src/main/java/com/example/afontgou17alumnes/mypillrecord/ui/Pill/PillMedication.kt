@@ -53,6 +53,13 @@ class PillMedication : AppCompatActivity() {
     }
 
     fun select_start_end_dates(){
+        var new_ini_day=0
+        var new_ini_month=0
+        var new_ini_year=0
+        var new_end_day=0
+        var new_end_month=0
+        var new_end_year=0
+
 
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.specific_dates_dialoge, null)
         //AlertDialogBuilder
@@ -69,9 +76,9 @@ class PillMedication : AppCompatActivity() {
             today.get(Calendar.DAY_OF_MONTH)
         ) { view, year, month, day ->
             val month = month + 1
-            ini_day=day
-            ini_month=month
-            ini_year=year
+            new_ini_day=day
+            new_ini_month=month
+            new_ini_year=year
             //val msg = "You Selected: $day/$month/$year"
             //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
         }
@@ -82,9 +89,9 @@ class PillMedication : AppCompatActivity() {
             today.get(Calendar.DAY_OF_MONTH)
         ) { view, year, month, day ->
             val month = month + 1
-            end_day=day
-            end_month=month
-            end_year=year
+            new_end_day=day
+            new_end_month=month
+            new_end_year=year
             //val msg = "You Selected: $day/$month/$year"
             //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
         }
@@ -92,15 +99,25 @@ class PillMedication : AppCompatActivity() {
         //Aqui faig els listeners dels dos botons
         mDialogView.OK.setOnClickListener {
             Toast.makeText(this,"work in progress",Toast.LENGTH_LONG).show()
-            //Ara ja estan les hores agafades correctament, ara hauriem de compartir
-            //Les terapies actives i no actives entre aquestes dates
-            mAlertDialog.dismiss()
+            set_ok_date(new_ini_day,new_ini_month,new_ini_year,new_end_day,new_end_month,new_end_year)
+            go_home()
         }
         mDialogView.cancel.setOnClickListener {
             mAlertDialog.dismiss()
             Toast.makeText(this,"Cancel",Toast.LENGTH_SHORT).show()
         }
     }
+
+    fun set_ok_date(ini_day:Int,ini_month:Int,ini_year:Int,end_day:Int,end_month:Int,end_year:Int){
+        this.end_day=end_day
+        this.end_month=end_month
+        this.end_year=end_year
+
+        this.ini_day=ini_day
+        this.ini_month=ini_month
+        this.ini_year=ini_year
+    }
+
 
     fun go_home(){
         val intent = Intent(this, MainActivity::class.java);
