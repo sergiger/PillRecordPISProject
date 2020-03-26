@@ -161,6 +161,7 @@
                 android:layout_weight="19"
                 android:textColor="@color/cardview_dark_background"
                 android:textColorHint="@color/cardview_dark_background"
+                android:id="@+id/input_notes"
                 >
             </android.support.design.widget.TextInputEditText>
         </LinearLayout>

@@ -7,29 +7,42 @@ import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.widget.DatePicker
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import kotlinx.android.synthetic.main.activity_pill_sports.*
+import kotlinx.android.synthetic.main.activity_pill_sports.btn_Save
+import kotlinx.android.synthetic.main.activity_pill_sports.btn_frequency
+import kotlinx.android.synthetic.main.activity_pill_sports.btn_from
+import kotlinx.android.synthetic.main.pill_mesurements_activity.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.weight_dialoge.view.*
 import java.util.*
 
-class PillMesurements_glucosaLevelAfter : AppCompatActivity() {
+class Pill_mesurements_info : AppCompatActivity() {
 
+    var ini_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+    var ini_month=Calendar.getInstance().get(Calendar.MONTH)+1
+    var ini_year=Calendar.getInstance().get(Calendar.YEAR)
+    var end_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+    var end_month=Calendar.getInstance().get(Calendar.YEAR)
+    var end_year=Calendar.getInstance().get(Calendar.YEAR)
 
-    var ini_day=0
-    var ini_month=0
-    var ini_year=0
-    var end_day=0
-    var end_month=0
-    var end_year=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pill_mesurements_glucosa_level_after)
+        setContentView(R.layout.pill_mesurements_activity)
+
+        val bundle:Bundle = intent.extras
+        val title = bundle.get("type_of_measurement")
+        val unitat =bundle.get("unitats")
+        toolbar_title.setText(title.toString())
+        unitats_output.text=unitat.toString()
+
         val image_view = findViewById(R.id.left_arrow) as ImageButton
+        btn_from.setText("")
         image_view.setOnClickListener {
             go_back()
         }
@@ -48,12 +61,12 @@ class PillMesurements_glucosaLevelAfter : AppCompatActivity() {
     }
 
     fun select_start_end_dates(){
-        var new_ini_day=0
-        var new_ini_month=0
-        var new_ini_year=0
-        var new_end_day=0
-        var new_end_month=0
-        var new_end_year=0
+        var new_ini_day=this.ini_day
+        var new_ini_month=this.ini_month
+        var new_ini_year=this.ini_year
+        var new_end_day=this.end_day
+        var new_end_month=this.end_month
+        var new_end_year=this.end_year
 
 
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.specific_dates_dialoge, null)
@@ -111,6 +124,16 @@ class PillMesurements_glucosaLevelAfter : AppCompatActivity() {
         this.ini_day=ini_day
         this.ini_month=ini_month
         this.ini_year=ini_year
+
+        var data_ini=this.ini_day.toString()+"//"+this.ini_month.toString()+"//"+this.ini_year.toString()
+
+        this.ini_day=ini_day
+        this.ini_month=ini_month
+        this.ini_year=ini_year
+
+        var data_end=this.end_day.toString()+"//"+this.end_month.toString()+"//"+this.end_year.toString()
+
+        btn_from.setText(data_ini+" to "+data_end)
     }
 
 
@@ -125,3 +148,6 @@ class PillMesurements_glucosaLevelAfter : AppCompatActivity() {
 
     fun save_mesurement(){}//cal completar
 }
+
+
+

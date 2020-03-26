@@ -72,6 +72,8 @@ class share_team : AppCompatActivity() {
                     Toast.makeText(applicationContext,"On button click : nothing selected",
                         Toast.LENGTH_SHORT).show()
                 }
+            }else{
+                Toast.makeText(this,"Email does not exist",Toast.LENGTH_SHORT).show()
             }
         }
     }

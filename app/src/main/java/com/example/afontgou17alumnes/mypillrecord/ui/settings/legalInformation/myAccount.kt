@@ -66,6 +66,7 @@ class myAccount : AppCompatActivity() {
 
 
     }
+
     private fun onSelectedMenu(position: Int, users2: kotlin.Array<Any>, arrayAdapter2:ArrayAdapter<*>){
         if(position==0){//Change Pasword
             //Inflate the dialog with custom view

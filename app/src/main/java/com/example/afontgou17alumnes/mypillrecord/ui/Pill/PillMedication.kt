@@ -27,6 +27,7 @@ class PillMedication : AppCompatActivity() {
     var end_month=Calendar.getInstance().get(Calendar.YEAR)
     var end_year=Calendar.getInstance().get(Calendar.YEAR)
     var medicine= ""
+    var notes=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -137,5 +138,7 @@ class PillMedication : AppCompatActivity() {
         onBackPressed()
     }
 
-    fun save_medication(){}//cal completar
+    fun save_medication(){
+        this.notes=input_notes.text.toString()
+    }//cal completar
 }
