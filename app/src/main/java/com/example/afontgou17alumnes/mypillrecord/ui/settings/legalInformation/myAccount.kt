@@ -121,6 +121,7 @@ class myAccount : AppCompatActivity() {
             mDialogView.input_gender.setOnClickListener{
                 showPopupMenu(it)
                 mDialogView.input_gender.setText(gender.toString())
+                mDialogView.input_gender.refreshDrawableState()
             }
             //login button click of custom layout
             mDialogView.OK.setOnClickListener {
