@@ -24,13 +24,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="statistics_prompt">Selecciona estadística</string>
+    <string name="statistics_prompt">Select statistic</string>
     <string-array name="statistics_array">
-        <item>Peso</item>
-        <item>Frecuencia cardiaca</item>
-        <item>Presión arterial</item>
-        <item>Glucosa</item>
-        <item>Temperatura</item>
+        <item>Weight</item>
+        <item>Heart rate</item>
+        <item>Arterial pressure</item>
+        <item>Glucose</item>
+        <item>Temperature</item>
     </string-array>
     <string name="frequencia_prompt">Select the frequency</string>
     <string-array name="frequencia_array">
