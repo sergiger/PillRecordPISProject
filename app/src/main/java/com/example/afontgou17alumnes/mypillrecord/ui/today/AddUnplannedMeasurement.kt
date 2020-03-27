@@ -28,6 +28,7 @@ class AddUnplannedMeasurement : AppCompatActivity() {
     var year=Calendar.getInstance().get(Calendar.YEAR)
     var hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
     var minute=Calendar.getInstance().get(Calendar.MINUTE)
+    var value=30
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,27 +47,29 @@ class AddUnplannedMeasurement : AppCompatActivity() {
             select_time()
         }
         value_button.setOnClickListener{
-            val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
-            //Set Number Picker
-            mDialogView.number_Picker.minValue = 1
-            mDialogView.number_Picker.maxValue = 100
-            mDialogView.number_Picker.wrapSelectorWheel = false
+            select_value()
+        }
+    }
 
-            //AlertDialogBuilder
-            val mBuilder = AlertDialog.Builder(this)
-                .setView(mDialogView)
-                .setTitle("Set value")
-            val mAlertDialog = mBuilder.show()
-            mDialogView.OK.setOnClickListener {
-                Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
-                mAlertDialog.dismiss()
-            }
-            mDialogView.cancel.setOnClickListener {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
-                mAlertDialog.dismiss()
-            }
+    fun select_value(){
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
+        //Set Number Picker
+        mDialogView.number_Picker.minValue = 1
+        mDialogView.number_Picker.maxValue = 100
+        mDialogView.number_Picker.wrapSelectorWheel = false
 
-
+        //AlertDialogBuilder
+        val mBuilder = AlertDialog.Builder(this)
+            .setView(mDialogView)
+            .setTitle("Set value")
+        val mAlertDialog = mBuilder.show()
+        mDialogView.OK.setOnClickListener {
+            Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
+            mAlertDialog.dismiss()
+        }
+        mDialogView.cancel.setOnClickListener {
+            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+            mAlertDialog.dismiss()
         }
     }
 
@@ -94,6 +97,7 @@ class AddUnplannedMeasurement : AppCompatActivity() {
             if(this.hour<10){
                 hou="0"+this.hour.toString()
             }
+            //Aqui és on s'ha de posar on vols que s'escrigui el temps
             hour_button_unplanned_measurement.text = hou+":"+min
             Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
             mAlertDialog.dismiss()

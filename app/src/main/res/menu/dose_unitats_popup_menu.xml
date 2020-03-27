@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/botella"
+        android:title="Botle"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/grams"
+        android:title="Grams(g)"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/miligrams"
+        android:title="miligrams(mg)"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/pastilles"
+        android:title="Pills"
+        app:showAsAction="never"/>
+</menu>

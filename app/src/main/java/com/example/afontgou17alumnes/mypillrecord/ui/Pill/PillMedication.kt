@@ -5,17 +5,25 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.DatePicker
 import android.widget.ImageButton
+import android.widget.PopupMenu
 import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
 import kotlinx.android.synthetic.main.activity_pill_medication.*
+import kotlinx.android.synthetic.main.activity_pill_medication.view.*
 import kotlinx.android.synthetic.main.activity_pill_sports.*
 import kotlinx.android.synthetic.main.activity_pill_sports.btn_Save
 import kotlinx.android.synthetic.main.activity_pill_sports.btn_frequency
 import kotlinx.android.synthetic.main.activity_pill_sports.btn_from
+import kotlinx.android.synthetic.main.gender_dialoge.view.*
+import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
+import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
+import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import java.util.*
 
 class PillMedication : AppCompatActivity() {
@@ -28,6 +36,9 @@ class PillMedication : AppCompatActivity() {
     var end_year=Calendar.getInstance().get(Calendar.YEAR)
     var medicine= ""
     var notes=""
+    var new_units=""
+    var dose=1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +49,12 @@ class PillMedication : AppCompatActivity() {
 
         image_view.setOnClickListener {
             go_back()
+        }
+        btn_dose.setOnClickListener {
+            select_dose()
+        }
+        btn_units.setOnClickListener {
+            showPopupMenu_units(it)
         }
         btn_from.setOnClickListener {
             select_start_end_dates()
@@ -53,6 +70,35 @@ class PillMedication : AppCompatActivity() {
         }
         btn_scan.setOnClickListener {
             Toast.makeText(this, "TODO", Toast.LENGTH_LONG).show()
+        }
+
+    }
+
+    fun select_dose(){
+        var new_dose=1
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
+        //Set Number Picker
+        mDialogView.number_Picker.minValue = 1
+        mDialogView.number_Picker.maxValue = 100
+        mDialogView.number_Picker.wrapSelectorWheel = false
+
+        //AlertDialogBuilder
+        val mBuilder = AlertDialog.Builder(this)
+            .setView(mDialogView)
+            .setTitle("Set dose")
+        val mAlertDialog = mBuilder.show()
+        mDialogView.number_Picker.setOnValueChangedListener { picker, oldVal, newVal ->
+            new_dose=newVal
+        }
+        mDialogView.OK.setOnClickListener {
+            this.dose=new_dose
+            btn_dose.text=dose.toString()
+            Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
+            mAlertDialog.dismiss()
+        }
+        mDialogView.cancel.setOnClickListener {
+            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+            mAlertDialog.dismiss()
         }
     }
 
@@ -128,6 +174,16 @@ class PillMedication : AppCompatActivity() {
         btn_from.setText(data_ini+" to "+data_end)
     }
 
+    private fun showPopupMenu_units(view: View) = PopupMenu(view.context, view).run {
+        menuInflater.inflate(R.menu.dose_unitats_popup_menu, menu)
+        setOnMenuItemClickListener { item ->
+            Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
+            new_units=item.title.toString()
+            view.btn_units.setText(new_units.toString())
+            true
+        }
+        show()
+    }
 
     fun go_home(){
         val intent = Intent(this, MainActivity::class.java);

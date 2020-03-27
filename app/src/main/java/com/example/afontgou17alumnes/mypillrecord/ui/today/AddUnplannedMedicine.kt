@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.DatePicker
 import android.widget.NumberPicker
+import android.widget.PopupMenu
 import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
@@ -15,8 +17,11 @@ import kotlinx.android.synthetic.main.activity_add_unplanned_activity.back_arrow
 import kotlinx.android.synthetic.main.activity_add_unplanned_measurement.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.date_button
+import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.view.*
 import kotlinx.android.synthetic.main.activity_pill_add_time.*
 import kotlinx.android.synthetic.main.activity_pill_add_time.view.*
+import kotlinx.android.synthetic.main.activity_pill_medication.*
+import kotlinx.android.synthetic.main.activity_pill_medication.view.*
 import kotlinx.android.synthetic.main.number_dialog.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
@@ -34,6 +39,8 @@ class AddUnplannedMedicine : AppCompatActivity() {
     var year=Calendar.getInstance().get(Calendar.YEAR)
     var hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
     var minute=Calendar.getInstance().get(Calendar.MINUTE)
+    var dose=1
+    var units=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,25 +61,10 @@ class AddUnplannedMedicine : AppCompatActivity() {
             select_time()
         }
         dose_button.setOnClickListener{
-            val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
-            //Set Number Picker
-            mDialogView.number_Picker.minValue = 1
-            mDialogView.number_Picker.maxValue = 100
-            mDialogView.number_Picker.wrapSelectorWheel = false
-
-            //AlertDialogBuilder
-            val mBuilder = AlertDialog.Builder(this)
-                .setView(mDialogView)
-                .setTitle("Set dose")
-            val mAlertDialog = mBuilder.show()
-            mDialogView.OK.setOnClickListener {
-                Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
-                mAlertDialog.dismiss()
-            }
-            mDialogView.cancel.setOnClickListener {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
-                mAlertDialog.dismiss()
-            }
+            select_dose()
+        }
+        btn_unitss.setOnClickListener {
+            showPopupMenu_units(it)
         }
         medicine_name_button.setOnClickListener{
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.search_dialog, null)
@@ -90,6 +82,45 @@ class AddUnplannedMedicine : AppCompatActivity() {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
                 mAlertDialog.dismiss()
             }
+        }
+    }
+
+    private fun showPopupMenu_units(view: View) = PopupMenu(view.context, view).run {
+        menuInflater.inflate(R.menu.dose_unitats_popup_menu, menu)
+        setOnMenuItemClickListener { item ->
+            Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
+            units=item.title.toString()
+            view.btn_unitss.setText(units.toString())
+            true
+        }
+        show()
+    }
+
+    fun select_dose(){
+        var new_dose=1
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
+        //Set Number Picker
+        mDialogView.number_Picker.minValue = 1
+        mDialogView.number_Picker.maxValue = 100
+        mDialogView.number_Picker.wrapSelectorWheel = false
+
+        //AlertDialogBuilder
+        val mBuilder = AlertDialog.Builder(this)
+            .setView(mDialogView)
+            .setTitle("Set dose")
+        val mAlertDialog = mBuilder.show()
+        mDialogView.number_Picker.setOnValueChangedListener { picker, oldVal, newVal ->
+            new_dose=newVal
+        }
+        mDialogView.OK.setOnClickListener {
+            this.dose=new_dose
+            dose_button.text=dose.toString()
+            Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
+            mAlertDialog.dismiss()
+        }
+        mDialogView.cancel.setOnClickListener {
+            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+            mAlertDialog.dismiss()
         }
     }
 
@@ -117,6 +148,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
             if(this.hour<10){
                 hou="0"+this.hour.toString()
             }
+            //Aqui és on s'ha de posar on vols que s'escrigui el temps
             hour_button_unplanned_medicine.text = hou+":"+min
             Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
             mAlertDialog.dismiss()

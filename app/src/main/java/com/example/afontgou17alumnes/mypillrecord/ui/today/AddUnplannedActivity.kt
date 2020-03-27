@@ -32,6 +32,7 @@ class AddUnplannedActivity : AppCompatActivity() {
     var new_activity=""
     var hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
     var minute=Calendar.getInstance().get(Calendar.MINUTE)
+    var duration=15
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,27 +52,7 @@ class AddUnplannedActivity : AppCompatActivity() {
             select_time()
         }
         duration_button.setOnClickListener{
-            val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
-            //Set Number Picker
-            mDialogView.number_Picker.minValue = 1
-            mDialogView.number_Picker.maxValue = 100
-            mDialogView.number_Picker.wrapSelectorWheel = false
-
-            //AlertDialogBuilder
-            val mBuilder = AlertDialog.Builder(this)
-                .setView(mDialogView)
-                .setTitle("Set duration")
-            val mAlertDialog = mBuilder.show()
-            mDialogView.OK.setOnClickListener {
-                Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
-                mAlertDialog.dismiss()
-            }
-            mDialogView.cancel.setOnClickListener {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
-                mAlertDialog.dismiss()
-            }
-
-
+            select_duration()
         }
         activity_name_button.setOnClickListener{
             showPopupMenu(it)
@@ -90,6 +71,34 @@ class AddUnplannedActivity : AppCompatActivity() {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
                 mAlertDialog.dismiss()
             }*/
+        }
+    }
+
+    fun select_duration(){
+        var new_duration=1
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
+        //Set Number Picker
+        mDialogView.number_Picker.minValue = 1
+        mDialogView.number_Picker.maxValue = 100
+        mDialogView.number_Picker.wrapSelectorWheel = false
+
+        //AlertDialogBuilder
+        val mBuilder = AlertDialog.Builder(this)
+            .setView(mDialogView)
+            .setTitle("Set duration")
+        val mAlertDialog = mBuilder.show()
+        mDialogView.number_Picker.setOnValueChangedListener { picker, oldVal, newVal ->
+            new_duration=newVal
+        }
+        mDialogView.OK.setOnClickListener {
+            this.duration=new_duration
+            duration_button.text=this.duration.toString()+"min"
+            Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
+            mAlertDialog.dismiss()
+        }
+        mDialogView.cancel.setOnClickListener {
+            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+            mAlertDialog.dismiss()
         }
     }
 
@@ -117,6 +126,7 @@ class AddUnplannedActivity : AppCompatActivity() {
             if(this.hour<10){
                 hou="0"+this.hour.toString()
             }
+            //Aqui és on s'ha de posar on vols que s'escrigui el temps
             hour_button_unplanned_activity.text = hou+":"+min
             Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
             mAlertDialog.dismiss()
@@ -128,9 +138,9 @@ class AddUnplannedActivity : AppCompatActivity() {
     }
 
     fun select_date(it: View){
-        var new_day=this.day
-        var new_month=this.month
-        var new_year=this.year
+        var new_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        var new_month=Calendar.getInstance().get(Calendar.MONTH)+1
+        var new_year=Calendar.getInstance().get(Calendar.YEAR)
 
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.date_dialoge, null)
         //AlertDialogBuilder
