@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
+import kotlinx.android.synthetic.main.time_dialog.view.*
 import java.util.*
 
 class AddUnplannedActivity : AppCompatActivity() {
@@ -29,6 +30,8 @@ class AddUnplannedActivity : AppCompatActivity() {
     var month=Calendar.getInstance().get(Calendar.MONTH)+1
     var year=Calendar.getInstance().get(Calendar.YEAR)
     var new_activity=""
+    var hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+    var minute=Calendar.getInstance().get(Calendar.MINUTE)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,20 +48,7 @@ class AddUnplannedActivity : AppCompatActivity() {
             select_date(it)
         }
         hour_button_unplanned_activity.setOnClickListener{
-            val mDialogView = LayoutInflater.from(this).inflate(R.layout.time_dialog, null)
-            //AlertDialogBuilder
-            val mBuilder = AlertDialog.Builder(this)
-                .setView(mDialogView)
-                .setTitle("Set date")
-            val mAlertDialog = mBuilder.show()
-            mDialogView.OK.setOnClickListener {
-                Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
-                mAlertDialog.dismiss()
-            }
-            mDialogView.cancel.setOnClickListener {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
-                mAlertDialog.dismiss()
-            }
+            select_time()
         }
         duration_button.setOnClickListener{
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
@@ -100,6 +90,40 @@ class AddUnplannedActivity : AppCompatActivity() {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
                 mAlertDialog.dismiss()
             }*/
+        }
+    }
+
+    fun select_time(){
+        var new_Hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        var new_minute=Calendar.getInstance().get(Calendar.MINUTE)
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.time_dialog, null)
+        //AlertDialogBuilder
+        val mBuilder = AlertDialog.Builder(this)
+            .setView(mDialogView)
+            .setTitle("Set date")
+        val mAlertDialog = mBuilder.show()
+        mDialogView.time_Picker.setOnTimeChangedListener { view, hour, minute ->
+            new_Hour=hour
+            new_minute=minute
+        }
+        mDialogView.OK.setOnClickListener {
+            this.hour=new_Hour
+            this.minute=new_minute
+            var min=this.minute.toString()
+            var hou=this.hour.toString()
+            if(this.minute<10){
+                min="0"+this.minute.toString()
+            }
+            if(this.hour<10){
+                hou="0"+this.hour.toString()
+            }
+            hour_button_unplanned_activity.text = hou+":"+min
+            Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
+            mAlertDialog.dismiss()
+        }
+        mDialogView.cancel.setOnClickListener {
+            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+            mAlertDialog.dismiss()
         }
     }
 
