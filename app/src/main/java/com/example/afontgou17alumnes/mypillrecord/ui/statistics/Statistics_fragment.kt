@@ -60,32 +60,9 @@ class Statistics_fragment : Fragment() {
 
         }
         add_button.setOnClickListener {
-            /*val intent = Intent(activity, AddMeasurement::class.java)
-            startActivity(intent)*/
             val mDialog = AddMeasurementDialog()
-            //val mDialogView = activity?.layoutInflater?.inflate(R.layout.add_measure_dialog, null)
-            //mDialog.layoutInflater.inflate(R.layout.add_measure_dialog, null)
-            //this.setTargetFragment(mDialog, targetRequestCode)
             mDialog.show(fragmentManager, "Add measurement")
-
-            /*
-            //AlertDialogBuilder
-            val mBuilder = activity?.applicationContext?.let { it1 ->
-                AlertDialog.Builder(it1)
-                    .setView(mDialogView)
-                    .setTitle("Add measurement")
-            }
-            val mAlertDialog = mBuilder?.show()
-
-            mDialogView?.findViewById<Button>(R.id.OK_add_measure_dialog)?.setOnClickListener {
-                Toast.makeText(activity?.applicationContext, "Saved", Toast.LENGTH_LONG).show()
-                //mAlertDialog!!.dismiss()
-            }
-            mDialogView?.findViewById<Button>(R.id.cancel_add_measure_dialog)?.setOnClickListener {
-                Toast.makeText(activity?.applicationContext, "Cancelled", Toast.LENGTH_LONG).show()
-                //mAlertDialog!!.dismiss()
-            }*/
-
+            refreshGraph()
         }
 
     }
@@ -94,7 +71,6 @@ class Statistics_fragment : Fragment() {
 
     fun createGraph(){
         val graph = view!!.findViewById<LineChart>(R.id.graph)
-        val spinner = view!!.findViewById<Spinner>(R.id.spinner)
         graph.setTouchEnabled(true)
         graph.setPinchZoom(true)
         graph.description.isEnabled = false
@@ -119,49 +95,10 @@ class Statistics_fragment : Fragment() {
         graph.legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
         graph.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
 
-        //Set data
-        /*val values = ArrayList<Entry>()
-        values.add(Entry(0F, 5F))
-        values.add(Entry(1F, 2F))
-        values.add(Entry(2F, 3F))
-        values.add(Entry(3F, 6F))
-        values.add(Entry(4F, 1F))
-        values.add(Entry(5F, 1F))
-        values.add(Entry(6F, 1F))
-        values.add(Entry(7F, 1F))
-        values.add(Entry(8F, 1F))
-        values.add(Entry(9F, 5F))
-        values.add(Entry(10F, 2F))
-        values.add(Entry(11F, 2F))
-        values.add(Entry(12F, 4f))
-        values.add(Entry(13F, 6F))
-        values.add(Entry(14F, 1F))
-        values.add(Entry(15F, 1F))
-        values.add(Entry(16F, 1F))
-        values.add(Entry(17F, 1F))
-        values.add(Entry(18F, 1F))
-
-
-        val setComp1 = LineDataSet(values, spinner.selectedItem.toString())
-        setComp1.axisDependency = YAxis.AxisDependency.LEFT;
-        setComp1.color = Color.rgb(78,159,230)
-        setComp1.lineWidth = 3f
-        setComp1.circleRadius = 6f
-        setComp1.setCircleColor(Color.rgb(78,159,230))
-        setComp1.highLightColor = Color.BLUE
-        setComp1.setDrawValues(false)
-
-
-        val dataSets: MutableList<ILineDataSet> = ArrayList()
-        dataSets.add(setComp1)
-        val data = LineData(dataSets)
-        graph.data = data*/
 
         //Viewport
         graph.setVisibleXRangeMaximum(8F)
         graph.moveViewToX(30F)
-
-        //graph.invalidate()
 
     }
 

@@ -32,6 +32,14 @@
         <item>Glucose</item>
         <item>Temperature</item>
     </string-array>
+    <string-array name="add_measurement_array">
+        <item>Weight</item>
+        <item>Heart rate</item>
+        <item>Arterial pressure</item>
+        <item>Glucose (before eating)</item>
+        <item>Glucose (after eating)</item>
+        <item>Temperature</item>
+    </string-array>
     <string name="frequencia_prompt">Select the frequency</string>
     <string-array name="frequencia_array">
         <item>Daily, (X) times  per day</item>

@@ -11,12 +11,6 @@ import android.widget.ListView
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.model.BasicMedicineReminder
 import com.example.afontgou17alumnes.mypillrecord.ui.calendar.MedicineListAdapter
-import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
-import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
-import com.example.afontgou17alumnes.mypillrecord.ui.statistics.AddMeasurement
-import com.example.afontgou17alumnes.mypillrecord.ui.statistics.Statistics_fragment
-import kotlinx.android.synthetic.main.statistics_fragment_fragment.*
-import kotlinx.android.synthetic.main.today__fragment.*
 import kotlinx.android.synthetic.main.today__fragment.add_button
 import java.time.LocalTime
 
