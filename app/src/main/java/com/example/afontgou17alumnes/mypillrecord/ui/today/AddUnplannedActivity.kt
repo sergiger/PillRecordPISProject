@@ -75,12 +75,13 @@ class AddUnplannedActivity : AppCompatActivity() {
     }
 
     fun select_duration(){
-        var new_duration=1
+        var new_duration=this.duration
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
         //Set Number Picker
         mDialogView.number_Picker.minValue = 1
         mDialogView.number_Picker.maxValue = 100
         mDialogView.number_Picker.wrapSelectorWheel = false
+        mDialogView.number_Picker.value=this.duration
 
         //AlertDialogBuilder
         val mBuilder = AlertDialog.Builder(this)

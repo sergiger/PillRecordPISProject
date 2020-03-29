@@ -107,7 +107,7 @@
         android:background="@color/transparent"
         android:selectAllOnFocus="true"
         android:shadowColor="#FFFFFF"
-        android:text=""
+        android:text="Botle"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"

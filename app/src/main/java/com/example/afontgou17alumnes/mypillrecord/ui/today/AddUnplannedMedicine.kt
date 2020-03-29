@@ -40,7 +40,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
     var hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
     var minute=Calendar.getInstance().get(Calendar.MINUTE)
     var dose=1
-    var units=""
+    var units="Botle"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

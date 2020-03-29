@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
+import android.view.View
+import android.widget.AdapterView
 import android.widget.DatePicker
 import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
@@ -29,6 +31,10 @@ class AddUnplannedMeasurement : AppCompatActivity() {
     var hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
     var minute=Calendar.getInstance().get(Calendar.MINUTE)
     var value=30
+    val measurement_types = arrayOf("Weight", "Heart rate","Arterial pressure","Temperature","Glucose level(before eating)","Glucose level(after eating)")
+    val unit_types=arrayOf("Kg","bpm","mmHg","Cº","mg/dl","mg/dl")
+    var measuremtent="Weight"
+    var units="kg"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,22 +55,44 @@ class AddUnplannedMeasurement : AppCompatActivity() {
         value_button.setOnClickListener{
             select_value()
         }
+        measurement_spinner.onItemSelectedListener= object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                units=unit_types[position]
+                measuremtent=measurement_types[position]
+                actualise_value()
+            }
+        }
     }
 
+    fun actualise_value(){
+        var str=value.toString()+units
+        value_button.text=str
+    }
     fun select_value(){
+        var new_val=this.value
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
         //Set Number Picker
         mDialogView.number_Picker.minValue = 1
         mDialogView.number_Picker.maxValue = 100
         mDialogView.number_Picker.wrapSelectorWheel = false
+        mDialogView.number_Picker.value=this.value
 
         //AlertDialogBuilder
         val mBuilder = AlertDialog.Builder(this)
             .setView(mDialogView)
             .setTitle("Set value")
         val mAlertDialog = mBuilder.show()
+        mDialogView.number_Picker.setOnValueChangedListener { picker, oldVal, newVal ->
+            new_val=newVal
+        }
         mDialogView.OK.setOnClickListener {
             Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
+            this.value=new_val
+            actualise_value()
             mAlertDialog.dismiss()
         }
         mDialogView.cancel.setOnClickListener {
