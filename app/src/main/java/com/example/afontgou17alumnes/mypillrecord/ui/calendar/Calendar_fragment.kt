@@ -28,10 +28,10 @@ class Calendar_fragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        createMonthCalendar()
+        createTabs()
     }
 
-    fun createMonthCalendar() {
+    fun createTabs() {
         tabLayout = view!!.findViewById<TabLayout>(R.id.tabLayout)
         viewPager = view!!.findViewById<ViewPager>(R.id.viewPager)
 
