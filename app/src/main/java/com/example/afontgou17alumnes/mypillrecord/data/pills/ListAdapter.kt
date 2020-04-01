@@ -1,4 +1,4 @@
-package com.example.afontgou17alumnes.mypillrecord.data
+package com.example.afontgou17alumnes.mypillrecord.data.pills
 
 import android.content.Context
 import android.view.View

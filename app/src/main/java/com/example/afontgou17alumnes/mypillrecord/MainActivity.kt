@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.example.afontgou17alumnes.mypillrecord.data.pills.Active_ingredients
+import com.example.afontgou17alumnes.mypillrecord.data.pills.MyData
 import com.example.afontgou17alumnes.mypillrecord.ui.Pill.Pill_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.calendar.Calendar_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.settings.ajustes_activity
@@ -111,29 +113,30 @@ class MainActivity : AppCompatActivity() {
         private fun jsonParser(result:String?) {
             val results = JSONObject(result)
             val jsonResults: JSONArray = results.getJSONArray("results")
-            //val list=ArrayList<MyData>()
-            val list=ArrayList<String>()
-            var i=0
-            while (i<jsonResults.length()) {
-                val currentResult = jsonResults.getJSONObject(i)
-                list.add(currentResult.getString("brand_name"))
 
-                val jsonAI: JSONArray = currentResult.getJSONArray("active_ingredients")
-                var j=0
+            val listOfPills = ArrayList<MyData>()
+            var i = 0
+            while (i<jsonResults.length()) {
+                val currentPill = jsonResults.getJSONObject(i)
+                val brand_name:String = currentPill.getString("brand_name")
+
+                val jsonAI: JSONArray = currentPill.getJSONArray("active_ingredients")
+                val listOfAI = ArrayList<Active_ingredients>()
+                var j = 0
                 while (j<jsonAI.length()) {
                     val currentAI = jsonAI.getJSONObject(j)
-                    list.add(currentAI.getString("name"))
-                    list.add(currentAI.getString("strength"))
+
+                    val nameAI:String = currentAI.getString("name")
+                    val strengthAI:String = currentAI.getString("strength")
+                    val active_ingredients = Active_ingredients(nameAI,strengthAI)
+                    listOfAI.add(active_ingredients)
                     j++
                 }
-                /*list.add(MyData (
-                        jsonObject.getString("brand_name"),
-                        jsonObject.getString("substance"),
-                        jsonObject.getString("dosis") )
-                )*/
+                val pill = MyData(brand_name, listOfAI)
+                listOfPills.add(pill)
                 i++
             }
-            println(list)
+            println(listOfPills)
         }
 
     } // Final of implementation
