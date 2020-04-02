@@ -1,10 +1,13 @@
 package com.example.afontgou17alumnes.mypillrecord.data.model
 
+import java.time.LocalDate
 import java.time.LocalTime
 
-data class UnplannedMedicineReminder (
-    val id: String,
-    val dose: Int,
-    val doseUnit: String,
-    val hour: LocalTime
-    )
+class UnplannedMedicineReminder(
+    name: String,
+    dose: Int,
+    doseUnit: String) :
+    MedicineReminder(name, dose, doseUnit, LocalDate.now(), LocalTime.of(15,0)){
+
+}
+

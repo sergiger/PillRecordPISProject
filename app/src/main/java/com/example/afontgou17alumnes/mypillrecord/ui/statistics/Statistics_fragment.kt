@@ -96,6 +96,7 @@ class Statistics_fragment : Fragment() {
         graph.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
 
 
+
         //Viewport
         graph.setVisibleXRangeMaximum(8F)
         graph.moveViewToX(30F)
@@ -141,6 +142,10 @@ class Statistics_fragment : Fragment() {
         val data = LineData(dataSets)
         graph.data = data
         graph.invalidate()
+
+        //Viewport
+        graph.setVisibleXRangeMaximum(8F)
+        graph.moveViewToX(30F)
     }
 
 }
