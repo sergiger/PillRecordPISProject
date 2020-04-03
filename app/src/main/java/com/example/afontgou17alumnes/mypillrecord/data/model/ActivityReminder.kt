@@ -5,7 +5,7 @@ import java.time.LocalTime
 
 class ActivityReminder(
     val name: String,
-    val duration: String,
+    val duration: Int,
     val date: LocalDate,
     val time: LocalTime
 ) : Reminder {

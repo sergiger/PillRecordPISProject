@@ -11,6 +11,7 @@ import android.widget.DatePicker
 import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_measurement.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_measurement.back_arrow
@@ -21,6 +22,8 @@ import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
+import java.time.LocalDate
+import java.time.LocalTime
 import java.util.*
 
 class AddUnplannedMeasurement : AppCompatActivity() {
@@ -30,7 +33,7 @@ class AddUnplannedMeasurement : AppCompatActivity() {
     var year=Calendar.getInstance().get(Calendar.YEAR)
     var hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
     var minute=Calendar.getInstance().get(Calendar.MINUTE)
-    var value=30
+    var value:Float=30F
     val measurement_types = arrayOf("Weight", "Heart rate","Arterial pressure","Temperature","Glucose level(before eating)","Glucose level(after eating)")
     val unit_types=arrayOf("Kg","bpm","mmHg","Cº","mg/dl","mg/dl")
     var measuremtent="Weight"
@@ -79,7 +82,7 @@ class AddUnplannedMeasurement : AppCompatActivity() {
         mDialogView.number_Picker.minValue = 1
         mDialogView.number_Picker.maxValue = 100
         mDialogView.number_Picker.wrapSelectorWheel = false
-        mDialogView.number_Picker.value=this.value
+        mDialogView.number_Picker.value=this.value.toInt()
 
         //AlertDialogBuilder
         val mBuilder = AlertDialog.Builder(this)
@@ -87,7 +90,7 @@ class AddUnplannedMeasurement : AppCompatActivity() {
             .setTitle("Set value")
         val mAlertDialog = mBuilder.show()
         mDialogView.number_Picker.setOnValueChangedListener { picker, oldVal, newVal ->
-            new_val=newVal
+            new_val= newVal.toFloat()
         }
         mDialogView.OK.setOnClickListener {
             Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
@@ -191,6 +194,12 @@ class AddUnplannedMeasurement : AppCompatActivity() {
         onBackPressed()
     }
 
-    fun save(){}//cal completar
+    fun save(){
+        var newReminder= Controller.createMeasurementReminder(
+            this.measuremtent, this.units, this.value,
+            LocalDate.of(this.year, this.month, this.day), LocalTime.of(this.hour, this.minute)
+        )
+        Controller.addReminder(newReminder)
+    }//cal completar
 
 }

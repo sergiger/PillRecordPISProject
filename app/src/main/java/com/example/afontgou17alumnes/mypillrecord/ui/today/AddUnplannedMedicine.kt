@@ -13,6 +13,8 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller.createMedicineReminder
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.back_arrow
 import kotlinx.android.synthetic.main.activity_add_unplanned_measurement.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
@@ -30,6 +32,8 @@ import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalTime
 import java.util.*
 
 class AddUnplannedMedicine : AppCompatActivity() {
@@ -41,6 +45,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
     var minute=Calendar.getInstance().get(Calendar.MINUTE)
     var dose=1
     var units="Botle"
+    var medicine="Dalsi"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -215,7 +220,11 @@ class AddUnplannedMedicine : AppCompatActivity() {
         onBackPressed()
     }
 
-    fun save(){}//cal completar
+    fun save(){
+        var newReminder=createMedicineReminder(this.medicine,this.dose,this.units,
+            LocalDate.of(this.year,this.month,this.day),LocalTime.of(this.hour,this.minute))
+        Controller.addReminder(newReminder)
+    }
 
 
 }

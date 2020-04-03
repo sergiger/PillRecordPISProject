@@ -37,7 +37,7 @@ class ReminderListAdapter (
             imageTextView.setImageResource(R.drawable.pulse)
         }else if (i is ActivityReminder){
             nameTextView.text = i.name
-            infoTextView.text = i.duration
+            infoTextView.text = i.duration.toString()
             timeTextView.text = i.time.toString()
             imageTextView.setImageResource(R.drawable.olimpic)
         }

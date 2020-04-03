@@ -11,6 +11,7 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.back_arrow
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.date_button
@@ -22,6 +23,8 @@ import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
+import java.time.LocalDate
+import java.time.LocalTime
 import java.util.*
 
 class AddUnplannedActivity : AppCompatActivity() {
@@ -193,7 +196,12 @@ class AddUnplannedActivity : AppCompatActivity() {
         onBackPressed()
     }
 
-    fun save(){}//cal completar
+    fun save(){
+        var newReminder= Controller.createActivityReminder(
+            this.new_activity, this.duration, LocalDate.of(this.year, this.month, this.day), LocalTime.of(this.hour, this.minute)
+        )
+        Controller.addReminder(newReminder)
+    }//cal completar
 
     private fun showPopupMenu(view: View) = PopupMenu(view.context, view).run {
         menuInflater.inflate(R.menu.activity_popup_menu, menu)

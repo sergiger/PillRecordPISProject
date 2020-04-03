@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ListView
 
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder
@@ -36,8 +37,8 @@ class FragmentOne : Fragment() {
     fun createWeekList(){
         val medicineList = arrayOf(
             MedicineReminder("Ibuprofen",3,"tablet(s)", LocalDate.now(), LocalTime.of(17,0)),
-            MeasurementReminder("Weight","kg", LocalDate.now(), LocalTime.of(17,0)),
-            ActivityReminder("Running", "15 minutes", LocalDate.now(), LocalTime.of(18,0)),
+            MeasurementReminder("Weight","kg",Controller.user.weight, LocalDate.now(), LocalTime.of(17,0)),
+            ActivityReminder("Running", 15, LocalDate.now(), LocalTime.of(18,0)),
             UnplannedMedicineReminder("Ibuprofen", 1, "tablet(s)"),
             UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
             UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),

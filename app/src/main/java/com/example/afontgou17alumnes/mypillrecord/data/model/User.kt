@@ -49,4 +49,16 @@ open class User{
         this.therapies.add(therapy)
     }
 
+    fun changePasword(oldPasword: String, newPasword: String, repetedNewPasword: String) {
+        if(oldPasword==this.pasword){
+            if(newPasword==repetedNewPasword){
+                this.pasword=newPasword
+            }else{
+                TODO()//exceptions
+            }
+        }else{
+            TODO()//exceptions
+        }
+    }
+
 }

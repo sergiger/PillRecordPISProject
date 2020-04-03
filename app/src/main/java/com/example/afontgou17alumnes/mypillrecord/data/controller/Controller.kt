@@ -1,9 +1,7 @@
 package com.example.afontgou17alumnes.mypillrecord.data.controller
 
 import android.graphics.Color
-import com.example.afontgou17alumnes.mypillrecord.data.model.StatisticEntry
-import com.example.afontgou17alumnes.mypillrecord.data.model.Statistics
-import com.example.afontgou17alumnes.mypillrecord.data.model.User
+import com.example.afontgou17alumnes.mypillrecord.data.model.*
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -11,6 +9,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import kotlinx.android.synthetic.main.statistics_fragment_fragment.*
 import java.time.LocalDate
+import java.time.LocalTime
 import java.time.temporal.ChronoUnit
 import java.util.ArrayList
 
@@ -115,5 +114,42 @@ object Controller {
         val dataSets: MutableList<ILineDataSet> = ArrayList()
         dataSets.add(setComp1)
         return LineData(dataSets)
+    }
+
+    fun setGender(gender:String){
+        user.gender=gender
+    }
+    fun setHeihght(height:Float){
+        user.height=height
+    }
+    fun setWeight(weight:Float){
+        user.weight=weight
+    }
+    fun setPasword(oldPasword:String,newPasword:String,repetedNewPasword:String){
+        //S'ha de millorar el metode change pasword per a que pugui enviar errors
+        user.changePasword(oldPasword,newPasword,repetedNewPasword)
+    }
+    fun addTherapy(therapy: Therapy){
+        user.addTherapy(therapy)
+    }
+    fun addReminder(reminder: Reminder){
+        user.addReminder(reminder)
+    }
+    fun createMedicineReminder(medicine:String,dose:Int,units:String,
+    date:LocalDate,time: LocalTime
+    ):Reminder{
+        return MedicineReminder(medicine,dose,units,date,time)
+    }
+
+    fun createActivityReminder(
+        activity: String,
+        duration: Int,
+        date: LocalDate,
+        time: LocalTime
+    ): Reminder {
+        return ActivityReminder(activity,duration,date,time)
+    }
+    fun createMeasurementReminder(type:String,units:String,value:Float,date:LocalDate,time:LocalTime):Reminder{
+        return MeasurementReminder(type,units,value,date,time)
     }
 }
