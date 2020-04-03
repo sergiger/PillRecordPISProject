@@ -40,7 +40,7 @@ open class User{
     fun checkPasword(pasword:String):Boolean{
         return this.pasword==pasword
     }
-    
+
     fun addReminder(reminder: Reminder){
         this.reminders.add(reminder)
     }
