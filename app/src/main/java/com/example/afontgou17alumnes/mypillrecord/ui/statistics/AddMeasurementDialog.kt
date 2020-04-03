@@ -19,7 +19,7 @@ class AddMeasurementDialog : DialogFragment() {
         val dm = DisplayMetrics()
         dialog.window!!.windowManager.defaultDisplay.getMetrics(dm)
         val width = dm.widthPixels*0.9
-        val height = dm.heightPixels*0.4
+        val height = dm.heightPixels*0.6
         dialog.window!!.setLayout(width.roundToInt(), height.roundToInt())
     }
 

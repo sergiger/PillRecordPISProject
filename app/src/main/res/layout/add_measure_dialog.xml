@@ -51,13 +51,22 @@
 
     </LinearLayout>
 
+    <DatePicker
+        android:id="@+id/add_measurement_date"
+        android:layout_width="wrap_content"
+        android:layout_height="140dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/text_layout"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="end"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_below="@+id/text_layout">
+        android:layout_below="@+id/add_measurement_date">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

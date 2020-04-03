@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.MarkerView
@@ -52,17 +53,17 @@ class Statistics_fragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         createGraph()
+        Controller.setStatisticsData()
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(p0: AdapterView<*>?) {            }
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                refreshGraph()
+                refreshGraph(p2)
             }
 
         }
         add_button.setOnClickListener {
             val mDialog = AddMeasurementDialog()
             mDialog.show(fragmentManager, "Add measurement")
-            refreshGraph()
         }
 
     }
@@ -94,19 +95,12 @@ class Statistics_fragment : Fragment() {
         graph.legend.textSize = 15f
         graph.legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
         graph.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
-
-
-
-        //Viewport
-        graph.setVisibleXRangeMaximum(8F)
-        graph.moveViewToX(30F)
-
     }
 
-    fun refreshGraph(){
+    fun refreshGraph(selected: Int){
         //Set other data
-        val values = ArrayList<Entry>()
-        values.add(Entry(12F, 90F))
+        /*val values = ArrayList<Entry>()
+        values.add(Entry(-15F, 90F))
         values.add(Entry(13F, 91F))
         values.add(Entry(14F, 90F))
         values.add(Entry(15F, 89F))
@@ -127,25 +121,28 @@ class Statistics_fragment : Fragment() {
         values.add(Entry(30F, 91F))
 
 
-        val setComp1 = LineDataSet(values, spinner.selectedItem.toString())
+        val values2 = Controller.getGraphLineData(selected)
+
+        val setComp1 = LineDataSet(values2, spinner.selectedItem.toString())
         setComp1.axisDependency = YAxis.AxisDependency.LEFT;
         setComp1.color = Color.rgb(250,0,0)
         setComp1.lineWidth = 3f
         setComp1.circleRadius = 6f
         setComp1.setCircleColor(Color.rgb(250,0,0))
-        setComp1.highLightColor = Color.BLUE
+        setComp1.highLightColor = Color.RED
         setComp1.setDrawValues(false)
 
 
+
         val dataSets: MutableList<ILineDataSet> = ArrayList()
-        dataSets.add(setComp1)
-        val data = LineData(dataSets)
-        graph.data = data
+        dataSets.add(setComp1)*/
+
+        graph.data = Controller.getGraphLineData(selected)
         graph.invalidate()
 
         //Viewport
         graph.setVisibleXRangeMaximum(8F)
-        graph.moveViewToX(30F)
+        graph.moveViewToX(0F)
     }
 
 }

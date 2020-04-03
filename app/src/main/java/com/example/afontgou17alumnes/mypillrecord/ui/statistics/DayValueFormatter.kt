@@ -8,9 +8,9 @@ import java.util.*
 class DayValueFormatter : ValueFormatter() {
 
     override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-        //Today is 30
+        //Today is 0
         val today = LocalDate.now()
-        val day = today.minusDays(30 - value.toInt().toLong())
+        val day = today.minusDays(0 - value.toInt().toLong())
         return day.toString()
     }
 }
