@@ -11,4 +11,6 @@ open class MedicineReminder(
     val date: LocalDate,
     val time: LocalTime
 ) : Reminder {
+
+
 }
