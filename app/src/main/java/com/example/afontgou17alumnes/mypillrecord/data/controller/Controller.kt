@@ -141,11 +141,8 @@ object Controller {
         return MedicineReminder(medicine,dose,units,date,time)
     }
 
-    fun createActivityReminder(
-        activity: String,
-        duration: Int,
-        date: LocalDate,
-        time: LocalTime
+    fun createActivityReminder(activity: String, duration: Int,
+                               date: LocalDate, time: LocalTime
     ): Reminder {
         return ActivityReminder(activity,duration,date,time)
     }
