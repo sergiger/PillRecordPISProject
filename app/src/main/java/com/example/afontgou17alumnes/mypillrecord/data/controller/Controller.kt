@@ -41,6 +41,7 @@ object Controller {
             StatisticEntry(83F, LocalDate.of(2020, 3, 28)),
             StatisticEntry(83F, LocalDate.of(2020, 3, 29)),
             StatisticEntry(83F, LocalDate.of(2020, 3, 30)),
+            StatisticEntry(85F, LocalDate.of(2020, 3, 30)),
             StatisticEntry(83F, LocalDate.of(2020, 3, 31)),
             StatisticEntry(84F, LocalDate.of(2020, 4, 1)),
             StatisticEntry(81F, LocalDate.of(2020, 4, 2)),
@@ -105,6 +106,15 @@ object Controller {
             formattedValues.add(Entry(0 - days.toFloat(), i.value))
         }
 
+        //Ordenem els valors
+        formattedValues.sortWith(Comparator<Entry> { p1, p2 ->
+            when {
+                p1.x > p2.x -> 1
+                p1.x == p2.x -> 0
+                else -> -1
+            }
+        })
+
         val setComp1 = LineDataSet(formattedValues, label)
         setComp1.axisDependency = YAxis.AxisDependency.LEFT;
         setComp1.color = Color.rgb(250,0,0)
@@ -122,15 +132,15 @@ object Controller {
     fun setGender(gender:String){
         user.gender=gender
     }
-    fun setHeihght(height:Float){
+    fun setHeight(height:Float){
         user.height=height
     }
     fun setWeight(weight:Float){
         user.weight=weight
     }
-    fun setPasword(oldPasword:String,newPasword:String,repetedNewPasword:String){
+    fun setPassword(oldPassword:String,newPasword:String,repetedNewPasword:String){
         //S'ha de millorar el metode change pasword per a que pugui enviar errors
-        user.changePasword(oldPasword,newPasword,repetedNewPasword)
+        user.changePasword(oldPassword,newPasword,repetedNewPasword)
     }
     fun addTherapy(therapy: Therapy){
         user.addTherapy(therapy)

@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.*
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.example.afontgou17alumnes.mypillrecord.data.model.StatisticEntry
+import com.example.afontgou17alumnes.mypillrecord.ui.statistics.Statistics_fragment
 import kotlinx.android.synthetic.main.add_measure_dialog.*
 import kotlinx.android.synthetic.main.add_measure_dialog.view.*
 import java.time.LocalDate
@@ -17,11 +19,12 @@ import java.time.LocalTime
 import kotlin.math.roundToInt
 
 class AddMeasurementDialog : DialogFragment() {
-    var value:Float=Controller.user.weight
+    var value:Float= Controller.user.weight
     var date:LocalDate= LocalDate.now()
     var time:LocalTime = LocalTime.now()
-    var unit="Kg"
+    var unit="kg"
     var type:String="Weight"
+
     override fun onResume() {
         super.onResume()
         val dm = DisplayMetrics()
@@ -43,7 +46,7 @@ class AddMeasurementDialog : DialogFragment() {
         val spinner = view.findViewById<Spinner>(R.id.spinner_measurement)
         val unit = view.findViewById<TextView>(R.id.unit)
         ok.setOnClickListener {
-            if(enter_value.text.toString()!=""){
+            if(enter_value.text.toString() != ""){
                 addData(unit)
                 dismiss()
             }
@@ -83,6 +86,9 @@ class AddMeasurementDialog : DialogFragment() {
     }
 
     fun addData(unit:TextView){
+        val pos = view!!.findViewById<Spinner>(R.id.spinner_measurement).selectedItemPosition
+        val value = view!!.findViewById<EditText>(R.id.enter_value).text.toString().toFloat()
+        val datePicker = view!!.findViewById<DatePicker>(R.id.add_measurement_date)
         //TODO funció per guardar les dades cal fer que et demani la hora exacta tmb
         //Tampbé cal pensar en com fer que els reminders ja estiguin complerts
 
@@ -90,6 +96,22 @@ class AddMeasurementDialog : DialogFragment() {
         var reminder = Controller.createMeasurementReminder(type,this.unit,date,time,value)
         Controller.addReminder(reminder)
         //Enviar valor on calgui
+
+        //Part modificar Statistics
+        when(pos){
+            0-> Controller.statistics.weightData.add(StatisticEntry(value,
+                LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
+            1-> Controller.statistics.heartRateData.add(StatisticEntry(value,
+                LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
+            2-> Controller.statistics.arterialPressureData.add(StatisticEntry(value,
+                LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
+            3-> Controller.statistics.glucoseBeforeData.add(StatisticEntry(value,
+                LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
+            4-> Controller.statistics.glucoseAfterData.add(StatisticEntry(value,
+                LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
+            5-> Controller.statistics.temperatureData.add(StatisticEntry(value,
+                LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
+        }
     }
     fun setType(id:Int){
         when(id){
