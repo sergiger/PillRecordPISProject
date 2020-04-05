@@ -7,10 +7,18 @@ class MeasurementReminder(
     val name: String,
     val unit: String,
     val date: LocalDate,
-    val time: LocalTime
+    val time: LocalTime,
+    val value: Float=0F
 ): Reminder {
     override fun toString(): String {
-        return "MeasurementReminder(name='$name', unit='$unit', value=$value, date=$date, time=$time)"
+        var str:String
+        if(value!=0F){
+            str="MeasurementReminder(name='$name', unit='$unit', value=$value, date=$date, time=$time)"
+        }
+        else{
+            str="MeasurementReminder(name='$name', unit='$unit', value=  , date=$date, time=$time)"
+        }
+        return str
     }
 
     override fun equals(other: Any?): Boolean {

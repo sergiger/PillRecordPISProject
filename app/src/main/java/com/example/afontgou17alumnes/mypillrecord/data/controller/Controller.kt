@@ -150,7 +150,8 @@ object Controller {
     ): Reminder {
         return ActivityReminder(activity,duration,date,time)
     }
-    fun createMeasurementReminder(type:String,units:String,date:LocalDate,time:LocalTime):Reminder{
-        return MeasurementReminder(type,units,date,time)
+    fun createMeasurementReminder(type:String,units:String,date:LocalDate,time:LocalTime,value:Float=0F):Reminder{
+        return MeasurementReminder(type,units,date,time,value)
     }
+
 }
