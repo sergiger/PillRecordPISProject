@@ -160,7 +160,7 @@ class AddUnplannedMeasurement : AppCompatActivity() {
     fun save(){
         var newReminder= Controller.createMeasurementReminder(
             this.measuremtent, this.units,
-            LocalDate.of(this.year, this.month, this.day), LocalTime.of(this.hour, this.minute)
+            LocalDate.of(this.year, this.month, this.day), LocalTime.of(this.hour, this.minute),value
         )
         Controller.addReminder(newReminder)
     }//cal completar

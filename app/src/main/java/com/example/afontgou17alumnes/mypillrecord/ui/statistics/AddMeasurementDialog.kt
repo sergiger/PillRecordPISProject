@@ -44,7 +44,7 @@ class AddMeasurementDialog : DialogFragment() {
         val unit = view.findViewById<TextView>(R.id.unit)
         ok.setOnClickListener {
             if(enter_value.text.toString()!=""){
-                addData()
+                addData(unit)
                 dismiss()
             }
         }
@@ -82,12 +82,12 @@ class AddMeasurementDialog : DialogFragment() {
         return view
     }
 
-    fun addData(){
+    fun addData(unit:TextView){
         //TODO funció per guardar les dades cal fer que et demani la hora exacta tmb
         //Tampbé cal pensar en com fer que els reminders ja estiguin complerts
 
-        setValues()
-        var reminder = Controller.createMeasurementReminder(type,unit,date,time)
+        setValues(unit)
+        var reminder = Controller.createMeasurementReminder(type,this.unit,date,time,value)
         Controller.addReminder(reminder)
         //Enviar valor on calgui
     }
@@ -101,8 +101,8 @@ class AddMeasurementDialog : DialogFragment() {
             5->this.type="Temperature"
         }
     }
-    fun setValues(){
+    fun setValues(unit:TextView){
         this.value=enter_value.text.toString().toFloat()
-        this.unit=enter_value.unit.text.toString()
+        this.unit=unit.text.toString()
     }
 }
