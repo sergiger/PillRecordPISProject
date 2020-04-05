@@ -6,7 +6,6 @@ import java.time.LocalTime
 class MeasurementReminder(
     val name: String,
     val unit: String,
-    val value:Float,
     val date: LocalDate,
     val time: LocalTime
 ): Reminder {

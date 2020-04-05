@@ -146,7 +146,7 @@ object Controller {
     ): Reminder {
         return ActivityReminder(activity,duration,date,time)
     }
-    fun createMeasurementReminder(type:String,units:String,value:Float,date:LocalDate,time:LocalTime):Reminder{
-        return MeasurementReminder(type,units,value,date,time)
+    fun createMeasurementReminder(type:String,units:String,date:LocalDate,time:LocalTime):Reminder{
+        return MeasurementReminder(type,units,date,time)
     }
 }

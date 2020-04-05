@@ -60,31 +60,7 @@
         android:textSize="24sp"
         app:layout_constraintTop_toBottomOf="@id/toolbar_unplanned_measurement" />
 
-    <TextView
-        android:id="@+id/value_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Value"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@id/value_button"
-        app:layout_constraintTop_toTopOf="@id/value_button"
-        app:layout_constraintBottom_toBottomOf="@id/value_button"/>
 
-    <Button
-        android:id="@+id/value_button"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-        android:background="@color/transparent"
-        android:selectAllOnFocus="true"
-        android:shadowColor="#FFFFFF"
-        android:text="30kg"
-        android:textAlignment="textEnd"
-        android:textAllCaps="false"
-        android:textColor="@color/colorApp3"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/measurement_spinner" />
 
     <TextView
         android:id="@+id/date_label"
@@ -110,7 +86,7 @@
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/value_button" />
+        app:layout_constraintTop_toBottomOf="@id/measurement_spinner" />
 
     <TextView
         android:id="@+id/hour_label"
