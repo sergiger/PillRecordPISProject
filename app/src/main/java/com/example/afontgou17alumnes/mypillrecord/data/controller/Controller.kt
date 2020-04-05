@@ -1,6 +1,7 @@
 package com.example.afontgou17alumnes.mypillrecord.data.controller
 
 import android.graphics.Color
+import android.util.Log
 import com.example.afontgou17alumnes.mypillrecord.data.model.*
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
@@ -8,10 +9,12 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import kotlinx.android.synthetic.main.statistics_fragment_fragment.*
+import java.lang.Math.log
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
 import java.util.ArrayList
+import kotlin.math.log
 
 object Controller {
     val user = User("user@gmail.com", "PillRecord", "123", "Male", 19, 50F, 160F)
@@ -134,6 +137,7 @@ object Controller {
     }
     fun addReminder(reminder: Reminder){
         user.addReminder(reminder)
+        Log.d("hola:",user.reminders[user.reminders.size-1].toString())
     }
     fun createMedicineReminder(medicine:String,dose:Int,units:String,
     date:LocalDate,time: LocalTime

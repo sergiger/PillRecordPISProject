@@ -8,27 +8,32 @@
     tools:context=".ui.calendar.FragmentTwo"
     android:weightSum="10">
 
-    <!-- TODO: Update blank fragment layout -->
-
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:paddingBottom="20dp"
+        android:fillViewport="true">
 
 
         <CalendarView
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@android:color/background_light"
-            android:layout_weight="5"
+
             />
 
         <ListView
             android:id="@+id/month_list"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/calendarView"
-            android:layout_weight="6"
+            android:layout_marginBottom="?attr/actionBarSize"
             />
-
+    </android.support.v7.widget.LinearLayoutCompat>
 
 
 </LinearLayout>

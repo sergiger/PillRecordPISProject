@@ -13,6 +13,34 @@ open class MedicineReminder(
     val date: LocalDate,
     val time: LocalTime
 ) : Reminder {
+    override fun toString(): String {//Es només per provar que les coses funcionen
+        return "MedicineReminder(name='$name', dose=$dose, doseUnit='$doseUnit', date=$date, time=$time)"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as MedicineReminder
+
+        if (name != other.name) return false
+        if (dose != other.dose) return false
+        if (doseUnit != other.doseUnit) return false
+        if (date != other.date) return false
+        if (time != other.time) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = name.hashCode()
+        result = 31 * result + dose
+        result = 31 * result + doseUnit.hashCode()
+        result = 31 * result + date.hashCode()
+        result = 31 * result + time.hashCode()
+        return result
+    }
+
     /*constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readInt(),

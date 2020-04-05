@@ -40,20 +40,21 @@ class Calendar_fragment : Fragment() {
         tabLayout!!.addTab(tabLayout!!.newTab().setText("List"))
         tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
 
-        val adapter = PagerAdapter(fragmentManager)
+        val adapter = PagerAdapter(childFragmentManager)
         viewPager!!.adapter = adapter
-
         viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
         tabLayout!!.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab) {
-                viewPager!!.currentItem = tab.position
+                //viewPager!!.currentItem = tab.position
             }
-            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+            }
             override fun onTabSelected(tab: TabLayout.Tab) {
                 viewPager!!.currentItem = tab.position
             }
         })
-        // viewModel = ViewModelProviders.of(this).get(CalendarFragmentViewModel::class.java)
+        viewPager!!.currentItem=0
+        viewModel = ViewModelProviders.of(this).get(CalendarFragmentViewModel::class.java)
         // TODO: Use the ViewModel
     }
 }

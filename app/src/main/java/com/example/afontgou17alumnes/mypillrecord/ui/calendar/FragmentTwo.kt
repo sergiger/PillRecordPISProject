@@ -37,8 +37,21 @@ class FragmentTwo : Fragment() {
     fun createMonthList() {
         val medicineList = arrayOf(
             MedicineReminder("Ibuprofen",3,"tablet(s)", LocalDate.now(), LocalTime.of(17,0)),
-            MeasurementReminder("Weight","kg",Controller.user.weight,LocalDate.now(), LocalTime.of(17,0)),
-            ActivityReminder("Running", 15, LocalDate.now(), LocalTime.of(18,0))
+            MeasurementReminder("Weight","kg", Controller.user.weight,LocalDate.now(), LocalTime.of(17,0)),
+            ActivityReminder("Running", 15, LocalDate.now(), LocalTime.of(18,0)),
+            UnplannedMedicineReminder("Ibuprofen", 1, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)")
         )
 
         val medicineListView : ListView? = view?.findViewById(R.id.month_list)
