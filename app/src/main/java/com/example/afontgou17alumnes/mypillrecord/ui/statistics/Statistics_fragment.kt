@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.statistics
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -68,8 +69,6 @@ class Statistics_fragment : Fragment() {
 
     }
 
-
-
     fun createGraph(){
         val graph = view!!.findViewById<LineChart>(R.id.graph)
         graph.setTouchEnabled(true)
@@ -98,45 +97,6 @@ class Statistics_fragment : Fragment() {
     }
 
     fun refreshGraph(selected: Int){
-        //Set other data
-        /*val values = ArrayList<Entry>()
-        values.add(Entry(-15F, 90F))
-        values.add(Entry(13F, 91F))
-        values.add(Entry(14F, 90F))
-        values.add(Entry(15F, 89F))
-        values.add(Entry(16F, 87F))
-        values.add(Entry(17F, 88F))
-        values.add(Entry(18F, 85F))
-        values.add(Entry(19F, 83F))
-        values.add(Entry(20F, 81F))
-        values.add(Entry(21F, 87F))
-        values.add(Entry(22F, 82F))
-        values.add(Entry(23F, 87F))
-        values.add(Entry(24F, 85f))
-        values.add(Entry(25F, 84F))
-        values.add(Entry(26F, 83F))
-        values.add(Entry(27F, 86F))
-        values.add(Entry(28F, 85F))
-        values.add(Entry(29F, 90F))
-        values.add(Entry(30F, 91F))
-
-
-        val values2 = Controller.getGraphLineData(selected)
-
-        val setComp1 = LineDataSet(values2, spinner.selectedItem.toString())
-        setComp1.axisDependency = YAxis.AxisDependency.LEFT;
-        setComp1.color = Color.rgb(250,0,0)
-        setComp1.lineWidth = 3f
-        setComp1.circleRadius = 6f
-        setComp1.setCircleColor(Color.rgb(250,0,0))
-        setComp1.highLightColor = Color.RED
-        setComp1.setDrawValues(false)
-
-
-
-        val dataSets: MutableList<ILineDataSet> = ArrayList()
-        dataSets.add(setComp1)*/
-
         graph.data = Controller.getGraphLineData(selected)
         graph.invalidate()
 
