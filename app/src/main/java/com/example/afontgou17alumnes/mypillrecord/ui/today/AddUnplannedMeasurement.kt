@@ -55,9 +55,6 @@ class AddUnplannedMeasurement : AppCompatActivity() {
         hour_button_unplanned_measurement.setOnClickListener{
             select_time()
         }
-        value_button.setOnClickListener{
-            select_value()
-        }
         measurement_spinner.onItemSelectedListener= object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -66,41 +63,7 @@ class AddUnplannedMeasurement : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 units=unit_types[position]
                 measuremtent=measurement_types[position]
-                actualise_value()
             }
-        }
-    }
-
-    fun actualise_value(){
-        var str=value.toString()+units
-        value_button.text=str
-    }
-    fun select_value(){
-        var new_val=this.value
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
-        //Set Number Picker
-        mDialogView.number_Picker.minValue = 1
-        mDialogView.number_Picker.maxValue = 100
-        mDialogView.number_Picker.wrapSelectorWheel = false
-        mDialogView.number_Picker.value=this.value.toInt()
-
-        //AlertDialogBuilder
-        val mBuilder = AlertDialog.Builder(this)
-            .setView(mDialogView)
-            .setTitle("Set value")
-        val mAlertDialog = mBuilder.show()
-        mDialogView.number_Picker.setOnValueChangedListener { picker, oldVal, newVal ->
-            new_val= newVal.toFloat()
-        }
-        mDialogView.OK.setOnClickListener {
-            Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
-            this.value=new_val
-            actualise_value()
-            mAlertDialog.dismiss()
-        }
-        mDialogView.cancel.setOnClickListener {
-            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
-            mAlertDialog.dismiss()
         }
     }
 
@@ -196,7 +159,7 @@ class AddUnplannedMeasurement : AppCompatActivity() {
 
     fun save(){
         var newReminder= Controller.createMeasurementReminder(
-            this.measuremtent, this.units, this.value,
+            this.measuremtent, this.units,
             LocalDate.of(this.year, this.month, this.day), LocalTime.of(this.hour, this.minute)
         )
         Controller.addReminder(newReminder)

@@ -87,7 +87,7 @@ class AddMeasurementDialog : DialogFragment() {
         //Tampbé cal pensar en com fer que els reminders ja estiguin complerts
 
         setValues()
-        var reminder = Controller.createMeasurementReminder(type,unit,value,date,time)
+        var reminder = Controller.createMeasurementReminder(type,unit,date,time)
         Controller.addReminder(reminder)
         //Enviar valor on calgui
     }
