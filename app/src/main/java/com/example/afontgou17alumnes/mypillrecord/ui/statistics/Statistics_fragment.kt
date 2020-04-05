@@ -63,7 +63,7 @@ class Statistics_fragment : Fragment() {
         }
         add_button.setOnClickListener {
             val mDialog = AddMeasurementDialog()
-            mDialog.show(fragmentManager, "Add measurement")
+            mDialog.show(childFragmentManager, "Add measurement")
         }
 
     }

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.statistics.Statistics_fragment">
-
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="0dp"

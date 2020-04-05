@@ -17,7 +17,7 @@ import java.util.ArrayList
 import kotlin.math.log
 
 object Controller {
-    val user = User("user@gmail.com", "PillRecord", "123", "Male", 19, 50F, 160F)
+    val user = User("user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
     val statistics = Statistics()
 
     fun setStatisticsData(){
@@ -152,6 +152,13 @@ object Controller {
     }
     fun createMeasurementReminder(type:String,units:String,date:LocalDate,time:LocalTime,value:Float=0F):Reminder{
         return MeasurementReminder(type,units,date,time,value)
+    }
+
+    fun refreshMyAccount(gender: String, birthYear: Int, height: Float, weight: Float) {
+        this.user.weight=weight
+        this.user.height=height
+        this.user.gender=gender
+        this.user.birthYear=birthYear
     }
 
 }

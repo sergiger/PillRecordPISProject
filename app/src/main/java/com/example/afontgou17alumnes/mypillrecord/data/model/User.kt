@@ -13,7 +13,7 @@ open class User{
     var gender:String
         get() =field
         set(value) {field=value}
-    var age :Int
+    var birthYear :Int
         get() =field
         set(value) {field=value}
     var weight:Float
@@ -26,8 +26,8 @@ open class User{
     var reminders=ArrayList<Reminder>()
 
     constructor(email:String, username:String, pasword:String, gender:String,
-                age:Int, weight:Float, height:Float){
-        this.age=age
+                birthYear:Int, weight:Float, height:Float){
+        this.birthYear=birthYear
         this.email=email
         this.username=username
         this.gender=gender
