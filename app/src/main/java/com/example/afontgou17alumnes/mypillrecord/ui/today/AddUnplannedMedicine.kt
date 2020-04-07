@@ -13,6 +13,7 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.SearchActivity
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller.createMedicineReminder
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.back_arrow
@@ -72,7 +73,9 @@ class AddUnplannedMedicine : AppCompatActivity() {
             showPopupMenu_units(it)
         }
         medicine_name_button.setOnClickListener{
-            val mDialogView = LayoutInflater.from(this).inflate(R.layout.search_dialog, null)
+            val searchIntent = Intent(this, SearchActivity::class.java)
+            startActivity(searchIntent)
+            /*val mDialogView = LayoutInflater.from(this).inflate(R.layout.search_dialog, null)
 
             //AlertDialogBuilder
             val mBuilder = AlertDialog.Builder(this)
@@ -86,7 +89,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
             mDialogView.cancel.setOnClickListener {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
                 mAlertDialog.dismiss()
-            }
+            }*/
         }
     }
 
