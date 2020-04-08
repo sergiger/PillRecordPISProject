@@ -24,6 +24,7 @@ open class User{
         set(value){field=value}
     var therapies= ArrayList<Therapy>()
     var reminders=ArrayList<Reminder>()
+    var agenda=Agenda()
 
     constructor(email:String, username:String, pasword:String, gender:String,
                 birthYear:Int, weight:Float, height:Float){
@@ -60,6 +61,7 @@ open class User{
             TODO()//exceptions
         }
     }
+
 
 
 }
