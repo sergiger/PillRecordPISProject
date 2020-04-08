@@ -1,39 +1,18 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.statistics
 
-import android.content.DialogInterface
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatDialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.Button
-import android.widget.Spinner
-import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.jjoe64.graphview.series.DataPoint
-import com.jjoe64.graphview.series.LineGraphSeries
-import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
-import kotlinx.android.synthetic.main.add_measure_dialog.*
-import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.statistics_fragment_fragment.*
-import kotlinx.android.synthetic.main.time_dialog.view.*
-import java.util.*
 
 
 class Statistics_fragment : Fragment() {
@@ -94,6 +73,9 @@ class Statistics_fragment : Fragment() {
         graph.legend.textSize = 15f
         graph.legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
         graph.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+
+        //Setting MarkerView
+        graph.marker = this.context?.let { GraphMarkerView(it, R.layout.markerview) }
     }
 
     fun refreshGraph(selected: Int){
