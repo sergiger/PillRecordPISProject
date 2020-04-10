@@ -49,16 +49,16 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="20">
+
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/pill_search"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="12"
                 android:hint="Medicine"
                 android:inputType="text"
-                android:layout_weight="12"
                 android:textColor="@color/cardview_dark_background"
-                android:textColorHint="@color/cardview_dark_background"
-                >
-            </android.support.design.widget.TextInputEditText>
+                android:textColorHint="@color/cardview_dark_background"></android.support.design.widget.TextInputEditText>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

@@ -1,19 +1,19 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.calendar
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.ListView
-import android.widget.TextView
 
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.model.BasicMedicineReminder
-import java.sql.Time
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.UnplannedMedicineReminder
+import java.time.LocalDate
 import java.time.LocalTime
 
 /**
@@ -35,24 +35,28 @@ class FragmentThree : Fragment() {
     }
 
     fun createMedicineList(){
-        val medicineList = arrayOf(BasicMedicineReminder("Ibuprofeno", 1, LocalTime.of(16,4,0)),
-            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
-            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
-            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
-            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
-            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
-            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
-            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
-            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
-            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
-            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
-            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0)),
-            BasicMedicineReminder("Paracetamol", 2, LocalTime.of(19,30,0))
+        val medicineList = arrayOf(
+            MedicineReminder("Ibuprofen",3,"tablet(s)", LocalDate.now(), LocalTime.of(17,0)),
+            MeasurementReminder("Weight","kg", LocalDate.now(), LocalTime.of(17,0),0F),
+            ActivityReminder("Running", 15, LocalDate.now(), LocalTime.of(18,0)),
+            UnplannedMedicineReminder("Ibuprofen", 1, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
+            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)")
         )
         val medicineListView : ListView? = view?.findViewById(R.id.medicine_list)
-        val medicineAdapter : MedicineListAdapter= MedicineListAdapter(this,medicineList)
+        val reminderAdapter : ReminderListAdapter= ReminderListAdapter(this,medicineList)
         if (medicineListView != null) {
-            medicineListView.adapter = medicineAdapter
+            medicineListView.adapter = reminderAdapter
         }
     }
 
