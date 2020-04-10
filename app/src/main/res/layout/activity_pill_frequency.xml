@@ -55,30 +55,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Daily, (X) times  per day"
-                android:id="@+id/radioButton_day"
-                android:onClick="radio_button_click"/>
+                android:id="@+id/radioButton_xDay"
+                android:checked="true"
+                />
+            <!--android:onClick="radio_button_click"-->
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Each (X) days"
-                android:id="@+id/radioButton_week"
-                android:onClick="radio_button_click"/>
+                android:id="@+id/radioButton_eachXDays" />
 
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Specific week days"
-                android:id="@+id/radioButton_month"
-                android:onClick="radio_button_click"/>
+                android:id="@+id/radioButton_specificDays" />
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Puntual Day"
+                android:id="@+id/radioButton_PuntualDay" />
         </RadioGroup>
-        <!--
+
         <fragment
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="60"
-            android:id="@+id/fragmentFrequency">
+            android:id="@+id/fragmentFrequency"
+            android:name="com.example.afontgou17alumnes.mypillrecord.ui.Pill.Pillfrequency_FragmentOne">
         </fragment>
-        -->
+
         <Button
             android:id="@+id/btn_accept"
             android:layout_width="wrap_content"

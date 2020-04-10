@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Pill.Pillfrequency_FragmentTwo">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="80"
+        android:gravity="top"
+        android:orientation="vertical"
+        android:background="@color/colorApp3">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+        </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:weightSum="80"
+            android:layout_weight="12"
+            android:gravity="center"
+            android:background="@color/cardview_light_background">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="55"
+                android:text="Each:"
+                android:textSize="30dp"
+                android:textAlignment="center"
+                android:textColor="@color/cardview_dark_background"></TextView>
+            <Button
+                android:id="@+id/dose_button"
+                android:layout_width="0dp"
+                android:layout_weight="25"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:textSize="30dp"
+                android:textColor="@color/colorApp2"
+                android:backgroundTint="@color/cardview_light_background"
+                android:textAlignment="center">
+
+            </Button>
+
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
