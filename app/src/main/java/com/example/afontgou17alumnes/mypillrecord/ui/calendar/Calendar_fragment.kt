@@ -1,15 +1,14 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.calendar
 
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.viewpager.widget.ViewPager
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.google.android.material.tabs.TabLayout
 
 class Calendar_fragment : Fragment() {
 

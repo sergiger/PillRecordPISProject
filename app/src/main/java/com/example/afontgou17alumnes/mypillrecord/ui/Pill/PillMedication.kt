@@ -1,27 +1,26 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 
+import android.app.Activity
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.DatePicker
 import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
-import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
+import com.google.zxing.integration.android.IntentIntegrator
+import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.activity_pill_medication.*
 import kotlinx.android.synthetic.main.activity_pill_medication.view.*
-import kotlinx.android.synthetic.main.activity_pill_sports.*
 import kotlinx.android.synthetic.main.activity_pill_sports.btn_Save
 import kotlinx.android.synthetic.main.activity_pill_sports.btn_frequency
 import kotlinx.android.synthetic.main.activity_pill_sports.btn_from
-import kotlinx.android.synthetic.main.gender_dialoge.view.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
-import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import java.util.*
@@ -43,9 +42,7 @@ class PillMedication : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pill_medication)
-        val image_view = findViewById(R.id.left_arrow) as ImageButton
-
-        btn_from.setText("")
+        val image_view = findViewById<ImageButton>(R.id.left_arrow)
 
         image_view.setOnClickListener {
             go_back()
@@ -72,6 +69,28 @@ class PillMedication : AppCompatActivity() {
             Toast.makeText(this, "TODO", Toast.LENGTH_LONG).show()
         }
 
+        btn_scan.setOnClickListener {
+            val scanner = IntentIntegrator(this)
+            scanner.initiateScan()
+        }
+    }
+
+    // Barcode Scanner implementatiton
+    // Exemple: Aspirin (cut first and last number of the barcode)
+    // https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%220536-1149-41%22
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            val result:IntentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+            if (result != null) {
+                if (result.contents == null) {
+                    Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+                }
+            } else {
+                super.onActivityResult(requestCode, resultCode, data)
+            }
+        }
     }
 
     fun select_dose(){
@@ -171,7 +190,7 @@ class PillMedication : AppCompatActivity() {
 
         var data_end=this.end_day.toString()+"//"+this.end_month.toString()+"//"+this.end_year.toString()
 
-        btn_from.setText(data_ini+" to "+data_end)
+        btn_from.text = data_ini+" to "+data_end
     }
 
     private fun showPopupMenu_units(view: View) = PopupMenu(view.context, view).run {
@@ -179,15 +198,15 @@ class PillMedication : AppCompatActivity() {
         setOnMenuItemClickListener { item ->
             Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
             new_units=item.title.toString()
-            view.btn_units.setText(new_units.toString())
+            view.btn_units.text = new_units.toString()
             true
         }
         show()
     }
 
     fun go_home(){
-        val intent = Intent(this, MainActivity::class.java);
-        startActivity(intent);
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
     fun go_back(){

@@ -1,24 +1,20 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.widget.DatePicker
 import android.widget.ImageButton
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
-import kotlinx.android.synthetic.main.activity_pill_sports.*
 import kotlinx.android.synthetic.main.activity_pill_sports.btn_Save
 import kotlinx.android.synthetic.main.activity_pill_sports.btn_frequency
 import kotlinx.android.synthetic.main.activity_pill_sports.btn_from
 import kotlinx.android.synthetic.main.pill_mesurements_activity.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
-import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
-import kotlinx.android.synthetic.main.weight_dialoge.view.*
 import java.util.*
 
 class Pill_mesurements_info : AppCompatActivity() {
@@ -38,11 +34,11 @@ class Pill_mesurements_info : AppCompatActivity() {
         val bundle:Bundle = intent.extras
         val title = bundle.get("type_of_measurement")
         val unitat =bundle.get("unitats")
-        toolbar_title.setText(title.toString())
+        toolbar_title.text = title.toString()
         unitats_output.text=unitat.toString()
 
-        val image_view = findViewById(R.id.left_arrow) as ImageButton
-        btn_from.setText("")
+        val image_view = findViewById<ImageButton>(R.id.left_arrow)
+        btn_from.text = ""
         image_view.setOnClickListener {
             go_back()
         }
@@ -133,13 +129,13 @@ class Pill_mesurements_info : AppCompatActivity() {
 
         var data_end=this.end_day.toString()+"//"+this.end_month.toString()+"//"+this.end_year.toString()
 
-        btn_from.setText(data_ini+" to "+data_end)
+        btn_from.text = data_ini+" to "+data_end
     }
 
 
     fun go_home(){
-        val intent = Intent(this, MainActivity::class.java);
-        startActivity(intent);
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
     fun go_back(){

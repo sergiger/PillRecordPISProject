@@ -1,19 +1,16 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.statistics
 
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.DialogFragment
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.StatisticEntry
-import com.example.afontgou17alumnes.mypillrecord.ui.statistics.Statistics_fragment
 import kotlinx.android.synthetic.main.add_measure_dialog.*
-import kotlinx.android.synthetic.main.add_measure_dialog.view.*
 import java.time.LocalDate
 import java.time.LocalTime
 import kotlin.math.roundToInt

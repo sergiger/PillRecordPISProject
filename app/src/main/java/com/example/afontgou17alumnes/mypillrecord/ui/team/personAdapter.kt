@@ -1,10 +1,10 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.team
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.example.afontgou17alumnes.mypillrecord.R
 import kotlinx.android.synthetic.main.agenda_person_item_list.view.*
 
@@ -22,7 +22,7 @@ class personAdapter(val items : ArrayList<String>, val context: Context) : Recyc
 
     // Binds each animal in the ArrayList to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
-        holder?.tvPersonType?.text = items.get(position)
+        holder.tvPersonType?.text = items.get(position)
     }
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {

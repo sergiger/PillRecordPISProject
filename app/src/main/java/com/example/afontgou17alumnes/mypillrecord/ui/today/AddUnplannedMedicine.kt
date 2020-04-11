@@ -1,38 +1,27 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.today
 
-import android.app.TimePickerDialog
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.DatePicker
-import android.widget.NumberPicker
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.SearchActivity
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller.createMedicineReminder
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.back_arrow
-import kotlinx.android.synthetic.main.activity_add_unplanned_measurement.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.date_button
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.view.*
-import kotlinx.android.synthetic.main.activity_pill_add_time.*
-import kotlinx.android.synthetic.main.activity_pill_add_time.view.*
-import kotlinx.android.synthetic.main.activity_pill_medication.*
-import kotlinx.android.synthetic.main.activity_pill_medication.view.*
-import kotlinx.android.synthetic.main.number_dialog.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
-import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
-import java.text.NumberFormat
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*
@@ -98,7 +87,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
         setOnMenuItemClickListener { item ->
             Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
             units=item.title.toString()
-            view.btn_unitss.setText(units.toString())
+            view.btn_unitss.text = units.toString()
             true
         }
         show()
@@ -210,13 +199,13 @@ class AddUnplannedMedicine : AppCompatActivity() {
         this.day=ini_day
         this.month=ini_month
         this.year=ini_year
-        date_button.setText(this.day.toString()+"//"+this.month.toString()+"//"+this.year.toString())
+        date_button.text = this.day.toString()+"//"+this.month.toString()+"//"+this.year.toString()
 
     }
 
     fun go_home(){
-        val intent = Intent(this, MainActivity::class.java);
-        startActivity(intent);
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
     fun go_back(){

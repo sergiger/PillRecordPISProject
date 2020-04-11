@@ -3,12 +3,10 @@ package com.example.afontgou17alumnes.mypillrecord.data
 import android.app.SearchManager
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.SearchView
-import android.view.Menu
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.R.layout.activity_search
-import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +31,7 @@ class SearchActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 //TODO("Not yet implemented")
                 if (newText!!.isNotEmpty()) {
-                    val search = newText!!.toLowerCase()
+                    val search = newText.toLowerCase()
                     return true
                 }else {
                     return false
