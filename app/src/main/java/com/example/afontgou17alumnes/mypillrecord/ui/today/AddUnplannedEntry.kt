@@ -1,9 +1,9 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.today
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.DisplayMetrics
+import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import kotlinx.android.synthetic.main.activity_add_unplanned_entry.*
 import kotlin.math.roundToInt

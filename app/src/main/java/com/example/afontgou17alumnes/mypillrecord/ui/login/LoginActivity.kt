@@ -1,12 +1,8 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.login
 
 import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.StringRes
-import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -15,8 +11,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
-
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
 import kotlinx.android.synthetic.main.activity_login.*
@@ -98,12 +97,12 @@ class LoginActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 loginViewModel.login(username.text.toString(), password.text.toString())
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                startActivity(intent);
+                startActivity(intent)
             }
             btn_register.setOnClickListener {
 
                 val intent = Intent(this@LoginActivity, activity_Register4::class.java)
-                startActivity(intent);
+                startActivity(intent)
             }
         }
     }

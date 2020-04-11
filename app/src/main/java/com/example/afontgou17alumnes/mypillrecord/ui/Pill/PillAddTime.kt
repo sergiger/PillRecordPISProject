@@ -1,8 +1,8 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.DisplayMetrics
+import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import kotlin.math.roundToInt
 

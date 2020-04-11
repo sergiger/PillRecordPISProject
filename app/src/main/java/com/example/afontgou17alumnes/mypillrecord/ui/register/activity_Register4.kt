@@ -1,19 +1,14 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.register
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.PopupMenu
-import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import kotlinx.android.synthetic.main.activity__register4.*
 import kotlinx.android.synthetic.main.activity__register4.view.*
-import kotlinx.android.synthetic.main.change_pasword_dialogue.*
-import kotlinx.android.synthetic.main.gender_dialoge.*
-import kotlinx.android.synthetic.main.share_team_activity.*
 
 class activity_Register4 : AppCompatActivity() {
     var email=""
@@ -51,7 +46,7 @@ class activity_Register4 : AppCompatActivity() {
             //Aqui ara utilitzariem aquestes variables per fer totes les restriccions que volguéssim avans
             // Handler code here.
             val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent);
+            startActivity(intent)
         }
     }
 
