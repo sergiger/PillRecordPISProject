@@ -1,7 +1,5 @@
 package com.example.afontgou17alumnes.mypillrecord.data.model
 
-import android.os.Parcel
-import android.os.Parcelable
 import java.time.LocalDate
 import java.time.LocalTime
 
