@@ -1,14 +1,9 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation
 
-import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.view.View
-import android.widget.*
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
-import kotlinx.android.synthetic.main.ajustes_activity.*
-import kotlinx.android.synthetic.main.legal_main_activity.*
 import kotlinx.android.synthetic.main.legal_main_activity.back_legal_icon
 import kotlinx.android.synthetic.main.privacy_activity.*
 

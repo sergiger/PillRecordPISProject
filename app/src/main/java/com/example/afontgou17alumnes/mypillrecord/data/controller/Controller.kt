@@ -8,13 +8,11 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import kotlinx.android.synthetic.main.statistics_fragment_fragment.*
-import java.lang.Math.log
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
 import java.util.ArrayList
-import kotlin.math.log
+import kotlin.Comparator
 
 object Controller {
     val user = User("user@gmail.com", "PillRecord", "123", "Male", 19, 50F, 160F)
@@ -116,7 +114,7 @@ object Controller {
         })
 
         val setComp1 = LineDataSet(formattedValues, label)
-        setComp1.axisDependency = YAxis.AxisDependency.LEFT;
+        setComp1.axisDependency = YAxis.AxisDependency.LEFT
         setComp1.color = Color.rgb(250,0,0)
         setComp1.lineWidth = 3f
         setComp1.circleRadius = 6f

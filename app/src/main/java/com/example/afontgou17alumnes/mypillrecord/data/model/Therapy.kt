@@ -3,19 +3,12 @@ package com.example.afontgou17alumnes.mypillrecord.data.model
 import android.os.Parcel
 import android.os.Parcelable
 import java.time.LocalDate
-import java.util.*
 
 open class Therapy :Parcelable{
     var frequency=Frequency()
     var startDate:LocalDate
-        get()=field
-        set(value) {field=value}
     var endDate:LocalDate
-        get()=field
-        set(value) {field=value}
     var notes:String
-        get()=field
-        set(value) {field=value}
 
 
     constructor(startDate:LocalDate,endDate:LocalDate, frequency: Frequency ?= null,notes:String){

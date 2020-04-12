@@ -1,14 +1,17 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.calendar
 
 import android.annotation.SuppressLint
-import android.support.v4.app.Fragment
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.model.*
+import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.Reminder
 
 class ReminderListAdapter(
     val activity: Fragment,
@@ -43,18 +46,18 @@ class ReminderListAdapter(
         }
 
 
-        return view;
+        return view
     }
 
     override fun getItem(p0: Int): Any {
-        return 1;
+        return 1
     }
 
     override fun getItemId(p0: Int): Long {
-        return 0;
+        return 0
     }
 
     override fun getCount(): Int {
-        return reminderList.size;
+        return reminderList.size
     }
 }

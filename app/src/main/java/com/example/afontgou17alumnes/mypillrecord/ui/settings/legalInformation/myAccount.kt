@@ -2,20 +2,18 @@ package com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
-
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
-import kotlinx.android.synthetic.main.my_account_activity.*
 import kotlinx.android.synthetic.main.change_pasword_dialogue.view.*
-import kotlinx.android.synthetic.main.gender_dialoge.*
 import kotlinx.android.synthetic.main.gender_dialoge.view.*
 import kotlinx.android.synthetic.main.height_dialoge.view.*
 import kotlinx.android.synthetic.main.height_dialoge.view.cancel
+import kotlinx.android.synthetic.main.my_account_activity.*
 import kotlinx.android.synthetic.main.weight_dialoge.view.*
 import kotlinx.android.synthetic.main.year_of_birth_dialoge.view.*
 import kotlinx.android.synthetic.main.year_of_birth_dialoge.view.OK
@@ -100,13 +98,13 @@ class myAccount : AppCompatActivity() {
             }
         }
         else if(position==1){//Close Session
-            val intent = Intent(this, LoginActivity::class.java);
-            startActivity(intent);
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
             Toast.makeText(this,"sesion closed", Toast.LENGTH_SHORT).show()
         }
         else if(position==2){//Extra information
-            val intent = Intent(this, extra_information::class.java);
-            startActivity(intent);
+            val intent = Intent(this, extra_information::class.java)
+            startActivity(intent)
             //Aqui s'haurà de posar que el user i la contrassenya son null, per a que no puguis tornar
             //a entrar a la conta amb el mateix user
         }

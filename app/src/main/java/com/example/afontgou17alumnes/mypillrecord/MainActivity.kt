@@ -4,12 +4,11 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.data.pills.Active_ingredients
 import com.example.afontgou17alumnes.mypillrecord.data.pills.MyData
 import com.example.afontgou17alumnes.mypillrecord.ui.Pill.Pill_fragment
@@ -18,6 +17,7 @@ import com.example.afontgou17alumnes.mypillrecord.ui.settings.ajustes_activity
 import com.example.afontgou17alumnes.mypillrecord.ui.statistics.Statistics_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.team.Team_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.today.Today_Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
             val connection=URL(url[0]).openConnection() as HttpURLConnection
             try {
                 connection.connect()
-                res=connection.inputStream.use() { it.reader().use { reader->reader.readText() } }
+                res=connection.inputStream.use { it.reader().use { reader->reader.readText() } }
             }
             finally {
                 connection.disconnect()
@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
         }
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
-            if (pDialog.isShowing())
+            if (pDialog.isShowing)
                 pDialog.dismiss()
             jsonParser(result)
         }
@@ -155,8 +155,8 @@ class MainActivity : AppCompatActivity() {
         val id = item?.itemId
         if(id == R.id.options_item){
             Toast.makeText(this,"opcions",Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, ajustes_activity::class.java);
-            startActivity(intent);
+            val intent = Intent(this, ajustes_activity::class.java)
+            startActivity(intent)
         }
         if(id == R.id.pdf_item){
             Toast.makeText(this,"PDF is being generated",Toast.LENGTH_LONG).show()

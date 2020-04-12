@@ -1,18 +1,16 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.team
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import kotlinx.android.synthetic.main.share_team_activity.*
-import kotlinx.android.synthetic.main.specific_dates_dialoge.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
-import kotlinx.android.synthetic.main.weight_dialoge.view.*
 import kotlinx.android.synthetic.main.weight_dialoge.view.cancel
 import java.util.*
 
@@ -31,7 +29,7 @@ class share_team : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.share_team_activity)
 
-        val image_view = findViewById(R.id.left_arrow) as ImageButton
+        val image_view = findViewById<ImageButton>(R.id.left_arrow)
         image_view.setOnClickListener {
             onBackPressed()
         }
@@ -88,14 +86,14 @@ class share_team : AppCompatActivity() {
 
 
     fun go_home(){
-        val intent = Intent(this, MainActivity::class.java);
-        startActivity(intent);
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
     fun go_home_succesfully(){
         Toast.makeText(this,"Shared succesfully",Toast.LENGTH_SHORT).show()
-        val intent = Intent(this, MainActivity::class.java);
-        startActivity(intent);
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
     fun select_start_end_dates(){

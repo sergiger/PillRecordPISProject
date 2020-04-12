@@ -1,25 +1,20 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.today
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.DatePicker
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.*
-import kotlinx.android.synthetic.main.activity_add_unplanned_activity.back_arrow
-import kotlinx.android.synthetic.main.activity_add_unplanned_activity.date_button
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.view.*
-import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
-import kotlinx.android.synthetic.main.activity_pill_sports.view.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
-import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
@@ -184,12 +179,12 @@ class AddUnplannedActivity : AppCompatActivity() {
         this.day=ini_day
         this.month=ini_month
         this.year=ini_year
-        date_button.setText(this.day.toString()+"//"+this.month.toString()+"//"+this.year.toString())
+        date_button.text = this.day.toString()+"//"+this.month.toString()+"//"+this.year.toString()
     }
 
     fun go_home(){
-        val intent = Intent(this, MainActivity::class.java);
-        startActivity(intent);
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
     fun go_back(){
@@ -208,7 +203,7 @@ class AddUnplannedActivity : AppCompatActivity() {
         setOnMenuItemClickListener { item ->
             Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
             new_activity=item.title.toString()
-            view.activity_name_button.setText(new_activity.toString())
+            view.activity_name_button.text = new_activity.toString()
             true
         }
         show()
