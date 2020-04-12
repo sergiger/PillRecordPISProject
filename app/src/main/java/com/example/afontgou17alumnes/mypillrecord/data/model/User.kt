@@ -1,9 +1,9 @@
 package com.example.afontgou17alumnes.mypillrecord.data.model
 
 open class User{
-    val email:String
+    var email:String
         get()=field
-    val username:String
+    var username:String
         get() =field
     var pasword:String
         get() =field

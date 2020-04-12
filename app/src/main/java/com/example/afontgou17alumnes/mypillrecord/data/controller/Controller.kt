@@ -1,8 +1,12 @@
 package com.example.afontgou17alumnes.mypillrecord.data.controller
 
+import android.content.Context
 import android.graphics.Color
 import android.util.Log
+import android.widget.Toast
+import com.example.afontgou17alumnes.mypillrecord.data.SharedApp
 import com.example.afontgou17alumnes.mypillrecord.data.model.*
+import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -19,9 +23,21 @@ object Controller {
     val statistics = Statistics()
 
     fun initUserSaved(){
+        /*this.user.weight=SharedApp.prefs.weight
+        this.user.height=SharedApp.prefs.height
+        this.user.birthYear=SharedApp.prefs.yearBirth
+        this.user.username=SharedApp.prefs.username
+        //this.user.email=SharedApp.prefs.email
+        this.user.gender=SharedApp.prefs.gender
+        this.user.pasword=SharedApp.prefs.pasword*/
 
-        //Agafo el que hi ha a shared preferences i creo el user
     }
+
+    fun savePreferences(){
+
+    }
+
+
 
     fun setStatisticsData(){
         val data1 = arrayOf<StatisticEntry>(
@@ -172,6 +188,9 @@ object Controller {
         this.user.height=height
         this.user.gender=gender
         this.user.birthYear=birthYear
+
     }
+
+
 
 }

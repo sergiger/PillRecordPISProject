@@ -21,10 +21,10 @@ import kotlinx.android.synthetic.main.year_of_birth_dialoge.view.OK
 
 
 class myAccount : AppCompatActivity() {
-    var gender="Masculin"
-    var birth_year=1999
-    var height=181F
-    var weight=67F
+    var gender=Controller.user.gender
+    var birth_year=Controller.user.birthYear
+    var height=Controller.user.height
+    var weight=Controller.user.weight
     var new_gender=gender.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +56,7 @@ class myAccount : AppCompatActivity() {
             android.R.layout.simple_list_item_1, users)
         opcions_menuu.adapter = arrayAdapter
         opcions_menuu.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-            onSelectedMenu(position,users2, arrayAdapter2)
+            onSelectedMenu(position, users2, arrayAdapter2)
         }
 
 
@@ -66,7 +66,7 @@ class myAccount : AppCompatActivity() {
 
     }
 
-    private fun onSelectedMenu(position: Int, users2: kotlin.Array<Any>, arrayAdapter2:ArrayAdapter<*>){
+    private fun onSelectedMenu(position: Int, users2: Array<Any>, arrayAdapter2:ArrayAdapter<*>){
         if(position==0){//Change Pasword
             //Inflate the dialog with custom view
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.change_pasword_dialogue, null)
@@ -100,6 +100,7 @@ class myAccount : AppCompatActivity() {
         }
         else if(position==1){//Close Session
             val intent = Intent(this, LoginActivity::class.java)
+            intent.putExtra("type_of_action","close_sesion")
             startActivity(intent)
             Toast.makeText(this,"sesion closed", Toast.LENGTH_SHORT).show()
         }
@@ -228,13 +229,15 @@ class myAccount : AppCompatActivity() {
     }
 
     private fun refreshMyAccount(users2: Array<Any>, arrayAdapter2:ArrayAdapter<*>){
-
         users2.set(3,gender)
         users2.set(4,birth_year)
         users2.set(5,height)
         users2.set(6,weight)
         arrayAdapter2.notifyDataSetChanged()
         Controller.refreshMyAccount(this.gender,this.birth_year,this.height,this.weight)
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.putExtra("type_of_action","Save_Share_and_go_back")
+        startActivity(intent)
     }
 
     private fun showPopupMenu(view: View) = PopupMenu(view.context, view).run {

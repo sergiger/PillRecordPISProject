@@ -12,3 +12,4 @@ class SharedApp : Application() {
         prefs = Prefs(applicationContext)
     }
 }
+
