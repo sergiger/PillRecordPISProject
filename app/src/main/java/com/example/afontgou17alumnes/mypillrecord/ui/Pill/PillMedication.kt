@@ -65,14 +65,13 @@ class PillMedication : AppCompatActivity() {
             save_medication()
             go_home()
         }
-        btn_scan.setOnClickListener {
-            Toast.makeText(this, "TODO", Toast.LENGTH_LONG).show()
-        }
 
+        // Barcode Scanner implementatiton
         btn_scan.setOnClickListener {
             val scanner = IntentIntegrator(this)
             scanner.initiateScan()
         }
+
     }
 
     // Barcode Scanner implementatiton

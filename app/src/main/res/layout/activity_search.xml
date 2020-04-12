@@ -1,40 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
     tools:context=".data.SearchActivity">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_search"
+        android:id="@+id/toolbar2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="?attr/colorPrimary"
-        android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/back_arrow"
+        android:theme="?attr/actionBarTheme">
+        <ImageButton
+            android:id="@+id/left_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:src="@drawable/ic_arrow_back_white_24dp"
-            app:backgroundTint="@color/transparent"
-            app:elevation="0dp"
-            tools:layout_editor_absoluteX="16dp" />
-        <SearchView
-            android:id="@+id/searchEngine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:background="@drawable/arrow_left2">
+        </ImageButton>
     </androidx.appcompat.widget.Toolbar>
 
-    <ListView
-        android:id="@+id/lista"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pills_list"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"></ListView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_weight="9"></androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>

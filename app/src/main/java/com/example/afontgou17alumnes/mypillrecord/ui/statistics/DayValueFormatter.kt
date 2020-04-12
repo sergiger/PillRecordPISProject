@@ -3,7 +3,6 @@ package com.example.afontgou17alumnes.mypillrecord.ui.statistics
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.formatter.ValueFormatter
 import java.time.LocalDate
-import java.util.*
 
 class DayValueFormatter : ValueFormatter() {
 
