@@ -10,9 +10,9 @@ import android.widget.TextView
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.model.*
 
-class ReminderListAdapter (
+class ReminderListAdapter(
     val activity: Fragment,
-    val reminderList : Array<Reminder>
+    val reminderList: Array<Reminder>
 ) : BaseAdapter() {
     @SuppressLint("SetTextI18n", "ViewHolder")
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {

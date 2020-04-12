@@ -1,6 +1,5 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.today
 
-import android.content.ContentProvider
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ListView
 
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder

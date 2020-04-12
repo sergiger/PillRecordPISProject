@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.ListView
 
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder

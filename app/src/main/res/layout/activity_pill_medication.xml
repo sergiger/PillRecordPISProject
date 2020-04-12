@@ -98,18 +98,10 @@
                 android:backgroundTint="@color/cardview_light_background"
                 android:text=""
                 android:textAllCaps="false"
-                android:textAlignment="textEnd"
-
-                >
+                android:textAlignment="textEnd">
             </Button>
         </LinearLayout>
-        <TextView
-            android:id="@+id/text_view_dates"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
-            android:text="EXAMPLE 21/03/2020 to 25/03/2020"
-            android:gravity="center"></TextView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -139,70 +131,93 @@
                 android:textAlignment="textEnd"
                 ></Button>
         </LinearLayout>
-        <TextView
-            android:id="@+id/text_view_frequency"
+        <ListView
+            android:id="@+id/lw_hours_medications"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"
-            android:text="(Frequency)"
-            android:gravity="center"></TextView>
+            android:layout_weight="39"
+            android:scrollbarSize="@dimen/activity_vertical_margin"
+           >
+        </ListView>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="20">
-            <TextView
-                android:id="@+id/dose_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dose"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="@id/btn_dose"
-                app:layout_constraintTop_toTopOf="@id/btn_dose"
-                app:layout_constraintBottom_toBottomOf="@id/btn_dose"/>
-
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:weightSum="3"
+            android:gravity="center">
             <Button
-                android:id="@+id/btn_dose"
+                android:id="@+id/btn_add_field_medication_button"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="19"
-                android:backgroundTint="@color/cardview_light_background"
-                android:text=""
-                android:textAllCaps="false"
-                android:textAlignment="textEnd"
-                ></Button>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#555"
+                android:text="Add Field"
+                android:textColor="#FFF"></Button>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="20">
-            <TextView
-                android:id="@+id/units_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Units"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="@id/btn_units"
-                app:layout_constraintTop_toTopOf="@id/btn_units"
-                app:layout_constraintBottom_toBottomOf="@id/btn_units"/>
-
-            <Button
-                android:id="@+id/btn_units"
-                android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:weightSum="2"
+            android:gravity="center">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="19"
-                android:backgroundTint="@color/cardview_light_background"
-                android:text=""
-                android:textAllCaps="false"
-                android:textAlignment="textEnd"
-                ></Button>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="20">
+                <TextView
+                    android:id="@+id/dose_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dose"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="@id/btn_dose"
+                    app:layout_constraintTop_toTopOf="@id/btn_dose"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_dose"/>
+
+                <Button
+                    android:id="@+id/btn_dose"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="19"
+                    android:backgroundTint="@color/cardview_light_background"
+                    android:text=""
+                    android:textAllCaps="false"
+                    android:textAlignment="textEnd"
+                    ></Button>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="20">
+                <TextView
+                    android:id="@+id/units_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Units"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="@id/btn_units"
+                    app:layout_constraintTop_toTopOf="@id/btn_units"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_units"/>
+
+                <Button
+                    android:id="@+id/btn_units"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="19"
+                    android:backgroundTint="@color/cardview_light_background"
+                    android:text=""
+                    android:textAllCaps="false"
+                    android:textAlignment="textEnd"
+                    ></Button>
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

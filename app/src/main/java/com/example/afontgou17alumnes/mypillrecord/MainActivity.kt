@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     // API Implementation
     inner class AsyncTaskHandler:AsyncTask<String,String,String> () {
         override fun onPreExecute() {
@@ -102,7 +103,6 @@ class MainActivity : AppCompatActivity() {
             }
             return res
         }
-
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
             if (pDialog.isShowing())
