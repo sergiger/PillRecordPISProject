@@ -20,6 +20,11 @@ object Controller {
     val user = User("user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
     val statistics = Statistics()
 
+    fun initUserSaved(){
+
+        //Agafo el que hi ha a shared preferences i creo el user
+    }
+
     fun setStatisticsData(){
         val data1 = arrayOf<StatisticEntry>(
             StatisticEntry(80F, LocalDate.of(2020, 3, 12)),

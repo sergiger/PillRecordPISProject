@@ -1,6 +1,7 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.login
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -17,17 +18,21 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.SharedApp
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
+    val EMPTY_VALUE = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_login)
+
+        configView(this@LoginActivity)
 
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
@@ -107,6 +112,21 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    fun preferencesSaved(context: Context){
+        Controller.initUserSaved()
+        val intent = Intent(context , MainActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun configView(context: Context){
+        if(isSavedName()) preferencesSaved(context)
+    }
+
+    fun isSavedName():Boolean{
+        val myName = SharedApp.prefs.name
+        return myName != EMPTY_VALUE
+    }//Aqui retorno true si hi ha algo guardat a shared preferences i false si no hi ha res
+
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
@@ -137,3 +157,6 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
     })
 }
+
+
+
