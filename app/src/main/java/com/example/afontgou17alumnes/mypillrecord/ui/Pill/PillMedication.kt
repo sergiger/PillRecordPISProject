@@ -7,27 +7,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
-import android.widget.DatePicker
-import android.widget.ImageButton
-import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.activity_pill_medication.*
 import kotlinx.android.synthetic.main.activity_pill_medication.view.*
-import kotlinx.android.synthetic.main.activity_pill_sports.*
 import kotlinx.android.synthetic.main.activity_pill_sports.btn_Save
 import kotlinx.android.synthetic.main.activity_pill_sports.btn_frequency
 import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
-import java.time.LocalDate
 import java.util.*
 
 class PillMedication : AppCompatActivity() {
@@ -190,8 +183,6 @@ class PillMedication : AppCompatActivity() {
                 llista.removeAt(i)
                 listHasChanged(llista)
             }
-
-
             if( button.visibility ==View.INVISIBLE){
                 button.visibility=View.VISIBLE
                 button.setOnClickListener {
@@ -205,13 +196,13 @@ class PillMedication : AppCompatActivity() {
              */
         }
     }
-//per afegir
+    //per afegir
     fun select_time(){
         var new_Hour= Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         var new_minute= Calendar.getInstance().get(Calendar.MINUTE)
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.time_dialog, null)
         //AlertDialogBuilder
-        val mBuilder = AlertDialog.Builder(this!!)
+        val mBuilder = AlertDialog.Builder(this)
             .setView(mDialogView)
             .setTitle("Set date")
         val mAlertDialog = mBuilder.show()
@@ -253,7 +244,7 @@ class PillMedication : AppCompatActivity() {
         var new_minute= Calendar.getInstance().get(Calendar.MINUTE)
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.time_dialog, null)
         //AlertDialogBuilder
-        val mBuilder = AlertDialog.Builder(this!!)
+        val mBuilder = AlertDialog.Builder(this)
             .setView(mDialogView)
             .setTitle("Set date")
         val mAlertDialog = mBuilder.show()

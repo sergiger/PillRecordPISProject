@@ -11,9 +11,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.SearchActivity
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller.createMedicineReminder
+import com.example.afontgou17alumnes.mypillrecord.data.search.SearchActivity
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.back_arrow
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.date_button

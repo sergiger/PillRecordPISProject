@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
-import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity

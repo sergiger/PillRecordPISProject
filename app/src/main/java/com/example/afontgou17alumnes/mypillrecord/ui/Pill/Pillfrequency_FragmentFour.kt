@@ -2,7 +2,6 @@ package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 
 import android.os.Bundle
 import android.util.Log
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +11,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-
 import com.example.afontgou17alumnes.mypillrecord.R
-import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
 import kotlinx.android.synthetic.main.fragment_pillfrequency__four.*
-import kotlinx.android.synthetic.main.fragment_pillfrequency__one.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import java.util.*
 

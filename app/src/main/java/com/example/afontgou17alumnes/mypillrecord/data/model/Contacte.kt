@@ -2,12 +2,8 @@ package com.example.afontgou17alumnes.mypillrecord.data.model
 
 class Contacte {
     var username:String
-        get() =field
-        set(value) {field=value}
     var tipus:String
-        get() =field
-        set(value) {field=value}
-                    //Hi haurà 4 tipus: Metge, Cuidador, Familiar, Pacient
+    //Hi haurà 4 tipus: Metge, Cuidador, Familiar, Pacient
                     //METGE: podrà veure tot i accedir a afegir reminders i terapies
                     //Cuidador: podrà veure tot i afegir reminders
                     //Faminilar: podrà veure tot.

@@ -1,12 +1,8 @@
 package com.example.afontgou17alumnes.mypillrecord.data.controller
 
-import android.content.Context
 import android.graphics.Color
 import android.util.Log
-import android.widget.Toast
-import com.example.afontgou17alumnes.mypillrecord.data.SharedApp
 import com.example.afontgou17alumnes.mypillrecord.data.model.*
-import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData

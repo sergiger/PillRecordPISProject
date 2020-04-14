@@ -6,14 +6,8 @@ import java.time.LocalDate
 
 open class MedicineTherapy: Therapy {
     var dose:Int
-        get()=field
-        set(value) {field=value}
     var units:String
-        get()=field
-        set(value) {field=value}
     var medicine:String
-        get()=field
-        set(value) {field=value}
 
     constructor(startDate: LocalDate, endDate: LocalDate, frequency: Frequency,notes:String,dose:Int,units:String,medicine:String)
             : super(startDate,endDate,frequency,notes) {
