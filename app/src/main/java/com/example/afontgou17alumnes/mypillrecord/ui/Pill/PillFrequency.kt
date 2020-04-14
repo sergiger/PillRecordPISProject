@@ -25,11 +25,16 @@ class PillFrequency : AppCompatActivity() {
     var end_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
     var end_month=Calendar.getInstance().get(Calendar.MONTH)+1
     var end_year=Calendar.getInstance().get(Calendar.YEAR)
-    var new_units=""
+
+    var button_radiogrupPressed = ""
+    var new_dose=0
+    var arrayDiesSaltejats= mutableListOf<String>()
+    var arrayDiesSetmana= mutableListOf<String>("0","0","0","0","0","0","0")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pill_frequency)
+        button_radiogrupPressed="radioButton_xDay"
         btn_from_to.setOnClickListener {
             select_start_end_dates()
         }
@@ -40,6 +45,7 @@ class PillFrequency : AppCompatActivity() {
                 val genderString = resources.getResourceEntryName(radio.id) // "male"
                 when(genderString){
                     "radioButton_xDay" ->{
+                        button_radiogrupPressed="radioButton_xDay"
                        /* Toast.makeText(applicationContext," On checked change : ${genderString}",
                             Toast.LENGTH_SHORT).show()*/
                         layout_fromto.visibility=View.VISIBLE
@@ -47,18 +53,21 @@ class PillFrequency : AppCompatActivity() {
 
                     }
                     "radioButton_eachXDays"->{
+                        button_radiogrupPressed="radioButton_eachXDays"
                         /*Toast.makeText(applicationContext," On checked change : ${genderString}",
                             Toast.LENGTH_SHORT).show()*/
                         layout_fromto.visibility=View.VISIBLE
                         loadFragment(Pillfrequency_FragmentTwo())
                     }
                     "radioButton_specificDays"->{
+                        button_radiogrupPressed= "radioButton_specificDays"
                         /*Toast.makeText(applicationContext," On checked change : ${genderString}",
                             Toast.LENGTH_SHORT).show()*/
                         layout_fromto.visibility=View.VISIBLE
                         loadFragment(Pillfrequency_FragmentThree())
                     }
                     "radioButton_PuntualDay"->{
+                        button_radiogrupPressed= "radioButton_PuntualDay"
                         /*Toast.makeText(applicationContext," On checked change : ${genderString}",
                             Toast.LENGTH_SHORT).show()*/
                         layout_fromto.visibility=View.INVISIBLE
@@ -84,7 +93,25 @@ class PillFrequency : AppCompatActivity() {
             Log.e("end_day",end_day.toString())
             Log.e("end_month",end_month.toString())
             Log.e("end_year",end_year.toString())
-            onBackPressed()
+            when(button_radiogrupPressed){
+                "radioButton_xDay" ->{
+                    Log.e("radioButton_xDay","radioButton_xDay SAVED")
+                }
+                "radioButton_eachXDays"->{
+                    //Pillfrequency_FragmentTwo().
+                    Log.e("radioButton_eachXDays","radioButton_eachXDays SAVED")
+                    Log.e("dose",new_dose.toString())
+                }
+                "radioButton_specificDays"->{
+                    Log.e("radioButton_specificDays","radioButton_specificDays SAVED")
+                    Log.e("Week days",arrayDiesSetmana.toString())
+                }
+                "radioButton_PuntualDay"->{
+                    Log.e("radioButton_PuntualDay","radioButton_PuntualDay SAVED")
+                    Log.e("list days",arrayDiesSaltejats.toString())
+
+                }
+            }
         }
     }
     private fun loadFragment(fragment:Fragment) {
@@ -183,15 +210,20 @@ class PillFrequency : AppCompatActivity() {
             return 1
         }
     }
-
-    private fun showPopupMenu_units(view: View) = PopupMenu(view.context, view).run {
-        menuInflater.inflate(R.menu.dose_unitats_popup_menu, menu)
-        setOnMenuItemClickListener { item ->
-            Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
-            new_units=item.title.toString()
-            view.btn_units.text = new_units.toString()
-            true
-        }
-        show()
+    fun setDose(dose :Int){
+        new_dose = dose
     }
+    fun getDiesSetmana(): MutableList<String> {
+        return arrayDiesSetmana
+    }
+    fun setDiesSetmana(week : MutableList<String>){
+        arrayDiesSetmana = week
+    }
+    fun getDiesSaltejats(): MutableList<String> {
+        return arrayDiesSaltejats
+    }
+    fun setDiesSaltejats(week : MutableList<String>){
+        arrayDiesSaltejats = week
+    }
+
 }

@@ -93,6 +93,10 @@ class PillHourListAdapter3 (val activity: Context, val reminderList : Array<Stri
                 var w_hourListfrequency= classe.get_w_dayListfrequency()
                 w_hourListfrequency.removeAt(p0)
                 classe.listHasChanged(w_hourListfrequency)
+
+                val dies = (activity as PillFrequency?)?.getDiesSaltejats()
+                dies!!.removeAt(p0)
+                (activity as PillFrequency?)?.setDiesSaltejats(dies)
             }
         }
 

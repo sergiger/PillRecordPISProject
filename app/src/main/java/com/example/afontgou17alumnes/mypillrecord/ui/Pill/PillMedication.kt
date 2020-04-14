@@ -24,13 +24,7 @@ import kotlinx.android.synthetic.main.time_dialog.view.*
 import java.util.*
 
 class PillMedication : AppCompatActivity() {
-
-    var ini_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-    var ini_month=Calendar.getInstance().get(Calendar.MONTH)+1
-    var ini_year=Calendar.getInstance().get(Calendar.YEAR)
-    var end_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-    var end_month=Calendar.getInstance().get(Calendar.YEAR)
-    var end_year=Calendar.getInstance().get(Calendar.YEAR)
+    var v_frequency= ""
     var medicine= ""
     var notes=""
     var new_units=""
@@ -41,6 +35,8 @@ class PillMedication : AppCompatActivity() {
     var timeListViewfrequency : ListView? = null
     var timeAdapter : PillHourListAdapter2? = null
     var w_hourListfrequency= mutableListOf<String>()
+
+    var activityFrequency1 = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,6 +63,7 @@ class PillMedication : AppCompatActivity() {
         btn_Save.setOnClickListener {
             Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
             save_medication()
+            Log.e("ACTIVITYFREQUENCY",activityFrequency1.toString())
             go_home()
         }
 
@@ -282,6 +279,13 @@ class PillMedication : AppCompatActivity() {
     }
     fun get_w_hourListfrequency(): MutableList<String> {
         return w_hourListfrequency
+    }
+
+    fun getactivityFrequency(): String {
+        return activityFrequency1
+    }
+    fun setactivityFrequency(dies : String){
+        activityFrequency1 = dies
     }
 
 }
