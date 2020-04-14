@@ -6,11 +6,7 @@ import java.time.LocalDate
 
 class ActivityTherapy:Therapy {
     var activityType:String
-        get()=field
-        set(value) {field=value}
     var duration:Int
-        get()=field
-        set(value){field=value}
 
     constructor(startDate: LocalDate, endDate: LocalDate, frequency: Frequency, notes:String, activityType:String,duration: Int)
             : super(startDate,endDate,frequency,notes){

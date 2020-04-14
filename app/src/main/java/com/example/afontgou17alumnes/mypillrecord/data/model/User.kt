@@ -2,26 +2,15 @@ package com.example.afontgou17alumnes.mypillrecord.data.model
 
 open class User{
     var email:String
-        get()=field
     var username:String
-        get() =field
     var pasword:String
-        get() =field
         set(value) {
             if (value.length>6) field=value //Aqui faig que la contrassenya hagi de ser minim de 6 digits, però s'ha de modificar
         }
     var gender:String
-        get() =field
-        set(value) {field=value}
     var birthYear :Int
-        get() =field
-        set(value) {field=value}
     var weight:Float
-        get() =field
-        set(value){field=value}
     var height:Float
-        get() =field
-        set(value){field=value}
     var therapies= ArrayList<Therapy>()
     var reminders=ArrayList<Reminder>()
     var agenda=Agenda()

@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.calendar.FragmentTwo"
-    android:weightSum="10">
-
-    <androidx.appcompat.widget.LinearLayoutCompat
+    tools:context=".ui.calendar.FragmentTwo">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:paddingBottom="20dp"
-        android:fillViewport="true">
-
-
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@android:color/background_light"
-
-            />
-
-        <ListView
-            android:id="@+id/month_list"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp">
+        <Button
+            android:id="@+id/btn_selectDate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/calendarView"
-            android:layout_marginBottom="?attr/actionBarSize"
-            />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:paddingHorizontal="50dp"
+            android:drawableLeft="@drawable/ic_calendar_icon"
+            android:text="Select a date" />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_calendar_icon"
+            android:background="@color/colorApp2">
+        </ImageView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/txt_datePicked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text=""
+        android:textSize="20sp"
+        android:textColor="#000000">
+    </TextView>
+    <ListView
+        android:id="@+id/month_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

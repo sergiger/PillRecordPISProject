@@ -52,7 +52,7 @@ class FragmentOne : Fragment() {
             UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)")
         )
         val medicineListView : ListView? = view?.findViewById(R.id.week_list)
-        val reminderAdapter : ReminderListAdapter= ReminderListAdapter(this,medicineList)
+        val reminderAdapter : WeekListAdapter = WeekListAdapter (this, medicineList)
         if (medicineListView != null) {
             medicineListView.adapter = reminderAdapter
         }

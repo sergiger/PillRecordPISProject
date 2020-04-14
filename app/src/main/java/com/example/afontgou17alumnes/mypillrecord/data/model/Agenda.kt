@@ -3,7 +3,7 @@ package com.example.afontgou17alumnes.mypillrecord.data.model
 class Agenda {
     var contactes=ArrayList<Contacte>()
 
-    constructor(){    }//Constructor vuit
+    constructor()//Constructor vuit
     constructor(contactes:ArrayList<Contacte>){
         for(contacte in contactes)
             this.contactes.add(contacte)

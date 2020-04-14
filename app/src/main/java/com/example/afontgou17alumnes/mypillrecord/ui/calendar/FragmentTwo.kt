@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.calendar
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,10 @@ import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.UnplannedMedicineReminder
+import kotlinx.android.synthetic.main.fragment_two.*
 import java.time.LocalDate
 import java.time.LocalTime
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -29,7 +32,23 @@ class FragmentTwo : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        createCalendarDialog()
         createMonthList()
+    }
+
+    fun createCalendarDialog() {
+        val c = Calendar.getInstance()
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        val month = c.get(Calendar.MONTH)
+        val year= c.get(Calendar.YEAR)
+
+        btn_selectDate.setOnClickListener {
+            val datePickerDialog = DatePickerDialog(context, DatePickerDialog.OnDateSetListener {
+                    view, myear, monthOfYear, dayOfMonth ->
+                    txt_datePicked.text = "The date picked is: " + myear + "/" + monthOfYear + "/" + dayOfMonth
+            }, year, month, day)
+            datePickerDialog.show()
+        }
     }
 
     fun createMonthList() {

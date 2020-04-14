@@ -1,10 +1,12 @@
-package com.example.afontgou17alumnes.mypillrecord.data
+package com.example.afontgou17alumnes.mypillrecord.data.search
 
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -16,7 +18,9 @@ import com.example.afontgou17alumnes.mypillrecord.R.layout.activity_search
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.pill_child.view.*
 
-class SearchActivity : AppCompatActivity() {
+class SearchActivity : AppCompatActivity(),
+    OnPillsListener {
+    var currentText: CharSequence = ""
     var drugs: MutableList<String> = ArrayList()
     var displayList: MutableList<String> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +31,12 @@ class SearchActivity : AppCompatActivity() {
             onBackPressed()
         }
         pills_list.layoutManager = LinearLayoutManager(this)
-        pills_list.adapter = PillAdapter(displayList, this)
+        pills_list.adapter =
+            PillAdapter(
+                displayList,
+                this,
+                this
+            )
         loadData()
         doMySearch()
     }
@@ -74,25 +83,40 @@ class SearchActivity : AppCompatActivity() {
         })
     }
 
-    class PillAdapter(items : List<String>, ctx : Context) : RecyclerView.Adapter<PillAdapter.ViewHolder>(){
+    class PillAdapter(items : List<String>, ctx : Context, listener: OnPillsListener) : RecyclerView.Adapter<PillAdapter.ViewHolder>(){
         private var list = items
         private var context = ctx
+        private var mlistener = listener
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            return ViewHolder(LayoutInflater.from(context).inflate(R.layout.pill_child, parent, false))
+            return ViewHolder(
+                LayoutInflater.from(context).inflate(R.layout.pill_child, parent, false),
+                mlistener
+            )
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.name?.text = list[position]
+            holder.button.text = list[position]
         }
 
         override fun getItemCount(): Int {
             return list.size
         }
-
-        class ViewHolder (v : View) : RecyclerView.ViewHolder(v) {
-            val name = v.pill_name
+        class ViewHolder (itemView : View, listener: OnPillsListener) : RecyclerView.ViewHolder(itemView), OnClickListener{
+            val button: Button = itemView.pill_name
+            var mlistener = listener
+            init {
+                println(100000)
+                button.setOnClickListener(this)
+            }
+            override fun onClick(p: View?) {
+                mlistener.onPillClick(adapterPosition)
+            }
         }
-
+    }
+    override fun onPillClick(position: Int) {
+        println("The position is " + position)
+        println(displayList[position])
+        searchEngine.setQuery(displayList[position], true)
     }
 }

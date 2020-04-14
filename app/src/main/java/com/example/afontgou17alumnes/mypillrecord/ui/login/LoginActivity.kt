@@ -19,10 +19,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.SharedApp
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
-import com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation.myAccount
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -127,15 +125,15 @@ class LoginActivity : AppCompatActivity() {
 
     fun sharedUpLoad(email: String, pasword: String, username:String="Joan",gender:String="Masculin",yearBirth:Int=1999, weight:Float=67F,height:Float=180F) {
         val editor = getSharedPreferences("Mydata", Context.MODE_PRIVATE).edit()
-        editor.putString("email",email);
-        editor.putString("pasword",pasword);
+        editor.putString("email",email)
+        editor.putString("pasword",pasword)
         //Ara hauriem d'anar a la base de dades i agafar la resta, jo ara posaré valors fixes, però el pròxim pas és conectar-ho amb el firebase
         editor.putString("username",username)
-        editor.putString("gender",gender);
-        editor.putString("yearBirth",yearBirth.toString());
-        editor.putString("weight",weight.toString());
-        editor.putString("height",height.toString());
-        editor.apply();
+        editor.putString("gender",gender)
+        editor.putString("yearBirth",yearBirth.toString())
+        editor.putString("weight",weight.toString())
+        editor.putString("height",height.toString())
+        editor.apply()
     }
     fun sharedDownloadLoad(){
         //Log.d("hola",getSharedPreferences("Mydata", Context.MODE_PRIVATE).contains("email").toString())
@@ -179,8 +177,8 @@ class LoginActivity : AppCompatActivity() {
     }
     fun closeSesion(){
         val editor = getSharedPreferences("Mydata", Context.MODE_PRIVATE).edit()
-        editor.clear();
-        editor.apply();
+        editor.clear()
+        editor.apply()
     }
 
     fun createAccount(){
