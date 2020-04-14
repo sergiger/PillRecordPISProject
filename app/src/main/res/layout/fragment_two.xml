@@ -34,8 +34,4 @@
         android:textSize="20sp"
         android:textColor="#000000">
     </TextView>
-    <ListView
-        android:id="@+id/month_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 </LinearLayout>
