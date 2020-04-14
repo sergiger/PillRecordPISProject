@@ -3,13 +3,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorApp3"
     tools:context=".ui.Pill.Pillfrequency_FragmentFour">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/holo_purple"
-        android:text="@string/hello_blank_fragment" />
+        android:gravity="top"
+        android:orientation="vertical"
+        android:weightSum="80"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:background="@color/colorApp3"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="3"></TextView>
+        <LinearLayout
+            android:id="@+id/parent_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:context=".MainActivity"
+            android:weightSum="40"
+            android:layout_weight="77"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/lw_days"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="35"
+                android:fastScrollEnabled="true"
+                >
+
+            </ListView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:weightSum="2"
+                android:gravity="end"
+                >
+                <Button
+                    android:id="@+id/btn_add_day_button"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="#555"
+                    android:layout_gravity="bottom"
+                    android:textColor="#FFF"
+                    android:text="Add Day"
+                    android:paddingLeft="5dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </FrameLayout>

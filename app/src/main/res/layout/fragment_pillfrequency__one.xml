@@ -13,7 +13,8 @@
         android:weightSum="80"
         tools:layout_editor_absoluteX="86dp"
         tools:layout_editor_absoluteY="0dp"
-        android:background="@android:color/holo_orange_light">
+        android:background="@color/colorApp3"
+        >
         <TextView
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -59,7 +60,8 @@
                     android:layout_gravity="bottom"
                     android:textColor="#FFF"
                     android:text="Add Field"
-                    android:paddingLeft="5dp"/>
+                    android:paddingLeft="5dp"
+                    android:visibility="invisible"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

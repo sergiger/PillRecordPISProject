@@ -1,14 +1,16 @@
 package com.example.afontgou17alumnes.mypillrecord
 
+
+
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.data.pills.Active_ingredients
 import com.example.afontgou17alumnes.mypillrecord.data.pills.MyData
 import com.example.afontgou17alumnes.mypillrecord.ui.Pill.Pill_fragment
@@ -71,6 +73,7 @@ class MainActivity : AppCompatActivity() {
 
         // API Implementation
         val url = "https://api.fda.gov/drug/ndc.json?search=active_ingredients.name:%22ibuprofen%22+AND+brand_name:%22Advil%22&limit=100"
+        //TODO senyal posadq
         AsyncTaskHandler().execute(url)  // Final of implementation
 
         setSupportActionBar(toolbar)
@@ -82,7 +85,7 @@ class MainActivity : AppCompatActivity() {
 
 
     // API Implementation
-    inner class AsyncTaskHandler:AsyncTask<String,String,String> () {
+    inner class AsyncTaskHandler: AsyncTask<String, String, String>() {
         override fun onPreExecute() {
             super.onPreExecute()
             pDialog = ProgressDialog(this@MainActivity)

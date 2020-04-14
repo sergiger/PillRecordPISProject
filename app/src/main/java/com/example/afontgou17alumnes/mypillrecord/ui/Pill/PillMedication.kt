@@ -2,10 +2,8 @@ package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 
 import android.app.Activity
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
+
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -26,10 +24,7 @@ import kotlinx.android.synthetic.main.activity_pill_sports.*
 import kotlinx.android.synthetic.main.activity_pill_sports.btn_Save
 import kotlinx.android.synthetic.main.activity_pill_sports.btn_frequency
 import kotlinx.android.synthetic.main.activity_pill_sports.btn_from
-import kotlinx.android.synthetic.main.fragment_pillfrequency__one.*
-import kotlinx.android.synthetic.main.gender_dialoge.view.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
-import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
@@ -72,9 +67,6 @@ class PillMedication : AppCompatActivity() {
         btn_units.setOnClickListener {
             showPopupMenu_units(it)
         }
-        btn_from.setOnClickListener {
-            select_start_end_dates()
-        }
         btn_frequency.setOnClickListener {
             val intent = Intent(this, PillFrequency::class.java)
             startActivity(intent)
@@ -89,9 +81,17 @@ class PillMedication : AppCompatActivity() {
             scanner.initiateScan()
         }
         val pos = w_hourListfrequency.size
-        w_hourListfrequency.add(pos, "08:00")
+        Log.e("MINUTE",minute.toString())
+        if(minute<10){
+            val minute2 = "0"+ minute.toString()
+            w_hourListfrequency.add(pos, hour.toString()+":"+ minute2)
+        }
+        else{
+            w_hourListfrequency.add(pos, hour.toString()+":"+ minute)
+        }
         //la llista ha canviat
         listHasChanged(w_hourListfrequency)
+    }
 
     // Barcode Scanner implementatiton
     // Exemple: Aspirin (cut first and last number of the barcode)
@@ -139,78 +139,6 @@ class PillMedication : AppCompatActivity() {
         }
     }
 
-    fun select_start_end_dates(){
-        var new_ini_day=this.ini_day
-        var new_ini_month=this.ini_month
-        var new_ini_year=this.ini_year
-        var new_end_day=this.end_day
-        var new_end_month=this.end_month
-        var new_end_year=this.end_year
-
-
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.specific_dates_dialoge, null)
-        //AlertDialogBuilder
-        val mBuilder = AlertDialog.Builder(this)
-            .setView(mDialogView)
-            .setTitle("Set specific dates")
-        //show dialog
-        val  mAlertDialog = mBuilder.show()
-        //Aqui guardo la data INI seleccionada
-        //i també poso la data correcta al DatePicker de INICI amb la data d'avui
-        val datePicker_ini = mDialogView.findViewById<DatePicker>(R.id.date_Picker_ini)
-        val today = Calendar.getInstance()
-        datePicker_ini.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
-            today.get(Calendar.DAY_OF_MONTH)
-        ) { view, year, month, day ->
-            val month = month + 1
-            new_ini_day=day
-            new_ini_month=month
-            new_ini_year=year
-            //val msg = "You Selected: $day/$month/$year"
-            //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-        }
-        //Aqui guardo la data END seleccionada
-        //i també poso la data correcta al DatePicker de END amb la data d'avui
-        val datePicker_end = mDialogView.findViewById<DatePicker>(R.id.date_Picker_end)
-        datePicker_end.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
-            today.get(Calendar.DAY_OF_MONTH)
-        ) { view, year, month, day ->
-            val month = month + 1
-            new_end_day=day
-            new_end_month=month
-            new_end_year=year
-            //val msg = "You Selected: $day/$month/$year"
-            //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-        }
-
-        //Aqui faig els listeners dels dos botons
-        mDialogView.OK.setOnClickListener {
-            Toast.makeText(this,"work in progress",Toast.LENGTH_LONG).show()
-            set_ok_date(new_ini_day,new_ini_month,new_ini_year,new_end_day,new_end_month,new_end_year)
-            mAlertDialog.dismiss()
-        }
-        mDialogView.cancel.setOnClickListener {
-            mAlertDialog.dismiss()
-            Toast.makeText(this,"Cancel",Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    fun set_ok_date(ini_day:Int,ini_month:Int,ini_year:Int,end_day:Int,end_month:Int,end_year:Int){
-        this.end_day=end_day
-        this.end_month=end_month
-        this.end_year=end_year
-
-        var data_ini=this.ini_day.toString()+"//"+this.ini_month.toString()+"//"+this.ini_year.toString()
-
-        this.ini_day=ini_day
-        this.ini_month=ini_month
-        this.ini_year=ini_year
-
-        var data_end=this.end_day.toString()+"//"+this.end_month.toString()+"//"+this.end_year.toString()
-
-        btn_from.text = data_ini+" to "+data_end
-    }
-
     private fun showPopupMenu_units(view: View) = PopupMenu(view.context, view).run {
         menuInflater.inflate(R.menu.dose_unitats_popup_menu, menu)
         setOnMenuItemClickListener { item ->
@@ -245,7 +173,9 @@ class PillMedication : AppCompatActivity() {
         timeListViewfrequency = timeListViewfrequency2
         Log.e("timeListViewfrequency", timeListViewfrequency.toString())
         timeAdapter = timeAdapter2
-        Toast.makeText(this, "Added", Toast.LENGTH_LONG).show()
+        if(llista.size > 1){
+            Toast.makeText(this, "Added", Toast.LENGTH_LONG).show()
+        }
         timeListViewfrequency?.setOnItemClickListener { adapterView, view, i, l ->
             Log.e("POSITION", timeAdapter?.getItem(i).toString())
             var text : TextView = view.findViewById(R.id.tw_hour)
@@ -272,7 +202,7 @@ class PillMedication : AppCompatActivity() {
              */
         }
     }
-
+//per afegir
     fun select_time(){
         var new_Hour= Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         var new_minute= Calendar.getInstance().get(Calendar.MINUTE)
@@ -314,6 +244,7 @@ class PillMedication : AppCompatActivity() {
             mAlertDialog.dismiss()
         }
     }
+    //per modificar
     fun select_time2(textView: TextView){
         var new_Hour= Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         var new_minute= Calendar.getInstance().get(Calendar.MINUTE)
@@ -347,7 +278,6 @@ class PillMedication : AppCompatActivity() {
                 w_hourListfrequency.set(pos, hou + ":" + min)
                 textView.text = hou + ":" + min
                 //la llista ha canviat
-                //listHasChanged(w_hourListfrequency)
                 mAlertDialog.dismiss()
             }
         }
@@ -359,8 +289,5 @@ class PillMedication : AppCompatActivity() {
     fun get_w_hourListfrequency(): MutableList<String> {
         return w_hourListfrequency
     }
-
-
-
 
 }

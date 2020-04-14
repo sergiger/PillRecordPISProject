@@ -41,6 +41,35 @@
                 android:textSize="20dp"
                 android:textStyle="bold"></TextView>
         </androidx.appcompat.widget.Toolbar>
+        <LinearLayout
+            android:id="@+id/layout_fromto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="20">
+            <TextView
+                android:id="@+id/date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="From/To"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="@id/btn_from"
+                app:layout_constraintTop_toTopOf="@id/btn_from"
+                app:layout_constraintBottom_toBottomOf="@id/btn_from"/>
+            <Button
+                android:id="@+id/btn_from_to"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="19"
+                android:backgroundTint="@color/cardview_light_background"
+                android:text=""
+                android:textAllCaps="false"
+                android:textAlignment="textEnd">
+            </Button>
+        </LinearLayout>
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,6 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Chose which frequency you will do it"/>
+
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
