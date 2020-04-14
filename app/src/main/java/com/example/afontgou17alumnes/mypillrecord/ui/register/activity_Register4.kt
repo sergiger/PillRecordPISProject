@@ -7,18 +7,20 @@ import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity__register4.*
 import kotlinx.android.synthetic.main.activity__register4.view.*
 
 class activity_Register4 : AppCompatActivity() {
-    var email=""
-    var username=""
-    var pasword=""
+    var email="88"
+    var username="88"
+    var pasword="88888888888888"
     var pasword_repeat=""
-    var gender=""
-    var age=10000
-    var weight=10000
-    var height=10000
+    var year_Birth=1599
+    var gender="Masculin"
+    var weight=10000F
+    var height=10000F
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,8 +47,9 @@ class activity_Register4 : AppCompatActivity() {
             height=text_input_height.text.toString().toInt()*/
             //Aqui ara utilitzariem aquestes variables per fer totes les restriccions que volguéssim avans
             // Handler code here.
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            //val intent = Intent(this, MainActivity::class.java)
+            //startActivity(intent)
+            createAccount()
         }
     }
 
@@ -59,5 +62,12 @@ class activity_Register4 : AppCompatActivity() {
             true
         }
         show()
+    }
+
+    fun createAccount(){
+        Controller.createAccount(this.email,this.username,this.pasword,this.gender,this.year_Birth,this.weight,this.height)
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.putExtra("type_of_action","Save_share_Create_Account_Go_Home")
+        startActivity(intent)
     }
 }

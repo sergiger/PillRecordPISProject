@@ -21,6 +21,9 @@ class ActivityTherapy:Therapy {
         this.activityType=source.readString()
         this.duration=source.readInt()
     }
+    override fun toString(): String {
+        return "ActivityTherapy(frequency=$frequency, startDate=$startDate, endDate=$endDate, notes='$notes', activityType=$activityType, duration=$duration)"
+    }
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.let {
             //Això és crucial per poder utilitzar el constructor, ja que s'ha de poder llegir i escriure amb el mateix format

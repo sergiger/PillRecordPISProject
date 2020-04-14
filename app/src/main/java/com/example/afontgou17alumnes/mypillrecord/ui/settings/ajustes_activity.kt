@@ -44,9 +44,9 @@ class ajustes_activity : AppCompatActivity() {
         }
         else if(position==2){//close Session
             val intent = Intent(this, LoginActivity::class.java)
+            intent.putExtra("type_of_action","close_sesion")
             startActivity(intent)
-            //Aqui s'haurà de posar que el user i la contrassenya son null, per a que no puguis tornar
-            //a entrar a la conta amb el mateix user
+            Toast.makeText(this,"sesion closed", Toast.LENGTH_SHORT).show()
         }
         else if(position==3){//Legal information
             val intent = Intent(this, legal_main::class.java)

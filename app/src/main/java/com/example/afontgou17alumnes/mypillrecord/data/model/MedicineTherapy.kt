@@ -27,6 +27,10 @@ open class MedicineTherapy: Therapy {
         this.units=source.readString()
         this.medicine=source.readString()
     }
+
+    override fun toString(): String {
+        return "MedicineTherapy(frequency=$frequency, startDate=$startDate, endDate=$endDate, notes='$notes', dose=$dose, units=$units, medicine=$medicine)"
+    }
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.let {
             //Això és crucial per poder utilitzar el constructor, ja que s'ha de poder llegir i escriure amb el mateix format

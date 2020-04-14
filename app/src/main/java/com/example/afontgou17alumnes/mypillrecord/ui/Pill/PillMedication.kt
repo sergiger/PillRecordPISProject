@@ -3,7 +3,6 @@ package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.activity_pill_medication.*
@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
+import java.time.LocalDate
 import java.util.*
 
 class PillMedication : AppCompatActivity() {
@@ -67,6 +68,9 @@ class PillMedication : AppCompatActivity() {
         btn_units.setOnClickListener {
             showPopupMenu_units(it)
         }
+        btn_from.setOnClickListener {
+            select_start_end_dates()
+        }
         btn_frequency.setOnClickListener {
             val intent = Intent(this, PillFrequency::class.java)
             startActivity(intent)
@@ -76,6 +80,8 @@ class PillMedication : AppCompatActivity() {
             save_medication()
             go_home()
         }
+
+        // Barcode Scanner implementatiton
         btn_scan.setOnClickListener {
             val scanner = IntentIntegrator(this)
             scanner.initiateScan()
@@ -139,6 +145,78 @@ class PillMedication : AppCompatActivity() {
         }
     }
 
+    fun select_start_end_dates(){
+        var new_ini_day=this.ini_day
+        var new_ini_month=this.ini_month
+        var new_ini_year=this.ini_year
+        var new_end_day=this.end_day
+        var new_end_month=this.end_month
+        var new_end_year=this.end_year
+
+
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.specific_dates_dialoge, null)
+        //AlertDialogBuilder
+        val mBuilder = AlertDialog.Builder(this)
+            .setView(mDialogView)
+            .setTitle("Set specific dates")
+        //show dialog
+        val  mAlertDialog = mBuilder.show()
+        //Aqui guardo la data INI seleccionada
+        //i també poso la data correcta al DatePicker de INICI amb la data d'avui
+        val datePicker_ini = mDialogView.findViewById<DatePicker>(R.id.date_Picker_ini)
+        val today = Calendar.getInstance()
+        datePicker_ini.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH)
+        ) { view, year, month, day ->
+            val month = month + 1
+            new_ini_day=day
+            new_ini_month=month
+            new_ini_year=year
+            //val msg = "You Selected: $day/$month/$year"
+            //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        }
+        //Aqui guardo la data END seleccionada
+        //i també poso la data correcta al DatePicker de END amb la data d'avui
+        val datePicker_end = mDialogView.findViewById<DatePicker>(R.id.date_Picker_end)
+        datePicker_end.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH)
+        ) { view, year, month, day ->
+            val month = month + 1
+            new_end_day=day
+            new_end_month=month
+            new_end_year=year
+            //val msg = "You Selected: $day/$month/$year"
+            //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        }
+
+        //Aqui faig els listeners dels dos botons
+        mDialogView.OK.setOnClickListener {
+            Toast.makeText(this,"work in progress",Toast.LENGTH_LONG).show()
+            set_ok_date(new_ini_day,new_ini_month,new_ini_year,new_end_day,new_end_month,new_end_year)
+            mAlertDialog.dismiss()
+        }
+        mDialogView.cancel.setOnClickListener {
+            mAlertDialog.dismiss()
+            Toast.makeText(this,"Cancel",Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun set_ok_date(ini_day:Int,ini_month:Int,ini_year:Int,end_day:Int,end_month:Int,end_year:Int){
+        this.end_day=end_day
+        this.end_month=end_month
+        this.end_year=end_year
+
+        var data_ini=this.ini_day.toString()+"//"+this.ini_month.toString()+"//"+this.ini_year.toString()
+
+        this.ini_day=ini_day
+        this.ini_month=ini_month
+        this.ini_year=ini_year
+
+        var data_end=this.end_day.toString()+"//"+this.end_month.toString()+"//"+this.end_year.toString()
+
+        btn_from.text = data_ini+" to "+data_end
+    }
+
     private fun showPopupMenu_units(view: View) = PopupMenu(view.context, view).run {
         menuInflater.inflate(R.menu.dose_unitats_popup_menu, menu)
         setOnMenuItemClickListener { item ->
@@ -151,8 +229,8 @@ class PillMedication : AppCompatActivity() {
     }
 
     fun go_home(){
-        val intent = Intent(this, MainActivity::class.java);
-        startActivity(intent);
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
     fun go_back(){
@@ -161,6 +239,7 @@ class PillMedication : AppCompatActivity() {
 
     fun save_medication(){
         this.notes=input_notes.text.toString()
+        //Controller.createMedicineTherapy()
     }//cal completar
 
     fun listHasChanged( llista: MutableList<String>){

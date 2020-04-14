@@ -1,13 +1,19 @@
 package com.example.afontgou17alumnes.mypillrecord.data.controller
 
+import android.content.Context
 import android.graphics.Color
 import android.util.Log
+import android.widget.Toast
+import com.example.afontgou17alumnes.mypillrecord.data.SharedApp
 import com.example.afontgou17alumnes.mypillrecord.data.model.*
+import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
@@ -15,8 +21,25 @@ import java.util.ArrayList
 import kotlin.Comparator
 
 object Controller {
-    val user = User("user@gmail.com", "PillRecord", "123", "Male", 19, 50F, 160F)
+    val user = User("user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
     val statistics = Statistics()
+
+    fun initUserSaved(){
+        /*this.user.weight=SharedApp.prefs.weight
+        this.user.height=SharedApp.prefs.height
+        this.user.birthYear=SharedApp.prefs.yearBirth
+        this.user.username=SharedApp.prefs.username
+        //this.user.email=SharedApp.prefs.email
+        this.user.gender=SharedApp.prefs.gender
+        this.user.pasword=SharedApp.prefs.pasword*/
+
+    }
+
+    fun savePreferences(){
+
+    }
+
+
 
     fun setStatisticsData(){
         val data1 = arrayOf<StatisticEntry>(
@@ -161,5 +184,36 @@ object Controller {
     fun createMeasurementReminder(type:String,units:String,date:LocalDate,time:LocalTime,value:Float=0F):Reminder{
         return MeasurementReminder(type,units,date,time,value)
     }
+
+    fun refreshMyAccount(gender: String, birthYear: Int, height: Float, weight: Float) {
+        this.user.weight=weight
+        this.user.height=height
+        this.user.gender=gender
+        this.user.birthYear=birthYear
+
+    }
+
+    fun initAgenda(JSONString:String){
+        val gson = Gson()
+        val arrayTutorialType = object : TypeToken<Array<Reminder>>() {}.type
+
+        var tutorials: Array<Reminder> = gson.fromJson(JSONString, arrayTutorialType)
+        tutorials.forEachIndexed  { idx, tut -> println("> Item ${idx}:\n${tut}") }
+
+    }
+
+    fun createAccount(email:String, username:String, pasword:String, gender:String, yearBirth:Int, weight: Float, height: Float){
+        user.email=email
+        user.username=username
+        user.pasword=pasword
+        user.gender=gender
+        user.birthYear=yearBirth
+        user.height=height
+        user.weight=weight
+    }
+
+    fun createAccount_in_Firebase(){}//Cal fer, ara està buida
+
+
 
 }
