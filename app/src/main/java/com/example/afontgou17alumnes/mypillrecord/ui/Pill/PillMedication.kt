@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.activity_pill_medication.*
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_pill_sports.btn_from
 import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
+import java.time.LocalDate
 import java.util.*
 
 class PillMedication : AppCompatActivity() {
@@ -214,5 +216,6 @@ class PillMedication : AppCompatActivity() {
 
     fun save_medication(){
         this.notes=input_notes.text.toString()
+        //Controller.createMedicineTherapy()
     }//cal completar
 }

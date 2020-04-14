@@ -12,6 +12,8 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
@@ -190,6 +192,27 @@ object Controller {
         this.user.birthYear=birthYear
 
     }
+
+    fun initAgenda(JSONString:String){
+        val gson = Gson()
+        val arrayTutorialType = object : TypeToken<Array<Reminder>>() {}.type
+
+        var tutorials: Array<Reminder> = gson.fromJson(JSONString, arrayTutorialType)
+        tutorials.forEachIndexed  { idx, tut -> println("> Item ${idx}:\n${tut}") }
+
+    }
+
+    fun createAccount(email:String, username:String, pasword:String, gender:String, yearBirth:Int, weight: Float, height: Float){
+        user.email=email
+        user.username=username
+        user.pasword=pasword
+        user.gender=gender
+        user.birthYear=yearBirth
+        user.height=height
+        user.weight=weight
+    }
+
+    fun createAccount_in_Firebase(){}//Cal fer, ara està buida
 
 
 

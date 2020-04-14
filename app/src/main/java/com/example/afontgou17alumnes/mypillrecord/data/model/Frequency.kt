@@ -4,6 +4,8 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class Frequency :Parcelable {
+
+
     constructor(parcel: Parcel){
         //aqui has de separar totes les parts del parel i posarles a cada variable this.
     }
@@ -25,6 +27,10 @@ class Frequency :Parcelable {
 
     override fun describeContents(): Int {
         return 0
+    }
+
+    override fun toString(): String {
+        return "Frequency()"
     }
 
     companion object CREATOR : Parcelable.Creator<Frequency> {

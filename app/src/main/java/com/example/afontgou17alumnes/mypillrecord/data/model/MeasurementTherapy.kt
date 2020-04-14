@@ -26,6 +26,9 @@ class MeasurementTherapy:Therapy {
             dest.writeString(this.measurementType)
         }
     }
+    override fun toString(): String {
+        return "MeasurementTherapy(frequency=$frequency, startDate=$startDate, endDate=$endDate, notes='$notes', measurementType=$measurementType)"
+    }
 
     companion object CREATOR : Parcelable.Creator<MeasurementTherapy> {
         override fun createFromParcel(parcel: Parcel): MeasurementTherapy {
@@ -36,4 +39,5 @@ class MeasurementTherapy:Therapy {
             return arrayOfNulls(size)
         }
     }
+
 }

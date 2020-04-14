@@ -70,5 +70,9 @@ class Agenda {
         // la deixaré per a recordar la funcionalitat.
     }
 
+    override fun toString(): String {
+        return "Agenda(contactes=$contactes)"
+    }
+
 
 }

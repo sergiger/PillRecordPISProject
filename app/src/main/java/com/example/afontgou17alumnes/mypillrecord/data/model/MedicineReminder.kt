@@ -9,10 +9,11 @@ open class MedicineReminder(
     val dose: Int,
     val doseUnit: String,
     val date: LocalDate,
-    val time: LocalTime
+    val time: LocalTime,
+    val taken:Boolean=false
 ) : Reminder {
     override fun toString(): String {//Es només per provar que les coses funcionen
-        return "MedicineReminder(name='$name', dose=$dose, doseUnit='$doseUnit', date=$date, time=$time)"
+        return "MedicineReminder(name='$name', dose=$dose, doseUnit='$doseUnit', date=$date, time=$time, taken=$taken)"
     }
 
     override fun equals(other: Any?): Boolean {

@@ -39,6 +39,8 @@ class LoginActivity : AppCompatActivity() {
             sharedUpLoad_and_go_back()
         else if(actions!=null && actions=="close_sesion")
             closeSesion()
+        else if(actions!=null && actions=="Save_share_Create_Account_Go_Home")
+            createAccount()
         else
             sharedDownloadLoad()
 
@@ -113,7 +115,7 @@ class LoginActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 loginViewModel.login(username.text.toString(), password.text.toString())
                 sharedUpLoad(username.text.toString(),password.text.toString())//Funció que carrega les dades al user de la base de dades a shared preferences i al user del controlador
-
+                sharedDownloadLoad()
             }
             btn_register.setOnClickListener {
 
@@ -123,18 +125,17 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun sharedUpLoad(email: String, pasword: String) {
+    fun sharedUpLoad(email: String, pasword: String, username:String="Joan",gender:String="Masculin",yearBirth:Int=1999, weight:Float=67F,height:Float=180F) {
         val editor = getSharedPreferences("Mydata", Context.MODE_PRIVATE).edit()
         editor.putString("email",email);
         editor.putString("pasword",pasword);
         //Ara hauriem d'anar a la base de dades i agafar la resta, jo ara posaré valors fixes, però el pròxim pas és conectar-ho amb el firebase
-        editor.putString("username","Joan")
-        editor.putString("gender","Masculin");
-        editor.putString("yearBirth","1999");
-        editor.putString("weight","67");
-        editor.putString("height","180");
+        editor.putString("username",username)
+        editor.putString("gender",gender);
+        editor.putString("yearBirth",yearBirth.toString());
+        editor.putString("weight",weight.toString());
+        editor.putString("height",height.toString());
         editor.apply();
-        sharedDownloadLoad()//per posar-ho tot al controlador
     }
     fun sharedDownloadLoad(){
         //Log.d("hola",getSharedPreferences("Mydata", Context.MODE_PRIVATE).contains("email").toString())
@@ -171,16 +172,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
     fun sharedUpLoad_and_go_back(){
-        val editor = getSharedPreferences("Mydata", Context.MODE_PRIVATE).edit()
-        editor.putString("email",Controller.user.email);
-        editor.putString("pasword",Controller.user.pasword);
-        //Ara hauriem d'anar a la base de dades i agafar la resta, jo ara posaré valors fixes, però el pròxim pas és conectar-ho amb el firebase
-        editor.putString("username",Controller.user.username)
-        editor.putString("gender",Controller.user.gender);
-        editor.putString("yearBirth",Controller.user.birthYear.toString());
-        editor.putString("weight",Controller.user.weight.toString());
-        editor.putString("height",Controller.user.height.toString());
-        editor.apply();
+        sharedUpLoad(Controller.user.email,Controller.user.pasword,Controller.user.username,Controller.user.gender,Controller.user.birthYear,Controller.user.weight,Controller.user.height)
         onBackPressed()
         //val intent = Intent(this@LoginActivity, myAccount::class.java)
         //startActivity(intent)
@@ -189,6 +181,13 @@ class LoginActivity : AppCompatActivity() {
         val editor = getSharedPreferences("Mydata", Context.MODE_PRIVATE).edit()
         editor.clear();
         editor.apply();
+    }
+
+    fun createAccount(){
+        sharedUpLoad(Controller.user.email,Controller.user.pasword,Controller.user.username,Controller.user.gender,Controller.user.birthYear,Controller.user.weight,Controller.user.height)
+        Controller.createAccount_in_Firebase()
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
     }
 
     /*fun preferencesSaved(context: Context){

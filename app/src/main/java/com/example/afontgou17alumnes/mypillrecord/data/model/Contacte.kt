@@ -23,7 +23,7 @@ class Contacte {
     }
 
     fun toStirng():String{
-        return username.toString()+": "+ tipus.toString()
+        return "Contacte(username=$username, tipus=$tipus)"
     }
 
 }
