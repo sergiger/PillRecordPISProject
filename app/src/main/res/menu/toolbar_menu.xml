@@ -4,6 +4,12 @@
 
         <!-- "Mark Favorite", should appear as action button if possible -->
         <item
+            android:id="@+id/options_search"
+            android:icon="@drawable/ic_search_white_24dp"
+            android:title="Search"
+            app:showAsAction="ifRoom"
+            app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+        <item
             android:id="@+id/pdf_item"
             android:icon="@drawable/pdf_icon"
             android:title="PDF"
@@ -13,9 +19,4 @@
             android:icon="@drawable/ic_settings_white_24dp"
             android:title="Settings"
             app:showAsAction="ifRoom" />
-        <item
-            android:id="@+id/options_search"
-            android:icon="@drawable/ic_settings_white_24dp"
-            android:title="Search"
-            app:showAsAction="ifRoom|collapseActionView" />
 </menu>
