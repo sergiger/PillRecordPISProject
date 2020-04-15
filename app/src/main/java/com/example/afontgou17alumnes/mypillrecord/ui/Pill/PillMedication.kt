@@ -45,6 +45,7 @@ class PillMedication : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_pill_medication)
         val image_view = findViewById<ImageButton>(R.id.left_arrow)
 

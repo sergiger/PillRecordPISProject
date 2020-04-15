@@ -24,7 +24,7 @@
         <activity android:name=".ui.today.AddUnplannedMeasurement"
             android:screenOrientation="locked"/>
         <activity android:name=".ui.today.AddUnplannedMedicine"
-            android:screenOrientation="locked"/>
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.team.agenda_team"
             android:screenOrientation="locked"/>
         <activity android:name=".ui.team.share_team"
@@ -39,7 +39,7 @@
         <activity android:name=".ui.Pill.PillMesurements"
             android:screenOrientation="locked"/>
         <activity android:name=".ui.Pill.PillMedication"
-            android:screenOrientation="locked"/>
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.Pill.Pillplanificar"
             android:screenOrientation="locked"/>
         <activity android:name=".ui.Pill.PillFrequency"
