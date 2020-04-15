@@ -204,6 +204,10 @@ object Controller {
 
     fun createAccount_in_Firebase(){}//Cal fer, ara està buida
 
+    fun deleteMeasure(type: String, value: Float, date: LocalDate) {
+        statistics.deleteMeasure(type, value, date)
+
+    }
 
 
 }
