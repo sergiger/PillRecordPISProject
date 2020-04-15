@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.statistics_fragment_fragment.*
 
 class Statistics_fragment : Fragment() {
 
+    var shown:Int=0
+
     companion object {
         fun newInstance() =
             Statistics_fragment()
@@ -37,12 +39,16 @@ class Statistics_fragment : Fragment() {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(p0: AdapterView<*>?) {            }
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                shown=p2
                 refreshGraph(p2)
             }
 
         }
         add_button.setOnClickListener {
             val mDialog = AddMeasurementDialog()
+            val b=Bundle()
+            b.putInt("tius de mesurament",shown)
+            mDialog.arguments=b
             mDialog.show(childFragmentManager, "Add measurement")
         }
 
