@@ -6,7 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.github.mikephil.charting.charts.LineChart
@@ -15,7 +20,8 @@ import com.github.mikephil.charting.components.XAxis
 import kotlinx.android.synthetic.main.statistics_fragment_fragment.*
 
 
-class Statistics_fragment : Fragment() {
+class Statistics_fragment : Fragment(),View.OnClickListener, AddMeasurementDialog.DialogListener,
+    ActivityCompat.OnRequestPermissionsResultCallback {
 
     var shown:Int=0
 
@@ -44,12 +50,17 @@ class Statistics_fragment : Fragment() {
             }
 
         }
+        var sad=this
         add_button.setOnClickListener {
+            onPause()
             val mDialog = AddMeasurementDialog()
             val b=Bundle()
             b.putInt("tius de mesurament",shown)
             mDialog.arguments=b
             mDialog.show(childFragmentManager, "Add measurement")
+            //while(!Controller.check_Statistics_Actualizated){}
+            //Controller.check_Statistics_Actualizated=false
+            onResume()
         }
 
     }
@@ -92,5 +103,19 @@ class Statistics_fragment : Fragment() {
         graph.setVisibleXRangeMaximum(8F)
         graph.moveViewToX(0F)
     }
+    override fun onResume() {
+        super.onResume()
+        refreshGraph(shown)
+    }
+
+    override fun onClick(v: View?) {
+        refreshGraph(shown)
+    }
+
+    override fun onFinishEditDialog() {
+        refreshGraph(shown)
+    }
 
 }
+
+

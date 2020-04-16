@@ -19,6 +19,7 @@ import kotlin.Comparator
 object Controller {
     val user = User("user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
     val statistics = Statistics()
+    var check_Statistics_Actualizated=false
 
     fun initUserSaved(){
         /*this.user.weight=SharedApp.prefs.weight
@@ -209,7 +210,5 @@ object Controller {
     }
 
     fun createAccount_in_Firebase(){}//Cal fer, ara està buida
-
-
 
 }
