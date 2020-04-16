@@ -139,9 +139,7 @@ object Controller {
         setComp1.highLightColor = Color.RED
         setComp1.setDrawValues(false)
 
-        val dataSets: MutableList<ILineDataSet> = ArrayList()
-        dataSets.add(setComp1)
-        return LineData(dataSets)
+        return setComp1
     }
 
     fun setGender(gender:String){
@@ -208,6 +206,9 @@ object Controller {
 
     fun createAccount_in_Firebase(){}//Cal fer, ara està buida
 
+    fun deleteMeasure(type: String, value: Float, date: LocalDate) {
+        statistics.deleteMeasure(type, value, date)
 
+    }
 
 }

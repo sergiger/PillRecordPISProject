@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.Spinner
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.statistics_fragment_fragment.*
 import java.time.LocalDate
 
 
-class Statistics_fragment : Fragment(),View.OnClickListener, AddMeasurementDialog.DialogListener,
+class Statistics_fragment : Fragment(),
     ActivityCompat.OnRequestPermissionsResultCallback {
 
     var shown:Int=0
@@ -42,8 +43,15 @@ class Statistics_fragment : Fragment(),View.OnClickListener, AddMeasurementDialo
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        var start = arguments?.getInt("start")
         createGraph()
         Controller.setStatisticsData()
+        if(start!=null){
+            shown=start
+            spinner.setSelection(shown)
+        }
+        refreshGraph(shown)
+        Log.d("hola",shown.toString())
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(p0: AdapterView<*>?) {            }
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -52,17 +60,12 @@ class Statistics_fragment : Fragment(),View.OnClickListener, AddMeasurementDialo
             }
 
         }
-        var sad=this
         add_button.setOnClickListener {
-            onPause()
             val mDialog = AddMeasurementDialog()
             val b=Bundle()
             b.putInt("tius de mesurament",shown)
             mDialog.arguments=b
             mDialog.show(childFragmentManager, "Add measurement")
-            //while(!Controller.check_Statistics_Actualizated){}
-            //Controller.check_Statistics_Actualizated=false
-            onResume()
         }
         delete_btn_statistics.setOnClickListener {
             val h = graph.highlighted ?: return@setOnClickListener
@@ -71,7 +74,7 @@ class Statistics_fragment : Fragment(),View.OnClickListener, AddMeasurementDialo
                 if(h[0].dataSetIndex == 0) type = "Glucose (before eating)"
                 else type = "Glucose (after eating)"
             }
-            val mDialog = DeleteMeasurementDialog(type, h[0].y, LocalDate.now().minusDays(0 - h[0].x.toLong()))
+            val mDialog = DeleteMeasurementDialog(shown,type, h[0].y, LocalDate.now().minusDays(0 - h[0].x.toLong()))
             mDialog.show(childFragmentManager, "Delete measurement")
         }
 
@@ -115,18 +118,8 @@ class Statistics_fragment : Fragment(),View.OnClickListener, AddMeasurementDialo
         graph.setVisibleXRangeMaximum(8F)
         graph.moveViewToX(0F)
     }
-    override fun onResume() {
-        super.onResume()
-        refreshGraph(shown)
-    }
 
-    override fun onClick(v: View?) {
-        refreshGraph(shown)
-    }
 
-    override fun onFinishEditDialog() {
-        refreshGraph(shown)
-    }
 
 }
 

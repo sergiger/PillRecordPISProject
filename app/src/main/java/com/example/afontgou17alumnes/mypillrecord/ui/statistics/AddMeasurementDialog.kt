@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.DialogFragment
+import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.StatisticEntry
@@ -54,8 +55,7 @@ class AddMeasurementDialog : DialogFragment() {
         setType(id)
         setUnits(id,unit)
         if(id==4){
-            id=5
-            spinner.setSelection(id)
+            spinner.setSelection(5)
         }else
             spinner.setSelection(id)
         ok.setOnClickListener(object :View.OnClickListener{
@@ -67,10 +67,9 @@ class AddMeasurementDialog : DialogFragment() {
                     //Aixó hauria de funcionar, però no sé per què no funciona, si algú s'ho pot mirar, jo ja no puc fer res més en aqeust
                     /*val callingActivity=activity as DialogListener?
                     callingActivity!!.onFinishEditDialog()*/
-
-
-                    dismiss()
+                    (activity as MainActivity).go_To_Statistics(id)
                     //Controller.check_Statistics_Actualizated=true
+                    dismiss()
                 }
             }
         })
@@ -171,4 +170,5 @@ class AddMeasurementDialog : DialogFragment() {
     interface DialogListener {
         fun onFinishEditDialog()
     }
+
 }
