@@ -79,8 +79,17 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        replaceFragment(Today_Fragment())
-
+        val bundle:Bundle? = intent.extras
+        //medicine
+        val goTo = bundle?.get("goTo")
+        if(goTo!= null){
+            if(goTo == "Pill"){
+                replaceFragment(Pill_fragment())
+            }
+        }
+        else{
+            replaceFragment(Today_Fragment())
+        }
     }
 
 

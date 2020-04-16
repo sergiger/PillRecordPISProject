@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.activity_pill_frequency.*
 import kotlinx.android.synthetic.main.activity_pill_medication.view.*
 import kotlinx.android.synthetic.main.activity_pill_sports.*
@@ -19,6 +21,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 class PillFrequency : AppCompatActivity() {
+    //values from pillFrequency
     var ini_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
     var ini_month=Calendar.getInstance().get(Calendar.MONTH)+1
     var ini_year=Calendar.getInstance().get(Calendar.YEAR)
@@ -27,13 +30,56 @@ class PillFrequency : AppCompatActivity() {
     var end_year=Calendar.getInstance().get(Calendar.YEAR)
 
     var button_radiogrupPressed = ""
-    var new_dose=0
+    var new_dose=1
     var arrayDiesSaltejats= mutableListOf<String>()
     var arrayDiesSetmana= mutableListOf<String>("0","0","0","0","0","0","0")
+
+    //values from PillMedication
+    var Medicine = ""
+    var DoseIn = 0
+    var Units = ""
+    var Notes = ""
+    var Hours = listOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pill_frequency)
+        //agafem el que passem
+        val bundle:Bundle? = intent.extras
+        val Medicine = bundle?.get("Medicine")
+        if(Medicine!= null){
+            this.Medicine= Medicine as String
+        }
+        val Hours = bundle?.get("Hours")
+        if(Hours!=null){
+            this.Hours = (Hours as Array<String>).toList()
+        }
+        val Dose = bundle?.get("Dose")
+        if(Dose!= null){
+            this.DoseIn = Dose as Int
+        }
+        val Units = bundle?.get("Units")
+        if(Units != null){
+            this.Units = Units as String
+        }
+        val Notes = bundle?.get("Notes")
+        if(Notes!= null){
+            this.Notes = Notes as String
+        }
+        Log.e("Medicine",this.Medicine)
+        Log.e("Hours",this.Hours.toString())
+        Log.e("Dose",this.DoseIn.toString())
+        Log.e("Units",this.Units)
+        Log.e("Notes",this.Notes)
+        /*
+        intent.putExtra("Medicine",medicine)
+            intent.putExtra("Hours",llista)
+            intent.putExtra("Dose",dose)
+            intent.putExtra("Units",new_units)
+            intent.putExtra("Notes",notes)
+         */
+
+
         button_radiogrupPressed="radioButton_xDay"
         btn_from_to.setOnClickListener {
             select_start_end_dates()
@@ -87,33 +133,155 @@ class PillFrequency : AppCompatActivity() {
             onBackPressed()
         }
         btn_accept.setOnClickListener {
+            //Quan prenem el boto de acceptar
+            val bundle:Bundle? = intent.extras
+            val from = bundle?.get("From")
+            Log.e("From",from.toString())
+            //si vinc de PillMedication
+            if(from=="PillMedication"){
+                val intent = Intent(this, PillMedication::class.java)
+                when(button_radiogrupPressed){
+                    "radioButton_xDay" ->{
+                        //Log.e("radioButton_xDay","radioButton_xDay SAVED")
+                        intent.putExtra("RadioButton",0)
+                        intent.putExtra("From",this.ini_day.toString()+"/"+this.ini_month.toString()+"/"+this.ini_year.toString())
+                        intent.putExtra("To",this.end_day.toString()+"/"+this.end_month.toString()+"/"+this.end_year.toString())
+                    }
+                    "radioButton_eachXDays"->{
+                        //Log.e("radioButton_eachXDays","radioButton_eachXDays SAVED")
+                        intent.putExtra("RadioButton",1)
+                        intent.putExtra("RadioButtonValue",new_dose.toString())
+                        intent.putExtra("From",this.ini_day.toString()+"/"+this.ini_month.toString()+"/"+this.ini_year.toString())
+                        intent.putExtra("To",this.end_day.toString()+"/"+this.end_month.toString()+"/"+this.end_year.toString())
+                        //Log.e("dose",new_dose.toString())
+                    }
+                    "radioButton_specificDays"->{
+                        //Log.e("radioButton_specificDays","radioButton_specificDays SAVED")
+                        intent.putExtra("RadioButton",2)
+                        intent.putExtra("RadioButtonValue",arrayDiesSetmana.toTypedArray())
+                        intent.putExtra("From",this.ini_day.toString()+"/"+this.ini_month.toString()+"/"+this.ini_year.toString())
+                        intent.putExtra("To",this.end_day.toString()+"/"+this.end_month.toString()+"/"+this.end_year.toString())
+                        //Log.e("Week days",arrayDiesSetmana.toString())
+                    }
+                    "radioButton_PuntualDay"->{
+                        //Log.e("radioButton_PuntualDay","radioButton_PuntualDay SAVED")
+                        intent.putExtra("RadioButton",3)
+                        intent.putExtra("RadioButtonValue",arrayDiesSaltejats.toString())
+                        Log.e("list days",arrayDiesSaltejats.toString())
+
+                    }
+                }
+
+                val llista = this.Hours
+                intent.putExtra("Medicine",this.Medicine)
+                intent.putExtra("Hours",llista.toTypedArray())
+                intent.putExtra("Dose",this.DoseIn)
+                intent.putExtra("Units",this.Units)
+                intent.putExtra("Notes",this.Notes)
+                startActivity(intent)
+            }
+            //Si vinc de Mesurements
+            else if (from=="PillMesurements"){
+                val intent = Intent(this, Pill_mesurements_info::class.java)
+                when(button_radiogrupPressed){
+                    "radioButton_xDay" ->{
+                        //Log.e("radioButton_xDay","radioButton_xDay SAVED")
+                        intent.putExtra("RadioButton",0)
+                        intent.putExtra("From",this.ini_day.toString()+"/"+this.ini_month.toString()+"/"+this.ini_year.toString())
+                        intent.putExtra("To",this.end_day.toString()+"/"+this.end_month.toString()+"/"+this.end_year.toString())
+                    }
+                    "radioButton_eachXDays"->{
+                        //Log.e("radioButton_eachXDays","radioButton_eachXDays SAVED")
+                        intent.putExtra("RadioButton",1)
+                        intent.putExtra("RadioButtonValue",new_dose.toString())
+                        intent.putExtra("From",this.ini_day.toString()+"/"+this.ini_month.toString()+"/"+this.ini_year.toString())
+                        intent.putExtra("To",this.end_day.toString()+"/"+this.end_month.toString()+"/"+this.end_year.toString())
+                        //Log.e("dose",new_dose.toString())
+                    }
+                    "radioButton_specificDays"->{
+                        //Log.e("radioButton_specificDays","radioButton_specificDays SAVED")
+                        intent.putExtra("RadioButton",2)
+                        intent.putExtra("RadioButtonValue",arrayDiesSetmana.toTypedArray())
+                        intent.putExtra("From",this.ini_day.toString()+"/"+this.ini_month.toString()+"/"+this.ini_year.toString())
+                        intent.putExtra("To",this.end_day.toString()+"/"+this.end_month.toString()+"/"+this.end_year.toString())
+                        //Log.e("Week days",arrayDiesSetmana.toString())
+                    }
+                    "radioButton_PuntualDay"->{
+                        //Log.e("radioButton_PuntualDay","radioButton_PuntualDay SAVED")
+                        intent.putExtra("RadioButton",3)
+                        intent.putExtra("RadioButtonValue",arrayDiesSaltejats.toString())
+                        Log.e("list days",arrayDiesSaltejats.toString())
+
+                    }
+                }
+                val TitolMesurement = bundle?.get("TitolMesurement")
+                val UnitatsMesurement = bundle?.get("UnitatsMesurement")
+                val llista = this.Hours
+                intent.putExtra("Medicine",this.Medicine)
+                intent.putExtra("Hours",llista.toTypedArray())
+                intent.putExtra("Dose",this.DoseIn)
+                intent.putExtra("Units",this.Units)
+                intent.putExtra("Notes",this.Notes)
+                intent.putExtra("TitolMesurement",TitolMesurement as String)
+                intent.putExtra("UnitatsMesurement",UnitatsMesurement as String)
+                startActivity(intent)
+            }
+            //Si vinc de PillSports
+            else if (from=="PillSports"){
+                val intent = Intent(this, PillSports::class.java)
+                when(button_radiogrupPressed){
+                    "radioButton_xDay" ->{
+                        //Log.e("radioButton_xDay","radioButton_xDay SAVED")
+                        intent.putExtra("RadioButton",0)
+                        intent.putExtra("From",this.ini_day.toString()+"/"+this.ini_month.toString()+"/"+this.ini_year.toString())
+                        intent.putExtra("To",this.end_day.toString()+"/"+this.end_month.toString()+"/"+this.end_year.toString())
+                    }
+                    "radioButton_eachXDays"->{
+                        //Log.e("radioButton_eachXDays","radioButton_eachXDays SAVED")
+                        intent.putExtra("RadioButton",1)
+                        intent.putExtra("RadioButtonValue",new_dose.toString())
+                        intent.putExtra("From",this.ini_day.toString()+"/"+this.ini_month.toString()+"/"+this.ini_year.toString())
+                        intent.putExtra("To",this.end_day.toString()+"/"+this.end_month.toString()+"/"+this.end_year.toString())
+                        //Log.e("dose",new_dose.toString())
+                    }
+                    "radioButton_specificDays"->{
+                        //Log.e("radioButton_specificDays","radioButton_specificDays SAVED")
+                        intent.putExtra("RadioButton",2)
+                        intent.putExtra("RadioButtonValue",arrayDiesSetmana.toTypedArray())
+                        intent.putExtra("From",this.ini_day.toString()+"/"+this.ini_month.toString()+"/"+this.ini_year.toString())
+                        intent.putExtra("To",this.end_day.toString()+"/"+this.end_month.toString()+"/"+this.end_year.toString())
+                        //Log.e("Week days",arrayDiesSetmana.toString())
+                    }
+                    "radioButton_PuntualDay"->{
+                        //Log.e("radioButton_PuntualDay","radioButton_PuntualDay SAVED")
+                        intent.putExtra("RadioButton",3)
+                        intent.putExtra("RadioButtonValue",arrayDiesSaltejats.toString())
+                        Log.e("list days",arrayDiesSaltejats.toString())
+
+                    }
+                }
+                val llista = this.Hours
+                val Activity = bundle?.get("Activity")
+                intent.putExtra("Medicine",this.Medicine)
+                intent.putExtra("Hours",llista.toTypedArray())
+                intent.putExtra("Dose",this.DoseIn)
+                intent.putExtra("Units",this.Units)
+                intent.putExtra("Notes",this.Notes)
+                intent.putExtra("Activity",Activity as String)
+                startActivity(intent)
+            }
+
+            /*
             Log.e("ini_day",ini_day.toString())
             Log.e("ini_month",ini_month.toString())
             Log.e("ini_year",ini_year.toString())
             Log.e("end_day",end_day.toString())
             Log.e("end_month",end_month.toString())
             Log.e("end_year",end_year.toString())
-            when(button_radiogrupPressed){
-                "radioButton_xDay" ->{
-                    Log.e("radioButton_xDay","radioButton_xDay SAVED")
-                }
-                "radioButton_eachXDays"->{
-                    //Pillfrequency_FragmentTwo().
-                    Log.e("radioButton_eachXDays","radioButton_eachXDays SAVED")
-                    Log.e("dose",new_dose.toString())
-                }
-                "radioButton_specificDays"->{
-                    Log.e("radioButton_specificDays","radioButton_specificDays SAVED")
-                    Log.e("Week days",arrayDiesSetmana.toString())
-                }
-                "radioButton_PuntualDay"->{
-                    Log.e("radioButton_PuntualDay","radioButton_PuntualDay SAVED")
-                    Log.e("list days",arrayDiesSaltejats.toString())
-
-                }
-            }
+            */
         }
     }
+
     private fun loadFragment(fragment:Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.add(R.id.fragmentFrequency, fragment)
