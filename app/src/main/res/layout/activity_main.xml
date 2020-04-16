@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:weightSum="3"
     tools:context=".MainActivity"
+    android:screenOrientation="portrait"
     >
 
     <androidx.appcompat.widget.Toolbar

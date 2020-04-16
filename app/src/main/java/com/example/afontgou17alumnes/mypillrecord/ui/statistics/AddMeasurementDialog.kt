@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.statistics
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.StatisticEntry
 import kotlinx.android.synthetic.main.add_measure_dialog.*
+import kotlinx.android.synthetic.main.statistics_fragment_fragment.*
 import java.time.LocalDate
 import java.time.LocalTime
 import kotlin.math.roundToInt
@@ -36,12 +38,22 @@ class AddMeasurementDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val args=arguments
+        var id:Int=0
+        args?.let {
+            id=it.getInt("tius de mesurament")
+        }
         val view = inflater.inflate(R.layout.add_measure_dialog, null)
         //View elements
         val ok = view.findViewById<Button>(R.id.OK_add_measure_dialog)
         val cancel = view.findViewById<Button>(R.id.cancel_add_measure_dialog)
         val spinner = view.findViewById<Spinner>(R.id.spinner_measurement)
         val unit = view.findViewById<TextView>(R.id.unit)
+        setType(id)
+        setUnits(id,unit)
+        if(id==4)
+            id=5
+        spinner.setSelection(id)
         ok.setOnClickListener {
             if(enter_value.text.toString() != ""){
                 addData(unit)
@@ -118,6 +130,22 @@ class AddMeasurementDialog : DialogFragment() {
             3->this.type="Glucose before eating"
             4->this.type="Glucose after eating"
             5->this.type="Temperature"
+        }
+    }
+    fun setUnits(id:Int,unit: TextView){
+        when(id){
+            0 ->
+                unit.text = "kg"
+            1 ->
+                unit.text = "bpm"
+            2 ->
+                unit.text = "mmHg"
+            3 ->
+                unit.text = "mg/dl"
+            4 ->
+                unit.text = "mg/dl"
+            5 ->
+                unit.text = "ºC"
         }
     }
     fun setValues(unit:TextView){

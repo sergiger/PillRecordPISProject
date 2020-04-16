@@ -33,21 +33,10 @@ class activity_Register4 : AppCompatActivity() {
 
         btn_confirm_register.setOnClickListener {
             /*
-            NO HE CONSEGUIT QUE EM FUNCIONI, SI POSO AIXÒ EL BOTÓ EM PETA I NO SÉ PERQUE
-            I NO VEIG ON POT ESTAR L'ERROR
-
-            email=input_email.text.toString()
-            pasword=input_new_pasword.text.toString()
-            pasword_repeat=input_repeat_new_pasword.text.toString()
-            username=text_input_username.text.toString()
-            gender=input_gender.text.toString()
-            age=text_input_age.text.toString().toInt()
-            weight=text_input_weight.text.toString().toInt()
-            height=text_input_height.text.toString().toInt()*/
-            //Aqui ara utilitzariem aquestes variables per fer totes les restriccions que volguéssim avans
-            // Handler code here.
-            //val intent = Intent(this, MainActivity::class.java)
-            //startActivity(intent)
+            * Aqui només has de fer que s'omplin totes les variables.
+            * També has d'enviar errors quan l'email ja estigui a la base de dades, és a dir, només una conta per email
+            *
+            * */
             createAccount()
         }
     }
