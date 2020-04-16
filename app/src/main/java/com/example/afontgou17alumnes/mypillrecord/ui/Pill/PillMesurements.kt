@@ -14,43 +14,44 @@ class PillMesurements : AppCompatActivity() {
         setContentView(R.layout.activity_pill_mesurements)
         val image_view = findViewById<ImageButton>(R.id.left_arrow)
         image_view.setOnClickListener {
-            onBackPressed()
+            val intent = Intent(this, Pillplanificar::class.java)
+            startActivity(intent)
         }
         btn_arterialPressure.setOnClickListener {
             val intent = Intent(this,Pill_mesurements_info::class.java)
-            intent.putExtra("type_of_measurement","      ARTERIAL PRESSURE")
-            intent.putExtra("unitats","mmHg")
+            intent.putExtra("TitolMesurement","      ARTERIAL PRESSURE")
+            intent.putExtra("UnitatsMesurement","mmHg")
             startActivity(intent)
         }
         btn_glucoseAfter.setOnClickListener {
             val intent = Intent(this,Pill_mesurements_info::class.java)
-            intent.putExtra("type_of_measurement","      GLUCOSA AFTER")
-            intent.putExtra("unitats","mg/dl")
+            intent.putExtra("TitolMesurement","      GLUCOSA AFTER")
+            intent.putExtra("UnitatsMesurement","mg/dl")
             startActivity(intent)
 
         }
         btn_glucoseBefore.setOnClickListener {
             val intent = Intent(this,Pill_mesurements_info::class.java)
-            intent.putExtra("type_of_measurement","      GLUCOSA BEFORE")
-            intent.putExtra("unitats","mg/dl")
+            intent.putExtra("TitolMesurement","      GLUCOSA BEFORE")
+            intent.putExtra("UnitatsMesurement","mg/dl")
             startActivity(intent)
         }
         btn_heartRate.setOnClickListener {
             val intent = Intent(this,Pill_mesurements_info::class.java)
-            intent.putExtra("type_of_measurement","      HEART FREQUENCY")
-            intent.putExtra("unitats","bpm")
+            intent.putExtra("TitolMesurement","      HEART FREQUENCY")
+            intent.putExtra("UnitatsMesurement","bpm")
             startActivity(intent)
         }
         btn_temperature.setOnClickListener {
             val intent = Intent(this,Pill_mesurements_info::class.java)
-            intent.putExtra("type_of_measurement","      TEMPERATURE")
-            intent.putExtra("unitats","Cº")
+            intent.putExtra("TitolMesurement","      TEMPERATURE")
+            intent.putExtra("UnitatsMesurement","Cº")
             startActivity(intent)
         }
         btn_weight.setOnClickListener {
             val intent = Intent(this,Pill_mesurements_info::class.java)
-            intent.putExtra("type_of_measurement","      WEIGHT")
-            intent.putExtra("unitats","kg")
+            intent.putExtra("TitolMesurement","      WEIGHT")
+            intent.putExtra("UnitatsMesurement","kg")
             startActivity(intent)
         }
     }

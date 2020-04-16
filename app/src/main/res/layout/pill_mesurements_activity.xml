@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Pill.PillMesurements_Arterialpressure">
+    tools:context=".ui.Pill.Pill_mesurements_info">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -65,43 +65,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="20">
-            <TextView
-                android:id="@+id/date_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="From/To"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="@id/btn_from"
-                app:layout_constraintTop_toTopOf="@id/btn_from"
-                app:layout_constraintBottom_toBottomOf="@id/btn_from"/>
-            <Button
-                android:id="@+id/btn_from"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="19"
-                android:backgroundTint="@color/cardview_light_background"
-                android:text="     From/To"
-                android:textAllCaps="false"
-                android:textAlignment="textEnd"
-                >
-            </Button>
-        </LinearLayout>
-        <TextView
-            android:id="@+id/text_view_dates"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
             android:layout_weight="4"
-            android:text="EXAMPLE 21/03/2020 to 25/03/2020"
-            android:gravity="center"></TextView>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
             android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="20">
@@ -131,9 +95,50 @@
             android:id="@+id/text_view_frequency"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_weight="15"
             android:text="(Frequency)"
-            android:gravity="center"></TextView>
+            android:textSize="23dp"
+            android:gravity="top|center"
+            android:textColor="@color/colorApp2"
+            >
+
+        </TextView>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="42"
+            android:weightSum="42"
+            android:orientation="vertical"
+            android:background="@color/gris2" >
+            <ListView
+                android:id="@+id/lw_hours_medications"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="35"
+                android:scrollbarSize="@dimen/activity_vertical_margin"
+                >
+            </ListView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7"
+                android:weightSum="3"
+                android:gravity="right">
+                <Button
+                    android:id="@+id/btn_add_field_medication_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#555"
+                    android:text="Add Field"
+                    android:textColor="#FFF"></Button>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="6"></TextView>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

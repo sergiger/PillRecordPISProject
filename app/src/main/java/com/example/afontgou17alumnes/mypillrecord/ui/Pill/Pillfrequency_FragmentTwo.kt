@@ -1,22 +1,18 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 
-import android.os.Bundle
-
-import android.util.Log
 //import androidx.fragment.app.Fragment
+
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-
 import com.example.afontgou17alumnes.mypillrecord.R
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
-import kotlinx.android.synthetic.main.number_dialog.view.OK
-import kotlinx.android.synthetic.main.number_dialog.view.cancel
-import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -62,12 +58,11 @@ class Pillfrequency_FragmentTwo : Fragment() {
             dose_button.text=dose.toString()
             Toast.makeText(activity, "Saved", Toast.LENGTH_LONG).show()
             mAlertDialog.dismiss()
+            (activity as PillFrequency?)?.setDose(dose)
         }
         mDialogView.cancel.setOnClickListener {
             Toast.makeText(activity, "Cancelled", Toast.LENGTH_LONG).show()
             mAlertDialog.dismiss()
         }
     }
-
-
 }

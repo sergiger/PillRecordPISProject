@@ -101,22 +101,19 @@ object Controller {
 
     fun getGraphLineData(select: Int) : LineData {
         //Agafem les dades que ens interessen segons quin grafic muntarem
-        var values = mutableListOf<StatisticEntry>()
-        var label = "Default"
+        val dataSets: MutableList<ILineDataSet> = ArrayList()
         when(select){
-            0->{
-                values = statistics.weightData
-                label = "Weight" }
-            1 ->{ values = statistics.heartRateData
-                label = "Heart rate"}
-            2 ->{ values = statistics.arterialPressureData
-                label = "Arterial pressure"}
-            3 ->{ values = statistics.glucoseBeforeData
-                label = "Glucose"}
-            4 -> {values = statistics.temperatureData
-                label = "Temperature"}
+            0-> dataSets.add(getLineDataSet(statistics.weightData, "Weight", Color.YELLOW))
+            1 -> dataSets.add(getLineDataSet(statistics.heartRateData, "Heart Rate", Color.RED))
+            2 -> dataSets.add(getLineDataSet(statistics.arterialPressureData, "Arterial Pressure", Color.rgb(255,165,0)))
+            3 ->{dataSets.add(getLineDataSet(statistics.glucoseBeforeData, "Glucose (before eating)", Color.MAGENTA))
+                dataSets.add(getLineDataSet(statistics.glucoseAfterData, "Glucose (after eating)", Color.BLUE))}
+            4 -> dataSets.add(getLineDataSet(statistics.temperatureData, "Temperature", Color.GREEN))
         }
+        return LineData(dataSets)
+    }
 
+    fun getLineDataSet(values: MutableList<StatisticEntry>, label: String, color: Int) : LineDataSet{
         //Formatejem les dades per a que les pugui llegir el gràfic
         val formattedValues = ArrayList<Entry>()
         for (i in values){
@@ -210,5 +207,7 @@ object Controller {
     }
 
     fun createAccount_in_Firebase(){}//Cal fer, ara està buida
+
+
 
 }

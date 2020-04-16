@@ -42,6 +42,10 @@ class Pillfrequency_FragmentFour : Fragment() {
         }
         val pos = w_dayListfrequency.size
         w_dayListfrequency.add(pos, day.toString()+"/"+month.toString()+"/"+year.toString())
+        //per guardar a activity
+        val dies = (activity as PillFrequency?)?.getDiesSaltejats()
+        dies!!.add(pos, day.toString()+"/"+month.toString()+"/"+year.toString())
+        (activity as PillFrequency?)?.setDiesSaltejats(dies)
         //la llista ha canviat
         listHasChanged(w_dayListfrequency)
     }
@@ -84,6 +88,11 @@ class Pillfrequency_FragmentFour : Fragment() {
             else {
                 w_dayListfrequency.add(pos, new_day.toString()+"/"+new_month.toString()+"/"+new_year.toString())
                 //la llista ha canviat
+                //per guardar a activity
+                val dies = (activity as PillFrequency?)?.getDiesSaltejats()
+                dies!!.add(pos, new_day.toString()+"/"+new_month.toString()+"/"+new_year.toString())
+                (activity as PillFrequency?)?.setDiesSaltejats(dies)
+
                 listHasChanged(w_dayListfrequency)
                 mAlertDialog.dismiss()
             }
@@ -131,6 +140,10 @@ class Pillfrequency_FragmentFour : Fragment() {
             else {
                 w_dayListfrequency.set(pos, new_day.toString()+"/"+new_month.toString()+"/"+new_year.toString())
                 textView.text= new_day.toString()+"/"+new_month.toString()+"/"+new_year.toString()
+                //per guardar a activity
+                val dies = (activity as PillFrequency?)?.getDiesSaltejats()
+                dies!!.set(pos, new_day.toString()+"/"+new_month.toString()+"/"+new_year.toString())
+                (activity as PillFrequency?)?.setDiesSaltejats(dies)
                 //la llista ha canviat
                 //listHasChanged(w_hourListfrequency)
                 mAlertDialog.dismiss()

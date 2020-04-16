@@ -11,7 +11,7 @@
         android:layout_width="wrap_content" android:layout_height="wrap_content"
 
         android:background="@drawable/popup_background"
-        android:backgroundTint="#FF0000"
+        android:backgroundTint="#52000000"
         android:gravity="center"
         android:orientation="vertical"
         >
@@ -34,5 +34,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_flecha_hacia_abajo"
-        android:tint="#FF0000"/>
+        android:tint="#52000000"/>
 </LinearLayout>

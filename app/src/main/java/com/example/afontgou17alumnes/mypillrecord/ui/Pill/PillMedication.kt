@@ -3,6 +3,7 @@ package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.google.android.material.textfield.TextInputEditText
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.activity_pill_medication.*
@@ -24,17 +26,11 @@ import kotlinx.android.synthetic.main.time_dialog.view.*
 import java.util.*
 
 class PillMedication : AppCompatActivity() {
-
-    var ini_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-    var ini_month=Calendar.getInstance().get(Calendar.MONTH)+1
-    var ini_year=Calendar.getInstance().get(Calendar.YEAR)
-    var end_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-    var end_month=Calendar.getInstance().get(Calendar.YEAR)
-    var end_year=Calendar.getInstance().get(Calendar.YEAR)
+    var v_frequency= ""
     var medicine= ""
     var notes=""
     var new_units=""
-    var dose=1
+    var dose :Int = 0
 
     var hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
     var minute=Calendar.getInstance().get(Calendar.MINUTE)
@@ -42,15 +38,93 @@ class PillMedication : AppCompatActivity() {
     var timeAdapter : PillHourListAdapter2? = null
     var w_hourListfrequency= mutableListOf<String>()
 
+    var activityFrequency1 = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_pill_medication)
         val image_view = findViewById<ImageButton>(R.id.left_arrow)
+        //extras
+        val bundle:Bundle? = intent.extras
+        //medicine
+        val Medicine = bundle?.get("Medicine")
+        if(Medicine!=null){
+            this.medicine= Medicine as String
+            val MedicineNoum = findViewById<TextInputEditText>(R.id.pill_search)
+            MedicineNoum.text= Editable.Factory.getInstance().newEditable(Medicine)
+        }
+
+        //list of hours
+        /*
+        val Hours = bundle?.get("Hours")
+        if(Hours != null){
+            w_hourListfrequency= (Hours as Array<String>).toList() as MutableList<String>
+            listHasChanged(w_hourListfrequency)
+        }*/
+
+        //dose
+        val Dose = bundle?.get("Dose")
+        if(Dose != null){
+            this.dose = Dose as Int
+            btn_dose.text=dose.toString()
+        }
+        //units
+        val Units = bundle?.get("Units")
+        if(Units != null){
+            this.new_units = Units as String
+            btn_units.text = new_units.toString()
+        }
+        //notes
+        val Notes = bundle?.get("Notes")
+        if(Notes != null){
+            this.notes = Notes as String
+            val NotesNoum = findViewById<TextInputEditText>(R.id.input_notes)
+            NotesNoum.text= Editable.Factory.getInstance().newEditable(Notes)
+        }
+        //Frequency
+        val id_RadioButton = bundle?.get("RadioButton")
+        if(id_RadioButton!=null){
+            val From = bundle?.get("From")
+            val To = bundle?.get("To")
+            val RadioButtonValue = bundle?.get("RadioButtonValue")
+            //el frequency ha retornat algo btn_frequency.text=
+            when(id_RadioButton){
+                0->{
+                    btn_frequency.text= From.toString()+" to "+To.toString()
+                }
+                1->{
+                    btn_frequency.text= From.toString()+" to "+To.toString()+" each "+RadioButtonValue+" days"
+                }
+                2->{
+                    var array = RadioButtonValue as Array<String>
+                    //val array: Any? = RadioButtonValue
+                    var array2:MutableList<String>
+                    array2=binaryToWeek(array )
+                    btn_frequency.text= From.toString()+" to "+To.toString()+" at "+array2.toString()
+                }
+                3->{
+                    Log.e("RadioButtonValue",RadioButtonValue.toString())
+                    var dies = RadioButtonValue as String
+                    var dies2 =""
+                    dies2 = dies.substring(1, dies.length - 1);
+                    btn_frequency.text= "dies: "+  dies
+                }
+            }
+        }
+
+        /*val llista = this.Hours
+            intent.putExtra("Medicine",this.Medicine)
+            intent.putExtra("Hours",llista.toTypedArray())
+            intent.putExtra("Dose",this.DoseIn)
+            intent.putExtra("Units",this.Units)
+            intent.putExtra("Notes",this.Notes)*/
 
         image_view.setOnClickListener {
-            go_back()
+            val intent = Intent(this, Pillplanificar::class.java)
+            startActivity(intent)
+
         }
         btn_add_field_medication_button.setOnClickListener {
             select_time()
@@ -63,11 +137,25 @@ class PillMedication : AppCompatActivity() {
         }
         btn_frequency.setOnClickListener {
             val intent = Intent(this, PillFrequency::class.java)
+            val llista = w_hourListfrequency.toTypedArray()
+            val MedicineNoum = findViewById<TextInputEditText>(R.id.pill_search)
+            medicine=MedicineNoum.text.toString()
+            val NotesNoum = findViewById<TextInputEditText>(R.id.input_notes)
+            notes=NotesNoum.text.toString()
+            intent.putExtra("Medicine",medicine)
+            intent.putExtra("Hours",llista)
+            intent.putExtra("Dose",dose)
+            intent.putExtra("Units",new_units)
+            intent.putExtra("Notes",notes)
+            intent.putExtra("From","PillMedication")
             startActivity(intent)
+
+
         }
         btn_Save.setOnClickListener {
             Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
             save_medication()
+            Log.e("ACTIVITYFREQUENCY",activityFrequency1.toString())
             go_home()
         }
 
@@ -76,17 +164,28 @@ class PillMedication : AppCompatActivity() {
             val scanner = IntentIntegrator(this)
             scanner.initiateScan()
         }
-        val pos = w_hourListfrequency.size
-        Log.e("MINUTE",minute.toString())
-        if(minute<10){
-            val minute2 = "0"+ minute.toString()
-            w_hourListfrequency.add(pos, hour.toString()+":"+ minute2)
+        if(w_hourListfrequency.size == 0) {
+            val pos = w_hourListfrequency.size
+            Log.e("MINUTE", minute.toString())
+            if (minute < 10) {
+                val minute2 = "0" + minute.toString()
+                w_hourListfrequency.add(pos, hour.toString() + ":" + minute2)
+            } else {
+                w_hourListfrequency.add(pos, hour.toString() + ":" + minute)
+            }
+            //la llista ha canviat
+            listHasChanged(w_hourListfrequency)
         }
-        else{
-            w_hourListfrequency.add(pos, hour.toString()+":"+ minute)
+    }
+
+    private fun binaryToWeek(array: Array<String>): MutableList<String> {
+        var array2= mutableListOf<String>("Mon","Tue","Wed","Thu","Fri","Sat","Sun")
+        for(x in 0..6){
+            if(array[x]=="0"){
+                array2[x]=""
+            }
         }
-        //la llista ha canviat
-        listHasChanged(w_hourListfrequency)
+        return array2
     }
 
     // Barcode Scanner implementatiton
@@ -177,24 +276,6 @@ class PillMedication : AppCompatActivity() {
             Log.e("POSITION", timeAdapter?.getItem(i).toString())
             var text : TextView = view.findViewById(R.id.tw_hour)
             select_time2(text)
-
-            /*
-            var button: Button = view.findViewById(R.id.btn_delete_button)
-            button.setOnClickListener {
-                llista.removeAt(i)
-                listHasChanged(llista)
-            }
-            if( button.visibility ==View.INVISIBLE){
-                button.visibility=View.VISIBLE
-                button.setOnClickListener {
-                    llista.removeAt(i)
-                    listHasChanged(llista)
-                }
-            }
-            else{
-                button.visibility=View.INVISIBLE
-            }
-             */
         }
     }
     //per afegir
@@ -284,5 +365,6 @@ class PillMedication : AppCompatActivity() {
     fun get_w_hourListfrequency(): MutableList<String> {
         return w_hourListfrequency
     }
+
 
 }

@@ -2,6 +2,7 @@ package com.example.afontgou17alumnes.mypillrecord.ui.statistics
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import kotlinx.android.synthetic.main.statistics_fragment_fragment.*
+import java.time.LocalDate
 
 
 class Statistics_fragment : Fragment(),View.OnClickListener, AddMeasurementDialog.DialogListener,
@@ -61,6 +63,16 @@ class Statistics_fragment : Fragment(),View.OnClickListener, AddMeasurementDialo
             //while(!Controller.check_Statistics_Actualizated){}
             //Controller.check_Statistics_Actualizated=false
             onResume()
+        }
+        delete_btn_statistics.setOnClickListener {
+            val h = graph.highlighted ?: return@setOnClickListener
+            var type = spinner.selectedItem.toString()
+            if(spinner.selectedItemPosition == 3){
+                if(h[0].dataSetIndex == 0) type = "Glucose (before eating)"
+                else type = "Glucose (after eating)"
+            }
+            val mDialog = DeleteMeasurementDialog(type, h[0].y, LocalDate.now().minusDays(0 - h[0].x.toLong()))
+            mDialog.show(childFragmentManager, "Delete measurement")
         }
 
     }

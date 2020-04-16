@@ -65,6 +65,7 @@
                 android:layout_weight="1">
                 <!--per separar-->
             </TextView>
+
             <Button
                 android:id="@+id/btn_scan"
                 android:layout_width="0dp"
