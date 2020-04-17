@@ -13,6 +13,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.pills.Active_ingredients
 import com.example.afontgou17alumnes.mypillrecord.data.pills.MyData
 import com.example.afontgou17alumnes.mypillrecord.ui.Pill.Pill_fragment
@@ -60,7 +61,12 @@ class MainActivity : AppCompatActivity() {
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_statistcs-> {
-               replaceFragment(Statistics_fragment())
+               if(Controller.ja_iniciat==false){
+                   replaceFragment(Statistics_fragment())
+                   Controller.ja_iniciat=true
+               }else{
+                   go_To_Statistics(0)
+               }
                Toast.makeText(this,"Statistics",Toast.LENGTH_SHORT).show()
                toolbar.title ="STATISTICS"
                return@OnNavigationItemSelectedListener true

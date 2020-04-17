@@ -45,13 +45,13 @@ class Statistics_fragment : Fragment(),
         super.onActivityCreated(savedInstanceState)
         var start = arguments?.getInt("start")
         createGraph()
-        Controller.setStatisticsData()
         if(start!=null){
             shown=start
             spinner.setSelection(shown)
+        }else{
+            Controller.setStatisticsData()
         }
         refreshGraph(shown)
-        Log.d("hola",shown.toString())
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(p0: AdapterView<*>?) {            }
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {

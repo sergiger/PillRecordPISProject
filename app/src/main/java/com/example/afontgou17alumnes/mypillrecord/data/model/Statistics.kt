@@ -15,8 +15,8 @@ class Statistics {
         val array : MutableList<StatisticEntry>
         when(type){
             "Weight" -> array = weightData
-            "Heart Rate" -> array = heartRateData
-            "Arterial Pressure" -> array = arterialPressureData
+            "Heart rate" -> array = heartRateData
+            "Arterial pressure" -> array = arterialPressureData
             "Glucose (before eating)" -> array = glucoseBeforeData
             "Glucose (after eating)" -> array = glucoseAfterData
             "Temperature" -> array = temperatureData
