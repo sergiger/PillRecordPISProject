@@ -31,20 +31,27 @@ import java.net.URL
 
 
 class MainActivity : AppCompatActivity() {
+    var currentFragment=0
     lateinit var pDialog: ProgressDialog
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener{
        item->
        when(item.itemId){
            R.id.action_Today->{
-               replaceFragment(Today_Fragment())
-               Toast.makeText(this,"Today",Toast.LENGTH_SHORT).show()
-               toolbar.title = "TODAY"
+               if(currentFragment!=0){
+                   replaceFragment(Today_Fragment())
+                   Toast.makeText(this,"Today",Toast.LENGTH_SHORT).show()
+                   toolbar.title = "TODAY"
+                   currentFragment=0
+               }
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_calendar->{
-               replaceFragment(Calendar_fragment())
-               Toast.makeText(this,"Calendar",Toast.LENGTH_SHORT).show()
-               toolbar.title ="CALENDAR"
+               if(currentFragment!=1){
+                   replaceFragment(Calendar_fragment())
+                   Toast.makeText(this,"Calendar",Toast.LENGTH_SHORT).show()
+                   toolbar.title ="CALENDAR"
+                   currentFragment=1
+               }
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_team->{
@@ -52,23 +59,30 @@ class MainActivity : AppCompatActivity() {
                /*replaceFragment(Team_fragment())
 
                toolbar.title ="TEAM"*/
+               //currentFragment=2
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_pills->{
-               replaceFragment(Pill_fragment())
-               Toast.makeText(this,"Add",Toast.LENGTH_SHORT).show()
-               toolbar.title ="THERAPY"
+               if(currentFragment!=3){
+                   replaceFragment(Pill_fragment())
+                   Toast.makeText(this,"Add",Toast.LENGTH_SHORT).show()
+                   toolbar.title ="THERAPY"
+                   currentFragment=3
+               }
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_statistcs-> {
-               if(Controller.ja_iniciat==false){
-                   replaceFragment(Statistics_fragment())
-                   Controller.ja_iniciat=true
-               }else{
-                   go_To_Statistics(0)
+               if(currentFragment!=4) {
+                   if (Controller.ja_iniciat == false) {
+                       replaceFragment(Statistics_fragment())
+                       Controller.ja_iniciat = true
+                   } else {
+                       go_To_Statistics(0)
+                   }
+                   Toast.makeText(this, "Statistics", Toast.LENGTH_SHORT).show()
+                   toolbar.title = "STATISTICS"
+                   currentFragment = 4
                }
-               Toast.makeText(this,"Statistics",Toast.LENGTH_SHORT).show()
-               toolbar.title ="STATISTICS"
                return@OnNavigationItemSelectedListener true
            }
        }
