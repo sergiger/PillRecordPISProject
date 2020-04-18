@@ -6,11 +6,14 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.pills.Active_ingredients
 import com.example.afontgou17alumnes.mypillrecord.data.pills.MyData
 import com.example.afontgou17alumnes.mypillrecord.ui.Pill.Pill_fragment
@@ -45,9 +48,10 @@ class MainActivity : AppCompatActivity() {
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_team->{
-               replaceFragment(Team_fragment())
-               Toast.makeText(this,"Team",Toast.LENGTH_SHORT).show()
-               toolbar.title ="TEAM"
+               Toast.makeText(this,"Team (In next version",Toast.LENGTH_SHORT).show()
+               /*replaceFragment(Team_fragment())
+
+               toolbar.title ="TEAM"*/
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_pills->{
@@ -57,7 +61,12 @@ class MainActivity : AppCompatActivity() {
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_statistcs-> {
-               replaceFragment(Statistics_fragment())
+               if(Controller.ja_iniciat==false){
+                   replaceFragment(Statistics_fragment())
+                   Controller.ja_iniciat=true
+               }else{
+                   go_To_Statistics(0)
+               }
                Toast.makeText(this,"Statistics",Toast.LENGTH_SHORT).show()
                toolbar.title ="STATISTICS"
                return@OnNavigationItemSelectedListener true
@@ -174,5 +183,19 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this,"PDF is being generated",Toast.LENGTH_LONG).show()
         }
         return super.onOptionsItemSelected(item)
+    }
+    public fun go_To_Statistics(id:Int){
+
+        val bundle = Bundle()
+        bundle.putInt("start",id)
+
+        val transaction = this.supportFragmentManager.beginTransaction()
+        val statisticsFragment = Statistics_fragment()
+        statisticsFragment.arguments = bundle
+
+        transaction.replace(R.id.fragmentContainer, statisticsFragment)
+        transaction.addToBackStack(null)
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        transaction.commit()
     }
 }

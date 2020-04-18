@@ -7,7 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.Spinner
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.github.mikephil.charting.charts.LineChart
@@ -17,7 +23,8 @@ import kotlinx.android.synthetic.main.statistics_fragment_fragment.*
 import java.time.LocalDate
 
 
-class Statistics_fragment : Fragment() {
+class Statistics_fragment : Fragment(),
+    ActivityCompat.OnRequestPermissionsResultCallback {
 
     var shown:Int=0
 
@@ -36,8 +43,15 @@ class Statistics_fragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        var start = arguments?.getInt("start")
         createGraph()
-        Controller.setStatisticsData()
+        if(start!=null){
+            shown=start
+            spinner.setSelection(shown)
+        }else{
+            Controller.setStatisticsData()
+        }
+        refreshGraph(shown)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(p0: AdapterView<*>?) {            }
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -60,7 +74,7 @@ class Statistics_fragment : Fragment() {
                 if(h[0].dataSetIndex == 0) type = "Glucose (before eating)"
                 else type = "Glucose (after eating)"
             }
-            val mDialog = DeleteMeasurementDialog(type, h[0].y, LocalDate.now().minusDays(0 - h[0].x.toLong()))
+            val mDialog = DeleteMeasurementDialog(shown,type, h[0].y, LocalDate.now().minusDays(0 - h[0].x.toLong()))
             mDialog.show(childFragmentManager, "Delete measurement")
         }
 
@@ -105,4 +119,8 @@ class Statistics_fragment : Fragment() {
         graph.moveViewToX(0F)
     }
 
+
+
 }
+
+

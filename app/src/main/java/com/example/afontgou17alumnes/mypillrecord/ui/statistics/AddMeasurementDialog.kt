@@ -1,6 +1,8 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.statistics
 
 import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
@@ -8,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.DialogFragment
+import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.StatisticEntry
@@ -51,17 +54,28 @@ class AddMeasurementDialog : DialogFragment() {
         val unit = view.findViewById<TextView>(R.id.unit)
         setType(id)
         setUnits(id,unit)
-        if(id==4)
-            id=5
-        spinner.setSelection(id)
-        ok.setOnClickListener {
-            if(enter_value.text.toString() != ""){
-                addData(unit)
-                dismiss()
+        if(id==4){
+            spinner.setSelection(5)
+        }else
+            spinner.setSelection(id)
+        ok.setOnClickListener(object :View.OnClickListener{
+            override fun onClick(view:View){
+                if(enter_value.text.toString() != ""){
+                    addData(unit)
+                    //statisticsFragment.refreshGraph(id)
+
+                    //Aixó hauria de funcionar, però no sé per què no funciona, si algú s'ho pot mirar, jo ja no puc fer res més en aqeust
+                    /*val callingActivity=activity as DialogListener?
+                    callingActivity!!.onFinishEditDialog()*/
+                    (activity as MainActivity).go_To_Statistics(id)
+                    //Controller.check_Statistics_Actualizated=true
+                    dismiss()
+                }
             }
-        }
+        })
         cancel.setOnClickListener {
             dismiss()
+
         }
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -152,4 +166,9 @@ class AddMeasurementDialog : DialogFragment() {
         this.value=enter_value.text.toString().toFloat()
         this.unit=unit.text.toString()
     }
+
+    interface DialogListener {
+        fun onFinishEditDialog()
+    }
+
 }

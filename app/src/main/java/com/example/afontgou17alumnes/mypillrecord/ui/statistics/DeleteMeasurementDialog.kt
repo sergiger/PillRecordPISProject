@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
+import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import org.w3c.dom.Text
@@ -15,6 +16,7 @@ import java.time.LocalDate
 import kotlin.math.roundToInt
 
 class DeleteMeasurementDialog(
+    val shown: Int,
     val type : String,
     val value : Float,
     val date : LocalDate
@@ -50,6 +52,7 @@ class DeleteMeasurementDialog(
         //Set listeners
         deleteBtn.setOnClickListener {
             Controller.deleteMeasure(type, value, date)
+            (activity as MainActivity).go_To_Statistics(shown)
             dismiss()
         }
         cancelBtn.setOnClickListener {
