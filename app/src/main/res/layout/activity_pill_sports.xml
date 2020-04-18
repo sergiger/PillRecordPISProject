@@ -87,9 +87,8 @@
                 android:layout_weight="19"
                 android:backgroundTint="@color/cardview_light_background"
                 android:text=""
-                android:textAllCaps="false"
                 android:textAlignment="textEnd"
-                ></Button>
+                android:textAllCaps="false"></Button>
         </LinearLayout>
         <TextView
             android:id="@+id/text_view_frequency"

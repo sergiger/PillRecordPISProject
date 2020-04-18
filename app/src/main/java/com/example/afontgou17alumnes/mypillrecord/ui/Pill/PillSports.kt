@@ -1,6 +1,7 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
@@ -12,12 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import kotlinx.android.synthetic.main.activity_pill_sports.*
-import kotlinx.android.synthetic.main.activity_pill_sports.btn_Save
-import kotlinx.android.synthetic.main.activity_pill_sports.btn_frequency
-import kotlinx.android.synthetic.main.activity_pill_sports.text_view_frequency
 import kotlinx.android.synthetic.main.activity_pill_sports.view.*
-import kotlinx.android.synthetic.main.pill_mesurements_activity.*
-import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
@@ -45,7 +41,6 @@ class PillSports : AppCompatActivity() {
             val To = bundle?.get("To")
             val Activity = bundle?.get("Activity")
             if(Activity!=null){
-
                 set_sports.text= Editable.Factory.getInstance().newEditable(Activity as CharSequence?)
                 new_activity=Activity as String
             }
