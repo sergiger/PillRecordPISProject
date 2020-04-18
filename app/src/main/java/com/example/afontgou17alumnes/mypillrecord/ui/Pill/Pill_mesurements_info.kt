@@ -9,7 +9,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.model.Frequency
+import kotlinx.android.synthetic.main.activity_pill_sports.*
 import kotlinx.android.synthetic.main.pill_mesurements_activity.*
+import kotlinx.android.synthetic.main.pill_mesurements_activity.btn_Save
+import kotlinx.android.synthetic.main.pill_mesurements_activity.btn_frequency
+import kotlinx.android.synthetic.main.pill_mesurements_activity.text_view_frequency
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
@@ -26,6 +31,7 @@ class Pill_mesurements_info : AppCompatActivity() {
     var w_hourListfrequency= mutableListOf<String>()
     var titol=""
     var unitats=""
+    var frequencyClass : Frequency? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,9 +56,19 @@ class Pill_mesurements_info : AppCompatActivity() {
             when(id_RadioButton){
                 0->{
                     text_view_frequency.text= From.toString()+" to "+To.toString()
+                    //Creem la classe frequency
+                    val eachdaydose =(RadioButtonValue as String).toInt()
+                    val frequencyClass =Frequency(From as String , To as String,eachdaydose as Int )
+                    Log.w("frequencyClass",frequencyClass.toString())
+                    this.frequencyClass=frequencyClass
                 }
                 1->{
                     text_view_frequency.text= From.toString()+" to "+To.toString()+" each "+RadioButtonValue+" days"
+                    //Creem la classe frequency
+                    val eachdaydose =(RadioButtonValue as String).toInt()
+                    val frequencyClass =Frequency(From as String , To as String,eachdaydose as Int )
+                    Log.w("frequencyClass",frequencyClass.toString())
+                    this.frequencyClass=frequencyClass
                 }
                 2->{
                     var array = RadioButtonValue as Array<String>
@@ -60,13 +76,20 @@ class Pill_mesurements_info : AppCompatActivity() {
                     var array2:MutableList<String>
                     array2=binaryToWeek(array )
                     text_view_frequency.text= From.toString()+" to "+To.toString()+" at "+array2.toString()
+                    //Creem la classe frequency
+                    var array3 = array2.toTypedArray()
+                    val frequencyClass =Frequency(From as String , To as String, array3  )
+                    Log.w("frequencyClass",frequencyClass.toString())
+                    this.frequencyClass=frequencyClass
                 }
                 3->{
                     Log.e("RadioButtonValue",RadioButtonValue.toString())
-                    var dies = RadioButtonValue as String
-                    var dies2 =""
-                    dies2 = dies.substring(1, dies.length - 1);
-                    text_view_frequency.text= "dies: "+  dies
+                    var dies = RadioButtonValue as Array<String>
+                    text_view_frequency.text= "dies: "+  dies.contentToString()
+                    //Creem la classe frequency
+                    val frequencyClass =Frequency( dies  )
+                    Log.w("frequencyClass",frequencyClass.toString())
+                    this.frequencyClass=frequencyClass
                 }
             }
         }
