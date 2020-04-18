@@ -2,6 +2,7 @@ package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.model.Frequency
 import com.google.android.material.textfield.TextInputEditText
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
@@ -23,10 +25,11 @@ import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
+import java.time.LocalDate
 import java.util.*
 
 class PillMedication : AppCompatActivity() {
-    var v_frequency= ""
+    var frequencyClass : Frequency? = null
     var medicine= ""
     var notes=""
     var new_units=""
@@ -55,15 +58,6 @@ class PillMedication : AppCompatActivity() {
             val MedicineNoum = findViewById<TextInputEditText>(R.id.pill_search)
             MedicineNoum.text= Editable.Factory.getInstance().newEditable(Medicine)
         }
-
-        //list of hours
-        /*
-        val Hours = bundle?.get("Hours")
-        if(Hours != null){
-            w_hourListfrequency= (Hours as Array<String>).toList() as MutableList<String>
-            listHasChanged(w_hourListfrequency)
-        }*/
-
         //dose
         val Dose = bundle?.get("Dose")
         if(Dose != null){
@@ -93,33 +87,42 @@ class PillMedication : AppCompatActivity() {
             when(id_RadioButton){
                 0->{
                     btn_frequency.text= From.toString()+" to "+To.toString()
+                    //Creem la classe frequency
+                    val frequencyClass =Frequency(From as String , To as String )
+                    Log.w("frequencyClass",frequencyClass.toString())
+                    this.frequencyClass=frequencyClass
+
                 }
                 1->{
                     btn_frequency.text= From.toString()+" to "+To.toString()+" each "+RadioButtonValue+" days"
+                    //Creem la classe frequency
+                    val eachdaydose =(RadioButtonValue as String).toInt()
+                    val frequencyClass =Frequency(From as String , To as String,eachdaydose as Int )
+                    Log.w("frequencyClass",frequencyClass.toString())
+                    this.frequencyClass=frequencyClass
                 }
                 2->{
                     var array = RadioButtonValue as Array<String>
-                    //val array: Any? = RadioButtonValue
                     var array2:MutableList<String>
                     array2=binaryToWeek(array )
                     btn_frequency.text= From.toString()+" to "+To.toString()+" at "+array2.toString()
+                    //Creem la classe frequency
+                    var array3 = array2.toTypedArray()
+                    val frequencyClass =Frequency(From as String , To as String, array3  )
+                    Log.w("frequencyClass",frequencyClass.toString())
+                    this.frequencyClass=frequencyClass
                 }
                 3->{
                     Log.e("RadioButtonValue",RadioButtonValue.toString())
-                    var dies = RadioButtonValue as String
-                    var dies2 =""
-                    dies2 = dies.substring(1, dies.length - 1);
-                    btn_frequency.text= "dies: "+  dies
+                    var dies = RadioButtonValue as Array<String>
+                    btn_frequency.text= "dies: "+  dies.contentToString()
+                    //Creem la classe frequency
+                    val frequencyClass =Frequency( dies  )
+                    Log.w("frequencyClass",frequencyClass.toString())
+                    this.frequencyClass=frequencyClass
                 }
             }
         }
-
-        /*val llista = this.Hours
-            intent.putExtra("Medicine",this.Medicine)
-            intent.putExtra("Hours",llista.toTypedArray())
-            intent.putExtra("Dose",this.DoseIn)
-            intent.putExtra("Units",this.Units)
-            intent.putExtra("Notes",this.Notes)*/
 
         image_view.setOnClickListener {
             val intent = Intent(this, Pillplanificar::class.java)

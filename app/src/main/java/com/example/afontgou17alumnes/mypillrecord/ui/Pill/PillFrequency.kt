@@ -166,7 +166,7 @@ class PillFrequency : AppCompatActivity() {
                     "radioButton_PuntualDay"->{
                         //Log.e("radioButton_PuntualDay","radioButton_PuntualDay SAVED")
                         intent.putExtra("RadioButton",3)
-                        intent.putExtra("RadioButtonValue",arrayDiesSaltejats.toString())
+                        intent.putExtra("RadioButtonValue",arrayDiesSaltejats.toTypedArray())
                         Log.e("list days",arrayDiesSaltejats.toString())
 
                     }
@@ -209,7 +209,7 @@ class PillFrequency : AppCompatActivity() {
                     "radioButton_PuntualDay"->{
                         //Log.e("radioButton_PuntualDay","radioButton_PuntualDay SAVED")
                         intent.putExtra("RadioButton",3)
-                        intent.putExtra("RadioButtonValue",arrayDiesSaltejats.toString())
+                        intent.putExtra("RadioButtonValue",arrayDiesSaltejats.toTypedArray())
                         Log.e("list days",arrayDiesSaltejats.toString())
 
                     }
@@ -255,7 +255,7 @@ class PillFrequency : AppCompatActivity() {
                     "radioButton_PuntualDay"->{
                         //Log.e("radioButton_PuntualDay","radioButton_PuntualDay SAVED")
                         intent.putExtra("RadioButton",3)
-                        intent.putExtra("RadioButtonValue",arrayDiesSaltejats.toString())
+                        intent.putExtra("RadioButtonValue",arrayDiesSaltejats.toTypedArray())
                         Log.e("list days",arrayDiesSaltejats.toString())
 
                     }
