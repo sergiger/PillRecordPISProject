@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.today.AddUnplannedMeasurement">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_unplanned_measurement"
+        android:id="@+id/toolbar_today_modify_reminder"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
         app:contentInsetStart="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -26,48 +23,22 @@
             android:background="@color/transparent"
             android:src="@drawable/ic_arrow_back_white_24dp"
             app:backgroundTint="@color/transparent"
-            app:elevation="0dp"
-            tools:layout_editor_absoluteX="16dp" />
+            app:elevation="0dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="\t\tMeasurement"
+            android:text="\t\tName"
             android:textColor="#ffffff"
             android:textSize="20dp"
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
-        android:id="@+id/measurement_label"
+        android:id="@+id/info_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Measurement"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@id/measurement_spinner"
-        app:layout_constraintTop_toTopOf="@id/measurement_spinner"
-        app:layout_constraintBottom_toBottomOf="@id/measurement_spinner"/>
-
-    <Spinner
-        android:id="@+id/measurement_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-        android:entries="@array/statistics_array"
-        android:textAlignment="textEnd"
-        android:textAllCaps="false"
-        android:textColor="@color/colorApp3"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_unplanned_measurement" />
-
-
-
-    <TextView
-        android:id="@+id/date_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Date"
+        android:text="Default"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@id/date_button"
@@ -86,8 +57,8 @@
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/measurement_spinner" />
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_today_modify_reminder"/>
 
     <TextView
         android:id="@+id/hour_label"
@@ -112,22 +83,41 @@
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
-        android:textSize="24sp"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/date_button" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/tick_unplanned_measurement"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:elevation="4dp"
-        android:tint="#4CAF50"
-        app:backgroundTint="@color/transparent"
-        app:fabCustomSize="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="70dp"
-        app:srcCompat="@drawable/ic_tick" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Omit"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:background="@color/gris"
+            android:drawableTop="@drawable/ic_highlight_off_black_24dp"
+            android:paddingBottom="36dp"
+            android:paddingTop="36dp"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Confirm"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:background="#4CAF50"
+            android:drawableTop="@drawable/ic_check_white_24dp"
+            android:paddingBottom="36dp"
+            android:paddingTop="36dp"
+            />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

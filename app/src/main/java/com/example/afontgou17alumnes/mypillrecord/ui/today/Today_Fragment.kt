@@ -13,6 +13,7 @@ import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.UnplannedMedicineReminder
 import com.example.afontgou17alumnes.mypillrecord.ui.calendar.ReminderListAdapter
+import com.example.afontgou17alumnes.mypillrecord.ui.statistics.AddMeasurementDialog
 import kotlinx.android.synthetic.main.today__fragment.*
 import java.time.LocalDate
 import java.time.LocalTime
@@ -39,7 +40,12 @@ class Today_Fragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         createTodayList()
         add_button.setOnClickListener {
-            val intent = Intent(activity, AddUnplannedEntry::class.java)
+            val mDialog = AddUnplannedEntry()
+            mDialog.show(childFragmentManager, "Add unplanned entry")
+        }
+        today_list.setOnItemClickListener { adapterView, view, i, l ->
+
+            val intent = Intent(context, TodayModifyReminder::class.java)
             startActivity(intent)
         }
     }
