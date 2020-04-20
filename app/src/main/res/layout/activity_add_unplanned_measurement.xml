@@ -70,12 +70,12 @@
         android:text="Date"
         android:textColor="#000000"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@id/date_button"
-        app:layout_constraintTop_toTopOf="@id/date_button"
-        app:layout_constraintBottom_toBottomOf="@id/date_button"/>
+        app:layout_constraintStart_toStartOf="@id/info_button"
+        app:layout_constraintTop_toTopOf="@id/info_button"
+        app:layout_constraintBottom_toBottomOf="@id/info_button"/>
 
     <Button
-        android:id="@+id/date_button"
+        android:id="@+id/info_button"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
@@ -96,12 +96,12 @@
         android:text="Hour"
         android:textColor="#000000"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@id/hour_button_unplanned_measurement"
-        app:layout_constraintTop_toTopOf="@id/hour_button_unplanned_measurement"
-        app:layout_constraintBottom_toBottomOf="@id/hour_button_unplanned_measurement"/>
+        app:layout_constraintStart_toStartOf="@id/hour_button_today_modify_reminder"
+        app:layout_constraintTop_toTopOf="@id/hour_button_today_modify_reminder"
+        app:layout_constraintBottom_toBottomOf="@id/hour_button_today_modify_reminder"/>
 
     <Button
-        android:id="@+id/hour_button_unplanned_measurement"
+        android:id="@+id/hour_button_today_modify_reminder"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
@@ -113,7 +113,7 @@
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/date_button" />
+        app:layout_constraintTop_toBottomOf="@id/info_button" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/tick_unplanned_measurement"

@@ -50,7 +50,7 @@ class ReminderListAdapter(
     }
 
     override fun getItem(p0: Int): Any {
-        return 1
+        return reminderList[p0]
     }
 
     override fun getItemId(p0: Int): Long {

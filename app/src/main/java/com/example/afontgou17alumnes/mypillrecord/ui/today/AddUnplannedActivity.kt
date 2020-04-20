@@ -43,7 +43,7 @@ class AddUnplannedActivity : AppCompatActivity() {
             save()
             go_home()
         }
-        date_button.setOnClickListener{
+        info_button.setOnClickListener{
             select_date(it)
         }
         hour_button_unplanned_activity.setOnClickListener{
@@ -179,7 +179,7 @@ class AddUnplannedActivity : AppCompatActivity() {
         this.day=ini_day
         this.month=ini_month
         this.year=ini_year
-        date_button.text = this.day.toString()+"//"+this.month.toString()+"//"+this.year.toString()
+        info_button.text = this.day.toString()+"//"+this.month.toString()+"//"+this.year.toString()
     }
 
     fun go_home(){

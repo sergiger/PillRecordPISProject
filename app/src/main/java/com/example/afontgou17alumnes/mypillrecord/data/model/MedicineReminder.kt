@@ -16,6 +16,15 @@ open class MedicineReminder(
         return "MedicineReminder(name='$name', dose=$dose, doseUnit='$doseUnit', date=$date, time=$time, taken=$taken)"
     }
 
+    override fun getReminderName(): String {
+        return name
+    }
+
+    override fun getHour(): LocalTime {
+        return time
+    }
+
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

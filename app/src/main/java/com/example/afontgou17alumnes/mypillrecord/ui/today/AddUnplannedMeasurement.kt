@@ -43,10 +43,10 @@ class AddUnplannedMeasurement : AppCompatActivity() {
             save()
             go_home()
         }
-        date_button.setOnClickListener{
+        info_button.setOnClickListener{
             select_date()
         }
-        hour_button_unplanned_measurement.setOnClickListener{
+        hour_button_today_modify_reminder.setOnClickListener{
             select_time()
         }
         measurement_spinner.onItemSelectedListener= object: AdapterView.OnItemSelectedListener {
@@ -86,7 +86,7 @@ class AddUnplannedMeasurement : AppCompatActivity() {
                 hou="0"+this.hour.toString()
             }
             //Aqui és on s'ha de posar on vols que s'escrigui el temps
-            hour_button_unplanned_measurement.text = hou+":"+min
+            hour_button_today_modify_reminder.text = hou+":"+min
             Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
             mAlertDialog.dismiss()
         }
@@ -139,7 +139,7 @@ class AddUnplannedMeasurement : AppCompatActivity() {
         this.day=ini_day
         this.month=ini_month
         this.year=ini_year
-        date_button.text = this.day.toString()+"//"+this.month.toString()+"//"+this.year.toString()
+        info_button.text = this.day.toString()+"//"+this.month.toString()+"//"+this.year.toString()
     }
 
     fun go_home(){

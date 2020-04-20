@@ -16,7 +16,7 @@ import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller.cre
 import com.example.afontgou17alumnes.mypillrecord.data.search.SearchActivity
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.back_arrow
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
-import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.date_button
+import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.info_button
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.view.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
@@ -49,7 +49,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
             save()
             go_home()
         }
-        date_button.setOnClickListener{
+        info_button.setOnClickListener{
             select_date()
         }
         hour_button_unplanned_medicine.setOnClickListener{
@@ -199,7 +199,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
         this.day=ini_day
         this.month=ini_month
         this.year=ini_year
-        date_button.text = this.day.toString()+"//"+this.month.toString()+"//"+this.year.toString()
+        info_button.text = this.day.toString()+"//"+this.month.toString()+"//"+this.year.toString()
 
     }
 
