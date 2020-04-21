@@ -14,6 +14,14 @@ class MeasurementReminder(
         return "MeasurementReminder(name='$name', unit='$unit', value=$value, date=$date, time=$time)"
     }
 
+    override fun getReminderName(): String {
+        return name
+    }
+
+    override fun getHour(): LocalTime {
+        return time
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

@@ -14,6 +14,14 @@ class ActivityReminder(
         return "ActivityReminder(name='$name', duration=$duration, date=$date, time=$time, done=$done)"
     }
 
+    override fun getReminderName(): String {
+        return name
+    }
+
+    override fun getHour(): LocalTime {
+        return time
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
