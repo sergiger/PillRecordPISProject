@@ -1,5 +1,10 @@
 package com.example.afontgou17alumnes.mypillrecord.data.model
 
+import java.time.LocalDate
+import java.time.LocalTime
+import java.util.*
+import kotlin.collections.ArrayList
+
 open class User{
     var email:String
     var username:String
@@ -50,6 +55,30 @@ open class User{
             TODO()//exceptions
         }
     }
+
+    fun getNextReminder():Reminder{
+        var retorn:Reminder= MeasurementReminder("Weight","kg", LocalDate.now(), LocalTime.now())
+        for(reminder in reminders){
+            if(reminder.getMilisFromNow()>Calendar.getInstance().timeInMillis)
+                if(!reminder.isDone()){
+                    retorn=reminder
+                    break
+                }
+        }
+        return retorn
+    }
+    fun areThereReminders():Boolean{
+        var retorn=false
+        for(reminder in reminders){
+            if(reminder.getMilisFromNow()>Calendar.getInstance().timeInMillis)
+                if(!reminder.isDone()){
+                    retorn=true
+                    break
+                }
+        }
+        return retorn
+    }//Aquesta funció retorna true si hi ha algun reminder en el futur que no estigui fet
+        //false si no n'hi ha cap per recordar
 
 
 

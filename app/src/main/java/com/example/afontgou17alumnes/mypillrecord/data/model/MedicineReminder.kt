@@ -2,6 +2,8 @@ package com.example.afontgou17alumnes.mypillrecord.data.model
 
 import java.time.LocalDate
 import java.time.LocalTime
+import java.time.temporal.ChronoUnit
+import java.util.*
 
 open class MedicineReminder(
     //Potser alguns paràmetres es podrien agrupar a una classe Medicine
@@ -22,6 +24,23 @@ open class MedicineReminder(
 
     override fun getHour(): LocalTime {
         return time
+    }
+
+    override fun getMilisFromNow(): Long {
+        var result : Long = Calendar.getInstance().timeInMillis
+        var date:Long
+        var time:Long
+        time=this.time.hour.toLong()*60*60*1000+this.time.minute.toLong()*60*1000-(LocalTime.now().hour*60*60*1000+LocalTime.now().minute*60*1000)
+        date= ChronoUnit.DAYS.between(this.date,LocalDate.now())*24*60*60*1000
+        result+=time+date
+        return result
+    }
+
+    override fun isDone(): Boolean {
+        var retorn=false
+        if(taken)
+            retorn=true
+        return retorn
     }
 
 

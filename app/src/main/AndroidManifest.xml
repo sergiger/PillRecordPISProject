@@ -16,7 +16,7 @@
         <activity
             android:name=".data.search.SearchActivity"
             android:exported="true"
-            android:screenOrientation="locked" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.Pill.Pill_mesurements_info"
             android:screenOrientation="locked" />
@@ -92,10 +92,10 @@
             android:screenOrientation="locked" />
         <activity
             android:name=".ui.today.Today_Fragment"
-            android:screenOrientation="locked" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:screenOrientation="locked">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -108,6 +108,14 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="locked" />
+        <receiver
+            android:name=".notifications.recivers.AlarmReceiver"
+            android:enabled="true"
+            android:exported="false">
+        </receiver>
+        <service
+            android:name=".notifications.recivers.NotificationService"
+            android:enabled="true" />
     </application>
 
 </manifest>

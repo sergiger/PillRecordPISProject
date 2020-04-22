@@ -4,7 +4,9 @@ package com.example.afontgou17alumnes.mypillrecord
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.icu.util.LocaleData
 import android.os.AsyncTask
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -12,10 +14,12 @@ import androidx.fragment.app.Fragment
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentTransaction
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.pills.Active_ingredients
 import com.example.afontgou17alumnes.mypillrecord.data.pills.MyData
+import com.example.afontgou17alumnes.mypillrecord.notifications.NotificationUtils
 import com.example.afontgou17alumnes.mypillrecord.ui.Pill.Pill_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.calendar.Calendar_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.settings.ajustes_activity
@@ -28,6 +32,15 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
+import java.time.Instant.now
+import java.time.LocalDate
+import java.time.LocalDate.now
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.temporal.ChronoUnit
+import java.util.*
+import java.util.Calendar.getInstance
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -90,6 +103,7 @@ class MainActivity : AppCompatActivity() {
 
    }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?)  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -112,6 +126,17 @@ class MainActivity : AppCompatActivity() {
         }
         else{
             replaceFragment(Today_Fragment())
+        }
+        generarNextNotification()
+
+    }
+    fun generarNextNotification(){
+        if (Controller.user.areThereReminders()){
+            val mNotificationTime = Calendar.getInstance().timeInMillis + Controller.user.getNextReminder().getMilisFromNow() //Set after 5 seconds
+            NotificationUtils().setNotification(mNotificationTime, this@MainActivity)
+        }
+        else{
+            Toast.makeText(this,"There are no reminders",Toast.LENGTH_LONG).show()
         }
     }
 
