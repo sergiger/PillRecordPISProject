@@ -2,7 +2,6 @@ package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 
 import android.app.Activity
 import android.content.Intent
-import android.content.res.TypedArray
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
@@ -14,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.model.Frequency
+import com.example.afontgou17alumnes.mypillrecord.data.pills.MyData
+import com.example.afontgou17alumnes.mypillrecord.data.search.AsyncResponse
+import com.example.afontgou17alumnes.mypillrecord.data.search.AsyncTaskHandler
 import com.google.android.material.textfield.TextInputEditText
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
@@ -25,10 +27,9 @@ import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
-import java.time.LocalDate
 import java.util.*
 
-class PillMedication : AppCompatActivity() {
+class PillMedication : AppCompatActivity() , AsyncResponse{
     var frequencyClass : Frequency? = null
     var medicine= ""
     var notes=""
@@ -43,11 +44,15 @@ class PillMedication : AppCompatActivity() {
 
     var activityFrequency1 = ""
 
+    // API Implementation
+    val url = "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:"
+    val field = "packaging.package_ndc:"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_pill_medication)
+
         val image_view = findViewById<ImageButton>(R.id.left_arrow)
         //extras
         val bundle:Bundle? = intent.extras
@@ -80,9 +85,9 @@ class PillMedication : AppCompatActivity() {
         //Frequency
         val id_RadioButton = bundle?.get("RadioButton")
         if(id_RadioButton!=null){
-            val From = bundle?.get("From")
-            val To = bundle?.get("To")
-            val RadioButtonValue = bundle?.get("RadioButtonValue")
+            val From = bundle.get("From")
+            val To = bundle.get("To")
+            val RadioButtonValue = bundle.get("RadioButtonValue")
             //el frequency ha retornat algo btn_frequency.text=
             when(id_RadioButton){
                 0->{
@@ -97,7 +102,7 @@ class PillMedication : AppCompatActivity() {
                     btn_frequency.text= From.toString()+" to "+To.toString()+" each "+RadioButtonValue+" days"
                     //Creem la classe frequency
                     val eachdaydose =(RadioButtonValue as String).toInt()
-                    val frequencyClass =Frequency(From as String , To as String,eachdaydose as Int )
+                    val frequencyClass =Frequency(From as String , To as String, eachdaydose)
                     Log.w("frequencyClass",frequencyClass.toString())
                     this.frequencyClass=frequencyClass
                 }
@@ -153,7 +158,6 @@ class PillMedication : AppCompatActivity() {
             intent.putExtra("From","PillMedication")
             startActivity(intent)
 
-
         }
         btn_Save.setOnClickListener {
             Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
@@ -191,9 +195,9 @@ class PillMedication : AppCompatActivity() {
         return array2
     }
 
-    // Barcode Scanner implementatiton
-    // Exemple: Aspirin (cut first and last number of the barcode)
-    // https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%220536-1149-41%22
+    // Barcode Scanner implementatiton -> cut first and last number of the barcode
+    // https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:0536-1149-41
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             val result:IntentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
@@ -202,11 +206,33 @@ class PillMedication : AppCompatActivity() {
                     Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
                 } else {
                     Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+                    // API Implementation
+                    var ndc = result.contents.substring(1,result.contents.length - 1)
+                    var format1 = ndc.substring(0,4) + "-" + ndc.substring(4,8) + "-" + ndc.substring(8) // 4-4-2
+                    var format2 = ndc.substring(0,5) + "-" + ndc.substring(5,8) + "-" + ndc.substring(8) // 5-3-2
+
+                    AsyncTaskHandler().execute(url+format1+"+"+field+format2)  // Final of implementation
+                    println(url+format1+"+"+field+format2)
                 }
             } else {
                 super.onActivityResult(requestCode, resultCode, data)
             }
         }
+    }
+    override fun getResults(result: ArrayList<MyData>) {
+        var pill = result[0]
+        println(pill)
+
+        var name = pill.brand_name + " " + pill.active_ingredients[0].name
+        var editable:Editable = Editable.Factory.getInstance().newEditable(name)
+        // pill_search.text = name
+
+        var strength = pill.active_ingredients[0].strength
+        val parts = strength.split(" ", "/")
+        var dosis = parts[0]
+        var unit = parts[1]
+        // btn_dose.text = dosis
+        // btn_units.text = unit
     }
 
     fun select_dose(){
@@ -368,6 +394,5 @@ class PillMedication : AppCompatActivity() {
     fun get_w_hourListfrequency(): MutableList<String> {
         return w_hourListfrequency
     }
-
 
 }

@@ -8,22 +8,20 @@ import android.view.ViewGroup
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.*
 import com.example.afontgou17alumnes.mypillrecord.ui.calendar.ReminderListAdapter
-import com.example.afontgou17alumnes.mypillrecord.ui.statistics.AddMeasurementDialog
 import kotlinx.android.synthetic.main.today__fragment.*
 import java.time.LocalDate
-import java.time.LocalTime
-import kotlin.reflect.typeOf
 
 /**
  * A simple [Fragment] subclass.
  */
-class Today_Fragment : Fragment() {
+class TodayFragment : Fragment() {
 
     companion object {
         fun newInstance() =
-            Today_Fragment()
+            TodayFragment()
     }
 
     override fun onCreateView(
@@ -36,6 +34,8 @@ class Today_Fragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        //Ara es duplica pero quan es puguin guardar les dades s'eliminarà aquest metode
+        Controller.setRemindersData()
         createTodayList()
         add_button.setOnClickListener {
             val mDialog = AddUnplannedEntry()
@@ -50,7 +50,7 @@ class Today_Fragment : Fragment() {
     }
 
     fun createTodayList(){
-        val medicineList = arrayOf(
+        /*val medicineList = arrayOf(
             MedicineReminder("Ibuprofen",3,"tablet(s)", LocalDate.now(), LocalTime.of(17,0)),
             MeasurementReminder("Weight","kg",LocalDate.now(), LocalTime.of(17,0)),
             ActivityReminder("Running", 15, LocalDate.now(), LocalTime.of(18,0)),
@@ -67,9 +67,9 @@ class Today_Fragment : Fragment() {
             UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
             UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
             UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)")
-        )
+        )*/
         val medicineListView : ListView? = view?.findViewById(R.id.today_list)
-        val reminderAdapter = ReminderListAdapter(this,medicineList)
+        val reminderAdapter = ReminderListAdapter(this, Controller.getRemindersByDate(LocalDate.now()))
         if (medicineListView != null) {
             medicineListView.adapter = reminderAdapter
         }

@@ -8,9 +8,10 @@ import java.util.*
 class MeasurementReminder(
     val name: String,
     val unit: String,
-    val date: LocalDate,
-    val time: LocalTime,
-    val value: Float=0F
+    override var date: LocalDate,
+    override var time: LocalTime,
+    val value: Float=0F,
+    override var done:Boolean=false
 ): Reminder {
     override fun toString(): String {
         return "MeasurementReminder(name='$name', unit='$unit', value=$value, date=$date, time=$time)"
@@ -22,6 +23,10 @@ class MeasurementReminder(
 
     override fun getHour(): LocalTime {
         return time
+    }
+
+    override fun getReminderDate(): LocalDate {
+        return date
     }
 
     override fun getMilisFromNow(): Long {

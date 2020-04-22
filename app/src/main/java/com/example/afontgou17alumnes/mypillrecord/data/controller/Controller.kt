@@ -36,7 +36,35 @@ object Controller {
 
     }
 
+    fun setRemindersData(){
+        user.addReminder(MedicineReminder("Ibuprofen",3,"tablet(s)", LocalDate.now(), LocalTime.of(17,0)))
+        user.addReminder(MeasurementReminder("Weight","kg",LocalDate.now(), LocalTime.of(17,0)))
+        user.addReminder(ActivityReminder("Running", 15, LocalDate.now(), LocalTime.of(18,0)))
 
+    }
+
+    fun getRemindersData() : ArrayList<Reminder>{
+        return user.reminders
+    }
+
+    fun getRemindersByDate(date : LocalDate) : ArrayList<Reminder>{
+        val remindersToday = ArrayList<Reminder>()
+        user.reminders.sortWith(Comparator { p1, p2 ->
+            when {
+                p1.date > p2.date -> 1
+                p1.date < p2.date -> -1
+                p1.time > p2.time -> 1
+                p1.time < p2.time -> -1
+                else -> 0
+            }
+        })
+        //Es podria substituir per cerca binaria
+        for(i in user.reminders){
+            if(i.getReminderDate() == date) remindersToday.add(i)
+            else if (i.getReminderDate() > LocalDate.now()) break
+        }
+        return remindersToday
+    }
 
     fun setStatisticsData(){
         val data1 = arrayOf<StatisticEntry>(

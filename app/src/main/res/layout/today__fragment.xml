@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.today.Today_Fragment"
+    tools:context=".ui.today.TodayFragment"
     android:screenOrientation="portrait">
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:paddingBottom="20dp">
+        >
     <ListView
         android:id="@+id/today_list"
         android:layout_width="match_parent"
