@@ -1,17 +1,14 @@
 package com.example.afontgou17alumnes.mypillrecord
 
-
-
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.pills.Active_ingredients
@@ -20,7 +17,6 @@ import com.example.afontgou17alumnes.mypillrecord.ui.Pill.Pill_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.calendar.Calendar_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.settings.ajustes_activity
 import com.example.afontgou17alumnes.mypillrecord.ui.statistics.Statistics_fragment
-import com.example.afontgou17alumnes.mypillrecord.ui.team.Team_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.today.Today_Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -28,7 +24,6 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
-
 
 class MainActivity : AppCompatActivity() {
     lateinit var pDialog: ProgressDialog
@@ -100,7 +95,6 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(Today_Fragment())
         }
     }
-
 
     // API Implementation
     inner class AsyncTaskHandler: AsyncTask<String, String, String>() {
@@ -184,7 +178,7 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-    public fun go_To_Statistics(id:Int){
+    fun go_To_Statistics(id:Int){
 
         val bundle = Bundle()
         bundle.putInt("start",id)

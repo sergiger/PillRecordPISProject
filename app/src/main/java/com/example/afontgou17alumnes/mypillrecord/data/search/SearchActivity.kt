@@ -37,6 +37,9 @@ class SearchActivity : AppCompatActivity(),
                 this,
                 this
             )
+        val url = "https://api.fda.gov/drug/ndc.json?search=active_ingredients.name:%22ibuprofen%22+AND+brand_name:%22Advil%22&limit=100"
+        AsyncTaskHandler().execute(url)
+        //println("1000000000" + AsyncTaskHandler().getLista())
         loadData()
         doMySearch()
     }
@@ -106,7 +109,6 @@ class SearchActivity : AppCompatActivity(),
             val button: Button = itemView.pill_name
             var mlistener = listener
             init {
-                println(100000)
                 button.setOnClickListener(this)
             }
             override fun onClick(p: View?) {
