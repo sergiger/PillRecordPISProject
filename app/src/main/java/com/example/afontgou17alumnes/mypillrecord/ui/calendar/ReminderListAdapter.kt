@@ -1,6 +1,7 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.calendar
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -12,10 +13,11 @@ import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.Reminder
+import java.time.LocalTime
 
 class ReminderListAdapter(
     val activity: Fragment,
-    val reminderList: Array<Reminder>
+    val reminderList: ArrayList<Reminder>
 ) : BaseAdapter() {
     @SuppressLint("SetTextI18n", "ViewHolder")
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
@@ -23,7 +25,7 @@ class ReminderListAdapter(
         val nameTextView : TextView = view.findViewById(R.id.reminder_name)
         val infoTextView : TextView = view.findViewById(R.id.reminder_info)
         val timeTextView : TextView = view.findViewById(R.id.reminder_time)
-        val imageTextView : ImageView = view.findViewById(R.id.reminder_list_image)
+        val image : ImageView = view.findViewById(R.id.reminder_list_image)
 
         val i = reminderList[p0]
 
@@ -32,19 +34,29 @@ class ReminderListAdapter(
             nameTextView.text = i.name
             infoTextView.text = i.dose.toString() + " " + i.doseUnit
             timeTextView.text = i.time.toString()
-            imageTextView.setImageResource(R.drawable.pill)
+            image.setImageResource(R.drawable.pill)
         }else if (i is MeasurementReminder){
             nameTextView.text = i.name
             infoTextView.visibility = View.INVISIBLE
             timeTextView.text = i.time.toString()
-            imageTextView.setImageResource(R.drawable.pulse)
+            image.setImageResource(R.drawable.pulse)
         }else if (i is ActivityReminder){
             nameTextView.text = i.name
-            infoTextView.text = i.duration.toString()
+            infoTextView.text = i.duration.toString() + " min"
             timeTextView.text = i.time.toString()
-            imageTextView.setImageResource(R.drawable.olimpic)
+            image.setImageResource(R.drawable.olimpic)
         }
 
+        if(i.done){
+            infoTextView.setTextColor(Color.rgb(0, 128, 64))
+            nameTextView.setTextColor(Color.rgb(0, 128, 64))
+            timeTextView.setTextColor(Color.rgb(0, 128, 64))
+        }
+        else if(i.time < LocalTime.now()){
+            infoTextView.setTextColor(Color.RED)
+            nameTextView.setTextColor(Color.RED)
+            timeTextView.setTextColor(Color.RED)
+        }
 
         return view
     }

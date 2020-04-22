@@ -8,12 +8,12 @@ open class MedicineReminder(
     val name: String,
     val dose: Int,
     val doseUnit: String,
-    val date: LocalDate,
-    val time: LocalTime,
-    val taken:Boolean=false
+    override var date: LocalDate,
+    override var time: LocalTime,
+    override var done:Boolean=false
 ) : Reminder {
     override fun toString(): String {//Es només per provar que les coses funcionen
-        return "MedicineReminder(name='$name', dose=$dose, doseUnit='$doseUnit', date=$date, time=$time, taken=$taken)"
+        return "MedicineReminder(name='$name', dose=$dose, doseUnit='$doseUnit', date=$date, time=$time, taken=$done)"
     }
 
     override fun getReminderName(): String {
@@ -22,6 +22,10 @@ open class MedicineReminder(
 
     override fun getHour(): LocalTime {
         return time
+    }
+
+    override fun getReminderDate(): LocalDate {
+        return date
     }
 
 

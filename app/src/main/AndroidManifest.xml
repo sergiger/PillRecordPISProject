@@ -28,7 +28,7 @@
             android:screenOrientation="locked" />
         <activity
             android:name=".ui.today.AddUnplannedMedicine"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="locked" />
         <activity
             android:name=".ui.team.agenda_team"
             android:screenOrientation="locked" />
@@ -47,7 +47,7 @@
             android:screenOrientation="locked" />
         <activity
             android:name=".ui.Pill.PillMedication"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="locked" />
         <activity
             android:name=".ui.Pill.Pillplanificar"
             android:screenOrientation="locked" />
@@ -91,7 +91,7 @@
             android:name=".ui.team.Team_fragment"
             android:screenOrientation="locked" />
         <activity
-            android:name=".ui.today.Today_Fragment"
+            android:name=".ui.today.TodayFragment"
             android:screenOrientation="locked" />
         <activity
             android:name=".ui.login.LoginActivity"

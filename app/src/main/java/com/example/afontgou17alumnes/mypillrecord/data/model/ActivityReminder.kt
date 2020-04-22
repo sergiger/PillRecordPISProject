@@ -6,9 +6,9 @@ import java.time.LocalTime
 class ActivityReminder(
     val name: String,
     val duration: Int,
-    val date: LocalDate,
-    val time: LocalTime,
-    val done: Boolean=false
+    override var date: LocalDate,
+    override var time: LocalTime,
+    override var done: Boolean=false
 ) : Reminder {
     override fun toString(): String {
         return "ActivityReminder(name='$name', duration=$duration, date=$date, time=$time, done=$done)"
@@ -20,6 +20,10 @@ class ActivityReminder(
 
     override fun getHour(): LocalTime {
         return time
+    }
+
+    override fun getReminderDate(): LocalDate {
+        return date
     }
 
     override fun equals(other: Any?): Boolean {
