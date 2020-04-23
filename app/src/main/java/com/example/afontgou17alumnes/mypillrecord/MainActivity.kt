@@ -21,7 +21,7 @@ import com.example.afontgou17alumnes.mypillrecord.ui.Pill.Pill_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.calendar.Calendar_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.settings.ajustes_activity
 import com.example.afontgou17alumnes.mypillrecord.ui.statistics.Statistics_fragment
-import com.example.afontgou17alumnes.mypillrecord.ui.today.Today_Fragment
+import com.example.afontgou17alumnes.mypillrecord.ui.today.TodayFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
        when(item.itemId){
            R.id.action_Today->{
                if(currentFragment!=0){
-                   replaceFragment(Today_Fragment())
+                   replaceFragment(TodayFragment())
                    Toast.makeText(this,"Today",Toast.LENGTH_SHORT).show()
                    toolbar.title = "TODAY"
                    currentFragment=0
@@ -120,14 +120,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
         else{
-            replaceFragment(Today_Fragment())
+            replaceFragment(TodayFragment())
         }
+        Controller.setRemindersData()
         generarNextNotification()
 
     }
     fun generarNextNotification(){
         if (Controller.user.areThereReminders()){
-            val mNotificationTime = Calendar.getInstance().timeInMillis + Controller.user.getNextReminder().getMilisFromNow() //Set after 5 seconds
+            val mNotificationTime = Controller.user.getNextReminder().getMilisFromNow() //Set after 5 seconds
             NotificationUtils().setNotification(mNotificationTime, this@MainActivity)
         }
         else{

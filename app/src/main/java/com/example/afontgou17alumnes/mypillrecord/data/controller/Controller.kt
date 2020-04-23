@@ -37,6 +37,7 @@ object Controller {
     }
 
     fun setRemindersData(){
+        user.addReminder(MeasurementReminder("Weight","kg", LocalDate.now(), LocalTime.of(LocalTime.now().hour,LocalTime.now().minute+1)))
         user.addReminder(MedicineReminder("Ibuprofen",3,"tablet(s)", LocalDate.now(), LocalTime.of(17,0)))
         user.addReminder(MeasurementReminder("Weight","kg",LocalDate.now(), LocalTime.of(17,0)))
         user.addReminder(ActivityReminder("Running", 15, LocalDate.now(), LocalTime.of(18,0)))

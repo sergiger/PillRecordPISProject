@@ -35,7 +35,7 @@ class TodayFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         //Ara es duplica pero quan es puguin guardar les dades s'eliminarà aquest metode
-        Controller.setRemindersData()
+        //Controller.setRemindersData()
         createTodayList()
         add_button.setOnClickListener {
             val mDialog = AddUnplannedEntry()

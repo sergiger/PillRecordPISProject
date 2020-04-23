@@ -14,4 +14,5 @@ interface Reminder : Serializable{
     fun getMilisFromNow(): Long //Retorna els milisegons que cal posar per a la notificació
     fun isDone():Boolean
     fun getReminderDate(): LocalDate
+    //fun toJSON(): String
 } /*:Parcelable*/

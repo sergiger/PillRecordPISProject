@@ -20,7 +20,13 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.Reminder
 import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -133,34 +139,60 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("yearBirth",yearBirth.toString())
         editor.putString("weight",weight.toString())
         editor.putString("height",height.toString())
+        editor.putString("ActivityReminder","")
+        editor.putString("MeasurementReminder","")
+        editor.putString("MedicationReminder","")
         editor.apply()
     }
     fun sharedDownloadLoad(){
         //Log.d("hola",getSharedPreferences("Mydata", Context.MODE_PRIVATE).contains("email").toString())
         if(getSharedPreferences("Mydata", Context.MODE_PRIVATE).contains("email")){
             //Log.d("hola",getSharedPreferences("Mydata", Context.MODE_PRIVATE).contains("email").toString())
-            Toast.makeText(this,"User found!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Preparing Data!", Toast.LENGTH_LONG).show()
             //Log.d("hola",getSharedPreferences("Mydata", Context.MODE_PRIVATE).contains("email").toString())
-            Controller.user.email=getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("email","")
-            Log.d("email",getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("email","1").toString())
 
-            Controller.user.pasword=  getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("pasword","")
-            Log.d("pasword",getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("pasword","2").toString())
+            var prefs = getSharedPreferences("Mydata", Context.MODE_PRIVATE)
+            Controller.user.email=prefs.getString("email","")
 
-            Controller.user.username = getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("username","")
-            Log.d("username",getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("username","3").toString())
+            Controller.user.pasword=  prefs.getString("pasword","")
 
-            Controller.user.gender = getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("gender","")
-            Log.d("gender",getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("gender","4").toString())
+            Controller.user.username = prefs.getString("username","")
 
-            Controller.user.birthYear= getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("yearBirth","").toInt()
-            Log.d("birth",getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("yearBirth","5").toString())
+            Controller.user.gender = prefs.getString("gender","")
 
-            Controller.user.weight= getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("weight","").toFloat()
-            Log.d("weight",getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("weight","6").toString())
+            Controller.user.birthYear= prefs.getString("yearBirth","").toInt()
 
-            Controller.user.height=  getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("height","").toFloat()
-            Log.d("weight",getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("height","7").toString())
+            Controller.user.weight= prefs.getString("weight","").toFloat()
+
+            Controller.user.height= prefs.getString("height","").toFloat()
+/*
+            //He separat els reminders en 3 perque no sabia com passar de JSON a array de reminders amb diferents constructors
+            val gson = Gson()
+            var jsonList=prefs.getString("ActivityReminder","")
+
+            var arrayTutorialType = object : TypeToken<Array<ActivityReminder>>() {}.type
+            var reminder_list: Array<Reminder> = gson.fromJson(jsonList, arrayTutorialType)
+            for(reminder in reminder_list){
+                Controller.user.reminders.add(reminder)
+            }
+            jsonList=prefs.getString("MeasurementReminder","")
+
+            arrayTutorialType = object : TypeToken<Array<MeasurementReminder>>() {}.type
+            reminder_list = gson.fromJson(jsonList, arrayTutorialType)
+            for(reminder in reminder_list){
+                Controller.user.reminders.add(reminder)
+            }
+            jsonList=prefs.getString("MedicineReminder","")
+
+            arrayTutorialType = object : TypeToken<Array<MedicineReminder>>() {}.type
+            reminder_list= gson.fromJson(jsonList, arrayTutorialType)
+            for(reminder in reminder_list){
+                Controller.user.reminders.add(reminder)
+            }
+*/
+            //Controller.user.reminders=getSharedPreferences("Mydata", Context.MODE_PRIVATE)
+
+            //Log.d("weight",getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("height","7").toString())
             //val intent =Intent(this,MainActivity_sh)
             //tvCognom.setText(last_name)
             //tvNom.setText(name)
