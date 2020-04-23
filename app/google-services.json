@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "146454876169",
+    "firebase_url": "https://mypillrecord01.firebaseio.com",
+    "project_id": "mypillrecord01",
+    "storage_bucket": "mypillrecord01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146454876169:android:842874762860856be2e8d8",
+        "android_client_info": {
+          "package_name": "com.example.afontgou17alumnes.mypillrecord"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146454876169-ckve8ajkvb9me18rkp49ph153cv5knvb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1w8yngy42mYcyVqeV08k724-Z80sg4gY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "146454876169-ckve8ajkvb9me18rkp49ph153cv5knvb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
