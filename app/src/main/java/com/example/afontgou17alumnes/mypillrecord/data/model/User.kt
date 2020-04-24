@@ -93,7 +93,7 @@ open class User{
         var acumulador=ArrayList<FakeReminder>()
         for(reminder in this.reminders){
             if(reminder is ActivityReminder) {
-                acumulador.add(FakeActivityReminder(reminder.name,reminder.duration,reminder.date.toString(),reminder.time.toString(),reminder.done))
+                acumulador.add(reminder.createFakeReminder())
             }
         }
         val retorn=arrayOfNulls<FakeReminder>(acumulador.size)
@@ -104,7 +104,7 @@ open class User{
         var acumulador=ArrayList<FakeReminder>()
         for(reminder in this.reminders){
             if(reminder is MeasurementReminder) {
-                acumulador.add(FakeMeasurementReminder(reminder.name,reminder.unit,reminder.date.toString(),reminder.time.toString(),reminder.value,reminder.done))
+                acumulador.add(reminder.createFakeReminder())
             }
         }
         val retorn=arrayOfNulls<FakeReminder>(acumulador.size)
@@ -115,7 +115,7 @@ open class User{
         var acumulador=ArrayList<FakeReminder>()
         for(reminder in this.reminders){
             if(reminder is MedicineReminder) {
-                acumulador.add(FakeMedicationReminder(reminder.name,reminder.dose,reminder.doseUnit,reminder.date.toString(),reminder.time.toString()))
+                acumulador.add(reminder.createFakeReminder())
             }
         }
         val retorn=arrayOfNulls<FakeReminder>(acumulador.size)

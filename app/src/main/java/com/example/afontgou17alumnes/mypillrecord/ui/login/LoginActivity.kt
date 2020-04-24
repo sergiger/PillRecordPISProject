@@ -148,7 +148,6 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("height",height.toString())
         editor.putString("ActivityReminder",Gson().toJson(Controller.user.getFakeActivityReminders()))
         editor.putString("MeasurementReminder",Gson().toJson(Controller.user.getFakeMeasurementReminders()))
-        Log.d("ssssssssss",Gson().toJson(Controller.user.getFakeMeasurementReminders()))
         editor.putString("MedicationReminder",Gson().toJson(Controller.user.getFakeMedicationReminders()))
         editor.apply()
     }
@@ -178,7 +177,7 @@ class LoginActivity : AppCompatActivity() {
             val gson = Gson()
             var tipusArray: Type
             var jsonList=prefs.getString("ActivityReminder","")
-            Log.d("ActivityReminder",jsonList)
+            //Log.d("ActivityReminder",jsonList)
             if(jsonList!=""){
                 var tipusArray = object : TypeToken<Array<FakeActivityReminder>>() {}.type
                 var reminder_list1: Array<FakeReminder> = gson.fromJson(jsonList, tipusArray)
@@ -188,7 +187,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             jsonList=prefs.getString("MeasurementReminder","")
-            Log.d("MeasurementReminder",jsonList)
+            //Log.d("MeasurementReminder",jsonList)
             if(jsonList!=""){
                 tipusArray = object : TypeToken<Array<FakeMeasurementReminder>>() {}.type
                 var reminder_list2 : Array<FakeReminder> = gson.fromJson(jsonList, tipusArray)
@@ -198,7 +197,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             jsonList=prefs.getString("MedicineReminder","")
-            Log.d("MedicationReminder",jsonList)
+            //Log.d("MedicationReminder",jsonList)
             if(jsonList!=""){
                 tipusArray = object : TypeToken<Array<FakeMedicationReminder>>() {}.type
                 var reminder_list3:Array<FakeReminder> = gson.fromJson(jsonList, tipusArray)
@@ -206,20 +205,12 @@ class LoginActivity : AppCompatActivity() {
                     Controller.user.reminders.add(reminder.createRealReminder())
                 }
             }
-
-            //Controller.user.reminders=getSharedPreferences("Mydata", Context.MODE_PRIVATE)
-
-            //Log.d("weight",getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("height","7").toString())
-            //val intent =Intent(this,MainActivity_sh)
-            //tvCognom.setText(last_name)
-            //tvNom.setText(name)
-            //tvEmail.setText(correu)
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
         }
     }
     fun sharedUpLoad_and_go_home(){
-        Log.d("hola","perque o funciona aixó?")
+        //Log.d("hola","perque o funciona aixó?")
         sharedUpLoad(Controller.user.email,Controller.user.pasword,Controller.user.username,Controller.user.gender,Controller.user.birthYear,Controller.user.weight,Controller.user.height)
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
@@ -227,8 +218,6 @@ class LoginActivity : AppCompatActivity() {
     fun sharedUpLoad_and_go_back(){
         sharedUpLoad(Controller.user.email,Controller.user.pasword,Controller.user.username,Controller.user.gender,Controller.user.birthYear,Controller.user.weight,Controller.user.height)
         onBackPressed()
-        //val intent = Intent(this@LoginActivity, myAccount::class.java)
-        //startActivity(intent)
     }
     fun closeSesion(){
         val editor = getSharedPreferences("Mydata", Context.MODE_PRIVATE).edit()
@@ -243,22 +232,7 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    /*fun preferencesSaved(context: Context){
-        Controller.initUserSaved()
-        val intent = Intent(context , MainActivity::class.java)
-        startActivity(intent)
-    }
 
-    fun configView(context: Context){
-        if(isSavedName()) preferencesSaved(context)
-    }
-
-    fun isSavedName():Boolean{
-        Log.d("Hola",SharedApp.prefs.username)
-        //val username=getSharedPreferences("Pasword",Conte)
-        return SharedApp.prefs.username != ""
-    }//Aqui retorno true si hi ha algo guardat a shared preferences i false si no hi ha res
-*/
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName

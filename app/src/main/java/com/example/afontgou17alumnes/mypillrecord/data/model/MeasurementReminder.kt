@@ -1,5 +1,7 @@
 package com.example.afontgou17alumnes.mypillrecord.data.model
 
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMeasurementReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeReminder
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
@@ -27,6 +29,10 @@ class MeasurementReminder(
 
     override fun getReminderDate(): LocalDate {
         return date
+    }
+
+    override fun createFakeReminder(): FakeReminder {
+        return FakeMeasurementReminder(name,unit,date.toString(),time.toString(),value,done)
     }
 
     override fun getMilisFromNow(): Long {
