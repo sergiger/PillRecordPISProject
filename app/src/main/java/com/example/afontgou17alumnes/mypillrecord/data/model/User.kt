@@ -24,6 +24,7 @@ open class User{
     var therapies= ArrayList<Therapy>()
     var reminders=ArrayList<Reminder>()
     var agenda=Agenda()
+    val statistics = Statistics()
 
     constructor(email:String, username:String, pasword:String, gender:String,
                 birthYear:Int, weight:Float, height:Float){

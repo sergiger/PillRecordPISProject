@@ -18,7 +18,6 @@ import kotlin.Comparator
 
 object Controller {
     val user = User("user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
-    val statistics = Statistics()
     var ja_iniciat=false
 
     fun initUserSaved(){
@@ -120,24 +119,24 @@ object Controller {
             StatisticEntry(86F, LocalDate.of(2020, 4, 2)),
             StatisticEntry(83F, LocalDate.of(2020, 4, 3))
         )
-        statistics.weightData.addAll(data1)
-        statistics.heartRateData.addAll(data2)
-        statistics.arterialPressureData.addAll(data1)
-        statistics.glucoseAfterData.addAll(data2)
-        statistics.glucoseBeforeData.addAll(data1)
-        statistics.temperatureData.addAll(data2)
+        user.statistics.weightData.addAll(data1)
+        user.statistics.heartRateData.addAll(data2)
+        user.statistics.arterialPressureData.addAll(data1)
+        user.statistics.glucoseAfterData.addAll(data2)
+        user.statistics.glucoseBeforeData.addAll(data1)
+        user.statistics.temperatureData.addAll(data2)
     }
 
     fun getGraphLineData(select: Int) : LineData {
         //Agafem les dades que ens interessen segons quin grafic muntarem
         val dataSets: MutableList<ILineDataSet> = ArrayList()
         when(select){
-            0-> dataSets.add(getLineDataSet(statistics.weightData, "Weight", Color.YELLOW))
-            1 -> dataSets.add(getLineDataSet(statistics.heartRateData, "Heart Rate", Color.RED))
-            2 -> dataSets.add(getLineDataSet(statistics.arterialPressureData, "Arterial Pressure", Color.rgb(255,165,0)))
-            3 ->{dataSets.add(getLineDataSet(statistics.glucoseBeforeData, "Glucose (before eating)", Color.MAGENTA))
-                dataSets.add(getLineDataSet(statistics.glucoseAfterData, "Glucose (after eating)", Color.BLUE))}
-            4 -> dataSets.add(getLineDataSet(statistics.temperatureData, "Temperature", Color.GREEN))
+            0-> dataSets.add(getLineDataSet(user.statistics.weightData, "Weight", Color.YELLOW))
+            1 -> dataSets.add(getLineDataSet(user.statistics.heartRateData, "Heart Rate", Color.RED))
+            2 -> dataSets.add(getLineDataSet(user.statistics.arterialPressureData, "Arterial Pressure", Color.rgb(255,165,0)))
+            3 ->{dataSets.add(getLineDataSet(user.statistics.glucoseBeforeData, "Glucose (before eating)", Color.MAGENTA))
+                dataSets.add(getLineDataSet(user.statistics.glucoseAfterData, "Glucose (after eating)", Color.BLUE))}
+            4 -> dataSets.add(getLineDataSet(user.statistics.temperatureData, "Temperature", Color.GREEN))
         }
         return LineData(dataSets)
     }
@@ -236,7 +235,7 @@ object Controller {
     fun createAccount_in_Firebase(){}//Cal fer, ara està buida
 
     fun deleteMeasure(type: String, value: Float, date: LocalDate) {
-        statistics.deleteMeasure(type, value, date)
+        user.statistics.deleteMeasure(type, value, date)
     }
 
 
