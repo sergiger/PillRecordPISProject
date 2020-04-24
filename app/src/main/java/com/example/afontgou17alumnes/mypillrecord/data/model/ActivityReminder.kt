@@ -5,11 +5,13 @@ import java.time.LocalTime
 import java.time.temporal.ChronoUnit
 import java.util.*
 
+
+
 class ActivityReminder(
     val name: String,
     val duration: Int,
-    override var date: LocalDate,
-    override var time: LocalTime,
+    override var date: LocalDate= LocalDate.now(),
+    override var time: LocalTime= LocalTime.of(LocalTime.now().hour,LocalTime.now().minute+5),
     override var done: Boolean=false
 ) : Reminder {
     override fun toString(): String {
@@ -39,10 +41,7 @@ class ActivityReminder(
     }
 
     override fun isDone(): Boolean {
-        var retorn =false
-        if(done)
-            retorn=true
-        return retorn
+        return done
     }
 
     override fun equals(other: Any?): Boolean {

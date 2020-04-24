@@ -41,10 +41,7 @@ open class MedicineReminder(
     }
 
     override fun isDone(): Boolean {
-        var retorn=false
-        if(done)
-            retorn=true
-        return retorn
+        return done
     }
 
 

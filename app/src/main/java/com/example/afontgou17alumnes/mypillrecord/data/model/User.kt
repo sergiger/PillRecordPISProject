@@ -4,6 +4,11 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*
 import kotlin.collections.ArrayList
+import android.util.Log
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeActivityReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMeasurementReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMedicationReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeReminder
 
 open class User{
     var email:String
@@ -70,16 +75,53 @@ open class User{
     fun areThereReminders():Boolean{
         var retorn=false
         for(reminder in reminders){
-            if(reminder.getMilisFromNow()>Calendar.getInstance().timeInMillis)
-                if(!reminder.isDone()){
-                    retorn=true
+            Log.d("hh",reminder.time.toString())
+            if(reminder.getMilisFromNow()>Calendar.getInstance().timeInMillis) {
+                Log.d("hh2",reminder.time.toString())
+                if (!reminder.isDone()) {
+                    Log.d("hh3",reminder.time.toString())
+                    retorn = true
                     break
                 }
+            }
         }
         return retorn
     }//Aquesta funció retorna true si hi ha algun reminder en el futur que no estigui fet
         //false si no n'hi ha cap per recordar
 
+    fun getFakeActivityReminders(): Array<FakeReminder?> {
+        var acumulador=ArrayList<FakeReminder>()
+        for(reminder in this.reminders){
+            if(reminder is ActivityReminder) {
+                acumulador.add(FakeActivityReminder(reminder.name,reminder.duration,reminder.date.toString(),reminder.time.toString(),reminder.done))
+            }
+        }
+        val retorn=arrayOfNulls<FakeReminder>(acumulador.size)
+        acumulador.toArray(retorn)
+        return retorn
+    }
+    fun getFakeMeasurementReminders(): Array<FakeReminder?> {
+        var acumulador=ArrayList<FakeReminder>()
+        for(reminder in this.reminders){
+            if(reminder is MeasurementReminder) {
+                acumulador.add(FakeMeasurementReminder(reminder.name,reminder.unit,reminder.date.toString(),reminder.time.toString(),reminder.value,reminder.done))
+            }
+        }
+        val retorn=arrayOfNulls<FakeReminder>(acumulador.size)
+        acumulador.toArray(retorn)
+        return retorn
+    }
+    fun getFakeMedicationReminders(): Array<FakeReminder?> {
+        var acumulador=ArrayList<FakeReminder>()
+        for(reminder in this.reminders){
+            if(reminder is MedicineReminder) {
+                acumulador.add(FakeMedicationReminder(reminder.name,reminder.dose,reminder.doseUnit,reminder.date.toString(),reminder.time.toString()))
+            }
+        }
+        val retorn=arrayOfNulls<FakeReminder>(acumulador.size)
+        acumulador.toArray(retorn)
+        return retorn
+    }
 
 
 }

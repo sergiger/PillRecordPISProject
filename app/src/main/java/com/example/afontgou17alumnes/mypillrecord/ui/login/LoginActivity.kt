@@ -24,10 +24,15 @@ import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.Reminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeActivityReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMeasurementReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMedicationReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeReminder
 import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_login.*
+import java.lang.reflect.Type
 
 
 class LoginActivity : AppCompatActivity() {
@@ -45,6 +50,8 @@ class LoginActivity : AppCompatActivity() {
             closeSesion()
         else if(actions!=null && actions=="Save_share_Create_Account_Go_Home")
             createAccount()
+        else if(actions!=null && actions=="Save_and_go_home")
+            sharedUpLoad_and_go_home()
         else
             sharedDownloadLoad()
 
@@ -139,9 +146,10 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("yearBirth",yearBirth.toString())
         editor.putString("weight",weight.toString())
         editor.putString("height",height.toString())
-        editor.putString("ActivityReminder","")
-        editor.putString("MeasurementReminder","")
-        editor.putString("MedicationReminder","")
+        editor.putString("ActivityReminder",Gson().toJson(Controller.user.getFakeActivityReminders()))
+        editor.putString("MeasurementReminder",Gson().toJson(Controller.user.getFakeMeasurementReminders()))
+        Log.d("ssssssssss",Gson().toJson(Controller.user.getFakeMeasurementReminders()))
+        editor.putString("MedicationReminder",Gson().toJson(Controller.user.getFakeMedicationReminders()))
         editor.apply()
     }
     fun sharedDownloadLoad(){
@@ -165,31 +173,40 @@ class LoginActivity : AppCompatActivity() {
             Controller.user.weight= prefs.getString("weight","").toFloat()
 
             Controller.user.height= prefs.getString("height","").toFloat()
-/*
+
             //He separat els reminders en 3 perque no sabia com passar de JSON a array de reminders amb diferents constructors
             val gson = Gson()
+            var tipusArray: Type
             var jsonList=prefs.getString("ActivityReminder","")
-
-            var arrayTutorialType = object : TypeToken<Array<ActivityReminder>>() {}.type
-            var reminder_list: Array<Reminder> = gson.fromJson(jsonList, arrayTutorialType)
-            for(reminder in reminder_list){
-                Controller.user.reminders.add(reminder)
+            Log.d("ActivityReminder",jsonList)
+            if(jsonList!=""){
+                var tipusArray = object : TypeToken<Array<FakeActivityReminder>>() {}.type
+                var reminder_list1: Array<FakeReminder> = gson.fromJson(jsonList, tipusArray)
+                for(reminder in reminder_list1){
+                    Controller.user.reminders.add(reminder.createRealReminder())
+                }
             }
+
             jsonList=prefs.getString("MeasurementReminder","")
-
-            arrayTutorialType = object : TypeToken<Array<MeasurementReminder>>() {}.type
-            reminder_list = gson.fromJson(jsonList, arrayTutorialType)
-            for(reminder in reminder_list){
-                Controller.user.reminders.add(reminder)
+            Log.d("MeasurementReminder",jsonList)
+            if(jsonList!=""){
+                tipusArray = object : TypeToken<Array<FakeMeasurementReminder>>() {}.type
+                var reminder_list2 : Array<FakeReminder> = gson.fromJson(jsonList, tipusArray)
+                for(reminder in reminder_list2){
+                    Controller.user.reminders.add(reminder.createRealReminder())
+                }
             }
+
             jsonList=prefs.getString("MedicineReminder","")
-
-            arrayTutorialType = object : TypeToken<Array<MedicineReminder>>() {}.type
-            reminder_list= gson.fromJson(jsonList, arrayTutorialType)
-            for(reminder in reminder_list){
-                Controller.user.reminders.add(reminder)
+            Log.d("MedicationReminder",jsonList)
+            if(jsonList!=""){
+                tipusArray = object : TypeToken<Array<FakeMedicationReminder>>() {}.type
+                var reminder_list3:Array<FakeReminder> = gson.fromJson(jsonList, tipusArray)
+                for(reminder in reminder_list3){
+                    Controller.user.reminders.add(reminder.createRealReminder())
+                }
             }
-*/
+
             //Controller.user.reminders=getSharedPreferences("Mydata", Context.MODE_PRIVATE)
 
             //Log.d("weight",getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("height","7").toString())
@@ -200,6 +217,12 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
         }
+    }
+    fun sharedUpLoad_and_go_home(){
+        Log.d("hola","perque o funciona aixó?")
+        sharedUpLoad(Controller.user.email,Controller.user.pasword,Controller.user.username,Controller.user.gender,Controller.user.birthYear,Controller.user.weight,Controller.user.height)
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
     }
     fun sharedUpLoad_and_go_back(){
         sharedUpLoad(Controller.user.email,Controller.user.pasword,Controller.user.username,Controller.user.gender,Controller.user.birthYear,Controller.user.weight,Controller.user.height)

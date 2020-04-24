@@ -45,10 +45,7 @@ class MeasurementReminder(
     }
 
     override fun isDone(): Boolean {
-        var result=true
-        if(value==0F)
-            result=false
-        return result
+        return done
     }
 
     override fun equals(other: Any?): Boolean {

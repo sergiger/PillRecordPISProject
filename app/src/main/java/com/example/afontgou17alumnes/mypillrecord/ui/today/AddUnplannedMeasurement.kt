@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_add_unplanned_measurement.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
@@ -41,7 +42,6 @@ class AddUnplannedMeasurement : AppCompatActivity() {
         }
         tick_unplanned_measurement.setOnClickListener{
             save()
-            go_home()
         }
         info_button.setOnClickListener{
             select_date()
@@ -157,6 +157,10 @@ class AddUnplannedMeasurement : AppCompatActivity() {
             LocalDate.of(this.year, this.month, this.day), LocalTime.of(this.hour, this.minute),value
         )
         Controller.addReminder(newReminder)
+        //Actualitza el shared preferences tmb
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.putExtra("type_of_action","Save_and_go_home")
+        startActivity(intent)
     }//cal completar
 
 }
