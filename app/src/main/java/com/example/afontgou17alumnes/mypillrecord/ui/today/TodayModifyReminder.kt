@@ -3,12 +3,8 @@ package com.example.afontgou17alumnes.mypillrecord.ui.today
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.Reminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.*
 import kotlinx.android.synthetic.main.activity_today_modify_reminder.*
-import java.time.LocalTime
 
 class TodayModifyReminder: AppCompatActivity() {
 
@@ -17,7 +13,7 @@ class TodayModifyReminder: AppCompatActivity() {
         setContentView(R.layout.activity_today_modify_reminder)
 
         //Reminder
-        val reminder = intent.extras.get("Reminder") as Reminder
+        var reminder = intent.extras.get("Reminder") as Reminder
         if(reminder is MedicineReminder){
             info_label.text = "Dose"
             info_button.text = reminder.dose.toString() + " " + reminder.doseUnit
@@ -35,6 +31,14 @@ class TodayModifyReminder: AppCompatActivity() {
         hour_button_today_modify_reminder.text = reminder.getHour().toString()
 
         //Set Listeners
+        today_modify_reminder_confirm.setOnClickListener {
+            reminder.status = ReminderStatus.DONE
+            onBackPressed()
+        }
+        today_modify_reminder_omit.setOnClickListener{
+            reminder.status = ReminderStatus.OMITTED
+            onBackPressed()
+        }
         back_arrow.setOnClickListener {
             onBackPressed()
         }

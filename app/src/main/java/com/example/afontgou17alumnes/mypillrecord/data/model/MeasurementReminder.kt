@@ -13,7 +13,7 @@ class MeasurementReminder(
     override var date: LocalDate,
     override var time: LocalTime,
     val value: Float=0F,
-    override var done:Boolean=false
+    override var status:ReminderStatus=ReminderStatus.TO_DO
 ): Reminder {
     override fun toString(): String {
         return "MeasurementReminder(name='$name', unit='$unit', value=$value, date=$date, time=$time)"
@@ -32,7 +32,7 @@ class MeasurementReminder(
     }
 
     override fun createFakeReminder(): FakeReminder {
-        return FakeMeasurementReminder(name,unit,date.toString(),time.toString(),value,done)
+        return FakeMeasurementReminder(name,unit,date.toString(),time.toString(),value,status)
     }
 
     override fun getMilisFromNow(): Long {
@@ -50,8 +50,8 @@ class MeasurementReminder(
         return result
     }
 
-    override fun isDone(): Boolean {
-        return done
+    override fun getReminderStatus(): ReminderStatus {
+        return status
     }
 
     override fun equals(other: Any?): Boolean {
