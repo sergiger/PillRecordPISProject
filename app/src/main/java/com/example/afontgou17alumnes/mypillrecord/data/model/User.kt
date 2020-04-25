@@ -5,9 +5,6 @@ import java.time.LocalTime
 import java.util.*
 import kotlin.collections.ArrayList
 import android.util.Log
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeActivityReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMeasurementReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMedicationReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeReminder
 
 open class User{
@@ -66,7 +63,7 @@ open class User{
         var retorn:Reminder= MeasurementReminder("Weight","kg", LocalDate.now(), LocalTime.now())
         for(reminder in reminders){
             if(reminder.getMilisFromNow()>Calendar.getInstance().timeInMillis)
-                if(!reminder.isDone()){
+                if(reminder.getReminderStatus() == ReminderStatus.TO_DO){
                     retorn=reminder
                     break
                 }
@@ -79,7 +76,7 @@ open class User{
             Log.d("hh",reminder.time.toString())
             if(reminder.getMilisFromNow()>Calendar.getInstance().timeInMillis) {
                 Log.d("hh2",reminder.time.toString())
-                if (!reminder.isDone()) {
+                if (reminder.getReminderStatus() == ReminderStatus.TO_DO) {
                     Log.d("hh3",reminder.time.toString())
                     retorn = true
                     break

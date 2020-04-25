@@ -13,6 +13,7 @@ import com.example.afontgou17alumnes.mypillrecord.data.model.*
 import com.example.afontgou17alumnes.mypillrecord.ui.calendar.ReminderListAdapter
 import kotlinx.android.synthetic.main.today__fragment.*
 import java.time.LocalDate
+import java.time.LocalTime
 
 /**
  * A simple [Fragment] subclass.
@@ -35,14 +36,14 @@ class TodayFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         //Ara es duplica pero quan es puguin guardar les dades s'eliminarà aquest metode
-        //Controller.setRemindersData()
+        Controller.setRemindersData()
         createTodayList()
         add_button.setOnClickListener {
             val mDialog = AddUnplannedEntry()
             mDialog.show(childFragmentManager, "Add unplanned entry")
         }
         today_list.setOnItemClickListener { adapterView, view, i, l ->
-            val reminder : Reminder = adapterView.adapter.getItem(i) as Reminder
+            var reminder : Reminder = adapterView.adapter.getItem(i) as Reminder
             val intent = Intent(context, TodayModifyReminder::class.java)
             intent.putExtra("Reminder", reminder)
             startActivity(intent)
@@ -69,7 +70,7 @@ class TodayFragment : Fragment() {
             UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)")
         )*/
         val medicineListView : ListView? = view?.findViewById(R.id.today_list)
-        val reminderAdapter = ReminderListAdapter(this, Controller.getRemindersByDate(LocalDate.now()))
+        val reminderAdapter = ReminderListAdapter(this, Controller.getRemindersByDateAndStatus(LocalDate.now(), ReminderStatus.TO_DO))
         if (medicineListView != null) {
             medicineListView.adapter = reminderAdapter
         }

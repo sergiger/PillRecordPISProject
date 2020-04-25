@@ -104,29 +104,29 @@
         >
 
         <Button
+            android:id="@+id/today_modify_reminder_omit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Omit"
-            android:textAllCaps="false"
             android:layout_weight="1"
             android:background="@color/gris"
             android:drawableTop="@drawable/ic_highlight_off_black_24dp"
-            android:paddingBottom="36dp"
             android:paddingTop="36dp"
-            />
+            android:paddingBottom="36dp"
+            android:text="Omit"
+            android:textAllCaps="false" />
 
         <Button
+            android:id="@+id/today_modify_reminder_confirm"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Confirm"
-            android:textAllCaps="false"
-            android:textColor="#ffffff"
             android:layout_weight="1"
             android:background="#4CAF50"
             android:drawableTop="@drawable/ic_check_white_24dp"
-            android:paddingBottom="36dp"
             android:paddingTop="36dp"
-            />
+            android:paddingBottom="36dp"
+            android:text="Confirm"
+            android:textAllCaps="false"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

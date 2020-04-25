@@ -17,7 +17,7 @@ import java.time.LocalTime
 
 class ReminderListAdapter(
     val activity: Fragment,
-    val reminderList: ArrayList<Reminder>
+    var reminderList: ArrayList<Reminder>
 ) : BaseAdapter() {
     @SuppressLint("SetTextI18n", "ViewHolder")
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
@@ -27,7 +27,7 @@ class ReminderListAdapter(
         val timeTextView : TextView = view.findViewById(R.id.reminder_time)
         val image : ImageView = view.findViewById(R.id.reminder_list_image)
 
-        val i = reminderList[p0]
+        var i = reminderList[p0]
 
         //De moment només està fet amb medicine a falta de configurar el model darrera
         if (i is MedicineReminder){
@@ -47,12 +47,7 @@ class ReminderListAdapter(
             image.setImageResource(R.drawable.olimpic)
         }
 
-        if(i.done){
-            infoTextView.setTextColor(Color.rgb(0, 128, 64))
-            nameTextView.setTextColor(Color.rgb(0, 128, 64))
-            timeTextView.setTextColor(Color.rgb(0, 128, 64))
-        }
-        else if(i.time < LocalTime.now()){
+        if(i.time < LocalTime.now()){
             infoTextView.setTextColor(Color.RED)
             nameTextView.setTextColor(Color.RED)
             timeTextView.setTextColor(Color.RED)

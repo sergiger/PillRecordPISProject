@@ -7,17 +7,17 @@ import java.time.LocalTime
 import java.time.temporal.ChronoUnit
 import java.util.*
 
-
-
 class ActivityReminder(
     val name: String,
     val duration: Int,
     override var date: LocalDate= LocalDate.now(),
     override var time: LocalTime= LocalTime.of(LocalTime.now().hour,LocalTime.now().minute+5),
-    override var done: Boolean=false
+    override var status: ReminderStatus = ReminderStatus.TO_DO
 ) : Reminder {
+
+
     override fun toString(): String {
-        return "ActivityReminder(name='$name', duration=$duration, date=$date, time=$time, done=$done)"
+        return "ActivityReminder(name='$name', duration=$duration, date=$date, time=$time, done=$status)"
     }
 
     override fun getReminderName(): String {
@@ -33,7 +33,7 @@ class ActivityReminder(
     }
 
     override fun createFakeReminder(): FakeReminder {
-        return FakeActivityReminder(name,duration,date.toString(),time.toString(),done)
+        return FakeActivityReminder(name,duration,date.toString(),time.toString(),status)
     }
 
     override fun getMilisFromNow(): Long {
@@ -46,8 +46,8 @@ class ActivityReminder(
         return result
     }
 
-    override fun isDone(): Boolean {
-        return done
+    override fun getReminderStatus(): ReminderStatus {
+        return status
     }
 
     override fun equals(other: Any?): Boolean {
@@ -71,5 +71,6 @@ class ActivityReminder(
         result = 31 * result + time.hashCode()
         return result
     }
+
 
 }

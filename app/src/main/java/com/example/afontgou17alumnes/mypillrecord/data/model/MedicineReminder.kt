@@ -14,10 +14,10 @@ open class MedicineReminder(
     val doseUnit: String,
     override var date: LocalDate,
     override var time: LocalTime,
-    override var done:Boolean=false
+    override var status:ReminderStatus = ReminderStatus.TO_DO
 ) : Reminder {
     override fun toString(): String {//Es només per provar que les coses funcionen
-        return "MedicineReminder(name='$name', dose=$dose, doseUnit='$doseUnit', date=$date, time=$time, taken=$done)"
+        return "MedicineReminder(name='$name', dose=$dose, doseUnit='$doseUnit', date=$date, time=$time, taken=$status)"
     }
 
     override fun getReminderName(): String {
@@ -33,7 +33,7 @@ open class MedicineReminder(
     }
 
     override fun createFakeReminder(): FakeReminder {
-        return FakeMedicationReminder(name,dose,doseUnit,date.toString(),time.toString(),done)
+        return FakeMedicationReminder(name,dose,doseUnit,date.toString(),time.toString(),status)
     }
 
     override fun getMilisFromNow(): Long {
@@ -46,8 +46,8 @@ open class MedicineReminder(
         return result
     }
 
-    override fun isDone(): Boolean {
-        return done
+    override fun getReminderStatus(): ReminderStatus {
+        return status
     }
 
 
