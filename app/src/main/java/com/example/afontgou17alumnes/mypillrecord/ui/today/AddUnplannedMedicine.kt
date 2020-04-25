@@ -14,6 +14,7 @@ import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller.createMedicineReminder
 import com.example.afontgou17alumnes.mypillrecord.data.search.SearchActivity
+import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.back_arrow
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.info_button
@@ -47,7 +48,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
         }
         tick_unplanned_medicine.setOnClickListener{
             save()
-            go_home()
+
         }
         info_button.setOnClickListener{
             select_date()
@@ -216,6 +217,10 @@ class AddUnplannedMedicine : AppCompatActivity() {
         var newReminder=createMedicineReminder(this.medicine,this.dose,this.units,
             LocalDate.of(this.year,this.month,this.day),LocalTime.of(this.hour,this.minute))
         Controller.addReminder(newReminder)
+        //Actualitza el shared preferences tmb
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.putExtra("type_of_action","Save_and_go_home")
+        startActivity(intent)
     }
 
 

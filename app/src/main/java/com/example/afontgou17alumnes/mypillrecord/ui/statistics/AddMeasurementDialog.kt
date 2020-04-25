@@ -122,17 +122,17 @@ class AddMeasurementDialog : DialogFragment() {
 
         //Part modificar Statistics
         when(pos){
-            0-> Controller.statistics.weightData.add(StatisticEntry(value,
+            0-> Controller.user.statistics.weightData.add(StatisticEntry(value,
                 LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
-            1-> Controller.statistics.heartRateData.add(StatisticEntry(value,
+            1-> Controller.user.statistics.heartRateData.add(StatisticEntry(value,
                 LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
-            2-> Controller.statistics.arterialPressureData.add(StatisticEntry(value,
+            2-> Controller.user.statistics.arterialPressureData.add(StatisticEntry(value,
                 LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
-            3-> Controller.statistics.glucoseBeforeData.add(StatisticEntry(value,
+            3-> Controller.user.statistics.glucoseBeforeData.add(StatisticEntry(value,
                 LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
-            4-> Controller.statistics.glucoseAfterData.add(StatisticEntry(value,
+            4-> Controller.user.statistics.glucoseAfterData.add(StatisticEntry(value,
                 LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
-            5-> Controller.statistics.temperatureData.add(StatisticEntry(value,
+            5-> Controller.user.statistics.temperatureData.add(StatisticEntry(value,
                 LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
         }
     }

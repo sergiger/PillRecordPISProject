@@ -126,6 +126,7 @@ class MainActivity : AppCompatActivity() {
         Controller.setRemindersData()
         generarNextNotification()
 
+
     }
     fun generarNextNotification(){
         if (Controller.user.areThereReminders()){
@@ -198,7 +199,6 @@ class MainActivity : AppCompatActivity() {
     } // Final of implementation
 
     private fun replaceFragment(fragment: Fragment){
-
         val fragmentTransaction  = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit()
 

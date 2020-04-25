@@ -1,24 +1,39 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.login
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.Reminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeActivityReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMeasurementReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMedicationReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeReminder
 import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
 import com.google.firebase.auth.*
 import kotlinx.android.synthetic.main.activity__register4.*
 import kotlinx.android.synthetic.main.activity_login.*
+import java.lang.reflect.Type
 
 
 class LoginActivity : AppCompatActivity() {
@@ -40,6 +55,8 @@ class LoginActivity : AppCompatActivity() {
             closeSesion()
         else if(actions!=null && actions=="Save_share_Create_Account_Go_Home")
             createAccount()
+        else if(actions!=null && actions=="Save_and_go_home")
+            sharedUpLoad_and_go_home()
         else
             sharedDownloadLoad()
 
@@ -134,9 +151,9 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("yearBirth",yearBirth.toString())
         editor.putString("weight",weight.toString())
         editor.putString("height",height.toString())
-        editor.putString("ActivityReminder","")
-        editor.putString("MeasurementReminder","")
-        editor.putString("MedicationReminder","")
+        editor.putString("ActivityReminder",Gson().toJson(Controller.user.getFakeActivityReminders()))
+        editor.putString("MeasurementReminder",Gson().toJson(Controller.user.getFakeMeasurementReminders()))
+        editor.putString("MedicationReminder",Gson().toJson(Controller.user.getFakeMedicationReminders()))
         editor.apply()
     }
     fun sharedDownloadLoad(){
@@ -163,14 +180,26 @@ class LoginActivity : AppCompatActivity() {
 /*
             //He separat els reminders en 3 perque no sabia com passar de JSON a array de reminders amb diferents constructors
             val gson = Gson()
+            var tipusArray: Type
             var jsonList=prefs.getString("ActivityReminder","")
-
-            var arrayTutorialType = object : TypeToken<Array<ActivityReminder>>() {}.type
-            var reminder_list: Array<Reminder> = gson.fromJson(jsonList, arrayTutorialType)
-            for(reminder in reminder_list){
-                Controller.user.reminders.add(reminder)
+            //Log.d("ActivityReminder",jsonList)
+            if(jsonList!=""){
+                var tipusArray = object : TypeToken<Array<FakeActivityReminder>>() {}.type
+                var reminder_list1: Array<FakeReminder> = gson.fromJson(jsonList, tipusArray)
+                for(reminder in reminder_list1){
+                    Controller.user.reminders.add(reminder.createRealReminder())
+                }
             }
+
             jsonList=prefs.getString("MeasurementReminder","")
+            //Log.d("MeasurementReminder",jsonList)
+            if(jsonList!=""){
+                tipusArray = object : TypeToken<Array<FakeMeasurementReminder>>() {}.type
+                var reminder_list2 : Array<FakeReminder> = gson.fromJson(jsonList, tipusArray)
+                for(reminder in reminder_list2){
+                    Controller.user.reminders.add(reminder.createRealReminder())
+                }
+            }
 
             arrayTutorialType = object : TypeToken<Array<MeasurementReminder>>() {}.type
             reminder_list = gson.fromJson(jsonList, arrayTutorialType)
@@ -178,11 +207,13 @@ class LoginActivity : AppCompatActivity() {
                 Controller.user.reminders.add(reminder)
             }
             jsonList=prefs.getString("MedicineReminder","")
-
-            arrayTutorialType = object : TypeToken<Array<MedicineReminder>>() {}.type
-            reminder_list= gson.fromJson(jsonList, arrayTutorialType)
-            for(reminder in reminder_list){
-                Controller.user.reminders.add(reminder)
+            //Log.d("MedicationReminder",jsonList)
+            if(jsonList!=""){
+                tipusArray = object : TypeToken<Array<FakeMedicationReminder>>() {}.type
+                var reminder_list3:Array<FakeReminder> = gson.fromJson(jsonList, tipusArray)
+                for(reminder in reminder_list3){
+                    Controller.user.reminders.add(reminder.createRealReminder())
+                }
             }
 */
             //Controller.user.reminders=getSharedPreferences("Mydata", Context.MODE_PRIVATE)
@@ -195,6 +226,12 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
         }
+    }
+    fun sharedUpLoad_and_go_home(){
+        //Log.d("hola","perque o funciona aixó?")
+        sharedUpLoad(Controller.user.email,Controller.user.pasword,Controller.user.username,Controller.user.gender,Controller.user.birthYear,Controller.user.weight,Controller.user.height)
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
     }
     fun sharedUpLoad_and_go_back(){
         sharedUpLoad(Controller.user.email,Controller.user.pasword,Controller.user.username,Controller.user.gender,Controller.user.birthYear,Controller.user.weight,Controller.user.height)
@@ -231,6 +268,20 @@ class LoginActivity : AppCompatActivity() {
         return SharedApp.prefs.username != ""
     }//Aqui retorno true si hi ha algo guardat a shared preferences i false si no hi ha res
 */
+    private fun updateUiWithUser(model: LoggedInUserView) {
+        val welcome = getString(R.string.welcome)
+        val displayName = model.displayName
+        // TODO : initiate successful logged in experience
+        Toast.makeText(
+            applicationContext,
+            "$welcome $displayName",
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
+    private fun showLoginFailed(@StringRes errorString: Int) {
+        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
+    }
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed(): Unit {
     }
@@ -246,6 +297,22 @@ class LoginActivity : AppCompatActivity() {
         pDialog.setMessage("Please Wait")
         pDialog.setCancelable(false)
     }
+}
+
+/**
+ * Extension function to simplify setting an afterTextChanged action to EditText components.
+ */
+fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+    this.addTextChangedListener(object : TextWatcher {
+        override fun afterTextChanged(editable: Editable?) {
+            afterTextChanged.invoke(editable.toString())
+        }
+
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+    })
+
 }
 
 

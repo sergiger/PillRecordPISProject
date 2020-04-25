@@ -49,7 +49,7 @@ class Statistics_fragment : Fragment(),
             shown=start
             spinner.setSelection(shown)
         }else{
-            Controller.setStatisticsData()
+            //Controller.setStatisticsData()
         }
         refreshGraph(shown)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -115,8 +115,10 @@ class Statistics_fragment : Fragment(),
         graph.invalidate()
 
         //Viewport
-        graph.setVisibleXRangeMaximum(8F)
-        graph.moveViewToX(0F)
+        if(graph.data.xMax - graph.data.xMin > 8) {
+            graph.setVisibleXRangeMaximum(8F)
+            graph.moveViewToX(0F)
+        }
     }
 
 

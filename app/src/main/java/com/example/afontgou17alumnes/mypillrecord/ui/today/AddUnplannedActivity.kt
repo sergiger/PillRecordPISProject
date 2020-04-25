@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.view.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
@@ -41,7 +42,6 @@ class AddUnplannedActivity : AppCompatActivity() {
         }
         tick_unplanned_activity.setOnClickListener{
             save()
-            go_home()
         }
         info_button.setOnClickListener{
             select_date(it)
@@ -196,6 +196,10 @@ class AddUnplannedActivity : AppCompatActivity() {
             this.new_activity, this.duration, LocalDate.of(this.year, this.month, this.day), LocalTime.of(this.hour, this.minute)
         )
         Controller.addReminder(newReminder)
+        //Actualitza el shared preferences tmb
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.putExtra("type_of_action","Save_and_go_home")
+        startActivity(intent)
     }//cal completar
 
     private fun showPopupMenu(view: View) = PopupMenu(view.context, view).run {
