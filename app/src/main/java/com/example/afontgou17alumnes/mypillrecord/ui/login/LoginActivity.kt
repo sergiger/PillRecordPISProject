@@ -6,7 +6,9 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -31,6 +33,7 @@ import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeM
 import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeReminder
 import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
 import com.google.firebase.auth.*
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity__register4.*
 import kotlinx.android.synthetic.main.activity_login.*
 import java.lang.reflect.Type
@@ -151,7 +154,7 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("yearBirth",yearBirth.toString())
         editor.putString("weight",weight.toString())
         editor.putString("height",height.toString())
-        editor.putString("ActivityReminder",Gson().toJson(Controller.user.getFakeActivityReminders()))
+        editor.putString("ActivityReminder", Gson().toJson(Controller.user.getFakeActivityReminders()))
         editor.putString("MeasurementReminder",Gson().toJson(Controller.user.getFakeMeasurementReminders()))
         editor.putString("MedicationReminder",Gson().toJson(Controller.user.getFakeMedicationReminders()))
         editor.apply()
@@ -268,6 +271,7 @@ class LoginActivity : AppCompatActivity() {
         return SharedApp.prefs.username != ""
     }//Aqui retorno true si hi ha algo guardat a shared preferences i false si no hi ha res
 */
+    /*
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
@@ -277,7 +281,7 @@ class LoginActivity : AppCompatActivity() {
             "$welcome $displayName",
             Toast.LENGTH_LONG
         ).show()
-    }
+    }*/
 
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
