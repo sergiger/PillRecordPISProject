@@ -1,42 +1,37 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.login
 
-import android.app.Activity
+import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.text.TextUtils
 import android.util.Log
-import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
-import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.Reminder
 import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.google.firebase.auth.*
+import kotlinx.android.synthetic.main.activity__register4.*
 import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var loginViewModel: LoginViewModel
+    private lateinit var mAuth: FirebaseAuth
+    lateinit var pDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ProgressDialogInit()
+        mAuth=FirebaseAuth.getInstance()
         setContentView(R.layout.activity_login)
+        /*
         val bundle:Bundle? = intent.extras
         val actions = bundle?.get("type_of_action")//Això ens permet accedir al shared preferences, potser és una manera molt cutre, però és la única que consegueixo que funcioni
         if(actions!=null && actions=="Save_Share_and_go_back")
@@ -48,85 +43,85 @@ class LoginActivity : AppCompatActivity() {
         else
             sharedDownloadLoad()
 
-        //configView(this@LoginActivity)
-
+         */
 
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
 
-        loginViewModel = ViewModelProviders.of(this, LoginViewModelFactory())
-            .get(LoginViewModel::class.java)
+        login.setOnClickListener {
+            val email =username.text.toString().trim()
+            val pwd = password.text.toString().trim()
 
-        loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
-            val loginState = it ?: return@Observer
-
-            // disable login button unless both username / password is valid
-            login.isEnabled = loginState.isDataValid
-
-            if (loginState.usernameError != null) {
-                username.error = getString(loginState.usernameError)
+            if(email.isEmpty() and pwd.isEmpty()){
+                username.setError("Email is Required")
+                password.setError("Password is Required")
             }
-            if (loginState.passwordError != null) {
-                password.error = getString(loginState.passwordError)
+            else if(TextUtils.isEmpty(email)){
+                username.setError("Email is Required")
             }
-        })
-
-        loginViewModel.loginResult.observe(this@LoginActivity, Observer {
-            val loginResult = it ?: return@Observer
-
-            loading.visibility = View.GONE
-            if (loginResult.error != null) {
-                showLoginFailed(loginResult.error)
+            else if(TextUtils.isEmpty(pwd)){
+                password.setError("Password is Required")
             }
-            if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
+            else{
+                ProgressDialogEnable()
+                mAuth.signInWithEmailAndPassword(email, pwd)
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("login", "signInWithEmail:success")
+                            val user = mAuth.currentUser
+                            updateUI(user)
+                        } else {
+                            // If sign in fails, display a message to the user. errors from firebase
+                            try {
+                                throw task.exception!!
+                            }  catch (e: FirebaseAuthInvalidUserException) {
+                                username.setError(e.message)
+                                username.requestFocus()
+                            } catch (e: FirebaseAuthInvalidCredentialsException) {
+                                password.setError(e.message)
+                                password.requestFocus()
+                            }catch (e: Exception) {
+                                Log.e("register fail :", e.message)
+                            }
+
+                            Log.w("Sign in","signInWithEmail:failure",task.exception)
+                            Toast.makeText(this,"Authentication failed.",Toast.LENGTH_SHORT).show()
+                            Log.w("login", "signInWithEmail:failure", task.exception)
+                            Toast.makeText(baseContext, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show()
+                            updateUI(null)
+                        }
+                        // ...
+                    }
             }
-            setResult(Activity.RESULT_OK)
-
-            //Complete and destroy login activity once successful
-            finish()
-        })
-
-        username.afterTextChanged {
-            loginViewModel.loginDataChanged(
-                username.text.toString(),
-                password.text.toString()
-            )
         }
+        btn_register.setOnClickListener {
 
-        password.apply {
-            afterTextChanged {
-                loginViewModel.loginDataChanged(
-                    username.text.toString(),
-                    password.text.toString()
-                )
-            }
+            val intent = Intent(this@LoginActivity, activity_Register4::class.java)
+            startActivity(intent)
+        }
+        val currentUser = mAuth.currentUser
+        updateUI(currentUser)
+    }
 
-            setOnEditorActionListener { _, actionId, _ ->
-                when (actionId) {
-                    EditorInfo.IME_ACTION_DONE ->
-                        loginViewModel.login(
-                            username.text.toString(),
-                            password.text.toString()
-                        )
-                }
-                false
-            }
-
-            login.setOnClickListener {
-                loading.visibility = View.VISIBLE
-                loginViewModel.login(username.text.toString(), password.text.toString())
+    private fun updateUI(user: FirebaseUser?) {
+        if(user !=null){
+            if(user.isEmailVerified){
                 sharedUpLoad(username.text.toString(),password.text.toString())//Funció que carrega les dades al user de la base de dades a shared preferences i al user del controlador
                 sharedDownloadLoad()
-            }
-            btn_register.setOnClickListener {
-
-                val intent = Intent(this@LoginActivity, activity_Register4::class.java)
+                ProgressDialogDisable()
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+                finish()
+            }else{
+                Toast.makeText(this, "Please verify your email", Toast.LENGTH_SHORT).show()
+                ProgressDialogDisable()
             }
         }
+        ProgressDialogDisable()
     }
 
     fun sharedUpLoad(email: String, pasword: String, username:String="Joan",gender:String="Masculin",yearBirth:Int=1999, weight:Float=67F,height:Float=180F) {
@@ -236,35 +231,21 @@ class LoginActivity : AppCompatActivity() {
         return SharedApp.prefs.username != ""
     }//Aqui retorno true si hi ha algo guardat a shared preferences i false si no hi ha res
 */
-    private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
-        // TODO : initiate successful logged in experience
-        Toast.makeText(
-            applicationContext,
-            "$welcome $displayName",
-            Toast.LENGTH_LONG
-        ).show()
+    @SuppressLint("MissingSuperCall")
+    override fun onBackPressed(): Unit {
     }
-
-    private fun showLoginFailed(@StringRes errorString: Int) {
-        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
+    fun ProgressDialogEnable(){
+        pDialog.show()
     }
-}
-
-/**
- * Extension function to simplify setting an afterTextChanged action to EditText components.
- */
-fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
-        override fun afterTextChanged(editable: Editable?) {
-            afterTextChanged.invoke(editable.toString())
-        }
-
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-    })
+    fun ProgressDialogDisable(){
+        if (pDialog.isShowing)
+            pDialog.dismiss()
+    }
+    fun ProgressDialogInit(){
+        pDialog = ProgressDialog(this)
+        pDialog.setMessage("Please Wait")
+        pDialog.setCancelable(false)
+    }
 }
 
 
