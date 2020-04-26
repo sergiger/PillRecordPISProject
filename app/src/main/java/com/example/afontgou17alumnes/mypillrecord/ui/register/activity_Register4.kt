@@ -95,7 +95,7 @@ class activity_Register4 : AppCompatActivity() {
                                 intent.putExtra("type_of_action","Save_share_Create_Account_Go_Home")
                                 val user: FirebaseUser? = mAuth.getCurrentUser()
                                 user?.sendEmailVerification()
-                                Controller.createAccount( user!!.uid,this.email,this.username,this.password,this.gender,this.year_Birth,this.weight,this.height)
+                                //Controller.createAccount( user!!.uid,this.email,this.username,this.password,this.gender,this.year_Birth,this.weight,this.height)
                                 createuserfirebasedatabase(user!!.uid,this.email,this.username,this.password,this.gender,this.year_Birth,this.weight,this.height)
                                 startActivity(intent)
 

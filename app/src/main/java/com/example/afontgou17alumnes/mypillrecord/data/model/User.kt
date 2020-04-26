@@ -12,9 +12,6 @@ open class User{
     var email:String
     var username:String
     var pasword:String
-        set(value) {
-            if (value.length>6) field=value //Aqui faig que la contrassenya hagi de ser minim de 6 digits, però s'ha de modificar
-        }
     var gender:String
     var birthYear :Int
     var weight:Float
@@ -121,6 +118,9 @@ open class User{
         val retorn=arrayOfNulls<FakeReminder>(acumulador.size)
         acumulador.toArray(retorn)
         return retorn
+    }
+    override fun toString(): String {
+        return "id "+id+" email "+email +" username "+username+" pasword "+pasword+" gender "+gender+" birthYear "+birthYear.toString()+" weight "+weight.toString()+" height "+height.toString()
     }
 
 

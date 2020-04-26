@@ -2,6 +2,9 @@ package com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.SpannableStringBuilder
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
@@ -13,6 +16,7 @@ import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity__register4.*
 import kotlinx.android.synthetic.main.change_pasword_dialogue.view.*
 import kotlinx.android.synthetic.main.gender_dialoge.view.*
 import kotlinx.android.synthetic.main.height_dialoge.view.*
@@ -30,17 +34,17 @@ class myAccount : AppCompatActivity() {
     var birth_year=Controller.user.birthYear
     var height=Controller.user.height
     var weight=Controller.user.weight
+    var password=Controller.user.pasword
     var new_gender=gender.toString()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_account_activity)
-        val db = FirebaseFirestore.getInstance()
-        val mAuth= FirebaseAuth.getInstance()
         back_iicon.setOnClickListener {
             onBackPressed()
         }
+        Log.e("myAcount", "pwd:  ${Controller.user.toString()}")
         val arrayAdapter2: ArrayAdapter<*>
 
 
@@ -87,13 +91,26 @@ class myAccount : AppCompatActivity() {
                 val old_pasword = mDialogView.input_old_pasword.text.toString() //aquesta variable servirà per actualitzar l'edat
                 val new_pasword = mDialogView.input_new_pasword.text.toString()
                 val new_repeat_pasword = mDialogView.input_repeat_new_pasword.text.toString()
-                if(new_pasword==new_repeat_pasword){
-                    if(!new_pasword.equals("")) {
-                        //dismiss dialog
-                        mAlertDialog.dismiss()
+                if(old_pasword.equals(password)){
+                    if(new_pasword.equals(new_repeat_pasword)){
+                        if(new_pasword.length<6){
+                            //Toast.makeText(this,"Passwords need 7 characters minimum ", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this,"Password should be at least 6 characters",Toast.LENGTH_LONG).show()
+                        }
+                        else{
+                            Controller.updatePassword(new_pasword)
+                            mAlertDialog.dismiss()
+                        }
                     }
-                }else{
-                    Toast.makeText(this,"Wrong repeated pasword",Toast.LENGTH_LONG).show()
+                    else{
+                        Toast.makeText(this,"Wrong repeated pasword",Toast.LENGTH_LONG).show()
+                    }
+                }
+                else{
+                    Log.e("---------------------", "1 data: ${old_pasword}")
+                    Log.e("---------------------", "2 data: ${password.toString()}")
+                    Toast.makeText(this,"Wrong old pasword",Toast.LENGTH_LONG).show()
+                    mAlertDialog.dismiss()
                 }
             }
             //cancel button click of custom layout
@@ -239,7 +256,7 @@ class myAccount : AppCompatActivity() {
         users2.set(7,height)
         users2.set(8,weight)
         arrayAdapter2.notifyDataSetChanged()
-        Controller.refreshMyAccount(this.gender,this.birth_year,this.height,this.weight)
+        Controller.refreshMyAccount(email,username,gender,birth_year,height,weight)
         //go_back()
         /*val intent = Intent(this, LoginActivity::class.java)
         intent.putExtra("type_of_action","Save_Share_and_go_back")

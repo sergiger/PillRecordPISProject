@@ -8,6 +8,10 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.time.LocalDate
@@ -19,6 +23,9 @@ import kotlin.Comparator
 object Controller {
     val user = User("1","user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
     var ja_iniciat=false
+
+    private lateinit var mAuth: FirebaseAuth
+
 
     fun initUserSaved(){
         /*this.user.weight=SharedApp.prefs.weight
@@ -224,11 +231,46 @@ object Controller {
         return MeasurementReminder(type,units,date,time,value)
     }
 
-    fun refreshMyAccount(gender: String, birthYear: Int, height: Float, weight: Float) {
+    fun refreshMyAccount(email:String,username: String,gender: String, birthYear: Int, height: Float, weight: Float) {
+        mAuth=FirebaseAuth.getInstance()
+        val db = FirebaseFirestore.getInstance()
+        val user2: FirebaseUser? = mAuth.getCurrentUser()
+        val id =user2?.uid
+
+        if(gender!=this.user.gender){
+            val data = hashMapOf("gender" to gender.toString())
+            db.collection("users").document(id!!).set(data, SetOptions.merge())
+        }
+        if(birthYear!=this.user.birthYear){
+            val data = hashMapOf("yearBirth" to birthYear)
+            db.collection("users").document(id!!).set(data, SetOptions.merge())
+        }
+        if(weight!=this.user.weight){
+            val data = hashMapOf("weight" to weight)
+            db.collection("users").document(id!!).set(data, SetOptions.merge())
+        }
+        if(height!=this.user.height){
+            val data = hashMapOf("height" to height)
+            db.collection("users").document(id!!).set(data, SetOptions.merge())
+        }
+        this.user.username= username
+        this.user.email=email
         this.user.weight=weight
         this.user.height=height
         this.user.gender=gender
         this.user.birthYear=birthYear
+    }
+
+    fun downloadUserAccount(id: String,email:String,username: String,gender: String, birthYear: Int, height: Float, weight: Float,pasword: String) {
+        this.user.username= username
+        this.user.email=email
+        this.user.weight=weight
+        this.user.height=height
+        this.user.gender=gender
+        this.user.birthYear=birthYear
+        this.user.pasword=pasword
+        this.user.id=id
+        Log.e("controller", "pwd:  ${pasword}")
 
     }
 
@@ -273,5 +315,17 @@ object Controller {
             2 -> ReminderStatus.TO_DO
             else -> ReminderStatus.TO_DO
         }
+    }
+
+    fun updatePassword(newPasword: String) {
+        mAuth=FirebaseAuth.getInstance()
+        val db = FirebaseFirestore.getInstance()
+        val user2: FirebaseUser? = mAuth.getCurrentUser()
+        val id =user2?.uid
+        mAuth.currentUser!!.updatePassword(newPasword)
+        user.pasword=newPasword
+        val data = hashMapOf("password" to user.pasword)
+        db.collection("users").document(id!!).set(data, SetOptions.merge())
+
     }
 }

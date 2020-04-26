@@ -34,6 +34,7 @@ import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeR
 import com.example.afontgou17alumnes.mypillrecord.data.model.fakeStatistics.FakeStatistics
 import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
 import com.google.firebase.auth.*
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity__register4.*
@@ -134,6 +135,7 @@ class LoginActivity : AppCompatActivity() {
             if(user.isEmailVerified){
                 //sharedUpLoad(username.text.toString(),password.text.toString())//Funció que carrega les dades al user de la base de dades a shared preferences i al user del controlador
                 //sharedDownloadLoad()
+                getdatafromfirebase()
                 ProgressDialogDisable()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
@@ -144,6 +146,30 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         ProgressDialogDisable()
+    }
+
+    private fun getdatafromfirebase() {
+        val db = FirebaseFirestore.getInstance()
+        val user: FirebaseUser? = mAuth.getCurrentUser()
+        val id =user?.uid
+        //dàdes d'usuari
+        val docRef = id?.let { db.collection("users").document(id) }
+        docRef?.get()?.addOnSuccessListener { document ->
+                if (document != null) {
+                    Log.e("getDatafromfirestore", "DocumentSnapshot data: ${document.data}")
+                    var map= document.data as MutableMap<String, Any?>
+                    var y =map["yearBirth"] as Number
+                    val h = map["height"] as Number
+                    val w = map["weight"] as Number
+                    Controller.downloadUserAccount(id,map["email"] as String,map["username"]as String,map["gender"] as String,y.toInt(),h.toFloat(),w.toFloat(),map["password"] as String)
+                    Log.e("getDatafromfirestore", "get failed with ${map["password"]}")
+                } else {
+                    Log.e("getDatafromfirestore", "No such document")
+                }
+            }?.addOnFailureListener { exception ->
+                Log.e("getDatafromfirestore", "get failed with ", exception)
+            }
+
     }
 
     fun sharedUpLoad(email: String, pasword: String, username:String="Joan",gender:String="Masculin",yearBirth:Int=1999, weight:Float=67F,height:Float=180F) {
