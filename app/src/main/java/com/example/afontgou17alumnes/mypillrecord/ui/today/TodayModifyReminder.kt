@@ -1,5 +1,7 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.today
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.afontgou17alumnes.mypillrecord.R
@@ -33,11 +35,17 @@ class TodayModifyReminder: AppCompatActivity() {
         //Set Listeners
         today_modify_reminder_confirm.setOnClickListener {
             reminder.status = ReminderStatus.DONE
-            onBackPressed()
+            val returnIntent = Intent()
+            returnIntent.putExtra("Reminder", reminder)
+            setResult(Activity.RESULT_OK, returnIntent)
+            finish()
         }
         today_modify_reminder_omit.setOnClickListener{
             reminder.status = ReminderStatus.OMITTED
-            onBackPressed()
+            val returnIntent = Intent()
+            returnIntent.putExtra("Reminder", reminder)
+            setResult(Activity.RESULT_OK, returnIntent)
+            finish()
         }
         back_arrow.setOnClickListener {
             onBackPressed()
