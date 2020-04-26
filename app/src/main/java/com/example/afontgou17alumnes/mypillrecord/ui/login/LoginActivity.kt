@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
         ProgressDialogInit()
         mAuth=FirebaseAuth.getInstance()
         setContentView(R.layout.activity_login)
-        /*
+
         val bundle:Bundle? = intent.extras
         val actions = bundle?.get("type_of_action")//Això ens permet accedir al shared preferences, potser és una manera molt cutre, però és la única que consegueixo que funcioni
         if(actions!=null && actions=="Save_Share_and_go_back")
@@ -63,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
         else
             sharedDownloadLoad()
 
-         */
+
 
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
