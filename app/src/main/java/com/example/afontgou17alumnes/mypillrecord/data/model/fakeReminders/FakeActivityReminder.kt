@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders
 
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.ReminderStatus
 import java.time.LocalDate
@@ -10,10 +11,12 @@ class FakeActivityReminder(
     val duration: Int,
     override var date: String,
     override var time: String,
-    override var done: ReminderStatus=ReminderStatus.TO_DO
+    override var done: Int=55,
+    override var ID: String=""
 ):FakeReminder {
 
     override fun createRealReminder(): com.example.afontgou17alumnes.mypillrecord.data.model.Reminder {
-        return ActivityReminder(name, duration, LocalDate.parse(date), LocalTime.parse(time),done)
+        return ActivityReminder(name, duration, LocalDate.parse(date), LocalTime.parse(time),
+            Controller.getIntToReminderStatus(done),ID)
     }
 }

@@ -39,7 +39,7 @@ object Controller {
         //user.addReminder(MeasurementReminder("Weight","kg", LocalDate.now(), LocalTime.of(LocalTime.now().hour,LocalTime.now().minute+1)))
         //user.addReminder(MedicineReminder("Ibuprofen",3,"tablet(s)", LocalDate.now(), LocalTime.of(17,0)))
         //user.addReminder(MeasurementReminder("Weight","kg",LocalDate.now(), LocalTime.of(17,0)))
-        user.addReminder(ActivityReminder("Running", 15, LocalDate.now(), LocalTime.of(18,0)))
+        //user.addReminder(ActivityReminder("Running", 15, LocalDate.now(), LocalTime.of(18,0)))
 
     }
 
@@ -258,5 +258,20 @@ object Controller {
         user.statistics.deleteMeasure(type, value, date)
     }
 
+    fun getReminderStatusToInt(status: ReminderStatus): Int {
+        return when(status){
+            ReminderStatus.DONE -> 0
+            ReminderStatus.OMITTED -> 1
+            ReminderStatus.TO_DO -> 2
+        }
+    }
 
+    fun getIntToReminderStatus(i: Int): ReminderStatus{
+        return when(i){
+            0 -> ReminderStatus.DONE
+            1 -> ReminderStatus.OMITTED
+            2 -> ReminderStatus.TO_DO
+            else -> ReminderStatus.TO_DO
+        }
+    }
 }

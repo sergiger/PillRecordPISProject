@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord.data.model
 
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMedicationReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeReminder
 import java.time.LocalDate
@@ -9,12 +10,13 @@ import java.util.*
 
 open class MedicineReminder(
     //Potser alguns paràmetres es podrien agrupar a una classe Medicine
-    val name: String,
-    val dose: Int,
-    val doseUnit: String,
+    var name: String,
+    var dose: Int,
+    var doseUnit: String,
     override var date: LocalDate,
     override var time: LocalTime,
-    override var status:ReminderStatus = ReminderStatus.TO_DO
+    override var status:ReminderStatus = ReminderStatus.TO_DO,
+    override var ID:String=""
 ) : Reminder {
     override fun toString(): String {//Es només per provar que les coses funcionen
         return "MedicineReminder(name='$name', dose=$dose, doseUnit='$doseUnit', date=$date, time=$time, taken=$status)"
@@ -33,7 +35,8 @@ open class MedicineReminder(
     }
 
     override fun createFakeReminder(): FakeReminder {
-        return FakeMedicationReminder(name,dose,doseUnit,date.toString(),time.toString(),status)
+        return FakeMedicationReminder(name,dose,doseUnit,date.toString(),time.toString(),
+            Controller.getReminderStatusToInt(status))
     }
 
     override fun getMilisFromNow(): Long {

@@ -48,7 +48,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
         }
         tick_unplanned_medicine.setOnClickListener{
             save()
-
+            go_home()
         }
         info_button.setOnClickListener{
             select_date()
@@ -218,9 +218,9 @@ class AddUnplannedMedicine : AppCompatActivity() {
             LocalDate.of(this.year,this.month,this.day),LocalTime.of(this.hour,this.minute))
         Controller.addReminder(newReminder)
         //Actualitza el shared preferences tmb
-        val intent = Intent(this, LoginActivity::class.java)
+        /*val intent = Intent(this, LoginActivity::class.java)
         intent.putExtra("type_of_action","Save_and_go_home")
-        startActivity(intent)
+        startActivity(intent)*/
     }
 
 

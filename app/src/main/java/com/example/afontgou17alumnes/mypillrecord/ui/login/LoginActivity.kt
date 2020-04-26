@@ -31,9 +31,11 @@ import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeA
 import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMeasurementReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMedicationReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeStatistics.FakeStatistics
 import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
 import com.google.firebase.auth.*
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity__register4.*
 import kotlinx.android.synthetic.main.activity_login.*
 import java.lang.reflect.Type
@@ -49,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
         ProgressDialogInit()
         mAuth=FirebaseAuth.getInstance()
         setContentView(R.layout.activity_login)
-
+        /*
         val bundle:Bundle? = intent.extras
         val actions = bundle?.get("type_of_action")//Això ens permet accedir al shared preferences, potser és una manera molt cutre, però és la única que consegueixo que funcioni
         if(actions!=null && actions=="Save_Share_and_go_back")
@@ -63,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
         else
             sharedDownloadLoad()
 
-
+         */
 
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
@@ -130,8 +132,8 @@ class LoginActivity : AppCompatActivity() {
     private fun updateUI(user: FirebaseUser?) {
         if(user !=null){
             if(user.isEmailVerified){
-                sharedUpLoad(username.text.toString(),password.text.toString())//Funció que carrega les dades al user de la base de dades a shared preferences i al user del controlador
-                sharedDownloadLoad()
+                //sharedUpLoad(username.text.toString(),password.text.toString())//Funció que carrega les dades al user de la base de dades a shared preferences i al user del controlador
+                //sharedDownloadLoad()
                 ProgressDialogDisable()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
@@ -154,9 +156,10 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("yearBirth",yearBirth.toString())
         editor.putString("weight",weight.toString())
         editor.putString("height",height.toString())
-        editor.putString("ActivityReminder", Gson().toJson(Controller.user.getFakeActivityReminders()))
+        editor.putString("ActivityReminder",Gson().toJson(Controller.user.getFakeActivityReminders()))
         editor.putString("MeasurementReminder",Gson().toJson(Controller.user.getFakeMeasurementReminders()))
         editor.putString("MedicationReminder",Gson().toJson(Controller.user.getFakeMedicationReminders()))
+        editor.putString("Statistics",Gson().toJson(Controller.user.statistics.createFakeStatistics()))
         editor.apply()
     }
     fun sharedDownloadLoad(){
@@ -218,14 +221,11 @@ class LoginActivity : AppCompatActivity() {
                     Controller.user.reminders.add(reminder.createRealReminder())
                 }
             }
-*/
-            //Controller.user.reminders=getSharedPreferences("Mydata", Context.MODE_PRIVATE)
 
-            //Log.d("weight",getSharedPreferences("Mydata", Context.MODE_PRIVATE).getString("height","7").toString())
-            //val intent =Intent(this,MainActivity_sh)
-            //tvCognom.setText(last_name)
-            //tvNom.setText(name)
-            //tvEmail.setText(correu)
+            val fakeStatisticsJSON=prefs.getString("Statistics","")
+            val fakeStatistics: FakeStatistics = gson.fromJson(fakeStatisticsJSON, FakeStatistics::class.java)
+            Controller.user.statistics=fakeStatistics.createRealStatistics()
+*/
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
         }
