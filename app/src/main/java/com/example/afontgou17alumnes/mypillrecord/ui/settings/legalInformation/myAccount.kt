@@ -49,11 +49,11 @@ class myAccount : AppCompatActivity() {
 
 
         val users2= arrayOf("", "",username,email,birth_year,gender, height,weight)
-
+        val users3=users2 as Array<Any>
         //getActualMyAccount()
         // access the listView from xml file
         var mListView2 = findViewById<ListView>(R.id.opcions_menuu_actual)
-        arrayAdapter2 = ArrayAdapter(this,android.R.layout.simple_list_item_1, users2)
+        arrayAdapter2 = ArrayAdapter(this,android.R.layout.simple_list_item_1, users3)
         opcions_menuu_actual.adapter = arrayAdapter2
         val arrayAdapter: ArrayAdapter<*>
         val users = arrayOf("Change Pasword", "Extra information","Username","Email","Year of birth","Gender", "Height","Weight")
@@ -61,7 +61,7 @@ class myAccount : AppCompatActivity() {
         var mListView = findViewById<ListView>(R.id.opcions_menu)
         arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, users)
         opcions_menuu.adapter = arrayAdapter
-        opcions_menuu.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id -> onSelectedMenu(position, users2, arrayAdapter2)
+        opcions_menuu.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id -> onSelectedMenu(position, users3, arrayAdapter2)
         }
 
 
