@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.example.afontgou17alumnes.mypillrecord.data.model.User
 import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
@@ -21,6 +22,9 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity__register4.*
 import kotlinx.android.synthetic.main.activity__register4.view.*
 
@@ -36,6 +40,9 @@ class activity_Register4 : AppCompatActivity() {
     var height:Float= 0F
     private lateinit var mAuth: FirebaseAuth
     lateinit var pDialog: ProgressDialog
+
+    private lateinit var database: DatabaseReference// ...
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ProgressDialogInit()
@@ -79,7 +86,6 @@ class activity_Register4 : AppCompatActivity() {
             this.weight=text_input_weight.text.toString().toFloat()
             this.height=text_input_height.text.toString().toFloat()
             if (password.equals(password_repeat)){
-                Controller.createAccount(this.email,this.username,this.password,this.gender,this.year_Birth,this.weight,this.height)
                 mAuth!!.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this,
                         OnCompleteListener<AuthResult?> { task ->
@@ -89,6 +95,8 @@ class activity_Register4 : AppCompatActivity() {
                                 intent.putExtra("type_of_action","Save_share_Create_Account_Go_Home")
                                 val user: FirebaseUser? = mAuth.getCurrentUser()
                                 user?.sendEmailVerification()
+                                Controller.createAccount( user!!.uid,this.email,this.username,this.password,this.gender,this.year_Birth,this.weight,this.height)
+                                createuserfirebase(user!!.uid,this.email,this.username,this.password,this.gender,this.year_Birth,this.weight,this.height)
                                 startActivity(intent)
 
                             } else {
@@ -121,6 +129,40 @@ class activity_Register4 : AppCompatActivity() {
             }
         }
         ProgressDialogDisable()
+    }
+
+     fun createuserfirebase(
+        uid: String,
+        email: String,
+        username: String,
+        password: String,
+        gender: String,
+        yearBirth: Int,
+        weight: Float,
+        height :Float
+    ) {
+         /*database = FirebaseDatabase.getInstance().reference
+        val user2=User(uid,email,username,password,gender,yearBirth,weight,height)*/
+         val db = FirebaseFirestore.getInstance()
+         val user = hashMapOf(
+             "uid" to uid ,
+             "email" to email,
+             "username" to username,
+             "password" to password,
+             "gender" to gender,
+             "yearBirth" to yearBirth,
+             "weight" to weight,
+             "height" to height
+         )
+        // Add a new document with a specific id
+         db.collection("users").document(uid)
+             .set(user)
+             .addOnSuccessListener { documentReference ->
+                 Log.d("TAG", "DocumentSnapshot added with ID: ${uid}")
+             }
+             .addOnFailureListener { e ->
+                 Log.w("TAG", "Error adding document", e)
+             }
     }
 
     private fun errorsManage(): Boolean {
