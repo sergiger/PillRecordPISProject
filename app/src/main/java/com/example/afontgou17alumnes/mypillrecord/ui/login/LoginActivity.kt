@@ -64,8 +64,8 @@ class LoginActivity : AppCompatActivity() {
             sharedUpLoad_and_go_home()
         else
             sharedDownloadLoad()
+*/
 
-         */
 
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
@@ -132,8 +132,8 @@ class LoginActivity : AppCompatActivity() {
     private fun updateUI(user: FirebaseUser?) {
         if(user !=null){
             if(user.isEmailVerified){
-                sharedUpLoad(username.text.toString(),password.text.toString())//Funció que carrega les dades al user de la base de dades a shared preferences i al user del controlador
-                sharedDownloadLoad()
+                //sharedUpLoad(username.text.toString(),password.text.toString())//Funció que carrega les dades al user de la base de dades a shared preferences i al user del controlador
+                //sharedDownloadLoad()
                 ProgressDialogDisable()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)

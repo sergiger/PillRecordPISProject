@@ -258,7 +258,7 @@ object Controller {
         user.statistics.deleteMeasure(type, value, date)
     }
 
-    fun passReminderStatusToInt(status: ReminderStatus): Int {
+    fun getReminderStatusToInt(status: ReminderStatus): Int {
         return when(status){
             ReminderStatus.DONE -> 0
             ReminderStatus.OMITTED -> 1
@@ -266,7 +266,7 @@ object Controller {
         }
     }
 
-    fun passIntToReminderStatus(i: Int): ReminderStatus{
+    fun getIntToReminderStatus(i: Int): ReminderStatus{
         return when(i){
             0 -> ReminderStatus.DONE
             1 -> ReminderStatus.OMITTED

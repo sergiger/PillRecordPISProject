@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord.data.model
 
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMedicationReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeReminder
 import java.time.LocalDate
@@ -33,7 +34,8 @@ open class MedicineReminder(
     }
 
     override fun createFakeReminder(): FakeReminder {
-        return FakeMedicationReminder(name,dose,doseUnit,date.toString(),time.toString(),status)
+        return FakeMedicationReminder(name,dose,doseUnit,date.toString(),time.toString(),
+            Controller.getReminderStatusToInt(status))
     }
 
     override fun getMilisFromNow(): Long {

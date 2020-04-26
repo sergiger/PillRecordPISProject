@@ -6,6 +6,6 @@ import com.example.afontgou17alumnes.mypillrecord.data.model.ReminderStatus
 interface FakeReminder {
     var time:String
     var date:String
-    var done:ReminderStatus
+    var done:Int
     fun createRealReminder(): Reminder
 }
