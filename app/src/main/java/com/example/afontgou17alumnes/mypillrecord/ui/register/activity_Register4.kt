@@ -96,7 +96,7 @@ class activity_Register4 : AppCompatActivity() {
                                 val user: FirebaseUser? = mAuth.getCurrentUser()
                                 user?.sendEmailVerification()
                                 Controller.createAccount( user!!.uid,this.email,this.username,this.password,this.gender,this.year_Birth,this.weight,this.height)
-                                createuserfirebase(user!!.uid,this.email,this.username,this.password,this.gender,this.year_Birth,this.weight,this.height)
+                                createuserfirebasedatabase(user!!.uid,this.email,this.username,this.password,this.gender,this.year_Birth,this.weight,this.height)
                                 startActivity(intent)
 
                             } else {
@@ -131,7 +131,7 @@ class activity_Register4 : AppCompatActivity() {
         ProgressDialogDisable()
     }
 
-     fun createuserfirebase(
+     fun createuserfirebasedatabase(
         uid: String,
         email: String,
         username: String,
