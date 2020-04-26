@@ -9,9 +9,9 @@ import java.util.*
 
 open class MedicineReminder(
     //Potser alguns paràmetres es podrien agrupar a una classe Medicine
-    val name: String,
-    val dose: Int,
-    val doseUnit: String,
+    var name: String,
+    var dose: Int,
+    var doseUnit: String,
     override var date: LocalDate,
     override var time: LocalTime,
     override var status:ReminderStatus = ReminderStatus.TO_DO

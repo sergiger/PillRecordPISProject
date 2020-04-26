@@ -11,8 +11,7 @@ import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
-import com.example.afontgou17alumnes.mypillrecord.data.model.Reminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.ReminderStatus
+import com.example.afontgou17alumnes.mypillrecord.data.model.*
 import com.example.afontgou17alumnes.mypillrecord.ui.calendar.ReminderListAdapter
 import kotlinx.android.synthetic.main.today__fragment.*
 import java.time.LocalDate
@@ -60,6 +59,12 @@ class TodayFragment : Fragment() {
             if (resultCode == Activity.RESULT_OK) {
                 val result = data?.getSerializableExtra("Reminder") as Reminder
                 actualReminder.status = result.status
+                actualReminder.time = result.time
+                when(actualReminder){
+                    is MedicineReminder -> (actualReminder as MedicineReminder).dose = (result as MedicineReminder).dose
+                    is MeasurementReminder -> (actualReminder as MeasurementReminder).value = (result as MeasurementReminder).value
+                    is ActivityReminder -> (actualReminder as ActivityReminder).duration = (result as ActivityReminder).duration
+                }
                 createTodayList()
             }
             if (resultCode == Activity.RESULT_CANCELED) {

@@ -12,7 +12,7 @@ class MeasurementReminder(
     val unit: String,
     override var date: LocalDate,
     override var time: LocalTime,
-    val value: Float=0F,
+    var value: Float=0F,
     override var status:ReminderStatus=ReminderStatus.TO_DO
 ): Reminder {
     override fun toString(): String {
