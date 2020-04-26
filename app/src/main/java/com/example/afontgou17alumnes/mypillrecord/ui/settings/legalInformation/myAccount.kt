@@ -48,7 +48,7 @@ class myAccount : AppCompatActivity() {
         val arrayAdapter2: ArrayAdapter<*>
 
 
-        val users2= arrayOf("", "", "",username,email,birth_year,gender, height,weight)
+        val users2= arrayOf("", "",username,email,birth_year,gender, height,weight)
 
         //getActualMyAccount()
         // access the listView from xml file
@@ -56,7 +56,7 @@ class myAccount : AppCompatActivity() {
         arrayAdapter2 = ArrayAdapter(this,android.R.layout.simple_list_item_1, users2)
         opcions_menuu_actual.adapter = arrayAdapter2
         val arrayAdapter: ArrayAdapter<*>
-        val users = arrayOf("Change Pasword", "Close Session", "Extra information","Username","Email","Year of birth","Gender", "Height","Weight")
+        val users = arrayOf("Change Pasword", "Extra information","Username","Email","Year of birth","Gender", "Height","Weight")
         // access the listView from xml file
         var mListView = findViewById<ListView>(R.id.opcions_menu)
         arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, users)
@@ -120,19 +120,13 @@ class myAccount : AppCompatActivity() {
                 mAlertDialog.dismiss()
             }
         }
-        else if(position==1){//Close Session
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.putExtra("type_of_action","close_sesion")
-            startActivity(intent)
-            Toast.makeText(this,"sesion closed", Toast.LENGTH_SHORT).show()
-        }
-        else if(position==2){//Extra information
+        else if(position==1){//Extra information
             val intent = Intent(this, extra_information::class.java)
             startActivity(intent)
             //Aqui s'haurà de posar que el user i la contrassenya son null, per a que no puguis tornar
             //a entrar a la conta amb el mateix user
         }
-        else if(position==6){//Gender
+        else if(position==5){//Gender
             //Inflate the dialog with custom view
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.gender_dialoge, null)
             //AlertDialogBuilder
@@ -164,7 +158,7 @@ class myAccount : AppCompatActivity() {
                 mAlertDialog.dismiss()
             }
         }
-        else if(position==5){//Year of birth
+        else if(position==4){//Year of birth
             //Inflate the dialog with custom view
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.year_of_birth_dialoge, null)
             //AlertDialogBuilder
@@ -192,7 +186,7 @@ class myAccount : AppCompatActivity() {
                 mAlertDialog.dismiss()
             }
         }
-        else if(position==7){//Height
+        else if(position==6){//Height
             //Inflate the dialog with custom view
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.height_dialoge, null)
             //AlertDialogBuilder
@@ -221,7 +215,7 @@ class myAccount : AppCompatActivity() {
                 mAlertDialog.dismiss()
             }
         }
-        else if(position==8){//weight
+        else if(position==7){//weight
             //Inflate the dialog with custom view
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.weight_dialoge, null)
             //AlertDialogBuilder
@@ -251,10 +245,10 @@ class myAccount : AppCompatActivity() {
     }
 
     private fun refreshMyAccount(users2: Array<Any>, arrayAdapter2:ArrayAdapter<*>){
-        users2.set(6,gender)
-        users2.set(5,birth_year)
-        users2.set(7,height)
-        users2.set(8,weight)
+        users2.set(5,gender)
+        users2.set(4,birth_year)
+        users2.set(6,height)
+        users2.set(7,weight)
         arrayAdapter2.notifyDataSetChanged()
         Controller.refreshMyAccount(email,username,gender,birth_year,height,weight)
         //go_back()
