@@ -7,5 +7,6 @@ interface FakeReminder {
     var time:String
     var date:String
     var done:Int
+    var ID:String
     fun createRealReminder(): Reminder
 }

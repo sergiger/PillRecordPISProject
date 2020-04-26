@@ -11,11 +11,12 @@ class FakeActivityReminder(
     val duration: Int,
     override var date: String,
     override var time: String,
-    override var done: Int=55
+    override var done: Int=55,
+    override var ID: String=""
 ):FakeReminder {
 
     override fun createRealReminder(): com.example.afontgou17alumnes.mypillrecord.data.model.Reminder {
         return ActivityReminder(name, duration, LocalDate.parse(date), LocalTime.parse(time),
-            Controller.getIntToReminderStatus(done))
+            Controller.getIntToReminderStatus(done),ID)
     }
 }

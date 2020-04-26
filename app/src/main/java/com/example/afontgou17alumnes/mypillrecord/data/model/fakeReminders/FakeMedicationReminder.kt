@@ -13,10 +13,11 @@ class FakeMedicationReminder(
     val doseUnit: String,
     override var date: String,
     override var time: String,
-    override var done: Int=55
+    override var done: Int=55,
+    override var ID: String=""
 ):FakeReminder {
     override fun createRealReminder(): com.example.afontgou17alumnes.mypillrecord.data.model.Reminder {
-        return MedicineReminder(name,dose,doseUnit, LocalDate.parse(date), LocalTime.parse(time),Controller.getIntToReminderStatus(done))
+        return MedicineReminder(name,dose,doseUnit, LocalDate.parse(date), LocalTime.parse(time),Controller.getIntToReminderStatus(done),ID)
     }
 
 }

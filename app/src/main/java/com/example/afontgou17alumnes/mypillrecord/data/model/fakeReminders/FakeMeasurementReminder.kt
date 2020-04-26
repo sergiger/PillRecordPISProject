@@ -12,10 +12,11 @@ class FakeMeasurementReminder(
     override var date: String,
     override var time: String,
     val value: Float=0F,
-    override var done: Int=55
+    override var done: Int=55,
+    override var ID: String=""
 ):FakeReminder {
     override fun createRealReminder(): com.example.afontgou17alumnes.mypillrecord.data.model.Reminder {
         return MeasurementReminder(name,unit, LocalDate.parse(date), LocalTime.parse(time),value,
-            Controller.getIntToReminderStatus(done))
+            Controller.getIntToReminderStatus(done),ID)
     }
 }
