@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
@@ -235,11 +236,14 @@ class myAccount : AppCompatActivity() {
         users2.set(6,weight)
         arrayAdapter2.notifyDataSetChanged()
         Controller.refreshMyAccount(this.gender,this.birth_year,this.height,this.weight)
-        val intent = Intent(this, LoginActivity::class.java)
+        //go_back()
+        /*val intent = Intent(this, LoginActivity::class.java)
         intent.putExtra("type_of_action","Save_Share_and_go_back")
-        startActivity(intent)
+        startActivity(intent)*/
     }
-
+    fun go_back(){
+        onBackPressed()
+    }
     private fun showPopupMenu(view: View) = PopupMenu(view.context, view).run {
         menuInflater.inflate(R.menu.gender_popup_menu, menu)
         setOnMenuItemClickListener { item ->

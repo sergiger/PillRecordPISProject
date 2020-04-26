@@ -42,6 +42,7 @@ class AddUnplannedActivity : AppCompatActivity() {
         }
         tick_unplanned_activity.setOnClickListener{
             save()
+            go_home()
         }
         info_button.setOnClickListener{
             select_date(it)
@@ -197,9 +198,9 @@ class AddUnplannedActivity : AppCompatActivity() {
         )
         Controller.addReminder(newReminder)
         //Actualitza el shared preferences tmb
-        val intent = Intent(this, LoginActivity::class.java)
+        /*val intent = Intent(this, LoginActivity::class.java)
         intent.putExtra("type_of_action","Save_and_go_home")
-        startActivity(intent)
+        startActivity(intent)*/
     }//cal completar
 
     private fun showPopupMenu(view: View) = PopupMenu(view.context, view).run {
