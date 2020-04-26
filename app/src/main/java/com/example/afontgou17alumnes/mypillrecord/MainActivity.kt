@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord
 
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
 import android.icu.util.LocaleData
@@ -231,5 +232,8 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         transaction.commit()
+    }
+    @SuppressLint("MissingSuperCall")
+    override fun onBackPressed(): Unit {
     }
 }

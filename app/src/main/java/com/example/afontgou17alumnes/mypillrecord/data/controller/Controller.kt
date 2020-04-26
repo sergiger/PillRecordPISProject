@@ -17,7 +17,7 @@ import java.util.ArrayList
 import kotlin.Comparator
 
 object Controller {
-    val user = User("user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
+    val user = User("1","user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
     var ja_iniciat=false
 
     fun initUserSaved(){
@@ -39,7 +39,7 @@ object Controller {
         //user.addReminder(MeasurementReminder("Weight","kg", LocalDate.now(), LocalTime.of(LocalTime.now().hour,LocalTime.now().minute+1)))
         //user.addReminder(MedicineReminder("Ibuprofen",3,"tablet(s)", LocalDate.now(), LocalTime.of(17,0)))
         //user.addReminder(MeasurementReminder("Weight","kg",LocalDate.now(), LocalTime.of(17,0)))
-        user.addReminder(ActivityReminder("Running", 15, LocalDate.now(), LocalTime.of(18,0)))
+        //user.addReminder(ActivityReminder("Running", 15, LocalDate.now(), LocalTime.of(18,0)))
 
     }
 
@@ -241,7 +241,8 @@ object Controller {
 
     }
 
-    fun createAccount(email:String, username:String, pasword:String, gender:String, yearBirth:Int, weight: Float, height: Float){
+    fun createAccount(id:String,email:String, username:String, pasword:String, gender:String, yearBirth:Int, weight: Float, height: Float){
+        user.id=id
         user.email=email
         user.username=username
         user.pasword=pasword

@@ -1,6 +1,9 @@
 package com.example.afontgou17alumnes.mypillrecord.data.model
 
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeStatistics.FakeStatisticEntry
+import com.example.afontgou17alumnes.mypillrecord.data.model.fakeStatistics.FakeStatistics
+import com.google.gson.Gson
 import java.time.LocalDate
 
 class Statistics {
@@ -30,5 +33,28 @@ class Statistics {
                 break
             }
         }
+    }
+    fun createFakeStatistics(): FakeStatistics {
+        var fakeStatistics= FakeStatistics()
+        var gson= Gson()
+        for(entry in this.weightData){
+            fakeStatistics.weightData.add(gson.toJson(FakeStatisticEntry(entry.value,entry.date.toString())))
+        }
+        for(entry in this.arterialPressureData){
+            fakeStatistics.arterialPressureData.add(gson.toJson(FakeStatisticEntry(entry.value,entry.date.toString())))
+        }
+        for(entry in this.glucoseAfterData){
+            fakeStatistics.glucoseAfterData.add(gson.toJson(FakeStatisticEntry(entry.value,entry.date.toString())))
+        }
+        for(entry in this.glucoseBeforeData){
+            fakeStatistics.glucoseBeforeData.add(gson.toJson(FakeStatisticEntry(entry.value,entry.date.toString())))
+        }
+        for(entry in this.heartRateData){
+            fakeStatistics.heartRateData.add(gson.toJson(FakeStatisticEntry(entry.value,entry.date.toString())))
+        }
+        for(entry in this.temperatureData){
+            fakeStatistics.temperatureData.add(gson.toJson(FakeStatisticEntry(entry.value,entry.date.toString())))
+        }
+        return fakeStatistics
     }
 }

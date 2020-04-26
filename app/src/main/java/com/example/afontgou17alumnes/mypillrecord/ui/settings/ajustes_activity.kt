@@ -8,6 +8,7 @@ import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation.legal_main
 import com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation.myAccount
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.ajustes_activity.*
 
 class ajustes_activity : AppCompatActivity() {
@@ -43,6 +44,9 @@ class ajustes_activity : AppCompatActivity() {
             Toast.makeText(this,"Soon",Toast.LENGTH_SHORT).show()
         }
         else if(position==2){//close Session
+            //close from firebase
+            FirebaseAuth.getInstance().signOut()
+
             val intent = Intent(this, LoginActivity::class.java)
             intent.putExtra("type_of_action","close_sesion")
             startActivity(intent)

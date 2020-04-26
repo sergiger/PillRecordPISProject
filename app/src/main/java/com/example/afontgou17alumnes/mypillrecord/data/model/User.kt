@@ -8,6 +8,7 @@ import android.util.Log
 import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeReminder
 
 open class User{
+    var id : String
     var email:String
     var username:String
     var pasword:String
@@ -21,10 +22,11 @@ open class User{
     var therapies= ArrayList<Therapy>()
     var reminders=ArrayList<Reminder>()
     var agenda=Agenda()
-    val statistics = Statistics()
+    var statistics = Statistics()
 
-    constructor(email:String, username:String, pasword:String, gender:String,
+    constructor(id:String,email:String, username:String, pasword:String, gender:String,
                 birthYear:Int, weight:Float, height:Float){
+        this.id=id
         this.birthYear=birthYear
         this.email=email
         this.username=username
