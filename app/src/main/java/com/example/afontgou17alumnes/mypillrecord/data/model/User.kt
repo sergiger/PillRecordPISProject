@@ -39,7 +39,20 @@ open class User{
     }
 
     fun addReminder(reminder: Reminder){
-        this.reminders.add(reminder)
+        var index=-1
+        for(iterReminders in this.reminders){
+            index+=1
+            if(iterReminders.date.isAfter(reminder.date)){
+                var sublist=this.reminders.subList(index,reminders.size)
+                while(index<reminders.size)
+                    this.reminders.removeAt(index)
+                reminders.add(reminder)
+                reminders.addAll(sublist)
+                break
+            }
+        }
+        if((index+1)==reminders.size)
+            reminders.add(reminder)
     }
 
     fun addTherapy(therapy: Therapy){
