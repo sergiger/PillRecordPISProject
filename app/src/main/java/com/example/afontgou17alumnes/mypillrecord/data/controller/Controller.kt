@@ -23,6 +23,8 @@ import kotlin.Comparator
 object Controller {
     val user = User("1","user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
     var ja_iniciat=false
+    val controllerJSON=ControllerJSON()//Serveix per a treballar amb els JSON
+    val controllerSharePrefs=ControllerSharePrefs()//Serveix per treballar amb les share preferences
 
     private lateinit var mAuth: FirebaseAuth
 

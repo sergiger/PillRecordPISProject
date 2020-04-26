@@ -2,6 +2,8 @@ package com.example.afontgou17alumnes.mypillrecord.data.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.google.gson.Gson
 import java.time.LocalDate
 
 class Frequency :Parcelable {
