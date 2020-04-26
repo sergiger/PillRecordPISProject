@@ -41,7 +41,7 @@ class AsyncTaskHandler: AsyncTask<String, String, String>() {
         val jsonResults: JSONArray = results.getJSONArray("results")
 
         var i = 0
-        while (i<jsonResults.length()) {
+        while (i < jsonResults.length()) {
             val currentPill = jsonResults.getJSONObject(i)
             val brand_name:String = currentPill.getString("brand_name")
 

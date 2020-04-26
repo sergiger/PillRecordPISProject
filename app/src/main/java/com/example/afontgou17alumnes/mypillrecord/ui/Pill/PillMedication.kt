@@ -48,7 +48,6 @@ class PillMedication : AppCompatActivity() , AsyncResponse{
     val url = "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:"
     val field = "packaging.package_ndc:"
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pill_medication)
@@ -225,7 +224,8 @@ class PillMedication : AppCompatActivity() , AsyncResponse{
 
         var name = pill.brand_name + " " + pill.active_ingredients[0].name
         var editable:Editable = Editable.Factory.getInstance().newEditable(name)
-        // pill_search.text = name
+        //val MedicineNoum = findViewById<TextInputEditText>(R.id.pill_search)
+        //MedicineNoum.text = editable
 
         var strength = pill.active_ingredients[0].strength
         val parts = strength.split(" ", "/")

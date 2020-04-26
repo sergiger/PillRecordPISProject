@@ -5,9 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.UnplannedMedicineReminder
 import kotlinx.android.synthetic.main.fragment_two.*
+import java.time.LocalDate
+import java.time.LocalTime
 import java.util.*
 
 /**
@@ -45,7 +52,7 @@ class FragmentTwo : Fragment() {
     }
 
     fun createMonthList() {
-        /*val medicineList = arrayOf(
+        val medicineList = arrayListOf(
             MedicineReminder("Ibuprofen",3,"tablet(s)", LocalDate.now(), LocalTime.of(17,0)),
             MeasurementReminder("Weight","kg",LocalDate.now(), LocalTime.of(17,0)),
             ActivityReminder("Running", 15, LocalDate.now(), LocalTime.of(18,0)),
@@ -65,9 +72,9 @@ class FragmentTwo : Fragment() {
         )
 
         val medicineListView : ListView? = view?.findViewById(R.id.month_list)
-        val medicineAdapter = ReminderListAdapter(this,medicineList)
+        val medicineAdapter = ReminderListAdapter(this, medicineList)
         if (medicineListView != null) {
             medicineListView.adapter = medicineAdapter
-        }*/
+        }
     }
 }

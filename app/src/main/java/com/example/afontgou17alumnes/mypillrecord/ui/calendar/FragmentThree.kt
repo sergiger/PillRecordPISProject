@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder
@@ -34,7 +33,7 @@ class FragmentThree : Fragment() {
     }
 
     fun createMedicineList(){
-        /*val medicineList = arrayOf(
+        val medicineList = arrayOf(
             MedicineReminder("Ibuprofen",3,"tablet(s)", LocalDate.now(), LocalTime.of(17,0)),
             MeasurementReminder("Weight","kg", LocalDate.now(), LocalTime.of(17,0),0F),
             ActivityReminder("Running", 15, LocalDate.now(), LocalTime.of(18,0)),
@@ -51,9 +50,9 @@ class FragmentThree : Fragment() {
             UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
             UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
             UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)")
-        )*/
+        )
         val medicineListView : ListView? = view?.findViewById(R.id.medicine_list)
-        val reminderAdapter : ReminderListAdapter= ReminderListAdapter(this, Controller.getRemindersData())
+        val reminderAdapter : HistoricListAdapter = HistoricListAdapter (this, medicineList) // Controller.getRemindersData()
         if (medicineListView != null) {
             medicineListView.adapter = reminderAdapter
         }
