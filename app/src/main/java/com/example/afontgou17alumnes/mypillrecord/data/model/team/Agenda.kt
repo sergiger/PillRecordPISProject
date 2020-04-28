@@ -1,4 +1,4 @@
-package com.example.afontgou17alumnes.mypillrecord.data.model
+package com.example.afontgou17alumnes.mypillrecord.data.model.team
 
 class Agenda {
     var contactes=ArrayList<Contacte>()
@@ -9,13 +9,16 @@ class Agenda {
             this.contactes.add(contacte)
     } //constructor copia
 
-    fun addContact(contacte:Contacte){
+    fun addContact(contacte: Contacte){
         contactes.add(contacte)
         refreshAgenda()
         notifyContacte()
     }
-    fun createContacte(username:String,type:String):Contacte{
-        return Contacte(username,type)
+    fun createContacte(username:String,type:String): Contacte {
+        return Contacte(
+            username,
+            type
+        )
     }
     fun deleteContacte(username: String){
         for(index in contactes.indices){

@@ -1,10 +1,7 @@
-package com.example.afontgou17alumnes.mypillrecord.data.model
+package com.example.afontgou17alumnes.mypillrecord.data.model.therapy
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
-import com.google.gson.Gson
-import java.time.LocalDate
 
 class Frequency :Parcelable {
     var type : Int = 0
@@ -96,7 +93,9 @@ class Frequency :Parcelable {
 
     companion object CREATOR : Parcelable.Creator<Frequency> {
         override fun createFromParcel(parcel: Parcel): Frequency {
-            return Frequency(parcel)
+            return Frequency(
+                parcel
+            )
         }
 
         override fun newArray(size: Int): Array<Frequency?> {

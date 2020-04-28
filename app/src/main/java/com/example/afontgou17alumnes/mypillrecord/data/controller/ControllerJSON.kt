@@ -1,10 +1,14 @@
 package com.example.afontgou17alumnes.mypillrecord.data.controller
 
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeActivityReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMeasurementReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMedicationReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeStatistics.FakeStatistics
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeReminder.FakeActivityReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeReminder.FakeMeasurementReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeReminder.FakeMedicationReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeReminder.FakeReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeStatistics.FakeStatistics
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeTherapy.FakeActivityTherapy
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeTherapy.FakeMeasurementTherapy
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeTherapy.FakeMedicineTherapy
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeTherapy.FakeTherapy
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
@@ -21,6 +25,15 @@ class ControllerJSON {
     }
     fun getMedicineReminderJSON():String{
         return Gson().toJson(Controller.user.getFakeMedicationReminders())
+    }
+    fun getActivityTherapyJSON():String{
+        return Gson().toJson(Controller.user.getFakeActivityTherapy())
+    }
+    fun getMeasurementTherapyJSON():String{
+        return Gson().toJson(Controller.user.getFakeMeasurementTherapy())
+    }
+    fun getMedicineTherapyJSON():String{
+        return Gson().toJson(Controller.user.getFakeMedicationTherapy())
     }
     fun setStatisticssFromJSON(json:String){
         val fakeStatistics: FakeStatistics = Gson().fromJson(json, FakeStatistics::class.java)
@@ -59,6 +72,42 @@ class ControllerJSON {
             var reminder_list3:Array<FakeReminder> = gson.fromJson(json, tipusArray)
             for(reminder in reminder_list3){
                 Controller.user.reminders.add(reminder.createRealReminder())
+            }
+        }
+    }
+    fun setActivityReminderFronJSON(json:String){
+        val gson = Gson()
+        var tipusArray: Type
+
+        if(json!=""){
+            tipusArray = object : TypeToken<Array<FakeActivityTherapy>>() {}.type
+            var reminder_list3:Array<FakeTherapy> = gson.fromJson(json, tipusArray)
+            for(reminder in reminder_list3){
+                Controller.user.addTherapy(reminder.createRealTherapy())
+            }
+        }
+    }
+    fun setMeasurementReminderFronJSON(json:String){
+        val gson = Gson()
+        var tipusArray: Type
+
+        if(json!=""){
+            tipusArray = object : TypeToken<Array<FakeMeasurementTherapy>>() {}.type
+            var reminder_list3:Array<FakeTherapy> = gson.fromJson(json, tipusArray)
+            for(reminder in reminder_list3){
+                Controller.user.addTherapy(reminder.createRealTherapy())
+            }
+        }
+    }
+    fun setMedicineReminderFronJSON(json:String){
+        val gson = Gson()
+        var tipusArray: Type
+
+        if(json!=""){
+            tipusArray = object : TypeToken<Array<FakeMedicineTherapy>>() {}.type
+            var reminder_list3:Array<FakeTherapy> = gson.fromJson(json, tipusArray)
+            for(reminder in reminder_list3){
+                Controller.user.addTherapy(reminder.createRealTherapy())
             }
         }
     }

@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.ActivityReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.MeasurementReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.MedicineReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.UnplannedMedicineReminder
 import kotlinx.android.synthetic.main.fragment_two.*
 import java.time.LocalDate
@@ -53,9 +53,25 @@ class FragmentTwo : Fragment() {
 
     fun createMonthList() {
         val medicineList = arrayListOf(
-            MedicineReminder("Ibuprofen",3,"tablet(s)", LocalDate.now(), LocalTime.of(17,0)),
-            MeasurementReminder("Weight","kg",LocalDate.now(), LocalTime.of(17,0)),
-            ActivityReminder("Running", 15, LocalDate.now(), LocalTime.of(18,0)),
+            MedicineReminder(
+                "Ibuprofen",
+                3,
+                "tablet(s)",
+                LocalDate.now(),
+                LocalTime.of(17, 0)
+            ),
+            MeasurementReminder(
+                "Weight",
+                "kg",
+                LocalDate.now(),
+                LocalTime.of(17, 0)
+            ),
+            ActivityReminder(
+                "Running",
+                15,
+                LocalDate.now(),
+                LocalTime.of(18, 0)
+            ),
             UnplannedMedicineReminder("Ibuprofen", 1, "tablet(s)"),
             UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
             UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),

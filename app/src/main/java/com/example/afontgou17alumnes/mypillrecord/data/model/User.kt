@@ -5,7 +5,16 @@ import java.time.LocalTime
 import java.util.*
 import kotlin.collections.ArrayList
 import android.util.Log
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeReminder
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
+import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.Statistics
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.ActivityTherapy
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MeasurementTherapy
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MedicineTherapy
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Therapy
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeReminder.FakeReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeTherapy.FakeTherapy
+import com.example.afontgou17alumnes.mypillrecord.data.model.team.Agenda
 
 open class User{
     var id : String
@@ -18,8 +27,10 @@ open class User{
     var height:Float
     var therapies= ArrayList<Therapy>()
     var reminders=ArrayList<Reminder>()
-    var agenda=Agenda()
-    var statistics = Statistics()
+    var agenda=
+        Agenda()
+    var statistics =
+        Statistics()
 
     constructor(id:String,email:String, username:String, pasword:String, gender:String,
                 birthYear:Int, weight:Float, height:Float){
@@ -39,10 +50,10 @@ open class User{
     }
 
     fun addReminder(reminder: Reminder){
-        var index=-1
+        /*var index=-1
         for(iterReminders in this.reminders){
             index+=1
-            if(iterReminders.date.isAfter(reminder.date)){
+            if(iterReminders.date.isAfter(reminder.date)||(iterReminders.date.equals(reminder.date)&&iterReminders.time.isAfter(reminder.time))){
                 var sublist=this.reminders.subList(index,reminders.size)
                 while(index<reminders.size)
                     this.reminders.removeAt(index)
@@ -53,6 +64,7 @@ open class User{
         }
         if((index+1)==reminders.size)
             reminders.add(reminder)
+        Controller.controllerSharePrefs.sharedUpLoad()*/
     }
 
     fun addTherapy(therapy: Therapy){
@@ -71,8 +83,14 @@ open class User{
         }
     }
 
-    fun getNextReminder():Reminder{
-        var retorn:Reminder= MeasurementReminder("Weight","kg", LocalDate.now(), LocalTime.now())
+    fun getNextReminder(): Reminder {
+        var retorn: Reminder =
+            MeasurementReminder(
+                "Weight",
+                "kg",
+                LocalDate.now(),
+                LocalTime.now()
+            )
         for(reminder in reminders){
             if(reminder.getMilisFromNow()>Calendar.getInstance().timeInMillis)
                 if(reminder.getReminderStatus() == ReminderStatus.TO_DO){
@@ -129,6 +147,39 @@ open class User{
             }
         }
         val retorn=arrayOfNulls<FakeReminder>(acumulador.size)
+        acumulador.toArray(retorn)
+        return retorn
+    }
+    fun getFakeActivityTherapy():Array<FakeTherapy?>{
+        var acumulador=ArrayList<FakeTherapy>()
+        for(therapy in this.therapies){
+            if(therapy is ActivityTherapy) {
+                acumulador.add(therapy.createFakeTherapy())
+            }
+        }
+        val retorn=arrayOfNulls<FakeTherapy>(acumulador.size)
+        acumulador.toArray(retorn)
+        return retorn
+    }
+    fun getFakeMeasurementTherapy():Array<FakeTherapy?>{
+        var acumulador=ArrayList<FakeTherapy>()
+        for(therapy in this.therapies){
+            if(therapy is MeasurementTherapy) {
+                acumulador.add(therapy.createFakeTherapy())
+            }
+        }
+        val retorn=arrayOfNulls<FakeTherapy>(acumulador.size)
+        acumulador.toArray(retorn)
+        return retorn
+    }
+    fun getFakeMedicationTherapy():Array<FakeTherapy?>{
+        var acumulador=ArrayList<FakeTherapy>()
+        for(therapy in this.therapies){
+            if(therapy is MedicineTherapy) {
+                acumulador.add(therapy.createFakeTherapy())
+            }
+        }
+        val retorn=arrayOfNulls<FakeTherapy>(acumulador.size)
         acumulador.toArray(retorn)
         return retorn
     }

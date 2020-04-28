@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord.data.model
 
+import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.MedicineReminder
 import java.time.LocalDate
 import java.time.LocalTime
 

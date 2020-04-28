@@ -3,6 +3,9 @@ package com.example.afontgou17alumnes.mypillrecord.data.controller
 import android.graphics.Color
 import android.util.Log
 import com.example.afontgou17alumnes.mypillrecord.data.model.*
+import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
+import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.StatisticEntry
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Therapy
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -21,28 +24,21 @@ import java.util.ArrayList
 import kotlin.Comparator
 
 object Controller {
-    val user = User("1","user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
+    var user = User("1","user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
     var ja_iniciat=false
     val controllerJSON=ControllerJSON()//Serveix per a treballar amb els JSON
-    val controllerSharePrefs=ControllerSharePrefs()//Serveix per treballar amb les share preferences
+    var controllerSharePrefs=ControllerSharePrefs()//Serveix per treballar amb les share preferences
 
     private lateinit var mAuth: FirebaseAuth
 
 
-    fun initUserSaved(){
-        /*this.user.weight=SharedApp.prefs.weight
-        this.user.height=SharedApp.prefs.height
-        this.user.birthYear=SharedApp.prefs.yearBirth
-        this.user.username=SharedApp.prefs.username
-        //this.user.email=SharedApp.prefs.email
-        this.user.gender=SharedApp.prefs.gender
-        this.user.pasword=SharedApp.prefs.pasword*/
-
+    /*fun initUserSaved(){
+        controllerSharePrefs.sharedDownloadLoad()
     }
 
     fun savePreferences(){
-
-    }
+        controllerSharePrefs.sharedUpLoad()
+    }*/
 
     fun setRemindersData(){
         //user.addReminder(MeasurementReminder("Weight","kg", LocalDate.now(), LocalTime.of(LocalTime.now().hour,LocalTime.now().minute+1)))
@@ -96,56 +92,197 @@ object Controller {
 
     fun setStatisticsData(){
         val data1 = arrayOf<StatisticEntry>(
-            StatisticEntry(80F, LocalDate.of(2020, 3, 12)),
-            StatisticEntry(81F, LocalDate.of(2020, 3, 13)),
-            StatisticEntry(82F, LocalDate.of(2020, 3, 14)),
-            StatisticEntry(83F, LocalDate.of(2020, 3, 15)),
-            StatisticEntry(82F, LocalDate.of(2020, 3, 16)),
-            StatisticEntry(81F, LocalDate.of(2020, 3, 17)),
-            StatisticEntry(82F, LocalDate.of(2020, 3, 18)),
-            StatisticEntry(84F, LocalDate.of(2020, 3, 19)),
-            StatisticEntry(86F, LocalDate.of(2020, 3, 20)),
-            StatisticEntry(85F, LocalDate.of(2020, 3, 21)),
-            StatisticEntry(83F, LocalDate.of(2020, 3, 22)),
-            StatisticEntry(81F, LocalDate.of(2020, 3, 23)),
-            StatisticEntry(84F, LocalDate.of(2020, 3, 24)),
-            StatisticEntry(82F, LocalDate.of(2020, 3, 25)),
-            StatisticEntry(85F, LocalDate.of(2020, 3, 26)),
-            StatisticEntry(82F, LocalDate.of(2020, 3, 27)),
-            StatisticEntry(83F, LocalDate.of(2020, 3, 28)),
-            StatisticEntry(83F, LocalDate.of(2020, 3, 29)),
-            StatisticEntry(83F, LocalDate.of(2020, 3, 30)),
-            StatisticEntry(85F, LocalDate.of(2020, 3, 30)),
-            StatisticEntry(83F, LocalDate.of(2020, 3, 31)),
-            StatisticEntry(84F, LocalDate.of(2020, 4, 1)),
-            StatisticEntry(81F, LocalDate.of(2020, 4, 2)),
-            StatisticEntry(85F, LocalDate.of(2020, 4, 3))
+            StatisticEntry(
+                80F,
+                LocalDate.of(2020, 3, 12)
+            ),
+            StatisticEntry(
+                81F,
+                LocalDate.of(2020, 3, 13)
+            ),
+            StatisticEntry(
+                82F,
+                LocalDate.of(2020, 3, 14)
+            ),
+            StatisticEntry(
+                83F,
+                LocalDate.of(2020, 3, 15)
+            ),
+            StatisticEntry(
+                82F,
+                LocalDate.of(2020, 3, 16)
+            ),
+            StatisticEntry(
+                81F,
+                LocalDate.of(2020, 3, 17)
+            ),
+            StatisticEntry(
+                82F,
+                LocalDate.of(2020, 3, 18)
+            ),
+            StatisticEntry(
+                84F,
+                LocalDate.of(2020, 3, 19)
+            ),
+            StatisticEntry(
+                86F,
+                LocalDate.of(2020, 3, 20)
+            ),
+            StatisticEntry(
+                85F,
+                LocalDate.of(2020, 3, 21)
+            ),
+            StatisticEntry(
+                83F,
+                LocalDate.of(2020, 3, 22)
+            ),
+            StatisticEntry(
+                81F,
+                LocalDate.of(2020, 3, 23)
+            ),
+            StatisticEntry(
+                84F,
+                LocalDate.of(2020, 3, 24)
+            ),
+            StatisticEntry(
+                82F,
+                LocalDate.of(2020, 3, 25)
+            ),
+            StatisticEntry(
+                85F,
+                LocalDate.of(2020, 3, 26)
+            ),
+            StatisticEntry(
+                82F,
+                LocalDate.of(2020, 3, 27)
+            ),
+            StatisticEntry(
+                83F,
+                LocalDate.of(2020, 3, 28)
+            ),
+            StatisticEntry(
+                83F,
+                LocalDate.of(2020, 3, 29)
+            ),
+            StatisticEntry(
+                83F,
+                LocalDate.of(2020, 3, 30)
+            ),
+            StatisticEntry(
+                85F,
+                LocalDate.of(2020, 3, 30)
+            ),
+            StatisticEntry(
+                83F,
+                LocalDate.of(2020, 3, 31)
+            ),
+            StatisticEntry(
+                84F,
+                LocalDate.of(2020, 4, 1)
+            ),
+            StatisticEntry(
+                81F,
+                LocalDate.of(2020, 4, 2)
+            ),
+            StatisticEntry(
+                85F,
+                LocalDate.of(2020, 4, 3)
+            )
         )
 
         val data2 = arrayOf<StatisticEntry>(
-            StatisticEntry(85F, LocalDate.of(2020, 3, 12)),
-            StatisticEntry(86F, LocalDate.of(2020, 3, 13)),
-            StatisticEntry(84F, LocalDate.of(2020, 3, 14)),
-            StatisticEntry(82F, LocalDate.of(2020, 3, 15)),
-            StatisticEntry(83F, LocalDate.of(2020, 3, 16)),
-            StatisticEntry(81F, LocalDate.of(2020, 3, 17)),
-            StatisticEntry(89F, LocalDate.of(2020, 3, 18)),
-            StatisticEntry(87F, LocalDate.of(2020, 3, 19)),
-            StatisticEntry(85F, LocalDate.of(2020, 3, 20)),
-            StatisticEntry(82F, LocalDate.of(2020, 3, 21)),
-            StatisticEntry(84F, LocalDate.of(2020, 3, 22)),
-            StatisticEntry(89F, LocalDate.of(2020, 3, 23)),
-            StatisticEntry(86F, LocalDate.of(2020, 3, 24)),
-            StatisticEntry(80F, LocalDate.of(2020, 3, 25)),
-            StatisticEntry(82F, LocalDate.of(2020, 3, 26)),
-            StatisticEntry(83F, LocalDate.of(2020, 3, 27)),
-            StatisticEntry(88F, LocalDate.of(2020, 3, 28)),
-            StatisticEntry(84F, LocalDate.of(2020, 3, 29)),
-            StatisticEntry(89F, LocalDate.of(2020, 3, 30)),
-            StatisticEntry(87F, LocalDate.of(2020, 3, 31)),
-            StatisticEntry(85F, LocalDate.of(2020, 4, 1)),
-            StatisticEntry(86F, LocalDate.of(2020, 4, 2)),
-            StatisticEntry(83F, LocalDate.of(2020, 4, 3))
+            StatisticEntry(
+                85F,
+                LocalDate.of(2020, 3, 12)
+            ),
+            StatisticEntry(
+                86F,
+                LocalDate.of(2020, 3, 13)
+            ),
+            StatisticEntry(
+                84F,
+                LocalDate.of(2020, 3, 14)
+            ),
+            StatisticEntry(
+                82F,
+                LocalDate.of(2020, 3, 15)
+            ),
+            StatisticEntry(
+                83F,
+                LocalDate.of(2020, 3, 16)
+            ),
+            StatisticEntry(
+                81F,
+                LocalDate.of(2020, 3, 17)
+            ),
+            StatisticEntry(
+                89F,
+                LocalDate.of(2020, 3, 18)
+            ),
+            StatisticEntry(
+                87F,
+                LocalDate.of(2020, 3, 19)
+            ),
+            StatisticEntry(
+                85F,
+                LocalDate.of(2020, 3, 20)
+            ),
+            StatisticEntry(
+                82F,
+                LocalDate.of(2020, 3, 21)
+            ),
+            StatisticEntry(
+                84F,
+                LocalDate.of(2020, 3, 22)
+            ),
+            StatisticEntry(
+                89F,
+                LocalDate.of(2020, 3, 23)
+            ),
+            StatisticEntry(
+                86F,
+                LocalDate.of(2020, 3, 24)
+            ),
+            StatisticEntry(
+                80F,
+                LocalDate.of(2020, 3, 25)
+            ),
+            StatisticEntry(
+                82F,
+                LocalDate.of(2020, 3, 26)
+            ),
+            StatisticEntry(
+                83F,
+                LocalDate.of(2020, 3, 27)
+            ),
+            StatisticEntry(
+                88F,
+                LocalDate.of(2020, 3, 28)
+            ),
+            StatisticEntry(
+                84F,
+                LocalDate.of(2020, 3, 29)
+            ),
+            StatisticEntry(
+                89F,
+                LocalDate.of(2020, 3, 30)
+            ),
+            StatisticEntry(
+                87F,
+                LocalDate.of(2020, 3, 31)
+            ),
+            StatisticEntry(
+                85F,
+                LocalDate.of(2020, 4, 1)
+            ),
+            StatisticEntry(
+                86F,
+                LocalDate.of(2020, 4, 2)
+            ),
+            StatisticEntry(
+                83F,
+                LocalDate.of(2020, 4, 3)
+            )
         )
         user.statistics.weightData.addAll(data1)
         user.statistics.heartRateData.addAll(data2)
@@ -215,22 +352,40 @@ object Controller {
         user.addTherapy(therapy)
     }
     fun addReminder(reminder: Reminder){
-        user.addReminder(reminder)
+        user.reminders.add(reminder)
         Log.d("hola:",user.reminders[user.reminders.size-1].toString())
+        Controller.controllerSharePrefs.sharedUpLoad()
     }
     fun createMedicineReminder(medicine:String,dose:Int,units:String,
     date:LocalDate,time: LocalTime
-    ):Reminder{
-        return MedicineReminder(medicine,dose,units,date,time)
+    ): Reminder {
+        return MedicineReminder(
+            medicine,
+            dose,
+            units,
+            date,
+            time
+        )
     }
 
     fun createActivityReminder(activity: String, duration: Int,
                                date: LocalDate, time: LocalTime
     ): Reminder {
-        return ActivityReminder(activity,duration,date,time)
+        return ActivityReminder(
+            activity,
+            duration,
+            date,
+            time
+        )
     }
-    fun createMeasurementReminder(type:String,units:String,date:LocalDate,time:LocalTime,value:Float=0F):Reminder{
-        return MeasurementReminder(type,units,date,time,value)
+    fun createMeasurementReminder(type:String,units:String,date:LocalDate,time:LocalTime,value:Float=0F): Reminder {
+        return MeasurementReminder(
+            type,
+            units,
+            date,
+            time,
+            value
+        )
     }
 
     fun refreshMyAccount(email:String,username: String,gender: String, birthYear: Int, height: Float, weight: Float) {
@@ -310,7 +465,7 @@ object Controller {
         }
     }
 
-    fun getIntToReminderStatus(i: Int): ReminderStatus{
+    fun getIntToReminderStatus(i: Int): ReminderStatus {
         return when(i){
             0 -> ReminderStatus.DONE
             1 -> ReminderStatus.OMITTED

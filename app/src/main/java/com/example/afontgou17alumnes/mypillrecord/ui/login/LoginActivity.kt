@@ -1,45 +1,27 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.login
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.ProgressDialog
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
-import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.Reminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeActivityReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMeasurementReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMedicationReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeStatistics.FakeStatistics
+import com.example.afontgou17alumnes.mypillrecord.data.controller.ControllerSharePrefs
 import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.activity__register4.*
 import kotlinx.android.synthetic.main.activity_login.*
-import java.lang.reflect.Type
 
 
 class LoginActivity : AppCompatActivity() {
@@ -52,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
         ProgressDialogInit()
         mAuth=FirebaseAuth.getInstance()
         setContentView(R.layout.activity_login)
+        ControllerSharePrefs.setContext(this)
         /*
         val bundle:Bundle? = intent.extras
         val actions = bundle?.get("type_of_action")//Això ens permet accedir al shared preferences, potser és una manera molt cutre, però és la única que consegueixo que funcioni
@@ -128,6 +111,8 @@ class LoginActivity : AppCompatActivity() {
         }
         val currentUser = mAuth.currentUser
         updateUI(currentUser)
+        //Controller.controllerSharePrefs.closeSesion()
+        Controller.controllerSharePrefs.sharedDownloadLoad()
     }
 
     private fun updateUI(user: FirebaseUser?) {

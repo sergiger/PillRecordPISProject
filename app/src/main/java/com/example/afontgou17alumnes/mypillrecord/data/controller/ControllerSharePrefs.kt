@@ -2,6 +2,7 @@ package com.example.afontgou17alumnes.mypillrecord.data.controller
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
 import com.google.gson.Gson
@@ -35,6 +36,11 @@ class ControllerSharePrefs {
         editor.putString("MedicationReminder", Controller.controllerJSON.getMedicineReminderJSON())
         editor.putString("Statistics", Controller.controllerJSON.getStatisticsJSON())
         editor.apply()
+        //Log.d("hola",Controller.controllerJSON.getStatisticsJSON())
+        /*var prefs =context.getSharedPreferences("Mydata", Context.MODE_PRIVATE)
+
+
+        Log.d("hola","uploaded")*/
     }
     fun sharedDownloadLoad(){
         var prefs = context.getSharedPreferences("Mydata", Context.MODE_PRIVATE)
@@ -59,17 +65,26 @@ class ControllerSharePrefs {
             Controller.user.height= prefs.getString("height","").toFloat()
 
             //He separat els reminders en 3 perque no sabia com passar de JSON a array de reminders amb diferents constructors
-            var jsonList=prefs.getString("ActivityReminder","")
-            Controller.controllerJSON.setActivityReminderFromJSON(jsonList)
-
-            jsonList=prefs.getString("MeasurementReminder","")
-            Controller.controllerJSON.setMeasurementReminderFromJSON(jsonList)
-
-            jsonList=prefs.getString("MedicineReminder","")
-            Controller.controllerJSON.setMedicineReminderFromJSON(jsonList)
 
             val fakeStatisticsJSON=prefs.getString("Statistics","")
-            Controller.controllerJSON.setStatisticssFromJSON(jsonList)
+            Log.d("statisticsDownload",fakeStatisticsJSON)
+            Controller.controllerJSON.setStatisticssFromJSON(fakeStatisticsJSON)
+
+            var jsonList=prefs.getString("MedicationReminder","")
+            Log.d("measurement",jsonList)
+            Controller.controllerJSON.setMedicineReminderFromJSON(jsonList)
+
+            jsonList=prefs.getString("MeasurementReminder","")
+            Log.d("measurement",jsonList)
+            Controller.controllerJSON.setMeasurementReminderFromJSON(jsonList)
+
+            jsonList=prefs.getString("ActivityReminder","")
+            Log.d("measurement",jsonList)
+            Controller.controllerJSON.setActivityReminderFromJSON(jsonList)
+
+
+
+
 
         }
     }

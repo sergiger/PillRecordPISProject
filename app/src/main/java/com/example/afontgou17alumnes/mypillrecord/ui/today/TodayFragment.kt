@@ -1,6 +1,5 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.today
 
-import android.R.attr
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +10,7 @@ import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
-import com.example.afontgou17alumnes.mypillrecord.data.model.*
+import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
 import com.example.afontgou17alumnes.mypillrecord.ui.calendar.ReminderListAdapter
 import kotlinx.android.synthetic.main.today__fragment.*
 import java.time.LocalDate

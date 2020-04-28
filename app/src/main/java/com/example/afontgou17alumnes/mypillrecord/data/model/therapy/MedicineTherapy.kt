@@ -1,8 +1,6 @@
-package com.example.afontgou17alumnes.mypillrecord.data.model
+package com.example.afontgou17alumnes.mypillrecord.data.model.therapy
 
-import android.os.Parcel
-import android.os.Parcelable
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeTherapy.FakeMedicineTherapy
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeTherapy.FakeMedicineTherapy
 import com.google.gson.Gson
 import java.time.LocalDate
 
@@ -11,13 +9,13 @@ open class MedicineTherapy(
     override var startDate: LocalDate,
     override var endDate: LocalDate,
     override var notes: String="",
-    override var id: String="",
+    override var id: Int=-1,
     var dose:Int,
     var units:String,
     var medicine:String
 
 ) : Therapy {
-    override fun createFakeTherapy(): com.example.afontgou17alumnes.mypillrecord.data.model.fakeTherapy.FakeTherapy {
+    override fun createFakeTherapy(): com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeTherapy.FakeTherapy {
         return FakeMedicineTherapy(Gson().toJson(frequency),startDate.toString(),endDate.toString(),notes,id,dose,units,medicine)
     }
 }

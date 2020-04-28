@@ -5,13 +5,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.model.*
-import kotlinx.android.synthetic.main.activity_add_unplanned_measurement.*
-import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
+import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
 import kotlinx.android.synthetic.main.activity_today_modify_reminder.*
 import kotlinx.android.synthetic.main.activity_today_modify_reminder.back_arrow
 import kotlinx.android.synthetic.main.activity_today_modify_reminder.hour_button_today_modify_reminder
@@ -19,7 +16,6 @@ import kotlinx.android.synthetic.main.activity_today_modify_reminder.info_button
 import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.number_dialog.view.OK
 import kotlinx.android.synthetic.main.number_dialog.view.cancel
-import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.time_dialog.view.*
 import java.time.LocalTime
 import java.util.*
