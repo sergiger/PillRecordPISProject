@@ -155,6 +155,17 @@ class activity_Register4 : AppCompatActivity() {
              "height" to height
          )
         // Add a new document with a specific id
+         //iniciate statistis
+         val iniciate = hashMapOf(
+             "iniciate" to true
+         )
+         Controller.db.collection("statistics").document(Controller.user.id).set(iniciate)
+         Controller.db.collection("heartRateData").document(Controller.user.id).set(iniciate)
+         Controller.db.collection("arterialPressureData").document(Controller.user.id).set(iniciate)
+         Controller.db.collection("glucoseBeforeData").document(Controller.user.id).set(iniciate)
+         Controller.db.collection("glucoseAfterData").document(Controller.user.id).set(iniciate)
+         Controller.db.collection("temperatureData").document(Controller.user.id).set(iniciate)
+
          db.collection("users").document(uid)
              .set(user)
              .addOnSuccessListener { documentReference ->

@@ -122,18 +122,32 @@ class AddMeasurementDialog : DialogFragment() {
 
         //Part modificar Statistics
         when(pos){
-            0-> Controller.user.statistics.weightData.add(StatisticEntry(value,
+            0-> {
+                Controller.user.statistics.weightData.add(StatisticEntry(value,
+                    LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
+                Controller.addStaticsValueToFirebase("weightData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
+            }
+            1-> {
+                Controller.user.statistics.heartRateData.add(StatisticEntry(value,
+                    LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
+                Controller.addStaticsValueToFirebase("heartRateData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
+            }
+            2-> {Controller.user.statistics.arterialPressureData.add(StatisticEntry(value,
                 LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
-            1-> Controller.user.statistics.heartRateData.add(StatisticEntry(value,
+                Controller.addStaticsValueToFirebase("arterialPressureData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
+            }
+            3-> {Controller.user.statistics.glucoseBeforeData.add(StatisticEntry(value,
                 LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
-            2-> Controller.user.statistics.arterialPressureData.add(StatisticEntry(value,
+                Controller.addStaticsValueToFirebase("glucoseBeforeData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
+            }
+            4-> {Controller.user.statistics.glucoseAfterData.add(StatisticEntry(value,
                 LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
-            3-> Controller.user.statistics.glucoseBeforeData.add(StatisticEntry(value,
+                Controller.addStaticsValueToFirebase("glucoseAfterData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
+            }
+            5-> {Controller.user.statistics.temperatureData.add(StatisticEntry(value,
                 LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
-            4-> Controller.user.statistics.glucoseAfterData.add(StatisticEntry(value,
-                LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
-            5-> Controller.user.statistics.temperatureData.add(StatisticEntry(value,
-                LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
+                Controller.addStaticsValueToFirebase("temperatureData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
+            }
         }
     }
     fun setType(id:Int){
