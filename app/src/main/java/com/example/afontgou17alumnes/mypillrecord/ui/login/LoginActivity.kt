@@ -111,8 +111,10 @@ class LoginActivity : AppCompatActivity() {
         }
         val currentUser = mAuth.currentUser
         updateUI(currentUser)
+        
+        //Share preferences
         //Controller.controllerSharePrefs.closeSesion()
-        Controller.controllerSharePrefs.sharedDownloadLoad()
+        //Controller.controllerSharePrefs.sharedDownloadLoad()
     }
 
     private fun updateUI(user: FirebaseUser?) {
