@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation.legal_main
 import com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation.myAccount
@@ -51,6 +52,7 @@ class ajustes_activity : AppCompatActivity() {
             intent.putExtra("type_of_action","close_sesion")
             startActivity(intent)
             Toast.makeText(this,"sesion closed", Toast.LENGTH_SHORT).show()
+            Controller.controllerSharePrefs.closeSesion()
         }
         else if(position==3){//Legal information
             val intent = Intent(this, legal_main::class.java)

@@ -11,7 +11,7 @@ import com.google.gson.Gson
 class ControllerSharePrefs {
     //IMPRESCINDIBLE INICIALITZAR AL INICI DEL PROGRAMA AMB UN CONTEXT, DEL CONTRARI, NO FUNCIONARÀ
     //Aquest companion object s'ha d'inicialitzar des de una activity només un cop, és molt important
-    //que només sigui un cop, encara no ho he fet
+    //que només sigui un cop, encara no ho he fet l'inicialitzo a logIn
     companion object {
 
         private lateinit var context: Context
@@ -35,8 +35,13 @@ class ControllerSharePrefs {
         editor.putString("MeasurementReminder", Controller.controllerJSON.getMeasurementReminderJSON())
         editor.putString("MedicationReminder", Controller.controllerJSON.getMedicineReminderJSON())
         editor.putString("Statistics", Controller.controllerJSON.getStatisticsJSON())
+        editor.putString("ActivityTherapy",Controller.controllerJSON.getActivityTherapyJSON())
+        editor.putString("MeasurementTherapy",Controller.controllerJSON.getMedicineTherapyJSON())
+        editor.putString("MedicineTherapy",Controller.controllerJSON.getMeasurementTherapyJSON())
         editor.apply()
-        //Log.d("hola",Controller.controllerJSON.getStatisticsJSON())
+        Log.d("therapy1",Controller.controllerJSON.getActivityTherapyJSON())
+        Log.d("therapy2",Controller.controllerJSON.getMedicineTherapyJSON())
+        Log.d("therapy3",Controller.controllerJSON.getMeasurementTherapyJSON())
         /*var prefs =context.getSharedPreferences("Mydata", Context.MODE_PRIVATE)
 
 
@@ -89,6 +94,9 @@ class ControllerSharePrefs {
         }
     }
     fun closeSesion(){
+        /*
+        * No entenc perquè si fas close session pero no tanques l'aplicació del tot, no desapareixen les share preferences
+        * */
         val editor = context.getSharedPreferences("Mydata", Context.MODE_PRIVATE).edit()
         editor.clear()
         editor.apply()
