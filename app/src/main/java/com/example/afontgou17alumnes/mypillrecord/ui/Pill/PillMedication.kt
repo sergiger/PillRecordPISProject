@@ -12,7 +12,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.Frequency
+import com.example.afontgou17alumnes.mypillrecord.data.model.Therapy
 import com.example.afontgou17alumnes.mypillrecord.data.pills.MyData
 import com.example.afontgou17alumnes.mypillrecord.data.search.AsyncResponse
 import com.example.afontgou17alumnes.mypillrecord.data.search.AsyncTaskHandler
