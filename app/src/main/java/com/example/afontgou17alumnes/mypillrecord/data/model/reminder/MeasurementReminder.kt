@@ -1,25 +1,24 @@
-package com.example.afontgou17alumnes.mypillrecord.data.model
+package com.example.afontgou17alumnes.mypillrecord.data.model.reminder
 
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeActivityReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeReminder.FakeMeasurementReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeReminder.FakeReminder
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
 import java.util.*
 
-class ActivityReminder(
+class MeasurementReminder(
     val name: String,
-    var duration: Int,
-    override var date: LocalDate= LocalDate.now(),
-    override var time: LocalTime= LocalTime.of(LocalTime.now().hour,LocalTime.now().minute+5),
+    val unit: String,
+    override var date: LocalDate,
+    override var time: LocalTime,
+    var value: Float=0F,
     override var status: ReminderStatus = ReminderStatus.TO_DO,
-    override var ID:String=""
-) : Reminder {
-
-
+    override var ID:Int=-1
+): Reminder {
     override fun toString(): String {
-        return "ActivityReminder(name='$name', duration=$duration, date=$date, time=$time, done=$status)"
+        return "MeasurementReminder(name='$name', unit='$unit', value=$value, date=$date, time=$time)"
     }
 
     override fun getReminderName(): String {
@@ -35,7 +34,7 @@ class ActivityReminder(
     }
 
     override fun createFakeReminder(): FakeReminder {
-        return FakeActivityReminder(name,duration,date.toString(),time.toString(),Controller.getReminderStatusToInt(status))
+        return FakeMeasurementReminder(name,unit,date.toString(),time.toString(),value, Controller.getReminderStatusToInt(status))
     }
 
     override fun getMilisFromNow(): Long {
@@ -43,7 +42,12 @@ class ActivityReminder(
         var date:Long
         var time:Long
         time=this.time.hour.toLong()*60*60*1000+this.time.minute.toLong()*60*1000-(LocalTime.now().hour*60*60*1000+LocalTime.now().minute*60*1000)
-        date= ChronoUnit.DAYS.between(this.date,LocalDate.now())*24*60*60*1000
+        if(this.date.isBefore(LocalDate.now())){
+            date=-2*24*60*60*1000
+        }
+        else {
+            date = ChronoUnit.DAYS.between(this.date, LocalDate.now()) * 24 * 60 * 60 * 1000
+        }
         result+=time+date
         return result
     }
@@ -56,10 +60,11 @@ class ActivityReminder(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as ActivityReminder
+        other as MeasurementReminder
 
         if (name != other.name) return false
-        if (duration != other.duration) return false
+        if (unit != other.unit) return false
+        if (value != other.value) return false
         if (date != other.date) return false
         if (time != other.time) return false
 
@@ -68,11 +73,11 @@ class ActivityReminder(
 
     override fun hashCode(): Int {
         var result = name.hashCode()
-        result = 31 * result + duration
+        result = 31 * result + unit.hashCode()
+        result = 31 * result + value.hashCode()
         result = 31 * result + date.hashCode()
         result = 31 * result + time.hashCode()
         return result
     }
-
 
 }

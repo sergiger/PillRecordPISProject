@@ -1,6 +1,6 @@
-package com.example.afontgou17alumnes.mypillrecord.data.model.fakeStatistics
+package com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeStatistics
 
-import com.example.afontgou17alumnes.mypillrecord.data.model.StatisticEntry
+import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.StatisticEntry
 import java.time.LocalDate
 
 class FakeStatisticEntry(

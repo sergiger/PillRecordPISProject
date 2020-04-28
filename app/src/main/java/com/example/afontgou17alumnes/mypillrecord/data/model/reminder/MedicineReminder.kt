@@ -1,8 +1,8 @@
-package com.example.afontgou17alumnes.mypillrecord.data.model
+package com.example.afontgou17alumnes.mypillrecord.data.model.reminder
 
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeMedicationReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeReminder.FakeMedicationReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeReminder.FakeReminder
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
@@ -15,8 +15,8 @@ open class MedicineReminder(
     var doseUnit: String,
     override var date: LocalDate,
     override var time: LocalTime,
-    override var status:ReminderStatus = ReminderStatus.TO_DO,
-    override var ID:String=""
+    override var status: ReminderStatus = ReminderStatus.TO_DO,
+    override var ID:Int=-1
 ) : Reminder {
     override fun toString(): String {//Es només per provar que les coses funcionen
         return "MedicineReminder(name='$name', dose=$dose, doseUnit='$doseUnit', date=$date, time=$time, taken=$status)"

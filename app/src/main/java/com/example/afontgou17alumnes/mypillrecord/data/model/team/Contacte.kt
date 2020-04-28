@@ -1,4 +1,4 @@
-package com.example.afontgou17alumnes.mypillrecord.data.model
+package com.example.afontgou17alumnes.mypillrecord.data.model.team
 
 class Contacte {
     var username:String

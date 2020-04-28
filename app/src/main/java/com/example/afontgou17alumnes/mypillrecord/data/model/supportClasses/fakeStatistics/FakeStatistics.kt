@@ -1,11 +1,7 @@
-package com.example.afontgou17alumnes.mypillrecord.data.model.fakeStatistics
+package com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeStatistics
 
-import com.example.afontgou17alumnes.mypillrecord.data.model.StatisticEntry
-import com.example.afontgou17alumnes.mypillrecord.data.model.Statistics
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeReminders.FakeReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.Statistics
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import java.lang.reflect.Type
 
 class FakeStatistics {
     //Aquesta classe conté llistes de strings, aquests strings son JSON Strings de FakeStatisticsEntris
@@ -16,8 +12,9 @@ class FakeStatistics {
     val glucoseAfterData = ArrayList<String>()
     val temperatureData = ArrayList<String>()
 
-    fun createRealStatistics():Statistics{
-        var statistics:Statistics=Statistics()
+    fun createRealStatistics(): Statistics {
+        var statistics: Statistics =
+            Statistics()
         val gson = Gson()
         //Ara he de fer el parcel de les llistes de strings i convertirles a llistes de StatisticsEntry
         if(weightData!=null){

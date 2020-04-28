@@ -1,8 +1,7 @@
-package com.example.afontgou17alumnes.mypillrecord.data.model
+package com.example.afontgou17alumnes.mypillrecord.data.model.statistics
 
-import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeStatistics.FakeStatisticEntry
-import com.example.afontgou17alumnes.mypillrecord.data.model.fakeStatistics.FakeStatistics
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeStatistics.FakeStatisticEntry
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeStatistics.FakeStatistics
 import com.google.gson.Gson
 import java.time.LocalDate
 

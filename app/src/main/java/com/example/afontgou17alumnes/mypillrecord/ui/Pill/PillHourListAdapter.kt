@@ -1,6 +1,5 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 
-import android.app.Activity
 import android.content.Context
 
 import android.util.Log
@@ -9,10 +8,8 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.model.Reminder
 
 //Hi ha dos classes perquè tràcta el mateix tipus de llista
 class PillHourListAdapter (val activity: Fragment, val reminderList : Array<String>) : BaseAdapter() {

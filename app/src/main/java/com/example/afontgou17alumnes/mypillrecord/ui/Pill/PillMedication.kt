@@ -12,9 +12,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.Frequency
-import com.example.afontgou17alumnes.mypillrecord.data.model.Therapy
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Frequency
 import com.example.afontgou17alumnes.mypillrecord.data.pills.MyData
 import com.example.afontgou17alumnes.mypillrecord.data.search.AsyncResponse
 import com.example.afontgou17alumnes.mypillrecord.data.search.AsyncTaskHandler
@@ -114,7 +113,12 @@ class PillMedication : AppCompatActivity() , AsyncResponse{
                     btn_frequency.text= From.toString()+" to "+To.toString()+" at "+array2.toString()
                     //Creem la classe frequency
                     var array3 = array2.toTypedArray()
-                    val frequencyClass =Frequency(From as String , To as String, array3  )
+                    val frequencyClass =
+                        Frequency(
+                            From as String,
+                            To as String,
+                            array3
+                        )
                     Log.w("frequencyClass",frequencyClass.toString())
                     this.frequencyClass=frequencyClass
                 }
@@ -123,7 +127,10 @@ class PillMedication : AppCompatActivity() , AsyncResponse{
                     var dies = RadioButtonValue as Array<String>
                     btn_frequency.text= "dies: "+  dies.contentToString()
                     //Creem la classe frequency
-                    val frequencyClass =Frequency( dies  )
+                    val frequencyClass =
+                        Frequency(
+                            dies
+                        )
                     Log.w("frequencyClass",frequencyClass.toString())
                     this.frequencyClass=frequencyClass
                 }

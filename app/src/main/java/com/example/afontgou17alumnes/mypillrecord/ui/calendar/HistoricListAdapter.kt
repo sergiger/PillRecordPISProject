@@ -9,10 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.model.ActivityReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.MeasurementReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.MedicineReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.Reminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.ActivityReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.MeasurementReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.MedicineReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.Reminder
 
 class HistoricListAdapter (
     val activity: Fragment,
