@@ -5,10 +5,9 @@ import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Therapy
 interface FakeTherapy
     {
     var frequency: String
-    var startDate: String
-    var endDate: String
     var notes:String
-    var id:Int
+    var id:String
+    var hours : ArrayList<String>
     fun createRealTherapy(): Therapy
 
 

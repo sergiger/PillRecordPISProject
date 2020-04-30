@@ -11,7 +11,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.ActivityTherapy
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Frequency
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MedicineTherapy
 import kotlinx.android.synthetic.main.activity_pill_sports.*
 import kotlinx.android.synthetic.main.activity_pill_sports.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
@@ -125,9 +128,18 @@ class PillSports : AppCompatActivity() {
             startActivity(intent)
         }
         btn_Save.setOnClickListener {
-            Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
             save_activity()
-            go_home()
+           if (frequencyClass != null && !new_activity.equals("")){
+               val freq:Frequency = frequencyClass!!
+               val therapy= ActivityTherapy(freq,"", Controller.user.id,new_activity,0, w_hourListfrequency as ArrayList<String>)
+               Controller.user.therapies.add(therapy)
+               Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
+               Log.e("THERAPY",therapy.toString())
+               go_home()
+           }
+            else{
+            Toast.makeText(this, "Missing Data", Toast.LENGTH_LONG).show()
+           }
         }
 
         //inicialitzem la llista d'hores si no hi ha res
@@ -154,7 +166,9 @@ class PillSports : AppCompatActivity() {
         onBackPressed()
     }
 
-    private fun save_activity(){}//cal completar
+    private fun save_activity(){
+        this.new_activity=set_sports.text.toString()
+    }//cal completar
 
     private fun showPopupMenu(view: View) = PopupMenu(view.context, view).run {
         menuInflater.inflate(R.menu.activity_popup_menu, menu)

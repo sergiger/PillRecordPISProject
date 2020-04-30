@@ -6,13 +6,12 @@ import java.time.LocalDate
 
 class MeasurementTherapy(
     override var frequency: Frequency,
-    override var startDate: LocalDate,
-    override var endDate: LocalDate,
     override var notes: String="",
-    override var id: Int=-1,
-    var measurementType:String
+    override var id: String="-1",
+    var measurementType:String,
+    override var hours: ArrayList<String>
 ) : Therapy {
     override fun createFakeTherapy(): com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeTherapy.FakeTherapy {
-        return FakeMeasurementTherapy(Gson().toJson(frequency),startDate.toString(),endDate.toString(),notes,id,measurementType)
+        return FakeMeasurementTherapy(Gson().toJson(frequency),notes,id,measurementType,hours)
     }
 }

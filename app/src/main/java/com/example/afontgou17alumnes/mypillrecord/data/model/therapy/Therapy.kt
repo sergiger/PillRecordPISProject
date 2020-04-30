@@ -5,10 +5,9 @@ import java.time.LocalDate
 
 interface Therapy{
     var frequency: Frequency
-    var startDate:LocalDate
-    var endDate:LocalDate
     var notes:String
-    var id:Int
+    var id:String
+    var hours : ArrayList<String>
 
     fun createFakeTherapy():FakeTherapy
 }

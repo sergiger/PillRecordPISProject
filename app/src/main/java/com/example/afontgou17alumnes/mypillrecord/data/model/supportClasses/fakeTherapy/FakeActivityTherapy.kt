@@ -8,24 +8,22 @@ import java.time.LocalDate
 
 class FakeActivityTherapy(
     override var frequency: String,
-    override var startDate: String,
-    override var endDate: String,
     override var notes: String,
-    override var id: Int,
+    override var id: String,
     var activityType:String,
-    var duration:Int
+    var duration:Int,
+    override var hours: ArrayList<String>
 
 ) :FakeTherapy {
     override fun createRealTherapy(): Therapy {
         var frequecy: Frequency = Gson().fromJson(frequency, Frequency::class.java)
         return ActivityTherapy(
             frequecy,
-            LocalDate.parse(startDate),
-            LocalDate.parse(endDate),
             notes,
             id,
             activityType,
-            duration
+            duration,
+            hours
         )
 
     }

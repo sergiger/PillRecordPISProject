@@ -1,8 +1,5 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.statistics
 
-import android.app.AlertDialog
-import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
@@ -13,9 +10,8 @@ import androidx.fragment.app.DialogFragment
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
-import com.example.afontgou17alumnes.mypillrecord.data.model.StatisticEntry
+import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.StatisticEntry
 import kotlinx.android.synthetic.main.add_measure_dialog.*
-import kotlinx.android.synthetic.main.statistics_fragment_fragment.*
 import java.time.LocalDate
 import java.time.LocalTime
 import kotlin.math.roundToInt
@@ -125,28 +121,28 @@ class AddMeasurementDialog : DialogFragment() {
             0-> {
                 Controller.user.statistics.weightData.add(StatisticEntry(value,
                     LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
-                Controller.addStaticsValueToFirebase("weightData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
+                //Controller.addStaticsValueToFirebase("weightData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
             }
             1-> {
                 Controller.user.statistics.heartRateData.add(StatisticEntry(value,
                     LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
-                Controller.addStaticsValueToFirebase("heartRateData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
+                //Controller.addStaticsValueToFirebase("heartRateData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
             }
             2-> {Controller.user.statistics.arterialPressureData.add(StatisticEntry(value,
                 LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
-                Controller.addStaticsValueToFirebase("arterialPressureData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
+                //Controller.addStaticsValueToFirebase("arterialPressureData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
             }
             3-> {Controller.user.statistics.glucoseBeforeData.add(StatisticEntry(value,
                 LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
-                Controller.addStaticsValueToFirebase("glucoseBeforeData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
+                //Controller.addStaticsValueToFirebase("glucoseBeforeData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
             }
             4-> {Controller.user.statistics.glucoseAfterData.add(StatisticEntry(value,
                 LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
-                Controller.addStaticsValueToFirebase("glucoseAfterData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
+                //Controller.addStaticsValueToFirebase("glucoseAfterData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
             }
             5-> {Controller.user.statistics.temperatureData.add(StatisticEntry(value,
                 LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth)))
-                Controller.addStaticsValueToFirebase("temperatureData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
+                //Controller.addStaticsValueToFirebase("temperatureData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
             }
         }
     }

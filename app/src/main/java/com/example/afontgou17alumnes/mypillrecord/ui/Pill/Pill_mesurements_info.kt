@@ -9,7 +9,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.ActivityTherapy
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Frequency
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MeasurementTherapy
 import kotlinx.android.synthetic.main.pill_mesurements_activity.*
 import kotlinx.android.synthetic.main.pill_mesurements_activity.btn_Save
 import kotlinx.android.synthetic.main.pill_mesurements_activity.btn_frequency
@@ -44,24 +47,18 @@ class Pill_mesurements_info : AppCompatActivity() {
         toolbar_title.text = title.toString()
         unitats_output.text=unitat.toString()
         //FROM FREQUENCY
-        val id_RadioButton = bundle?.get("RadioButton")
+        val id_RadioButton = bundle.get("RadioButton")
         if(id_RadioButton!=null){
             Log.e("id_RadioButton",id_RadioButton.toString())
-            val From = bundle?.get("From")
-            val To = bundle?.get("To")
-            val RadioButtonValue = bundle?.get("RadioButtonValue")
+            val From = bundle.get("From")
+            val To = bundle.get("To")
+            val RadioButtonValue = bundle.get("RadioButtonValue")
             //el frequency ha retornat algo btn_frequency.text=
             when(id_RadioButton){
                 0->{
                     text_view_frequency.text= From.toString()+" to "+To.toString()
                     //Creem la classe frequency
-                    val eachdaydose =(RadioButtonValue as String).toInt()
-                    val frequencyClass =
-                        Frequency(
-                            From as String,
-                            To as String,
-                            eachdaydose as Int
-                        )
+                    val frequencyClass = Frequency(From as String,To as String)
                     Log.w("frequencyClass",frequencyClass.toString())
                     this.frequencyClass=frequencyClass
                 }
@@ -129,9 +126,18 @@ class Pill_mesurements_info : AppCompatActivity() {
             startActivity(intent)
         }
         btn_Save.setOnClickListener {
-            Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
             save_mesurement()
-            go_home()
+            if (frequencyClass != null ){
+                val freq:Frequency = frequencyClass!!
+                val therapy= MeasurementTherapy(freq,"", Controller.user.id,titol, w_hourListfrequency as ArrayList<String>)
+                Controller.user.therapies.add(therapy)
+                Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
+                Log.e("THERAPY",therapy.toString())
+                go_home()
+            }
+            else{
+                Toast.makeText(this, "Missing Data", Toast.LENGTH_LONG).show()
+            }
         }
 
         //si passem hora

@@ -12,8 +12,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.model.Frequency
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Frequency
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MedicineTherapy
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Therapy
 import com.example.afontgou17alumnes.mypillrecord.data.pills.MyData
 import com.example.afontgou17alumnes.mypillrecord.data.search.AsyncResponse
 import com.example.afontgou17alumnes.mypillrecord.data.search.AsyncTaskHandler
@@ -29,6 +31,7 @@ import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class PillMedication : AppCompatActivity() , AsyncResponse{
     var frequencyClass : Frequency? = null
@@ -168,10 +171,22 @@ class PillMedication : AppCompatActivity() , AsyncResponse{
 
         }
         btn_Save.setOnClickListener {
-            Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
             save_medication()
-            Log.e("ACTIVITYFREQUENCY",activityFrequency1.toString())
-            go_home()
+            //MedicineTherapy(freq,notes, Controller.user.id,dose,new_units,medicine)
+            if (frequencyClass != null && dose != 0 && !new_units.equals("") && !medicine.equals("")){
+                val freq:Frequency = frequencyClass!!
+                val therapy= MedicineTherapy(freq,notes, Controller.user.id,dose,new_units,medicine, w_hourListfrequency as ArrayList<String>)
+                Controller.user.therapies.add(therapy)
+                Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
+                Log.e("ACTIVITYFREQUENCY",activityFrequency1.toString())
+                Log.e("THERAPY",therapy.toString())
+
+                go_home()
+            }
+            else{
+                Toast.makeText(this, "Missing Data", Toast.LENGTH_LONG).show()
+            }
+
         }
 
         // Barcode Scanner implementatiton
@@ -294,6 +309,13 @@ class PillMedication : AppCompatActivity() , AsyncResponse{
 
     fun save_medication(){
         this.notes=input_notes.text.toString()
+        if(!btn_dose.text.toString().equals("")){
+            this.dose=btn_dose.text.toString().toInt()}
+        if(!pill_search.text.toString().equals("")){
+            this.medicine=pill_search.text.toString()
+        }
+        this.new_units=btn_units.text.toString()
+
         //Controller.createMedicineTherapy()
     }//cal completar
 
