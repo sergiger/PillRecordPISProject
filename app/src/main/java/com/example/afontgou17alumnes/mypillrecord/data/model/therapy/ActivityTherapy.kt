@@ -13,6 +13,6 @@ class ActivityTherapy(
     override var hours: ArrayList<String>
 ) : Therapy {
     override fun createFakeTherapy(): com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeTherapy.FakeTherapy {
-        return FakeActivityTherapy(Gson().toJson(frequency),notes,id,activityType,duration,hours)
+        return FakeActivityTherapy(Gson().toJson(frequency.createFakeFrequency()),notes,id,activityType,duration,hours)
     }
 }

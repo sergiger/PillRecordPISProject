@@ -15,6 +15,6 @@ open class MedicineTherapy(
 
 ) : Therapy {
     override fun createFakeTherapy(): com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeTherapy.FakeTherapy {
-        return FakeMedicineTherapy(Gson().toJson(frequency),notes,id,dose,units,medicine,hours)
+        return FakeMedicineTherapy(Gson().toJson(frequency.createFakeFrequency()),notes,id,dose,units,medicine,hours)
     }
 }

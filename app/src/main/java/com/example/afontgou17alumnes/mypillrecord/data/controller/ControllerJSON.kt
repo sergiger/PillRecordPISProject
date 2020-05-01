@@ -17,6 +17,7 @@ class ControllerJSON {
     fun getStatisticsJSON():String{
         return Gson().toJson(Controller.user.statistics.createFakeStatistics())
     }
+
     fun getActivityReminderJSON():String{
         return Gson().toJson(Controller.user.getFakeActivityReminders())
     }
@@ -26,6 +27,7 @@ class ControllerJSON {
     fun getMedicineReminderJSON():String{
         return Gson().toJson(Controller.user.getFakeMedicationReminders())
     }
+
     fun getActivityTherapyJSON():String{
         return Gson().toJson(Controller.user.getFakeActivityTherapy())
     }
@@ -35,10 +37,12 @@ class ControllerJSON {
     fun getMedicineTherapyJSON():String{
         return Gson().toJson(Controller.user.getFakeMedicationTherapy())
     }
+
     fun setStatisticssFromJSON(json:String){
         val fakeStatistics: FakeStatistics = Gson().fromJson(json, FakeStatistics::class.java)
         Controller.user.statistics=fakeStatistics.createRealStatistics()
     }
+
     fun setActivityReminderFromJSON(json:String){
         val gson = Gson()
         var tipusArray: Type
@@ -75,7 +79,8 @@ class ControllerJSON {
             }
         }
     }
-    fun setActivityReminderFronJSON(json:String){
+
+    fun setActivityTherapyFronJSON(json:String){
         val gson = Gson()
         var tipusArray: Type
 
@@ -87,7 +92,7 @@ class ControllerJSON {
             }
         }
     }
-    fun setMeasurementReminderFronJSON(json:String){
+    fun setMeasurementTherapyFronJSON(json:String){
         val gson = Gson()
         var tipusArray: Type
 
@@ -99,7 +104,7 @@ class ControllerJSON {
             }
         }
     }
-    fun setMedicineReminderFronJSON(json:String){
+    fun setMedicineTherapyFronJSON(json:String){
         val gson = Gson()
         var tipusArray: Type
 

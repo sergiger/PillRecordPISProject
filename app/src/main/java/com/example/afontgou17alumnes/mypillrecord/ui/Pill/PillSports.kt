@@ -132,7 +132,7 @@ class PillSports : AppCompatActivity() {
            if (frequencyClass != null && !new_activity.equals("")){
                val freq:Frequency = frequencyClass!!
                val therapy= ActivityTherapy(freq,"", Controller.user.id,new_activity,0, w_hourListfrequency as ArrayList<String>)
-               Controller.user.therapies.add(therapy)
+               Controller.addTherapy(therapy)
                Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
                Log.e("THERAPY",therapy.toString())
                go_home()

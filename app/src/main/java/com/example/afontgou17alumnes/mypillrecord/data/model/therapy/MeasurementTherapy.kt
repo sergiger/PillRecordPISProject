@@ -12,6 +12,6 @@ class MeasurementTherapy(
     override var hours: ArrayList<String>
 ) : Therapy {
     override fun createFakeTherapy(): com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeTherapy.FakeTherapy {
-        return FakeMeasurementTherapy(Gson().toJson(frequency),notes,id,measurementType,hours)
+        return FakeMeasurementTherapy(Gson().toJson(frequency.createFakeFrequency()),notes,id,measurementType,hours)
     }
 }

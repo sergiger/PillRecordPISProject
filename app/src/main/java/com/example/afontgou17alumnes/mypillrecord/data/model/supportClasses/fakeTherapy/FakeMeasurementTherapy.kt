@@ -14,9 +14,9 @@ class FakeMeasurementTherapy(
     override var hours: ArrayList<String>
 ) :FakeTherapy {
     override fun createRealTherapy(): Therapy {
-        var frequecy: Frequency = Gson().fromJson(frequency, Frequency::class.java)
+        var frequecy: FakeFrequency = Gson().fromJson(frequency, FakeFrequency::class.java)
         return MeasurementTherapy(
-            frequecy,
+            frequecy.createRealFrequency(),
             notes,
             id,
             measurementType,

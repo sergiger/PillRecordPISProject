@@ -176,10 +176,11 @@ class PillMedication : AppCompatActivity() , AsyncResponse{
             if (frequencyClass != null && dose != 0 && !new_units.equals("") && !medicine.equals("")){
                 val freq:Frequency = frequencyClass!!
                 val therapy= MedicineTherapy(freq,notes, Controller.user.id,dose,new_units,medicine, w_hourListfrequency as ArrayList<String>)
-                Controller.user.therapies.add(therapy)
+                //Controller.user.therapies.add(therapy)
+                Controller.addTherapy(therapy)
                 Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
                 Log.e("ACTIVITYFREQUENCY",activityFrequency1.toString())
-                Log.e("THERAPY",therapy.toString())
+                Log.d("THERAPY",therapy.toString())
 
                 go_home()
             }

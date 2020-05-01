@@ -2,8 +2,10 @@ package com.example.afontgou17alumnes.mypillrecord.data.model.therapy
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeTherapy.FakeFrequency
+import com.google.firebase.database.connection.util.StringListReader
 
-class Frequency :Parcelable {
+class Frequency{
     var type : Int = 0
         get() = field
         set(value) {
@@ -35,14 +37,6 @@ class Frequency :Parcelable {
             field = value
         }
 
-    constructor(parcel: Parcel){
-        //aqui has de separar totes les parts del parel i posarles a cada variable this.
-    }
-
-    //Aqui posariem els paràmetres
-    constructor(frequency: Frequency){
-        //Aquest és el constructor copia
-    }
     constructor(){
 
     }
@@ -68,18 +62,16 @@ class Frequency :Parcelable {
         this.type =4
         this.listofpuntualdays = listofpuntualdays
     }
-
-
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.let {
-            //aqui es montaria el parcel i es posaria tot dintre del dest de la seguent manera
-            //dest.writeSerializable(this.startDate) as LocalDate
-        }
+    constructor(type:Int, startDate: String, endDate: String, listofpuntualdays: Array<String>, specificweekdays: Array<String>, eachtimedose: Int){
+        this.type=type
+        this.startDate=startDate
+        this.endDate=endDate
+        this.eachtimedose=eachtimedose
+        this.listofpuntualdays=listofpuntualdays
+        this.specificweekdays=specificweekdays
     }
 
-    override fun describeContents(): Int {
-        return 0
-    }
+
 
     override fun toString(): String {
         when(type){
@@ -91,15 +83,8 @@ class Frequency :Parcelable {
         return "error del ToString fun"
     }
 
-    companion object CREATOR : Parcelable.Creator<Frequency> {
-        override fun createFromParcel(parcel: Parcel): Frequency {
-            return Frequency(
-                parcel
-            )
-        }
-
-        override fun newArray(size: Int): Array<Frequency?> {
-            return arrayOfNulls(size)
-        }
+    fun createFakeFrequency():FakeFrequency{
+        return FakeFrequency(type,startDate,endDate,listofpuntualdays,specificweekdays,eachtimedose)
     }
+
 }

@@ -36,8 +36,8 @@ class ControllerSharePrefs {
         editor.putString("MedicationReminder", Controller.controllerJSON.getMedicineReminderJSON())
         editor.putString("Statistics", Controller.controllerJSON.getStatisticsJSON())
         editor.putString("ActivityTherapy",Controller.controllerJSON.getActivityTherapyJSON())
-        editor.putString("MeasurementTherapy",Controller.controllerJSON.getMedicineTherapyJSON())
-        editor.putString("MedicineTherapy",Controller.controllerJSON.getMeasurementTherapyJSON())
+        editor.putString("MeasurementTherapy",Controller.controllerJSON.getMeasurementTherapyJSON())
+        editor.putString("MedicineTherapy",Controller.controllerJSON.getMedicineTherapyJSON())
         editor.apply()
         Log.d("therapy1",Controller.controllerJSON.getActivityTherapyJSON())
         Log.d("therapy2",Controller.controllerJSON.getMedicineTherapyJSON())
@@ -47,6 +47,7 @@ class ControllerSharePrefs {
 
         Log.d("hola","uploaded")*/
     }
+
     fun sharedDownloadLoad(){
         var prefs = context.getSharedPreferences("Mydata", Context.MODE_PRIVATE)
         //Log.d("hola",getSharedPreferences("Mydata", Context.MODE_PRIVATE).contains("email").toString())
@@ -76,21 +77,28 @@ class ControllerSharePrefs {
             Controller.controllerJSON.setStatisticssFromJSON(fakeStatisticsJSON)
 
             var jsonList=prefs.getString("MedicationReminder","")
-            Log.d("measurement",jsonList)
+            Log.d("reminder",jsonList)
             Controller.controllerJSON.setMedicineReminderFromJSON(jsonList)
 
             jsonList=prefs.getString("MeasurementReminder","")
-            Log.d("measurement",jsonList)
+            Log.d("reminder",jsonList)
             Controller.controllerJSON.setMeasurementReminderFromJSON(jsonList)
 
             jsonList=prefs.getString("ActivityReminder","")
-            Log.d("measurement",jsonList)
+            Log.d("reminder",jsonList)
             Controller.controllerJSON.setActivityReminderFromJSON(jsonList)
 
+            var jsonList2=prefs.getString("MedicineTherapy","")
+            Log.d("therapy",jsonList2)
+            Controller.controllerJSON.setMedicineTherapyFronJSON(jsonList2)
 
+            jsonList2=prefs.getString("MeasurementTherapy","")
+            Log.d("Therapy",jsonList2)
+            Controller.controllerJSON.setMeasurementTherapyFronJSON(jsonList2)
 
-
-
+            jsonList2=prefs.getString("ActivityTherapy","")
+            Log.d("Therapy",jsonList2)
+            Controller.controllerJSON.setActivityTherapyFronJSON(jsonList2)
         }
     }
     fun closeSesion(){

@@ -16,9 +16,9 @@ class FakeActivityTherapy(
 
 ) :FakeTherapy {
     override fun createRealTherapy(): Therapy {
-        var frequecy: Frequency = Gson().fromJson(frequency, Frequency::class.java)
+        var frequecy: FakeFrequency = Gson().fromJson(frequency,FakeFrequency::class.java)
         return ActivityTherapy(
-            frequecy,
+            frequecy.createRealFrequency(),
             notes,
             id,
             activityType,

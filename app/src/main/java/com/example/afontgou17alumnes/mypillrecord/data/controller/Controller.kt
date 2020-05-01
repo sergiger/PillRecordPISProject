@@ -354,11 +354,12 @@ object Controller {
     }
     fun addTherapy(therapy: Therapy){
         user.addTherapy(therapy)
+        controllerSharePrefs.sharedUpLoad()
     }
     fun addReminder(reminder: Reminder){
         user.reminders.add(reminder)
         Log.d("hola:",user.reminders[user.reminders.size-1].toString())
-        Controller.controllerSharePrefs.sharedUpLoad()
+        controllerSharePrefs.sharedUpLoad()
     }
     fun createMedicineReminder(medicine:String,dose:Int,units:String,
     date:LocalDate,time: LocalTime
@@ -459,6 +460,7 @@ object Controller {
 
     fun deleteMeasure(type: String, value: Float, date: LocalDate) {
         user.statistics.deleteMeasure(type, value, date)
+
     }
 
     fun getReminderStatusToInt(status: ReminderStatus): Int {
