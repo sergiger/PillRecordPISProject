@@ -10,20 +10,12 @@ import android.view.View
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
-import com.example.afontgou17alumnes.mypillrecord.data.model.User
 import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.*
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity__register4.*
 import kotlinx.android.synthetic.main.activity__register4.view.*
@@ -86,14 +78,14 @@ class activity_Register4 : AppCompatActivity() {
             this.weight=text_input_weight.text.toString().toFloat()
             this.height=text_input_height.text.toString().toFloat()
             if (password.equals(password_repeat)){
-                mAuth!!.createUserWithEmailAndPassword(email, password)
+                mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this,
                         OnCompleteListener<AuthResult?> { task ->
                             if (task.isSuccessful) {
                                 // Sign in success, update UI with the signed-in user's information
                                 val intent = Intent(this, LoginActivity::class.java)
                                 intent.putExtra("type_of_action","Save_share_Create_Account_Go_Home")
-                                val user: FirebaseUser? = mAuth.getCurrentUser()
+                                val user: FirebaseUser? = mAuth.currentUser
                                 user?.sendEmailVerification()
                                 //Controller.createAccount( user!!.uid,this.email,this.username,this.password,this.gender,this.year_Birth,this.weight,this.height)
                                 createuserfirebasedatabase(user!!.uid,this.email,this.username,this.password,this.gender,this.year_Birth,this.weight,this.height)
@@ -105,10 +97,10 @@ class activity_Register4 : AppCompatActivity() {
                                 try {
                                     throw task.exception!!
                                 }  catch (e: FirebaseAuthUserCollisionException) {
-                                    text_input_email.setError(e.message)
+                                    text_input_email.error = e.message
                                     text_input_email.requestFocus()
                                 } catch (e: FirebaseAuthInvalidCredentialsException) {
-                                    text_input_email.setError(e.message)
+                                    text_input_email.error = e.message
                                     text_input_email.requestFocus()
                                 }catch (e: Exception) {
                                     Log.e("register fail :", e.message)
@@ -190,47 +182,47 @@ class activity_Register4 : AppCompatActivity() {
         val height1=text_input_height.text.toString()
 
         if(email.isEmpty()){
-            text_input_email.setError("Email is Required")
+            text_input_email.error = "Email is Required"
             cont++
         }
         if(username.isEmpty()){
-            text_input_username.setError("Username is Required")
+            text_input_username.error = "Username is Required"
             cont++
 
         }
         if(password.isEmpty()){
-            text_input_password.setError("Pasword is Required")
+            text_input_password.error = "Pasword is Required"
             cont++
 
         }
         if(password_repeat.isEmpty()){
-            text_input_repeat_password.setError("Pasword is Required")
+            text_input_repeat_password.error = "Pasword is Required"
             cont++
 
         }
         if(gender.isEmpty()){
-            text_input_gender.setError("Gender is Required")
+            text_input_gender.error = "Gender is Required"
             cont++
         }
         if(year_Birth1.isEmpty()){
-            text_input_age.setError("Year of birth is Required")
+            text_input_age.error = "Year of birth is Required"
             cont++
 
         }
         if(weight1.isEmpty()){
-            text_input_weight.setError("Weight is Required")
+            text_input_weight.error = "Weight is Required"
             cont++
 
         }
         if(height1.isEmpty()){
-            text_input_height.setError("Height is Required")
+            text_input_height.error = "Height is Required"
             cont++
 
         }
 
         if(password.length<6){
             //Toast.makeText(this,"Passwords need 7 characters minimum ", Toast.LENGTH_SHORT).show()
-            text_input_password.setError("Password should be at least 6 characters")
+            text_input_password.error = "Password should be at least 6 characters"
             val text1: Editable = SpannableStringBuilder("")
             text_input_repeat_password.text=text1
             text_input_password.text=text1

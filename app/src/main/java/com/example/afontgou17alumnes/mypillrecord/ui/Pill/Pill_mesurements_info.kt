@@ -4,19 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.widget.*
+import android.widget.ImageButton
+import android.widget.ListView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
-import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.ActivityTherapy
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Frequency
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MeasurementTherapy
 import kotlinx.android.synthetic.main.pill_mesurements_activity.*
-import kotlinx.android.synthetic.main.pill_mesurements_activity.btn_Save
-import kotlinx.android.synthetic.main.pill_mesurements_activity.btn_frequency
-import kotlinx.android.synthetic.main.pill_mesurements_activity.text_view_frequency
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
@@ -70,7 +69,7 @@ class Pill_mesurements_info : AppCompatActivity() {
                         Frequency(
                             From as String,
                             To as String,
-                            eachdaydose as Int
+                            eachdaydose
                         )
                     Log.w("frequencyClass",frequencyClass.toString())
                     this.frequencyClass=frequencyClass

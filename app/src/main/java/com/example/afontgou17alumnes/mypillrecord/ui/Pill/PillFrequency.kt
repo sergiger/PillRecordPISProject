@@ -4,16 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.activity_pill_frequency.*
-import kotlinx.android.synthetic.main.activity_pill_medication.view.*
-import kotlinx.android.synthetic.main.activity_pill_sports.*
 import kotlinx.android.synthetic.main.share_team_activity.radio_group
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import java.time.LocalDate
@@ -214,8 +211,8 @@ class PillFrequency : AppCompatActivity() {
 
                     }
                 }
-                val TitolMesurement = bundle?.get("TitolMesurement")
-                val UnitatsMesurement = bundle?.get("UnitatsMesurement")
+                val TitolMesurement = bundle.get("TitolMesurement")
+                val UnitatsMesurement = bundle.get("UnitatsMesurement")
                 val llista = this.Hours
                 intent.putExtra("Medicine",this.Medicine)
                 intent.putExtra("Hours",llista.toTypedArray())
@@ -261,7 +258,7 @@ class PillFrequency : AppCompatActivity() {
                     }
                 }
                 val llista = this.Hours
-                val Activity = bundle?.get("Activity")
+                val Activity = bundle.get("Activity")
                 intent.putExtra("Medicine",this.Medicine)
                 intent.putExtra("Hours",llista.toTypedArray())
                 intent.putExtra("Dose",this.DoseIn)

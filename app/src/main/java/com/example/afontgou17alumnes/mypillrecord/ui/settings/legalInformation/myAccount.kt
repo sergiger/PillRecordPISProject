@@ -2,21 +2,14 @@ package com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.SpannableStringBuilder
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
-import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity__register4.*
 import kotlinx.android.synthetic.main.change_pasword_dialogue.view.*
 import kotlinx.android.synthetic.main.gender_dialoge.view.*
 import kotlinx.android.synthetic.main.height_dialoge.view.*
@@ -44,7 +37,7 @@ class myAccount : AppCompatActivity() {
         back_iicon.setOnClickListener {
             onBackPressed()
         }
-        Log.e("myAcount", "pwd:  ${Controller.user.toString()}")
+        Log.e("myAcount", "pwd:  ${Controller.user}")
         val arrayAdapter2: ArrayAdapter<*>
 
 
@@ -108,7 +101,7 @@ class myAccount : AppCompatActivity() {
                 }
                 else{
                     Log.e("---------------------", "1 data: ${old_pasword}")
-                    Log.e("---------------------", "2 data: ${password.toString()}")
+                    Log.e("---------------------", "2 data: $password")
                     Toast.makeText(this,"Wrong old pasword",Toast.LENGTH_LONG).show()
                     mAlertDialog.dismiss()
                 }

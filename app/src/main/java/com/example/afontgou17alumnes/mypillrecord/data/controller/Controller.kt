@@ -2,7 +2,7 @@ package com.example.afontgou17alumnes.mypillrecord.data.controller
 
 import android.graphics.Color
 import android.util.Log
-import com.example.afontgou17alumnes.mypillrecord.data.model.*
+import com.example.afontgou17alumnes.mypillrecord.data.model.User
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
 import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.StatisticEntry
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Therapy
@@ -396,7 +396,7 @@ object Controller {
     fun refreshMyAccount(email:String,username: String,gender: String, birthYear: Int, height: Float, weight: Float) {
         //mAuth=FirebaseAuth.getInstance()
         //val db = FirebaseFirestore.getInstance()
-        val user2: FirebaseUser? = mAuth.getCurrentUser()
+        val user2: FirebaseUser? = mAuth.currentUser
         val id =user2?.uid
 
         if(gender!=this.user.gender){
@@ -483,7 +483,7 @@ object Controller {
     fun updatePassword(newPasword: String) {
         //mAuth=FirebaseAuth.getInstance()
         //val db = FirebaseFirestore.getInstance()
-        val user2: FirebaseUser? = mAuth.getCurrentUser()
+        val user2: FirebaseUser? = mAuth.currentUser
         val id =user2?.uid
         mAuth.currentUser!!.updatePassword(newPasword)
         user.pasword=newPasword
@@ -517,8 +517,7 @@ object Controller {
                                 .update("weightData", FieldValue.arrayUnion(nestedData))
                                 .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
                                 .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-                        }
-                        else{
+                        } else{
                             db.collection("statistics").document(user.id).set(doc2Data,SetOptions.merge())
                             Log.e("setData", "Creem arraylist")
                         }
@@ -527,7 +526,7 @@ object Controller {
                         db.collection("statistics").document(user.id).set(nestedData, SetOptions.merge())
                         Log.e("set data", "creem col·leció")
                     }
-                }?.addOnFailureListener { exception ->
+                }.addOnFailureListener { exception ->
                     Log.e("getDatafromfirestore", "get failed with ", exception)
                 }
             }
@@ -553,8 +552,7 @@ object Controller {
                                 .update("heartRateData", FieldValue.arrayUnion(nestedData))
                                 .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
                                 .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-                        }
-                        else{
+                        } else{
                             db.collection("statistics").document(user.id).set(doc2Data,SetOptions.merge())
                             Log.e("setData", "Creem arraylist")
                         }
@@ -563,7 +561,7 @@ object Controller {
                         db.collection("statistics").document(user.id).set(nestedData, SetOptions.merge())
                         Log.e("set data", "creem col·leció")
                     }
-                }?.addOnFailureListener { exception ->
+                }.addOnFailureListener { exception ->
                     Log.e("getDatafromfirestore", "get failed with ", exception)
                 }
 
@@ -590,8 +588,7 @@ object Controller {
                                 .update("arterialPressureData", FieldValue.arrayUnion(nestedData))
                                 .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
                                 .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-                        }
-                        else{
+                        } else{
                             db.collection("statistics").document(user.id).set(doc2Data,SetOptions.merge())
                             Log.e("setData", "Creem arraylist")
                         }
@@ -600,7 +597,7 @@ object Controller {
                         db.collection("statistics").document(user.id).set(nestedData, SetOptions.merge())
                         Log.e("set data", "creem col·leció")
                     }
-                }?.addOnFailureListener { exception ->
+                }.addOnFailureListener { exception ->
                     Log.e("getDatafromfirestore", "get failed with ", exception)
                 }
 
@@ -627,8 +624,7 @@ object Controller {
                                 .update("glucoseBeforeData", FieldValue.arrayUnion(nestedData))
                                 .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
                                 .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-                        }
-                        else{
+                        } else{
                             db.collection("statistics").document(user.id).set(doc2Data,SetOptions.merge())
                             Log.e("setData", "Creem arraylist")
                         }
@@ -637,7 +633,7 @@ object Controller {
                         db.collection("statistics").document(user.id).set(nestedData, SetOptions.merge())
                         Log.e("set data", "creem col·leció")
                     }
-                }?.addOnFailureListener { exception ->
+                }.addOnFailureListener { exception ->
                     Log.e("getDatafromfirestore", "get failed with ", exception)
                 }
             }
@@ -663,8 +659,7 @@ object Controller {
                                 .update("glucoseAfterData", FieldValue.arrayUnion(nestedData))
                                 .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
                                 .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-                        }
-                        else{
+                        } else{
                             db.collection("statistics").document(user.id).set(doc2Data,SetOptions.merge())
                             Log.e("setData", "Creem arraylist")
                         }
@@ -673,7 +668,7 @@ object Controller {
                         db.collection("statistics").document(user.id).set(nestedData, SetOptions.merge())
                         Log.e("set data", "creem col·leció")
                     }
-                }?.addOnFailureListener { exception ->
+                }.addOnFailureListener { exception ->
                     Log.e("getDatafromfirestore", "get failed with ", exception)
                 }
 
@@ -700,8 +695,7 @@ object Controller {
                                 .update("temperatureData", FieldValue.arrayUnion(nestedData))
                                 .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
                                 .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-                        }
-                        else{
+                        } else{
                             db.collection("statistics").document(user.id).set(doc2Data,SetOptions.merge())
                             Log.e("setData", "Creem arraylist")
                         }
@@ -710,7 +704,7 @@ object Controller {
                         db.collection("statistics").document(user.id).set(nestedData, SetOptions.merge())
                         Log.e("set data", "creem col·leció")
                     }
-                }?.addOnFailureListener { exception ->
+                }.addOnFailureListener { exception ->
                     Log.e("getDatafromfirestore", "get failed with ", exception)
                 }
 

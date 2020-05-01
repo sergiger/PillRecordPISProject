@@ -19,7 +19,10 @@ import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.controller.ControllerSharePrefs
 import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
-import com.google.firebase.auth.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -61,14 +64,14 @@ class LoginActivity : AppCompatActivity() {
             val pwd = password.text.toString().trim()
 
             if(email.isEmpty() and pwd.isEmpty()){
-                username.setError("Email is Required")
-                password.setError("Password is Required")
+                username.error = "Email is Required"
+                password.error = "Password is Required"
             }
             else if(TextUtils.isEmpty(email)){
-                username.setError("Email is Required")
+                username.error = "Email is Required"
             }
             else if(TextUtils.isEmpty(pwd)){
-                password.setError("Password is Required")
+                password.error = "Password is Required"
             }
             else{
                 ProgressDialogEnable()
@@ -84,10 +87,10 @@ class LoginActivity : AppCompatActivity() {
                             try {
                                 throw task.exception!!
                             }  catch (e: FirebaseAuthInvalidUserException) {
-                                username.setError(e.message)
+                                username.error = e.message
                                 username.requestFocus()
                             } catch (e: FirebaseAuthInvalidCredentialsException) {
-                                password.setError(e.message)
+                                password.error = e.message
                                 password.requestFocus()
                             }catch (e: Exception) {
                                 Log.e("register fail :", e.message)
@@ -137,7 +140,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun getdatafromfirebase() {
         val db = FirebaseFirestore.getInstance()
-        val user: FirebaseUser? = mAuth.getCurrentUser()
+        val user: FirebaseUser? = mAuth.currentUser
         val id =user?.uid
         //dàdes d'usuari
         val docRef = id?.let { db.collection("users").document(id) }

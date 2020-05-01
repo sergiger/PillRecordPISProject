@@ -14,7 +14,6 @@ import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.ActivityTherapy
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Frequency
-import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MedicineTherapy
 import kotlinx.android.synthetic.main.activity_pill_sports.*
 import kotlinx.android.synthetic.main.activity_pill_sports.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
@@ -41,15 +40,15 @@ class PillSports : AppCompatActivity() {
         val id_RadioButton = bundle?.get("RadioButton")
         if(id_RadioButton!=null){
             Log.e("id_RadioButton",id_RadioButton.toString())
-            val From = bundle?.get("From")
-            val To = bundle?.get("To")
-            val Activity = bundle?.get("Activity")
+            val From = bundle.get("From")
+            val To = bundle.get("To")
+            val Activity = bundle.get("Activity")
             if(Activity!=null){
                 set_sports.text= Editable.Factory.getInstance().newEditable(Activity as CharSequence?)
                 new_activity=Activity as String
             }
 
-            val RadioButtonValue = bundle?.get("RadioButtonValue")
+            val RadioButtonValue = bundle.get("RadioButtonValue")
             //el frequency ha retornat algo btn_frequency.text=
             when(id_RadioButton){
                 0->{
@@ -71,7 +70,7 @@ class PillSports : AppCompatActivity() {
                         Frequency(
                             From as String,
                             To as String,
-                            eachdaydose as Int
+                            eachdaydose
                         )
                     Log.w("frequencyClass",frequencyClass.toString())
                     this.frequencyClass=frequencyClass

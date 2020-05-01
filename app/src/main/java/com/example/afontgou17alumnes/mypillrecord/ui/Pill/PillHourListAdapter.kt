@@ -32,7 +32,7 @@ class PillHourListAdapter (val activity: Fragment, val reminderList : Array<Stri
     }
 
     override fun getCount(): Int {
-        return reminderList.size;
+        return reminderList.size
     }
 }
 //hores PillMedication
@@ -68,7 +68,7 @@ class PillHourListAdapter2 (val activity: Context, val reminderList : Array<Stri
     }
 
     override fun getCount(): Int {
-        return reminderList.size;
+        return reminderList.size
     }
 }
 
@@ -109,7 +109,7 @@ class PillHourListAdapter3 (val activity: Context, val reminderList : Array<Stri
     }
 
     override fun getCount(): Int {
-        return reminderList.size;
+        return reminderList.size
     }
 }
 //hores PillMesurements
@@ -145,7 +145,7 @@ class PillHourListAdapter4 (val activity: Context, val reminderList : Array<Stri
     }
 
     override fun getCount(): Int {
-        return reminderList.size;
+        return reminderList.size
     }
 }
 //hores PillSports
@@ -181,6 +181,6 @@ class PillHourListAdapter5 (val activity: Context, val reminderList : Array<Stri
     }
 
     override fun getCount(): Int {
-        return reminderList.size;
+        return reminderList.size
     }
 }
