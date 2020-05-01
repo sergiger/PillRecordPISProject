@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.model.UnplannedMedicineReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.ActivityReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.MeasurementReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.MedicineReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.UnplannedMedicineReminder
 import kotlinx.android.synthetic.main.fragment_two.*
 import java.time.LocalDate
 import java.time.LocalTime
@@ -92,5 +92,6 @@ class FragmentTwo : Fragment() {
         if (medicineListView != null) {
             medicineListView.adapter = medicineAdapter
         }
+
     }
 }

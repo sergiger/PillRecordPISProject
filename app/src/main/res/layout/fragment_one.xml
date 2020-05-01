@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.calendar.FragmentOne"
+    tools:context=".ui.calendar.Week.FragmentOne"
     android:orientation="vertical"
-    android:id="@+id/layout_principal">
+    android:id="@+id/fragmentOne">
 
     <!-- TODO: Update blank fragment layout -->
 
     <ListView
         android:id="@+id/week_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

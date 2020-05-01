@@ -47,4 +47,8 @@
         <item>Each (X) days</item>
         <item>Specific week days</item>
     </string-array>
+    <string-array name="status_reminder">
+        <item>Confirmed</item>
+        <item>Skipped</item>
+    </string-array>
 </resources>

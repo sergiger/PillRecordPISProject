@@ -4,11 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="6dp">
-    <Button
-        android:id="@+id/btn_pillWeek"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/transparent" />
     <TextView
         android:id="@+id/txt_weekPillName"
         android:layout_width="wrap_content"

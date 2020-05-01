@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
-import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_add_unplanned_measurement.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
@@ -50,7 +49,7 @@ class AddUnplannedMeasurement : AppCompatActivity() {
         hour_button_today_modify_reminder.setOnClickListener{
             select_time()
         }
-        measurement_spinner.onItemSelectedListener= object: AdapterView.OnItemSelectedListener {
+        measurement_spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }

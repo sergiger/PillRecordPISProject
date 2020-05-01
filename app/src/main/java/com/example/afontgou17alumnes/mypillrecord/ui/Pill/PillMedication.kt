@@ -15,7 +15,6 @@ import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Frequency
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MedicineTherapy
-import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Therapy
 import com.example.afontgou17alumnes.mypillrecord.data.pills.MyData
 import com.example.afontgou17alumnes.mypillrecord.data.search.AsyncResponse
 import com.example.afontgou17alumnes.mypillrecord.data.search.AsyncTaskHandler
@@ -31,7 +30,6 @@ import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 class PillMedication : AppCompatActivity() , AsyncResponse{
     var frequencyClass : Frequency? = null
@@ -170,6 +168,7 @@ class PillMedication : AppCompatActivity() , AsyncResponse{
             startActivity(intent)
 
         }
+
         btn_Save.setOnClickListener {
             save_medication()
             //MedicineTherapy(freq,notes, Controller.user.id,dose,new_units,medicine)

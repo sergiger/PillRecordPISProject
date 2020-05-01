@@ -11,6 +11,7 @@ import java.net.URL
 
 class AsyncTaskHandler: AsyncTask<String, String, String>() {
     // API Implementation
+    // lateinit var pDialog: ProgressDialog
     // val url = "https://api.fda.gov/drug/ndc.json?search=active_ingredients.name:%22ibuprofen%22+AND+brand_name:%22Advil%22&limit=100"
     // AsyncTaskHandler().execute(url)
     // Final of implementation
