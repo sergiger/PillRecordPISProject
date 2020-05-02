@@ -24,6 +24,7 @@ import java.time.LocalTime
 import java.time.temporal.ChronoUnit
 import java.util.*
 import kotlin.Comparator
+import kotlin.collections.ArrayList
 
 object Controller {
     val user = User("1","user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
@@ -32,10 +33,6 @@ object Controller {
     private var mAuth = FirebaseAuth.getInstance()
     val controllerJSON=ControllerJSON()//Serveix per a treballar amb els JSON
     var controllerSharePrefs=ControllerSharePrefs()//Serveix per treballar amb les share preferences
-    val dateList = ArrayList<Date>()
-
-
-
 
     /*fun initUserSaved(){
         controllerSharePrefs.sharedDownloadLoad()
@@ -55,6 +52,46 @@ object Controller {
 
     fun getRemindersData() : ArrayList<Reminder>{
         return user.reminders
+    }
+
+    /** Return the list of dates which contains reminders*/
+    fun getDatesOfReminders(): ArrayList<LocalDate> {
+        val datesListOfReminders = ArrayList<LocalDate>()
+        user.reminders.sortWith(Comparator { p1, p2 ->
+            when {
+                p1.date > p2.date -> 1
+                p1.date < p2.date -> -1
+                p1.time > p2.time -> 1
+                p1.time < p2.time -> -1
+                else -> 0
+            }
+        })
+        for (i in user.reminders) {
+            if (datesListOfReminders.contains(i.getReminderDate()))
+            else datesListOfReminders.add(i.getReminderDate())
+        }
+        return datesListOfReminders
+    }
+
+    /** Return the list of dates and reminder in a header-row format*/
+    fun getDatesAndReminders() : ArrayList<Any>{
+        val listAll = ArrayList<Any>()
+        user.reminders.sortWith(Comparator { p1, p2 ->
+            when {
+                p1.date > p2.date -> 1
+                p1.date < p2.date -> -1
+                p1.time > p2.time -> 1
+                p1.time < p2.time -> -1
+                else -> 0
+            }
+        })
+        //Es podria substituir per cerca binaria
+        for(i in user.reminders){
+            if (listAll.contains(i.getReminderDate()))
+            else listAll.add(i.getReminderDate())
+            listAll.add(i)
+        }
+        return listAll
     }
 
     fun getRemindersByDate(date : LocalDate) : ArrayList<Reminder>{

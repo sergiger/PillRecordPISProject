@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+    <TextView
+        android:id="@+id/txt_PillDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="20dp"
+        android:text="Date"
+        android:textSize="20sp"
+        android:textColor="@color/colorApp3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image_reminder_list"/>
+    <TextView
+        android:id="@+id/txt_PillName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Advil 200 mg"
+        android:textSize="16sp"
+        android:textColor="#0F0000"
+        android:layout_marginTop="2dp"
+        app:layout_constraintTop_toBottomOf="@+id/txt_PillDate"
+        app:layout_constraintStart_toStartOf="@+id/txt_PillDate"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingLeft="52dp"
+        app:layout_constraintTop_toBottomOf="@+id/txt_PillName">
+
+        <TextView
+            android:id="@+id/txt_PillInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:layout_weight="0.7"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="2dp"
+            android:text="1 piil(s)"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txt_PillHour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="12dp"
+            android:text="08:10"
+            android:textColor="#0FF000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txt_Check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginTop="2dp"
+            android:text="?"
+            android:textColor="#0FF000"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/image_reminder_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pill"
+        android:layout_marginTop="6dp"
+        android:layout_marginRight="5dp"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>

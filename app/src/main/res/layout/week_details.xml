@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.calendar.Week.WeekModify">
     <ListView
-        android:id="@+id/historic_list"
+        android:id="@+id/week_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

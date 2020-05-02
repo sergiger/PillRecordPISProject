@@ -122,7 +122,7 @@ class WeekModify : AppCompatActivity() {
         }
         // Fer
         date_button.setOnClickListener {
-            select_date()
+            select_date(reminder)
         }
 
         status_button.setOnClickListener {
@@ -148,9 +148,9 @@ class WeekModify : AppCompatActivity() {
             finish()
         }
     }
-    fun select_date(){
+    fun select_date(reminder : Reminder){
         var new_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-        var new_month=Calendar.getInstance().get(Calendar.MONTH)+1
+        var new_month=Calendar.getInstance().get(Calendar.MONTH)
         var new_year=Calendar.getInstance().get(Calendar.YEAR)
 
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.date_dialoge, null)
@@ -163,13 +163,10 @@ class WeekModify : AppCompatActivity() {
         //Aqui guardo la data INI seleccionada
         //i també poso la data correcta al DatePicker de INICI amb la data d'avui
         val datePicker_ini = mDialogView.findViewById<DatePicker>(R.id.date_Picker)
-        val today = Calendar.getInstance()
-        datePicker_ini.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
-            today.get(Calendar.DAY_OF_MONTH)
-        ) { view, year, month, day ->
-            val month = month + 1
+        val date = reminder.date
+        datePicker_ini.init(date.year, date.monthValue-1, date.dayOfMonth) { view, year, month, day ->
             new_day=day
-            new_month=month
+            new_month=month +1
             new_year=year
             //val msg = "You Selected: $day/$month/$year"
             //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()

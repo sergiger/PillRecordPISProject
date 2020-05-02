@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
@@ -14,7 +15,8 @@ import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.ActivityRe
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.MeasurementReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.MedicineReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.Reminder
-import kotlinx.android.synthetic.main.week_details.*
+import kotlinx.android.synthetic.main.fragment_three.*
+import java.time.LocalDate
 
 /**
  * A simple [Fragment] subclass.
@@ -36,8 +38,12 @@ class FragmentThree : Fragment() {
         super.onActivityCreated(savedInstanceState)
         createMedicineList()
         historic_list.setOnItemClickListener { adapterView, view, i, l ->
-            var reminder : Reminder = adapterView.adapter.getItem(i) as Reminder
-            actualReminder = reminder
+            var reminder : Any = adapterView.adapter.getItem(i)
+            if (reminder is LocalDate) Toast.makeText(context,"Date", Toast.LENGTH_SHORT).show()
+            else if (reminder is Reminder){
+                actualReminder = reminder
+                Toast.makeText(context,"Reminder", Toast.LENGTH_SHORT).show()
+            }
             /*val intent = Intent(context, HistoricModify::class.java)
             intent.putExtra("Reminder", reminder)
             startActivityForResult(intent, 1)*/
@@ -61,10 +67,17 @@ class FragmentThree : Fragment() {
         }
     }
     fun createMedicineList() {
-        val medicineList = Controller.getRemindersData()
+        //val medicineList = Controller.getRemindersData()
+        val medicineList = Controller.getDatesAndReminders() // New
         println(medicineList)
         val medicineListView : ListView? = view?.findViewById(R.id.historic_list)
-        val reminderAdapter : HistoricListAdapter = HistoricListAdapter(this, medicineList) // Controller.getRemindersData()
+        // Actual
+        /*val reminderAdapter : HistoricListAdapter = HistoricListAdapter(this, medicineList) // Controller.getRemindersData()
+        if (medicineListView != null) {
+            medicineListView.adapter = reminderAdapter
+        }*/
+        // New
+        val reminderAdapter : CustomAdapter = CustomAdapter(this.context, medicineList) // Controller.getRemindersData()
         if (medicineListView != null) {
             medicineListView.adapter = reminderAdapter
         }
