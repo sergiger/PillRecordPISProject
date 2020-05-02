@@ -48,6 +48,7 @@ class FragmentOne : Fragment() {
             if (resultCode == Activity.RESULT_OK) {
                 val result = data?.getSerializableExtra("Reminder") as Reminder
                 actualReminder.status = result.status
+                // Change Tint Color
                 actualReminder.time = result.time
                 when(actualReminder){
                     is MedicineReminder -> (actualReminder as MedicineReminder).dose = (result as MedicineReminder).dose
@@ -66,6 +67,8 @@ class FragmentOne : Fragment() {
         val reminderAdapter : WeekListAdapter = WeekListAdapter(this, Controller.getRemindersData())
         if (medicineListView != null) {
             medicineListView.adapter = reminderAdapter
+            if (reminderAdapter.count >= 4) medicineListView.isScrollContainer = true
+            else medicineListView.isScrollContainer = false
         }
     }
 }

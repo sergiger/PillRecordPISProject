@@ -32,6 +32,7 @@ object Controller {
     private var mAuth = FirebaseAuth.getInstance()
     val controllerJSON=ControllerJSON()//Serveix per a treballar amb els JSON
     var controllerSharePrefs=ControllerSharePrefs()//Serveix per treballar amb les share preferences
+    val dateList = ArrayList<Date>()
 
 
 

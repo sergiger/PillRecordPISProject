@@ -11,13 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
 import kotlinx.android.synthetic.main.activity_calendar_modify.*
-import kotlinx.android.synthetic.main.activity_today_modify_reminder.back_arrow
-import kotlinx.android.synthetic.main.activity_today_modify_reminder.hour_button_today_modify_reminder
-import kotlinx.android.synthetic.main.activity_today_modify_reminder.info_button
-import kotlinx.android.synthetic.main.activity_today_modify_reminder.info_label
-import kotlinx.android.synthetic.main.activity_today_modify_reminder.name_today_modify_reminder
-import kotlinx.android.synthetic.main.activity_today_modify_reminder.today_modify_reminder_confirm
-import kotlinx.android.synthetic.main.activity_today_modify_reminder.today_modify_reminder_omit
 import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.number_dialog.view.OK
 import kotlinx.android.synthetic.main.number_dialog.view.cancel
@@ -27,7 +20,7 @@ import java.util.*
 
 class WeekModify : AppCompatActivity() {
     val status_types = arrayOf("Confirmed","Skipped")
-    var status = "Set"
+    var status = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar_modify)
@@ -45,12 +38,16 @@ class WeekModify : AppCompatActivity() {
             info_button.text = reminder.duration.toString() + " min"
         }
 
-
         //View elements common for reminders
-        name_today_modify_reminder.text = reminder.getReminderName()
-        hour_button_today_modify_reminder.text = reminder.getHour().toString()
+        name_calendar.text = reminder.getReminderName()
+        hour_button.text = reminder.getHour().toString()
         // fer
-        status_button.text = reminder.getReminderStatus().toString()
+        if (reminder.getReminderStatus() == ReminderStatus.DONE) {
+            status = status_types[0]
+        } else if (reminder.getReminderStatus() == ReminderStatus.OMITTED) {
+                status = status_types[1]
+        } else status = "Set ..."
+        status_button.text = status
         date_button.text = reminder.getReminderDate().toString()
 
         //Set Listeners
@@ -98,7 +95,7 @@ class WeekModify : AppCompatActivity() {
                 mAlertDialog.dismiss()
             }
         }
-        hour_button_today_modify_reminder.setOnClickListener {
+        hour_button.setOnClickListener {
             var newHour= Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
             var newMinute= Calendar.getInstance().get(Calendar.MINUTE)
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.time_dialog, null)
@@ -113,7 +110,7 @@ class WeekModify : AppCompatActivity() {
             }
             mDialogView.OK.setOnClickListener {
                 reminder.time = LocalTime.of(newHour, newMinute)
-                hour_button_today_modify_reminder.text = reminder.time.toString()
+                hour_button.text = reminder.time.toString()
 
                 Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
                 mAlertDialog.dismiss()
@@ -132,15 +129,13 @@ class WeekModify : AppCompatActivity() {
             select_status(reminder)
         }
 
-        today_modify_reminder_confirm.setOnClickListener {
-            reminder.status = ReminderStatus.DONE
+        calendar_modify_reminder_confirm.setOnClickListener {
             val returnIntent = Intent()
             returnIntent.putExtra("Reminder", reminder)
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
         }
-        today_modify_reminder_omit.setOnClickListener{
-            reminder.status = ReminderStatus.OMITTED
+        calendar_modify_reminder_omit.setOnClickListener{
             val returnIntent = Intent()
             returnIntent.putExtra("Reminder", reminder)
             setResult(Activity.RESULT_OK, returnIntent)
@@ -183,7 +178,7 @@ class WeekModify : AppCompatActivity() {
         //Aqui faig els listeners dels dos botons
         mDialogView.OK.setOnClickListener {
             Toast.makeText(this,"work in progress",Toast.LENGTH_LONG).show()
-            date_button.text = new_day.toString() +"//"+ new_month.toString()+"//"+ new_year.toString()
+            date_button.text = new_day.toString() +"/"+ new_month.toString()+"/"+ new_year.toString()
             mAlertDialog.dismiss()
         }
         mDialogView.cancel.setOnClickListener {
@@ -206,7 +201,7 @@ class WeekModify : AppCompatActivity() {
             .setView(mDialogView)
 
         //Set title of dialog
-        mBuilder.setTitle("Set duration")
+        mBuilder.setTitle("Set status")
 
         val mAlertDialog = mBuilder.show()
 
@@ -214,7 +209,12 @@ class WeekModify : AppCompatActivity() {
             infoValue = newVal
         }
         mDialogView.OK.setOnClickListener {
-            info_button.text = reminder.status.toString()
+            if (infoValue == 0) {
+                reminder.status = ReminderStatus.DONE
+            } else reminder.status = ReminderStatus.OMITTED
+            status = status_types[infoValue]
+            status_button.text = status
+
             Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
             mAlertDialog.dismiss()
         }

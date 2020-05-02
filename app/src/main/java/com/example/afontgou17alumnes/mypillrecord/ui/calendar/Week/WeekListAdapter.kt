@@ -1,6 +1,9 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.calendar.Week
 
 import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -24,6 +27,11 @@ class WeekListAdapter(
         val infoTextView : TextView = view.findViewById(R.id.txt_weekPillInfo)
         val imageTextView : ImageView = view.findViewById(R.id.reminder_list_image)
         // images radios
+        val checkImageView : ImageView = view.findViewById(R.id.img_radio1)
+        // Change Tint color
+        val colorFilter = PorterDuffColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN)
+        //val mode = PorterDuff.Mode.DST_OVER
+        checkImageView.colorFilter = colorFilter
 
         val i = reminderList[p0]
 
