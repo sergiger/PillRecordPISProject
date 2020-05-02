@@ -9,4 +9,7 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="gris">	#F5F5F5</color>
     <color name="gris2">#FEDDDADA</color>
+    <color name="aqua">#4BCAA1</color>
+    <color name="orange">#f1830f</color>
+    <color name="red">#e00e0e</color>
 </resources>
