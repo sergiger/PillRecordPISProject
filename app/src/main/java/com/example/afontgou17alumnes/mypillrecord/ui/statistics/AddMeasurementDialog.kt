@@ -146,6 +146,7 @@ class AddMeasurementDialog : DialogFragment() {
             }
         }
         Controller.controllerSharePrefs.sharedUpLoad()
+        Controller.StatisticToFirebase()
     }
     fun setType(id:Int){
         when(id){

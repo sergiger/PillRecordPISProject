@@ -36,6 +36,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         ProgressDialogInit()
         mAuth=FirebaseAuth.getInstance()
+
+        val currentUser = mAuth.currentUser
+        Log.e("CURRENT USER", "USER: ${currentUser?.uid}")
+        updateUI(currentUser)
+
         setContentView(R.layout.activity_login)
         ControllerSharePrefs.setContext(this)
         /*
@@ -112,8 +117,7 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this@LoginActivity, activity_Register4::class.java)
             startActivity(intent)
         }
-        val currentUser = mAuth.currentUser
-        updateUI(currentUser)
+
 
         //Share preferences
         //Controller.controllerSharePrefs.closeSesion()
@@ -125,7 +129,9 @@ class LoginActivity : AppCompatActivity() {
             if(user.isEmailVerified){
                 //sharedUpLoad(username.text.toString(),password.text.toString())//Funció que carrega les dades al user de la base de dades a shared preferences i al user del controlador
                 //sharedDownloadLoad()
-                getdatafromfirebase()
+                getdatafromfirebase(user)//personal data
+                Log.e("CONTROLLER AL MITG", Controller.user.toString())
+                Controller.downloadDataFromFirebase()
                 ProgressDialogDisable()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
@@ -138,28 +144,52 @@ class LoginActivity : AppCompatActivity() {
         ProgressDialogDisable()
     }
 
-    private fun getdatafromfirebase() {
+    private fun getdatafromfirebase(user: FirebaseUser?) {
         val db = FirebaseFirestore.getInstance()
-        val user: FirebaseUser? = mAuth.currentUser
+        val user: FirebaseUser? = user
         val id =user?.uid
+        Log.e("UID", id)
         //dàdes d'usuari
-        val docRef = id?.let { db.collection("users").document(id) }
-        docRef?.get()?.addOnSuccessListener { document ->
+        val docRef2 = Controller.db.collection("users").document(id!!)
+
+        val docRef3 = db.collection("users").document(id)
+        docRef3.get()
+            .addOnSuccessListener { document ->
+              if (document != null) {
+                  Log.e("getDatafromfirestore", "DocumentSnapshot data: ${document.data}")
+                  var map= document.data as MutableMap<String, Any?>
+                  var y =map["yearBirth"] as Number
+                  val h = map["height"] as Number
+                  val w = map["weight"] as Number
+                  val uid = map["uid"] as String
+                  Controller.downloadUserAccount(uid,map["email"] as String,map["username"]as String,map["gender"] as String,y.toInt(),h.toFloat(),w.toFloat(),map["password"] as String)
+                  Log.e("getDatafromfirestore", "get failed with ${map["password"]}")
+              } else {
+                Log.e("getDatafromfirestore", "No such document")
+            }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("getDatafromfirestore", "get failed with ", exception)
+            }
+
+/*
+        val docRef = id?.let { Controller.db.collection("users").document(id) }
+        docRef2.get().addOnSuccessListener { document ->
                 if (document != null) {
                     Log.e("getDatafromfirestore", "DocumentSnapshot data: ${document.data}")
                     var map= document.data as MutableMap<String, Any?>
                     var y =map["yearBirth"] as Number
                     val h = map["height"] as Number
                     val w = map["weight"] as Number
-                    Controller.downloadUserAccount(id,map["email"] as String,map["username"]as String,map["gender"] as String,y.toInt(),h.toFloat(),w.toFloat(),map["password"] as String)
+                    val uid = map["uid"] as String
+                    Controller.downloadUserAccount(uid,map["email"] as String,map["username"]as String,map["gender"] as String,y.toInt(),h.toFloat(),w.toFloat(),map["password"] as String)
                     Log.e("getDatafromfirestore", "get failed with ${map["password"]}")
                 } else {
                     Log.e("getDatafromfirestore", "No such document")
                 }
             }?.addOnFailureListener { exception ->
                 Log.e("getDatafromfirestore", "get failed with ", exception)
-            }
-
+            }*/
     }
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()

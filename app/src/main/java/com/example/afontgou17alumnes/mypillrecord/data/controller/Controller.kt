@@ -530,6 +530,46 @@ object Controller {
 
     }
 
+    fun StatisticToFirebase() {
+        val statistics = controllerJSON.getStatisticsJSON()
+
+        val nestedData = hashMapOf(
+            "data" to statistics
+        )
+        val docRef = db.collection("statistics").document(user.id)
+        docRef.get().addOnSuccessListener { document ->
+            if (document != null) {
+                db.collection("statistics").document(user.id).set(nestedData, SetOptions.merge())
+            } else {
+                db.collection("statistics").document(user.id).set(nestedData, SetOptions.merge())
+            }
+        }
+    }
+
+    fun FirabasetoStatics(){
+        val docRef = db.collection("statistics").document(user.id)
+        val control = Controller.user
+        Log.e("control", "control : ${control.toString()}")
+        docRef.get().addOnSuccessListener { document ->
+                if (document.data != null) {
+                    Log.d("statistics", "DocumentSnapshot data: ${document.data}")
+                    var map= document.data as MutableMap<String, Any?>
+                    var data =map["data"] as String
+                    controllerJSON.setStatisticssFromJSON(data)
+                } else {
+                    Log.d("statistics", "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("statistics", "get failed with ", exception)
+            }
+        Log.e("USER INSIDE firebase to statics", "get failed with ${user.id}")
+    }
+
+    fun downloadDataFromFirebase(){//download general all data from firebase
+        FirabasetoStatics()
+    }
+
 
     fun addStaticsValueToFirebase(type: String, statisticEntry: StatisticEntry) {
         when(type){

@@ -52,6 +52,7 @@ class DeleteMeasurementDialog(
         //Set listeners
         deleteBtn.setOnClickListener {
             Controller.deleteMeasure(type, value, date)
+            Controller.StatisticToFirebase()
             (activity as MainActivity).go_To_Statistics(shown)
             dismiss()
         }
