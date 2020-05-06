@@ -393,11 +393,13 @@ object Controller {
     fun addTherapy(therapy: Therapy){
         user.addTherapy(therapy)
         controllerSharePrefs.sharedUpLoad()
+        TherapiesToFirebase()
     }
     fun addReminder(reminder: Reminder){
         user.reminders.add(reminder)
         Log.d("hola:",user.reminders[user.reminders.size-1].toString())
         controllerSharePrefs.sharedUpLoad()
+        RemindersToFirebase()
     }
     fun createMedicineReminder(medicine:String,dose:Int,units:String,
     date:LocalDate,time: LocalTime
@@ -529,7 +531,7 @@ object Controller {
         db.collection("users").document(id!!).set(data, SetOptions.merge())
 
     }
-
+//STATISTICS___________________________________________________________________________________________________________________
     fun StatisticToFirebase() {
         val statistics = controllerJSON.getStatisticsJSON()
 
@@ -567,9 +569,113 @@ object Controller {
             }
         Log.e("USER INSIDE firebase to statics", "get failed with ${user.id}")
     }
+    //THERAPIESS___________________________________________________________________________________________________________________
+    fun TherapiesToFirebase() {
+        val Therapy1 = controllerJSON.getActivityTherapyJSON()
+        val Therapy2 = controllerJSON.getMeasurementTherapyJSON()
+        val Therapy3 = controllerJSON.getMedicineTherapyJSON()
 
-    fun downloadDataFromFirebase(){//download general all data from firebase
+        val nestedData = hashMapOf(
+            "Activity" to Therapy1,
+            "Measurement" to Therapy2,
+            "Medicine" to Therapy3
+        )
+        val docRef = db.collection("therapies").document(user.id)
+        docRef.get().addOnSuccessListener { document ->
+            if (document != null) {
+                db.collection("therapies").document(user.id).set(nestedData, SetOptions.merge())
+            } else {
+                db.collection("therapies").document(user.id).set(nestedData, SetOptions.merge())
+            }
+        }
+    }
+
+    fun FirebasetoTherapies(){
+        val docRef = db.collection("therapies").document(user.id)
+        val control = Controller.user
+        Log.e("control", "control : ${control.toString()}")
+        docRef.get().addOnSuccessListener { document ->
+            if (document.data != null) {
+                Log.d("therapies", "DocumentSnapshot data: ${document.data}")
+                var map= document.data as MutableMap<String, Any?>
+                if(map.containsKey("Activity")){
+                    var data1 =map["Activity"] as String
+                    controllerJSON.setActivityTherapyFronJSON(data1)
+                }
+                if(map.containsKey("Measurement")){
+                    var data2 =map["Measurement"] as String
+                    controllerJSON.setMeasurementTherapyFronJSON(data2)
+                }
+                if(map.containsKey("Medicine")){
+                    var data3 =map["Medicine"] as String
+                    controllerJSON.setMedicineTherapyFronJSON(data3)
+                }
+
+            } else {
+                Log.d("therapies", "No such document")
+            }
+        }
+            .addOnFailureListener { exception ->
+                Log.d("therapies", "get failed with ", exception)
+            }
+        Log.e("USER INSIDE firebase to statics", "get failed with ${user.id}")
+    }
+    //REMINDERS___________________________________________________________________________________________________________________
+    fun RemindersToFirebase() {
+        val Reminders1 = controllerJSON.getActivityReminderJSON()
+        val Reminders2 = controllerJSON.getMeasurementReminderJSON()
+        val Reminders3 = controllerJSON.getMedicineReminderJSON()
+
+        val nestedData = hashMapOf(
+            "Activity" to Reminders1,
+            "Measurement" to Reminders2,
+            "Medicine" to Reminders3
+        )
+        val docRef = db.collection("reminders").document(user.id)
+        docRef.get().addOnSuccessListener { document ->
+            if (document != null) {
+                db.collection("reminders").document(user.id).set(nestedData, SetOptions.merge())
+            } else {
+                db.collection("reminders").document(user.id).set(nestedData, SetOptions.merge())
+            }
+        }
+    }
+
+    fun FirebasetoReminders(){
+        val docRef = db.collection("reminders").document(user.id)
+        val control = Controller.user
+        Log.e("control", "control : ${control.toString()}")
+        docRef.get().addOnSuccessListener { document ->
+            if (document.data != null) {
+                Log.d("therapies", "DocumentSnapshot data: ${document.data}")
+                var map= document.data as MutableMap<String, Any?>
+                if(map.containsKey("Activity")){
+                    var data1 =map["Activity"] as String
+                    controllerJSON.setActivityReminderFromJSON(data1)
+                }
+                if(map.containsKey("Measurement")){
+                    var data2 =map["Measurement"] as String
+                    controllerJSON.setMeasurementReminderFromJSON(data2)
+                }
+                if(map.containsKey("Medicine")){
+                    var data3 =map["Medicine"] as String
+                    controllerJSON.setMedicineReminderFromJSON(data3)
+                }
+
+            } else {
+                Log.d("reminders", "No such document")
+            }
+        }
+            .addOnFailureListener { exception ->
+                Log.d("reminders", "get failed with ", exception)
+            }
+        Log.e("USER INSIDE firebase to statics", "get failed with ${user.id}")
+    }
+
+    fun downloadDataFromFirebaseThinksFromUser(){//download general all data from firebase
         FirabasetoStatics()
+        FirebasetoTherapies()
+        FirebasetoReminders()
     }
 
 

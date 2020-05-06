@@ -132,7 +132,7 @@ class LoginActivity : AppCompatActivity() {
             if(user.isEmailVerified){
                 //sharedUpLoad(username.text.toString(),password.text.toString())//Funció que carrega les dades al user de la base de dades a shared preferences i al user del controlador
                 //sharedDownloadLoad()
-                getdatafromfirebase(user)//personal data
+                getdatafromfirebase(user)//All data
                 ProgressDialogDisable()
                 //Controller.controllerSharePrefs.sharedUpLoad()
                 val intent = Intent(this, MainActivity::class.java)
@@ -165,10 +165,8 @@ class LoginActivity : AppCompatActivity() {
                   val w = map["weight"] as Number
                   val uid = map["uid"] as String
                   Controller.downloadUserAccount(uid,map["email"] as String,map["username"]as String,map["gender"] as String,y.toInt(),h.toFloat(),w.toFloat(),map["password"] as String)
-                  Log.e("getDatafromfirestore", "get failed with ${map["password"]}")
+                  Controller.downloadDataFromFirebaseThinksFromUser()
 
-                  Log.e("CONTROLLER AL MITG", Controller.user.toString())
-                  Controller.downloadDataFromFirebase()
               } else {
                 Log.e("getDatafromfirestore", "No such document")
             }
@@ -177,24 +175,6 @@ class LoginActivity : AppCompatActivity() {
                 Log.d("getDatafromfirestore", "get failed with ", exception)
             }
 
-/*
-        val docRef = id?.let { Controller.db.collection("users").document(id) }
-        docRef2.get().addOnSuccessListener { document ->
-                if (document != null) {
-                    Log.e("getDatafromfirestore", "DocumentSnapshot data: ${document.data}")
-                    var map= document.data as MutableMap<String, Any?>
-                    var y =map["yearBirth"] as Number
-                    val h = map["height"] as Number
-                    val w = map["weight"] as Number
-                    val uid = map["uid"] as String
-                    Controller.downloadUserAccount(uid,map["email"] as String,map["username"]as String,map["gender"] as String,y.toInt(),h.toFloat(),w.toFloat(),map["password"] as String)
-                    Log.e("getDatafromfirestore", "get failed with ${map["password"]}")
-                } else {
-                    Log.e("getDatafromfirestore", "No such document")
-                }
-            }?.addOnFailureListener { exception ->
-                Log.e("getDatafromfirestore", "get failed with ", exception)
-            }*/
     }
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
