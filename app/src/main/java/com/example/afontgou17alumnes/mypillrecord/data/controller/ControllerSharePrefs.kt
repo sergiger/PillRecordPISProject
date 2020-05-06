@@ -108,5 +108,6 @@ class ControllerSharePrefs {
         val editor = context.getSharedPreferences("Mydata", Context.MODE_PRIVATE).edit()
         editor.clear()
         editor.apply()
+        Controller.clearUser()
     }
 }

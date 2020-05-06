@@ -789,4 +789,8 @@ object Controller {
             }
         }
     }
+
+    fun clearUser() {
+        user.clear()
+    }
 }

@@ -187,5 +187,20 @@ open class User{
         return "id "+id+" email "+email +" username "+username+" pasword "+pasword+" gender "+gender+" birthYear "+birthYear.toString()+" weight "+weight.toString()+" height "+height.toString()
     }
 
+    fun clear() {
+        this.reminders.clear()
+        this.birthYear=0
+        this.weight=0F
+        this.height=0F
+        this.id=""
+        this.agenda.clear()
+        this.therapies.clear()
+        this.username=""
+        this.email=""
+        this.pasword=""
+        this.gender=""
+        this.statistics.clear()
+    }
+
 
 }

@@ -56,4 +56,13 @@ class Statistics {
         }
         return fakeStatistics
     }
+
+    fun clear() {
+        this.arterialPressureData.clear()
+        this.glucoseAfterData.clear()
+        this.glucoseBeforeData.clear()
+        this.heartRateData.clear()
+        this.weightData.clear()
+        this.temperatureData.clear()
+    }
 }
