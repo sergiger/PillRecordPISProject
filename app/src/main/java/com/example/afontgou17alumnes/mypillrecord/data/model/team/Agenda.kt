@@ -77,5 +77,9 @@ class Agenda {
         return "Agenda(contactes=$contactes)"
     }
 
+    fun clear() {
+        contactes.clear()
+    }
+
 
 }
