@@ -40,6 +40,9 @@ class LoginActivity : AppCompatActivity() {
         val currentUser = mAuth.currentUser
         Log.e("CURRENT USER", "USER: ${currentUser?.uid}")
         updateUI(currentUser)
+        //if(currentUser != null){
+           //Controller.controllerSharePrefs.sharedDownloadLoad()
+        //}
 
         setContentView(R.layout.activity_login)
         ControllerSharePrefs.setContext(this)
@@ -130,9 +133,8 @@ class LoginActivity : AppCompatActivity() {
                 //sharedUpLoad(username.text.toString(),password.text.toString())//Funció que carrega les dades al user de la base de dades a shared preferences i al user del controlador
                 //sharedDownloadLoad()
                 getdatafromfirebase(user)//personal data
-                Log.e("CONTROLLER AL MITG", Controller.user.toString())
-                Controller.downloadDataFromFirebase()
                 ProgressDialogDisable()
+                //Controller.controllerSharePrefs.sharedUpLoad()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -150,9 +152,9 @@ class LoginActivity : AppCompatActivity() {
         val id =user?.uid
         Log.e("UID", id)
         //dàdes d'usuari
-        val docRef2 = Controller.db.collection("users").document(id!!)
+        //val docRef2 = Controller.db.collection("users").document(id!!)
 
-        val docRef3 = db.collection("users").document(id)
+        val docRef3 = db.collection("users").document(id!!)
         docRef3.get()
             .addOnSuccessListener { document ->
               if (document != null) {
@@ -164,6 +166,9 @@ class LoginActivity : AppCompatActivity() {
                   val uid = map["uid"] as String
                   Controller.downloadUserAccount(uid,map["email"] as String,map["username"]as String,map["gender"] as String,y.toInt(),h.toFloat(),w.toFloat(),map["password"] as String)
                   Log.e("getDatafromfirestore", "get failed with ${map["password"]}")
+
+                  Log.e("CONTROLLER AL MITG", Controller.user.toString())
+                  Controller.downloadDataFromFirebase()
               } else {
                 Log.e("getDatafromfirestore", "No such document")
             }

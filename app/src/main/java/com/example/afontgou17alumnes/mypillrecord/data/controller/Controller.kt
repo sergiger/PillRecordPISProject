@@ -554,8 +554,10 @@ object Controller {
                 if (document.data != null) {
                     Log.d("statistics", "DocumentSnapshot data: ${document.data}")
                     var map= document.data as MutableMap<String, Any?>
-                    var data =map["data"] as String
-                    controllerJSON.setStatisticssFromJSON(data)
+                    if(map.containsKey("data")){
+                        var data =map["data"] as String
+                        controllerJSON.setStatisticssFromJSON(data)
+                    }
                 } else {
                     Log.d("statistics", "No such document")
                 }
