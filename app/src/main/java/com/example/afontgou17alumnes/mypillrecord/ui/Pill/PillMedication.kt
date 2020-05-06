@@ -266,6 +266,10 @@ class PillMedication : AppCompatActivity() {
             dosisInt = parts[0]
         }
         var unit = parts[1]
+
+        // Refresh
+        this.dose = dosisInt.toInt()
+        this.new_units = unit
         btn_dose.text = dosisInt
         btn_units.text = unit
     }
