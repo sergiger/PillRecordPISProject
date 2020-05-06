@@ -15,8 +15,13 @@ class AsyncTaskHandler: AsyncTask<String, String, String>() {
     // val url = "https://api.fda.gov/drug/ndc.json?search=active_ingredients.name:%22ibuprofen%22+AND+brand_name:%22Advil%22&limit=100"
     // AsyncTaskHandler().execute(url)
     // Final of implementation
+
+    var activity: PillMedication? = null
     val listOfPills = ArrayList<MyData>()
-    val delegate:AsyncResponse = PillMedication()
+
+    fun setContext(act : PillMedication) {
+        this.activity = act
+    }
 
     override fun doInBackground(vararg url: String?): String {
         val res:String
@@ -62,7 +67,7 @@ class AsyncTaskHandler: AsyncTask<String, String, String>() {
             listOfPills.add(pill)
             i++
         }
-        delegate.getResults(listOfPills)
+        activity?.getSearchResults(listOfPills) // Valid (current)
         //println(listOfPills)
     }
 } // Final of implementation

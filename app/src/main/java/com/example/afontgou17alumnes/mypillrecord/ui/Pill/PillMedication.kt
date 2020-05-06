@@ -16,7 +16,6 @@ import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Frequency
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MedicineTherapy
 import com.example.afontgou17alumnes.mypillrecord.data.pills.MyData
-import com.example.afontgou17alumnes.mypillrecord.data.search.AsyncResponse
 import com.example.afontgou17alumnes.mypillrecord.data.search.AsyncTaskHandler
 import com.google.android.material.textfield.TextInputEditText
 import com.google.zxing.integration.android.IntentIntegrator
@@ -31,7 +30,7 @@ import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
 import java.util.*
 
-class PillMedication : AppCompatActivity() , AsyncResponse{
+class PillMedication : AppCompatActivity() {
     var frequencyClass : Frequency? = null
     var medicine= ""
     var notes=""
@@ -234,7 +233,10 @@ class PillMedication : AppCompatActivity() , AsyncResponse{
                     var format1 = ndc.substring(0,4) + "-" + ndc.substring(4,8) + "-" + ndc.substring(8) // 4-4-2
                     var format2 = ndc.substring(0,5) + "-" + ndc.substring(5,8) + "-" + ndc.substring(8) // 5-3-2
 
-                    AsyncTaskHandler().execute(url+format1+"+"+field+format2)  // Final of implementation
+                    var asyncTask = AsyncTaskHandler()
+                    asyncTask.setContext(this)
+                    asyncTask.execute(url+format1+"+"+field+format2)
+                    //AsyncTaskHandler().execute(url+format1+"+"+field+format2)  // Final of implementation
                     println(url+format1+"+"+field+format2)
                 }
             } else {
@@ -242,21 +244,31 @@ class PillMedication : AppCompatActivity() , AsyncResponse{
             }
         }
     }
-    override fun getResults(result: ArrayList<MyData>) {
+    // Valid Function
+    fun getSearchResults(result: ArrayList<MyData>) {
         var pill = result[0]
         println(pill)
 
-        var name = pill.brand_name + " " + pill.active_ingredients[0].name
+        var name = pill.brand_name
         var editable:Editable = Editable.Factory.getInstance().newEditable(name)
-        //val MedicineNoum = findViewById<TextInputEditText>(R.id.pill_search)
-        //MedicineNoum.text = editable
+        pill_search.text = editable
 
         var strength = pill.active_ingredients[0].strength
         val parts = strength.split(" ", "/")
-        var dosis = parts[0]
+
+        // Model of dosis is Int (!)
+        var dosisInt = ""
+        if (parts[0].contains(".")) {
+            var dosisFloat = parts[0].split(".")
+            dosisInt = dosisFloat[0]
+        }
+        else {
+            dosisInt = parts[0]
+        }
         var unit = parts[1]
-        // btn_dose.text = dosis
-        // btn_units.text = unit
+
+        btn_dose.text = dosisInt
+        btn_units.text = unit
     }
 
     fun select_dose(){
