@@ -15,7 +15,7 @@ class MeasurementReminder(
     override var time: LocalTime,
     var value: Float=0F,
     override var status: ReminderStatus = ReminderStatus.TO_DO,
-    override var ID:Int=-1
+    override var ID:String="-1"
 ): Reminder {
     override fun toString(): String {
         return "MeasurementReminder(name='$name', unit='$unit', value=$value, date=$date, time=$time)"

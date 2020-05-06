@@ -202,5 +202,14 @@ open class User{
         this.statistics.clear()
     }
 
+    fun deleteAllRemindersById(id: String) {
+        var i=0
+        for(reminder in this.reminders){
+            if(reminder.ID.equals(id))
+                this.reminders.removeAt(i)
+            i+=1
+        }
+    }
+
 
 }

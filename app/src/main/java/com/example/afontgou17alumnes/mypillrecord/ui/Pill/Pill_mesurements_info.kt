@@ -129,7 +129,7 @@ class Pill_mesurements_info : AppCompatActivity() {
             if (frequencyClass != null ){
                 val freq:Frequency = frequencyClass!!
                 val therapy= MeasurementTherapy(freq,"", Controller.user.id,titol, w_hourListfrequency as ArrayList<String>)
-                Controller.addTherapy(therapy)
+                Controller.addTherapy__CreateReminders(therapy)
                 Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
                 Log.e("THERAPY",therapy.toString())
                 go_home()

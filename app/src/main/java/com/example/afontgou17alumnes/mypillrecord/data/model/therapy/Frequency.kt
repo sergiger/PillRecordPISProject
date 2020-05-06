@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord.data.model.therapy
 
+import android.util.Log
 import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeTherapy.FakeFrequency
 
 class Frequency{
@@ -57,5 +58,48 @@ class Frequency{
     fun createFakeFrequency():FakeFrequency{
         return FakeFrequency(type,startDate,endDate,listofpuntualdays,specificweekdays,eachtimedose)
     }
+
+    fun getRealDateString(date:String):String{
+        //Funció perquè la data està escrita en un format que no em permet fer el parcel a LocalDate, l'String que això em retorna és perfecte en aquest sentit
+        var dataString:String=""
+        var substrings=date.split("/")
+        if(substrings[0].length==1){
+            if(substrings[1].length==1)
+                dataString=substrings[2]+"-"+"0"+substrings[1]+"-"+"0"+substrings[0]
+            else
+                dataString=substrings[2]+"-"+substrings[1]+"-"+"0"+substrings[0]
+        }
+        else {
+            if (substrings[1].length == 1)
+                dataString = substrings[2] + "-" + "0" + substrings[1] + "-" + substrings[0]
+            else
+                dataString = substrings[2] + "-" + substrings[1] + "-" + substrings[0]
+        }
+        return dataString
+    }
+
+    fun getDiferenceBetweenDays(): ArrayList<Int> {
+        var llista1_0= arrayListOf<Int>(0,0,0,0,0,0,0)
+        //llista1_0 tindrà 1 si vols fer algo al dia i i si hi ha 0 voldrà dir que no s'ha de fer res aquest dia
+        for(dia in this.specificweekdays){
+            if(dia=="Mon")
+                llista1_0[0]=1
+            if(dia=="Tue")
+                llista1_0[1]=1
+            if(dia=="Wed")
+                llista1_0[2]=1
+            if(dia=="Thu")
+                llista1_0[3]=1
+            if(dia=="Fri")
+                llista1_0[4]=1
+            if(dia=="Sat")
+                llista1_0[5]=1
+            if(dia=="Sun")
+                llista1_0[6]=1
+
+        }
+        return llista1_0
+    }
+
 
 }

@@ -10,5 +10,9 @@ interface Therapy{
     var hours : ArrayList<String>
 
     fun createFakeTherapy():FakeTherapy
+
+    fun createReminders()
+
+    fun deleteReminders()
 }
 
