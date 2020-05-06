@@ -28,14 +28,17 @@ class AddUnplannedMeasurement : AppCompatActivity() {
     var hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
     var minute=Calendar.getInstance().get(Calendar.MINUTE)
     var value:Float=30F
-    val measurement_types = arrayOf("Weight", "Heart rate","Arterial pressure","Temperature","Glucose level(before eating)","Glucose level(after eating)")
-    val unit_types=arrayOf("Kg","bpm","mmHg","Cº","mg/dl","mg/dl")
+    val measurement_types = arrayOf("Weight", "Heart rate","Arterial pressure","Glucose level (before eating)","Glucose level (after eating)", "Temperature")
+    val unit_types=arrayOf("Kg","bpm","mmHg","mg/dl","mg/dl","Cº")
     var measuremtent="Weight"
     var units="kg"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_unplanned_measurement)
+
+        hour_button_today_modify_reminder.text = "$hour:$minute"
+
         back_arrow.setOnClickListener{
             go_back()
         }
@@ -139,7 +142,7 @@ class AddUnplannedMeasurement : AppCompatActivity() {
         this.day=ini_day
         this.month=ini_month
         this.year=ini_year
-        info_button.text = this.day.toString()+"//"+this.month.toString()+"//"+this.year.toString()
+        info_button.text = this.day.toString()+"/"+this.month.toString()+"/"+this.year.toString()
     }
 
     fun go_home(){

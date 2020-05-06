@@ -14,7 +14,6 @@ import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller.createMedicineReminder
 import com.example.afontgou17alumnes.mypillrecord.data.search.SearchActivity
-import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.back_arrow
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.info_button
@@ -41,6 +40,8 @@ class AddUnplannedMedicine : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_unplanned_medicine)
+
+        hour_button_unplanned_medicine.text = "$hour:$minute";
 
         //Set Listeners
         back_arrow.setOnClickListener{
@@ -123,8 +124,8 @@ class AddUnplannedMedicine : AppCompatActivity() {
     }
 
     fun select_time(){
-        var new_Hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-        var new_minute=Calendar.getInstance().get(Calendar.MINUTE)
+        var newHour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        var newMinute=Calendar.getInstance().get(Calendar.MINUTE)
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.time_dialog, null)
         //AlertDialogBuilder
         val mBuilder = AlertDialog.Builder(this)
@@ -132,12 +133,12 @@ class AddUnplannedMedicine : AppCompatActivity() {
             .setTitle("Set date")
         val mAlertDialog = mBuilder.show()
         mDialogView.time_Picker.setOnTimeChangedListener { view, hour, minute ->
-            new_Hour=hour
-            new_minute=minute
+            newHour=hour
+            newMinute=minute
         }
         mDialogView.OK.setOnClickListener {
-            this.hour=new_Hour
-            this.minute=new_minute
+            this.hour=newHour
+            this.minute=newMinute
             var min=this.minute.toString()
             var hou=this.hour.toString()
             if(this.minute<10){
@@ -200,7 +201,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
         this.day=ini_day
         this.month=ini_month
         this.year=ini_year
-        info_button.text = this.day.toString()+"//"+this.month.toString()+"//"+this.year.toString()
+        info_button.text = this.day.toString()+"/"+this.month.toString()+"/"+this.year.toString()
 
     }
 

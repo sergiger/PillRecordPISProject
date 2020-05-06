@@ -37,6 +37,9 @@ class AddUnplannedActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_unplanned_activity)
+
+        hour_button_unplanned_activity.text = "$hour:$minute"
+
         back_arrow.setOnClickListener{
             go_back()
         }
@@ -92,7 +95,7 @@ class AddUnplannedActivity : AppCompatActivity() {
         }
         mDialogView.OK.setOnClickListener {
             this.duration=new_duration
-            duration_button.text=this.duration.toString()+"min"
+            duration_button.text=this.duration.toString()+" min"
             Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
             mAlertDialog.dismiss()
         }
@@ -180,7 +183,7 @@ class AddUnplannedActivity : AppCompatActivity() {
         this.day=ini_day
         this.month=ini_month
         this.year=ini_year
-        info_button.text = this.day.toString()+"//"+this.month.toString()+"//"+this.year.toString()
+        info_button.text = this.day.toString()+"/"+this.month.toString()+"/"+this.year.toString()
     }
 
     fun go_home(){

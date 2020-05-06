@@ -51,15 +51,17 @@
 
     <Spinner
         android:id="@+id/measurement_spinner"
+        style="@style/Widget.AppCompat.Spinner"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-        android:entries="@array/statistics_array"
+        android:entries="@array/add_measurement_array"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_unplanned_measurement" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_unplanned_measurement"
+        tools:layout_editor_absoluteX="16dp" />
 
 
 
@@ -80,14 +82,17 @@
         android:layout_height="70dp"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:background="@color/transparent"
+        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+        android:drawableTint="@color/colorApp3"
         android:selectAllOnFocus="true"
         android:shadowColor="#FFFFFF"
         android:text="Today"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/measurement_spinner" />
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/measurement_spinner"
+        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
         android:id="@+id/hour_label"
@@ -106,14 +111,17 @@
         android:layout_height="70dp"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:background="@color/transparent"
+        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+        android:drawableTint="@color/colorApp3"
         android:selectAllOnFocus="true"
         android:shadowColor="#FFFFFF"
         android:text="15:00"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/info_button" />
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/info_button"
+        tools:layout_editor_absoluteX="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/tick_unplanned_measurement"
