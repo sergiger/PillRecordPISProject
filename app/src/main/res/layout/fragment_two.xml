@@ -5,35 +5,42 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.calendar.FragmentTwo">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:id="@+id/select_date_month_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
-        android:paddingVertical="10dp">
-        <Button
+        android:paddingVertical="10dp"
+        android:orientation="horizontal"
+        android:layout_gravity="right"
+        android:gravity="right"
+        android:background="@color/colorApp3">
+
+        <TextView
+            android:id="@+id/txt_datePicked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Today"
+            android:textAllCaps="true"
+            android:textColor="#ffffffff"
+            android:gravity="right"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="24sp"/>
+
+        <ImageButton
             android:id="@+id/btn_selectDate"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/transparent"
-            android:paddingHorizontal="50dp"
-            android:drawableLeft="@drawable/ic_calendar_icon"
-            android:text="Select a date" />
-        <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_calendar_icon"
-            android:background="@color/colorApp2">
-        </ImageView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <TextView
-        android:id="@+id/txt_datePicked"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text=""
-        android:textSize="20sp"
-        android:textColor="#000000">
-    </TextView>
+            android:layout_gravity="right"
+            android:background="@drawable/calendar_icon"
+            android:backgroundTint="#ffffffff"
+            />
+
+    </LinearLayout>
+
+
     <ListView
         android:id="@+id/month_list"
         android:layout_width="match_parent"

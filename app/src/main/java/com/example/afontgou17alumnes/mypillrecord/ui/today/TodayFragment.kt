@@ -73,24 +73,6 @@ class TodayFragment : Fragment() {
     }
 
     fun createTodayList(){
-        /*val medicineList = arrayOf(
-            MedicineReminder("Ibuprofen",3,"tablet(s)", LocalDate.now(), LocalTime.of(17,0)),
-            MeasurementReminder("Weight","kg",LocalDate.now(), LocalTime.of(17,0)),
-            ActivityReminder("Running", 15, LocalDate.now(), LocalTime.of(18,0)),
-            UnplannedMedicineReminder("Ibuprofen", 1, "tablet(s)"),
-            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
-            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
-            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
-            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
-            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
-            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
-            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
-            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
-            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
-            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
-            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)"),
-            UnplannedMedicineReminder("Paracetamol", 2, "tablet(s)")
-        )*/
         val medicineListView : ListView? = view?.findViewById(R.id.today_list)
         val reminderAdapter = ReminderListAdapter(this, Controller.getRemindersByDateAndStatus(LocalDate.now(), ReminderStatus.TO_DO))
         if (medicineListView != null) {
