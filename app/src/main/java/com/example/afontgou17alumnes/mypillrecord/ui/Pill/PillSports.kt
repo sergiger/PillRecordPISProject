@@ -30,6 +30,9 @@ class PillSports : AppCompatActivity() {
     var timeAdapter : PillHourListAdapter5? = null
     var w_hourListfrequency= mutableListOf<String>()
     var frequencyClass : Frequency? = null
+    var duration:Int=0
+    var notes:String=""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +92,7 @@ class PillSports : AppCompatActivity() {
                             To as String,
                             array3
                         )
-                    Log.w("frequencyClass",frequencyClass.toString())
+                    Log.d("frequencyClass",frequencyClass.toString())
                     this.frequencyClass=frequencyClass
                 }
                 3->{
@@ -130,8 +133,8 @@ class PillSports : AppCompatActivity() {
             save_activity()
            if (frequencyClass != null && !new_activity.equals("")){
                val freq:Frequency = frequencyClass!!
-               val therapy= ActivityTherapy(freq,"", Controller.user.id,new_activity,0, w_hourListfrequency as ArrayList<String>)
-               Controller.addTherapy(therapy)
+               val therapy= ActivityTherapy(freq,this.notes, Controller.user.id,new_activity,this.duration, w_hourListfrequency as ArrayList<String>)
+               Controller.addTherapy__CreateReminders(therapy)
                Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
                Log.e("THERAPY",therapy.toString())
                go_home()

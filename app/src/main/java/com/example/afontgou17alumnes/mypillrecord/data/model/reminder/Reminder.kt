@@ -10,7 +10,7 @@ interface Reminder : Serializable{
     var date: LocalDate
     var time : LocalTime
     var status : ReminderStatus
-    var ID:Int
+    var ID:String
 
     fun getReminderName(): String
     fun getHour(): LocalTime

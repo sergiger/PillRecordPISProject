@@ -5,6 +5,7 @@ import android.util.Log
 import com.example.afontgou17alumnes.mypillrecord.data.model.User
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
 import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.StatisticEntry
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.ActivityTherapy
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Therapy
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
@@ -900,5 +901,10 @@ object Controller {
 
     fun clearUser() {
         user.clear()
+    }
+
+    fun addTherapy__CreateReminders(therapy: Therapy) {
+        this.addTherapy(therapy)
+        therapy.createReminders()
     }
 }

@@ -54,14 +54,17 @@
         android:layout_height="70dp"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:background="@color/transparent"
+        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+        android:drawableTint="@color/colorApp3"
         android:selectAllOnFocus="true"
         android:shadowColor="#FFFFFF"
-        android:text="Dalsy"
+        android:text="Enter a medicine"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_unplanned_medicine" />
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_unplanned_medicine"
+        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
         android:id="@+id/dose_label"
@@ -80,24 +83,28 @@
         android:layout_height="70dp"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:background="@color/transparent"
+        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+        android:drawableTint="@color/colorApp3"
         android:selectAllOnFocus="true"
         android:shadowColor="#FFFFFF"
-        android:text="1"
+        android:text="Select dose"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/medicine_name_button" />
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/medicine_name_button"
+        tools:layout_editor_absoluteX="16dp" />
+
     <TextView
         android:id="@+id/label_units"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Units"
+        android:text="Select unit"
         android:textColor="#000000"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_unitss"
         app:layout_constraintStart_toStartOf="@id/btn_unitss"
-        app:layout_constraintTop_toTopOf="@id/btn_unitss"
-        app:layout_constraintBottom_toBottomOf="@id/btn_unitss"/>
+        app:layout_constraintTop_toTopOf="@id/btn_unitss" />
 
     <Button
         android:id="@+id/btn_unitss"
@@ -105,14 +112,17 @@
         android:layout_height="70dp"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:background="@color/transparent"
+        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+        android:drawableTint="@color/colorApp3"
         android:selectAllOnFocus="true"
         android:shadowColor="#FFFFFF"
         android:text="Botle"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/dose_button" />
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/dose_button"
+        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
         android:id="@+id/date_label"
@@ -131,14 +141,17 @@
         android:layout_height="70dp"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:background="@color/transparent"
+        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+        android:drawableTint="@color/colorApp3"
         android:selectAllOnFocus="true"
         android:shadowColor="#FFFFFF"
         android:text="Today"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/btn_unitss" />
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/btn_unitss"
+        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
         android:id="@+id/hour_label"
@@ -157,14 +170,17 @@
         android:layout_height="70dp"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:background="@color/transparent"
+        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+        android:drawableTint="@color/colorApp3"
         android:selectAllOnFocus="true"
         android:shadowColor="#FFFFFF"
-        android:text="15:00"
+        android:text="00:00"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/info_button" />
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/info_button"
+        tools:layout_editor_absoluteX="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/tick_unplanned_medicine"

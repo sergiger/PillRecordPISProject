@@ -16,7 +16,7 @@ open class MedicineReminder(
     override var date: LocalDate,
     override var time: LocalTime,
     override var status: ReminderStatus = ReminderStatus.TO_DO,
-    override var ID:Int=-1
+    override var ID:String="-1"
 ) : Reminder {
     override fun toString(): String {//Es només per provar que les coses funcionen
         return "MedicineReminder(name='$name', dose=$dose, doseUnit='$doseUnit', date=$date, time=$time, taken=$status)"

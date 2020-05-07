@@ -13,7 +13,7 @@ class FakeMedicationReminder(
     override var date: String,
     override var time: String,
     override var done: Int=55,
-    override var ID: Int=-1
+    override var ID: String="-1"
 ):FakeReminder {
     override fun createRealReminder(): Reminder {
         return MedicineReminder(

@@ -14,7 +14,7 @@ class ActivityReminder(
     override var date: LocalDate= LocalDate.now(),
     override var time: LocalTime= LocalTime.of(LocalTime.now().hour,LocalTime.now().minute+5),
     override var status: ReminderStatus = ReminderStatus.TO_DO,
-    override var ID:Int=-1
+    override var ID:String="-1"
 ) : Reminder {
 
 

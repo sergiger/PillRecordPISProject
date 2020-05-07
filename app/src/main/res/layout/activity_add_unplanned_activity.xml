@@ -53,14 +53,17 @@
         android:layout_height="70dp"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:background="@color/transparent"
+        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+        android:drawableTint="@color/colorApp3"
         android:selectAllOnFocus="true"
         android:shadowColor="#FFFFFF"
         android:text="Running"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_unplanned_activity" />
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_unplanned_activity"
+        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
         android:id="@+id/duration_label"
@@ -79,14 +82,17 @@
         android:layout_height="70dp"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:background="@color/transparent"
+        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+        android:drawableTint="@color/colorApp3"
         android:selectAllOnFocus="true"
         android:shadowColor="#FFFFFF"
-        android:text="15min"
+        android:text="15 min"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/activity_name_button" />
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/activity_name_button"
+        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
         android:id="@+id/date_label"
@@ -105,14 +111,17 @@
         android:layout_height="70dp"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:background="@color/transparent"
+        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+        android:drawableTint="@color/colorApp3"
         android:selectAllOnFocus="true"
         android:shadowColor="#FFFFFF"
         android:text="Today"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/duration_button" />
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/duration_button"
+        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
         android:id="@+id/hour_label"
@@ -131,14 +140,17 @@
         android:layout_height="70dp"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:background="@color/transparent"
+        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+        android:drawableTint="@color/colorApp3"
         android:selectAllOnFocus="true"
         android:shadowColor="#FFFFFF"
         android:text="15:00"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/info_button" />
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/info_button"
+        tools:layout_editor_absoluteX="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/tick_unplanned_activity"
