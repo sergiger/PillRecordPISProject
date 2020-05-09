@@ -90,4 +90,15 @@ class ActivityTherapy(
     override fun deleteReminders() {
         Controller.user.deleteAllRemindersById(this.id)
     }
+
+    override fun toStringPDF(): String {
+        return "          "+"Activity:  "+this.activityType+"\n               "+
+                "Duration:  "+this.duration.toString()+"min"+"\n" +
+                "               "+
+                "From: "+this.frequency.startDate+"\n" +
+                "               "+
+                "To: "+this.frequency.endDate+"\n" +
+                "               "+
+                "Notes: "+this.notes+"\n"
+    }
 }

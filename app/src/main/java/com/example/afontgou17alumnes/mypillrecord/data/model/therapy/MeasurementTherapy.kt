@@ -107,5 +107,14 @@ class MeasurementTherapy(
     override fun deleteReminders() {
         Controller.user.deleteAllRemindersById(this.id)
     }
+    override fun toStringPDF(): String {
+        return  "          "+"Measurement:"+this.measurementType+"\n               "+
 
+                "From: "+this.frequency.startDate+"\n" +
+                "               "+
+                "To: "+this.frequency.endDate+"\n" +
+                "               "+
+                "Notes: "+this.notes+"\n"
+
+    }
 }

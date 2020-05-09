@@ -76,4 +76,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:19.0.1'
     implementation 'android.arch.work:work-runtime:1.0.1'
 
+    //For PDF
+    implementation 'com.itextpdf:itextg:5.5.10'
+
 }

@@ -14,5 +14,6 @@ interface Therapy{
     fun createReminders()
 
     fun deleteReminders()
+    fun toStringPDF(): String
 }
 

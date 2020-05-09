@@ -211,5 +211,14 @@ open class User{
         }
     }
 
+    fun getTodayReminders(): ArrayList<Reminder> {
+        var reminders=ArrayList<Reminder>()
+        for(rem in this.reminders){
+            if(rem.date.equals(LocalDate.now()))
+                reminders.add(rem)
+        }
+        return reminders
+    }
+
 
 }

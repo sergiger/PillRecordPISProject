@@ -8,5 +8,9 @@ class UnplannedMedicineReminder(
     name: String,
     dose: Int,
     doseUnit: String) :
-    MedicineReminder(name, dose, doseUnit, LocalDate.now(), LocalTime.of(15,0))
+    MedicineReminder(name, dose, doseUnit, LocalDate.now(), LocalTime.of(15,0)) {
+    override fun toStringPDF(): String {
+        TODO("Not yet implemented")
+    }
+}
 
