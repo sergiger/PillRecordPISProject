@@ -220,5 +220,13 @@ open class User{
         return reminders
     }
 
+    fun getReminerBetween(from: LocalDate?, to: LocalDate?): ArrayList<Reminder> {
+        var retorn=ArrayList<Reminder>()
+        for(reminder in this.reminders)
+            if((reminder.date.equals(from)||reminder.date.isAfter(from))&&(reminder.date.equals(to)||reminder.date.isBefore(to)))
+                retorn.add(reminder)
+        return retorn
+    }
+
 
 }

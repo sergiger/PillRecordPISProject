@@ -46,7 +46,21 @@ class ActivityReminder(
                 "\n" +
                 "        Time: "+this.time.toString()+
                 "\n" +
-                "        Status:  "+this.status.name
+                "        Status:  "+this.status.name+"\n"
+        return retorn
+    }
+
+    override fun toStringPDF_calendar(): String{
+        var retorn=""
+        retorn="\n     Activity:  "+this.name+
+                "\n" +
+                "        Date:  "+this.date.toString()+
+                "\n" +
+                "        Duration:  "+this.duration+"min"+
+                "\n" +
+                "        Time: "+this.time.toString()+
+                "\n" +
+                "        Status:  "+this.status.name+"\n"
         return retorn
     }
 

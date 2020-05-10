@@ -99,6 +99,6 @@ class ActivityTherapy(
                 "               "+
                 "To: "+this.frequency.endDate+"\n" +
                 "               "+
-                "Notes: "+this.notes+"\n"
+                "Notes: "+this.notes+"\n"+"\n"
     }
 }

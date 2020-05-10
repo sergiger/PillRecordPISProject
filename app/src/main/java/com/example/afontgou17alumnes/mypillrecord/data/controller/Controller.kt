@@ -557,4 +557,14 @@ object Controller {
         this.addTherapy(therapy)
         therapy.createReminders()
     }
+    fun getLocalDate(year:Int,month:Int,day:Int):LocalDate{
+        var month_str=month.toString()
+        var day_str=day.toString()
+        var year_str=year.toString()
+        if(month<10)
+            month_str="0"+month_str
+        if(day<10)
+            day_str="0"+day_str
+        return LocalDate.parse(year_str+"-"+month_str+"-"+day_str)
+    }
 }
