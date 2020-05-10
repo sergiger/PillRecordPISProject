@@ -14,7 +14,7 @@ class Frequency{
 
     constructor()
     constructor(startDate: String, endDate: String ){//haurem de tenir varis constructors, un per a cada tipus de frequencia
-        //Aquest és el constructor vuit i encara podriem fer un altre constructor amb tota la informació
+        //Aquest és el constructor buit i encara podriem fer un altre constructor amb tota la informació
         this.type =1
         this.startDate =startDate
         this.endDate=endDate
