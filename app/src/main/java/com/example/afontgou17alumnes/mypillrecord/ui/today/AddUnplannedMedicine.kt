@@ -43,6 +43,13 @@ class AddUnplannedMedicine : AppCompatActivity() {
 
         hour_button_unplanned_medicine.text = "$hour:$minute";
 
+        val bundle:Bundle? = intent.extras
+        val Medicine = bundle?.get("Medicine")
+        if (Medicine != null) {
+            this.medicine = Medicine as String
+            medicine_name_button.text = medicine
+        }
+
         //Set Listeners
         back_arrow.setOnClickListener{
             go_back()
