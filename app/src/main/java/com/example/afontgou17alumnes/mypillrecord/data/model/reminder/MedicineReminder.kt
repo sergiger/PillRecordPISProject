@@ -49,7 +49,22 @@ open class MedicineReminder(
                 "\n" +
                 "        Time: "+this.time.toString()+
                 "\n" +
-                "        Status:  "+this.status.name
+                "        Status:  "+this.status.name+"\n"
+        return retorn
+    }
+    override fun toStringPDF_calendar(): String {
+        var retorn=""
+        retorn="\n     Medicine:  "+this.name+
+                "\n" +
+                "        Date:  "+this.date.toString()+
+                "\n" +
+                "        Dose:  "+this.dose+
+                "\n" +
+                "        Units:  "+this.doseUnit+
+                "\n" +
+                "        Time: "+this.time.toString()+
+                "\n" +
+                "        Status:  "+this.status.name+"\n"
         return retorn
     }
 
