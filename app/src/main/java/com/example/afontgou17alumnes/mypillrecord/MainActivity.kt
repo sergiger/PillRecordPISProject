@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -202,7 +203,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 printPDF(mText,mFileName)
             }
-            else if(currentFragment==1){
+            else if(currentFragment==1){//Estem a Calendar
                 mFileName="MyPillRecord_Calendar:"+LocalDate.now().toString()
                 //Inflate the dialog with custom view
                 val mDialogView = LayoutInflater.from(this).inflate(R.layout.from_to_dialogue_pdf, null)
