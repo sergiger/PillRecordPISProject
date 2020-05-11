@@ -17,4 +17,37 @@
         android:id="@+id/pastilles"
         android:title="Pills"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/litres"
+        android:title="Liters(l)"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/mililitres"
+        android:title="miliLiters(ml)"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/injeccio"
+        android:title="Injeccion"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/esprai"
+        android:title="inhaler"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/paquet"
+        android:title="Package"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/cullera"
+        android:title="Spoon"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/aplicació"
+        android:title="Application"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/got"
+        android:title="Cup"
+        app:showAsAction="never"/>
+
 </menu>

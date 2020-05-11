@@ -94,7 +94,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
     private fun showPopupMenu_units(view: View) = PopupMenu(view.context, view).run {
         menuInflater.inflate(R.menu.dose_unitats_popup_menu, menu)
         setOnMenuItemClickListener { item ->
-            Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
             units=item.title.toString()
             view.btn_unitss.text = units.toString()
             true

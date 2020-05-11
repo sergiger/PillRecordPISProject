@@ -19,6 +19,7 @@ import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.controller.ControllerSharePrefs
 import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
+import com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation.legal_main
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
@@ -34,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ControllerSharePrefs.setContext(this)
         ProgressDialogInit()
         mAuth=FirebaseAuth.getInstance()
 
@@ -48,11 +50,12 @@ class LoginActivity : AppCompatActivity() {
             else{
                 Log.e("INTERNET", "NO--------------------------------")
                 Controller.controllerSharePrefs.sharedDownloadLoad()
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }
         }
 
         setContentView(R.layout.activity_login)
-        ControllerSharePrefs.setContext(this)
         /*
         val bundle:Bundle? = intent.extras
         val actions = bundle?.get("type_of_action")//Això ens permet accedir al shared preferences, potser és una manera molt cutre, però és la única que consegueixo que funcioni

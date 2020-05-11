@@ -49,12 +49,13 @@ class ControllerSharePrefs {
     }
 
     fun sharedDownloadLoad(){
+        Log.d("hola1","peque")
         var prefs = context.getSharedPreferences("Mydata", Context.MODE_PRIVATE)
-        //Log.d("hola",getSharedPreferences("Mydata", Context.MODE_PRIVATE).contains("email").toString())
+        Log.d("hola2","peque")
         if(prefs.contains("id")){
-            //Log.d("hola",getSharedPreferences("Mydata", Context.MODE_PRIVATE).contains("email").toString())
+            Log.d("hola3","peque")
             Toast.makeText(context,"Preparing Data!", Toast.LENGTH_LONG).show()
-            //Log.d("hola",getSharedPreferences("Mydata", Context.MODE_PRIVATE).contains("email").toString())
+            Log.d("hola","peque")
             Controller.user.id=prefs.getString("id","")
             Controller.user.email=prefs.getString("email","")
 
