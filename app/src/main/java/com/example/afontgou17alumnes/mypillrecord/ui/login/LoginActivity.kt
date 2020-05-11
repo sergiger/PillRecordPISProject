@@ -39,10 +39,17 @@ class LoginActivity : AppCompatActivity() {
 
         val currentUser = mAuth.currentUser
         Log.e("CURRENT USER", "USER: ${currentUser?.uid}")
-        updateUI(currentUser)
-        //if(currentUser != null){
-           //Controller.controllerSharePrefs.sharedDownloadLoad()
-        //}
+
+        if(currentUser != null){
+            if(Controller.internet(this.applicationContext)){
+                Log.e("INTERNET", "SI--------------------------------")
+                updateUI(currentUser)
+            }
+            else{
+                Log.e("INTERNET", "NO--------------------------------")
+                Controller.controllerSharePrefs.sharedDownloadLoad()
+            }
+        }
 
         setContentView(R.layout.activity_login)
         ControllerSharePrefs.setContext(this)
@@ -132,9 +139,8 @@ class LoginActivity : AppCompatActivity() {
             if(user.isEmailVerified){
                 //sharedUpLoad(username.text.toString(),password.text.toString())//Funció que carrega les dades al user de la base de dades a shared preferences i al user del controlador
                 //sharedDownloadLoad()
-                getdatafromfirebase(user)//All data
+                getdatafromfirebase(user)//All data------------------------------------------
                 ProgressDialogDisable()
-                //Controller.controllerSharePrefs.sharedUpLoad()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()

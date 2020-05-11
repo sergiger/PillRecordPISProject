@@ -1,6 +1,9 @@
 package com.example.afontgou17alumnes.mypillrecord.data.controller
 
+import android.content.Context
 import android.graphics.Color
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.util.Log
 import com.example.afontgou17alumnes.mypillrecord.data.model.User
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
@@ -26,6 +29,7 @@ import java.time.temporal.ChronoUnit
 import java.util.*
 import kotlin.Comparator
 import kotlin.collections.ArrayList
+import kotlin.coroutines.coroutineContext
 
 object Controller {
     val user = User("1","user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
@@ -34,7 +38,7 @@ object Controller {
     private var mAuth = FirebaseAuth.getInstance()
     val controllerJSON=ControllerJSON()//Serveix per a treballar amb els JSON
     var controllerSharePrefs=ControllerSharePrefs()//Serveix per treballar amb les share preferences
-
+    var connected = false;
     /*fun initUserSaved(){
         controllerSharePrefs.sharedDownloadLoad()
     }
@@ -672,11 +676,22 @@ object Controller {
             }
         Log.e("USER INSIDE firebase to statics", "get failed with ${user.id}")
     }
+    //INTERNET??__________________________________________________________
+
+    fun internet(context: Context):Boolean {
+
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+        return isConnected
+    }
+
 
     fun downloadDataFromFirebaseThinksFromUser(){//download general all data from firebase
         FirabasetoStatics()
         FirebasetoTherapies()
         FirebasetoReminders()
+        controllerSharePrefs.sharedUpLoad()
     }
 
 
