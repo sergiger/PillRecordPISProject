@@ -119,7 +119,6 @@ class MainActivity : AppCompatActivity() {
         else{
             replaceFragment(TodayFragment())
         }
-        Controller.setRemindersData()
         generarNextNotification()
 
     }
