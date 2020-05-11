@@ -145,7 +145,7 @@ class AddMeasurementDialog : DialogFragment() {
                 //Controller.addStaticsValueToFirebase("temperatureData",StatisticEntry(value,LocalDate.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)))
             }
         }
-        Controller.controllerSharePrefs.sharedUpLoad()
+        //Controller.controllerSharePrefs.sharedUpLoad()
         Controller.StatisticToFirebase()
     }
     fun setType(id:Int){

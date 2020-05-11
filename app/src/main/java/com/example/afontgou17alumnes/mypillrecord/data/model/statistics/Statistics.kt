@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord.data.model.statistics
 
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeStatistics.FakeStatisticEntry
 import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeStatistics.FakeStatistics
 import com.google.gson.Gson
@@ -32,6 +33,7 @@ class Statistics {
                 break
             }
         }
+        Controller.controllerSharePrefs.sharedUpLoad()
     }
     fun createFakeStatistics(): FakeStatistics {
         var fakeStatistics= FakeStatistics()

@@ -325,6 +325,7 @@ object Controller {
         user.pasword=newPasword
         val data = hashMapOf("password" to user.pasword)
         db.collection("users").document(id!!).set(data, SetOptions.merge())
+        controllerSharePrefs.sharedUpLoad()
 
     }
 //STATISTICS___________________________________________________________________________________________________________________
