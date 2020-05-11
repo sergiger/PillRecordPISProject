@@ -18,4 +18,6 @@ interface Reminder : Serializable{
     fun getReminderStatus(): ReminderStatus
     fun getReminderDate(): LocalDate
     fun createFakeReminder():FakeReminder
+    fun toStringPDF(): String
+    fun toStringPDF_calendar(): String
 } /*:Parcelable*/

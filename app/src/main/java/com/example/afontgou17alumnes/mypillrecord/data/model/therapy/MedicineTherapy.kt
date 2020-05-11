@@ -100,4 +100,15 @@ open class MedicineTherapy(
     override fun deleteReminders() {
         Controller.user.deleteAllRemindersById(this.id)
     }
+
+    override fun toStringPDF(): String {
+        return  "          "+"Medicine:  "+this.medicine+"\n               "+
+                "Dose:  "+this.dose.toString()+"min"+"\n               "+
+                "Units:"+this.units.toString()+"\n               "+
+                "From: "+this.frequency.startDate+"\n" +
+                "               "+
+                "To: "+this.frequency.endDate+"\n" +
+                "               "+
+                "Notes: "+this.notes+"\n"+"\n"
+    }
 }

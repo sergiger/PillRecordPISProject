@@ -38,6 +38,32 @@ class ActivityReminder(
         return FakeActivityReminder(name,duration,date.toString(),time.toString(),Controller.getReminderStatusToInt(status))
     }
 
+    override fun toStringPDF(): String {
+        var retorn=""
+        retorn="\n     Activity:  "+this.name+
+                "\n" +
+                "        Duration:  "+this.duration+"min"+
+                "\n" +
+                "        Time: "+this.time.toString()+
+                "\n" +
+                "        Status:  "+this.status.name+"\n"
+        return retorn
+    }
+
+    override fun toStringPDF_calendar(): String{
+        var retorn=""
+        retorn="\n     Activity:  "+this.name+
+                "\n" +
+                "        Date:  "+this.date.toString()+
+                "\n" +
+                "        Duration:  "+this.duration+"min"+
+                "\n" +
+                "        Time: "+this.time.toString()+
+                "\n" +
+                "        Status:  "+this.status.name+"\n"
+        return retorn
+    }
+
     override fun getMilisFromNow(): Long {
         var result : Long = Calendar.getInstance().timeInMillis
         var date:Long

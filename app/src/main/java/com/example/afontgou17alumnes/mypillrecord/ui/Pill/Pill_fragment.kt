@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import kotlinx.android.synthetic.main.pill_fragment_fragment.*
 
 class Pill_fragment : Fragment() {
@@ -28,9 +30,20 @@ class Pill_fragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        createTherapyList()
+
         btn_add_therapy.setOnClickListener{
             val intent = Intent(activity,Pillplanificar::class.java)
             startActivity(intent)
+        }
+    }
+
+    fun createTherapyList(){
+        val therapyListView = view?.findViewById<ListView>(R.id.therapy_list)
+        val therapyAdapter = TherapyListAdapter(this, Controller.user.therapies)
+        if(therapyListView != null){
+            therapyListView.adapter = therapyAdapter
         }
     }
 }

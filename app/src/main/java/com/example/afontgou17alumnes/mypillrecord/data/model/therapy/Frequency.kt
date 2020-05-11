@@ -2,6 +2,7 @@ package com.example.afontgou17alumnes.mypillrecord.data.model.therapy
 
 import android.util.Log
 import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeTherapy.FakeFrequency
+import java.time.LocalDate
 
 class Frequency{
     var type : Int = 0
@@ -13,7 +14,7 @@ class Frequency{
 
     constructor()
     constructor(startDate: String, endDate: String ){//haurem de tenir varis constructors, un per a cada tipus de frequencia
-        //Aquest és el constructor vuit i encara podriem fer un altre constructor amb tota la informació
+        //Aquest és el constructor buit i encara podriem fer un altre constructor amb tota la informació
         this.type =1
         this.startDate =startDate
         this.endDate=endDate
@@ -99,6 +100,16 @@ class Frequency{
 
         }
         return llista1_0
+    }
+
+    fun isActive(): Boolean {
+        var retorn=false
+        var inici=LocalDate.parse(this.getRealDateString(this.startDate))
+        var end=LocalDate.parse(this.getRealDateString(this.endDate))
+        var now=LocalDate.now()
+        if((now.isEqual(inici)||now.isAfter(inici))&&(now.isEqual(end)||now.isBefore(end)))
+            retorn=true
+        return retorn
     }
 
 

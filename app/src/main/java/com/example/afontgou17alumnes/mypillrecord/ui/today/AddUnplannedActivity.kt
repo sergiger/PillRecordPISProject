@@ -28,7 +28,7 @@ class AddUnplannedActivity : AppCompatActivity() {
     var day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
     var month=Calendar.getInstance().get(Calendar.MONTH)+1
     var year=Calendar.getInstance().get(Calendar.YEAR)
-    var new_activity=""
+    var new_activity="Running"
     var hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
     var minute=Calendar.getInstance().get(Calendar.MINUTE)
     var duration=15

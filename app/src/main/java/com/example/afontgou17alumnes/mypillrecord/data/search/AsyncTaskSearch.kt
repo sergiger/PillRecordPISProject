@@ -1,22 +1,31 @@
 package com.example.afontgou17alumnes.mypillrecord.data.search
 
+import android.app.ProgressDialog
 import android.os.AsyncTask
-import com.example.afontgou17alumnes.mypillrecord.data.pills.Active_ingredients
-import com.example.afontgou17alumnes.mypillrecord.data.pills.MyData
-import com.example.afontgou17alumnes.mypillrecord.ui.Pill.PillMedication
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.FileNotFoundException
 import java.net.HttpURLConnection
 import java.net.URL
 
-class AsyncTaskHandler: AsyncTask<String, String, String>() {
+class AsyncTaskSearch: AsyncTask<String, String, String>() {
+    // API Implementation
+    lateinit var pDialog: ProgressDialog
+    // Final of implementation
 
-    var activity: PillMedication? = null
-    val listOfPills = ArrayList<MyData>()
+    var activity: SearchActivity? = null
+    val listOfPills = ArrayList<String>()
 
-    fun setContext(act : PillMedication) {
+    fun setContext(act : SearchActivity) {
         this.activity = act
+    }
+
+    override fun onPreExecute() {
+        super.onPreExecute()
+        pDialog = ProgressDialog(activity)
+        pDialog.setMessage("Loading...")
+        pDialog.setCancelable(false)
+        pDialog.show()
     }
 
     override fun doInBackground(vararg url: String?): String {
@@ -32,9 +41,9 @@ class AsyncTaskHandler: AsyncTask<String, String, String>() {
         }
         return res
     }
-
     override fun onPostExecute(result: String?) {
         super.onPostExecute(result)
+        if (pDialog.isShowing) pDialog.dismiss()
         jsonParser(result)
     }
 
@@ -47,24 +56,10 @@ class AsyncTaskHandler: AsyncTask<String, String, String>() {
             while (i < jsonResults.length()) {
                 val currentPill = jsonResults.getJSONObject(i)
                 val brand_name: String = currentPill.getString("brand_name")
-
-                val jsonAI: JSONArray = currentPill.getJSONArray("active_ingredients")
-                val listOfAI = ArrayList<Active_ingredients>()
-                var j = 0
-                while (j < jsonAI.length()) {
-                    val currentAI = jsonAI.getJSONObject(j)
-
-                    val nameAI: String = currentAI.getString("name")
-                    val strengthAI: String = currentAI.getString("strength")
-                    val active_ingredients = Active_ingredients(nameAI, strengthAI)
-                    listOfAI.add(active_ingredients)
-                    j++
-                }
-                val pill = MyData(brand_name, listOfAI)
-                listOfPills.add(pill)
+                listOfPills.add(brand_name)
                 i++
             }
-            activity?.getSearchResults(listOfPills) // Valid (current)
+            activity?.getSearchResults(listOfPills)// Valid (current)
         } else {
             activity?.resultsNotFound() // Error case
         }

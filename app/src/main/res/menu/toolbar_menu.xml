@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <!-- "Mark Favorite", should appear as action button if possible -->
+        <!--
         <item
             android:id="@+id/options_search"
             android:icon="@drawable/ic_search_white_24dp"
             android:title="Search"
             app:showAsAction="ifRoom"
             app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+            -->
         <item
             android:id="@+id/pdf_item"
             android:icon="@drawable/pdf_icon"

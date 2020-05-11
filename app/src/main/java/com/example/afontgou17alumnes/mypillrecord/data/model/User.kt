@@ -211,5 +211,22 @@ open class User{
         }
     }
 
+    fun getTodayReminders(): ArrayList<Reminder> {
+        var reminders=ArrayList<Reminder>()
+        for(rem in this.reminders){
+            if(rem.date.equals(LocalDate.now()))
+                reminders.add(rem)
+        }
+        return reminders
+    }
+
+    fun getReminerBetween(from: LocalDate?, to: LocalDate?): ArrayList<Reminder> {
+        var retorn=ArrayList<Reminder>()
+        for(reminder in this.reminders)
+            if((reminder.date.equals(from)||reminder.date.isAfter(from))&&(reminder.date.equals(to)||reminder.date.isBefore(to)))
+                retorn.add(reminder)
+        return retorn
+    }
+
 
 }

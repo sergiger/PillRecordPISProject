@@ -37,6 +37,28 @@ class MeasurementReminder(
         return FakeMeasurementReminder(name,unit,date.toString(),time.toString(),value, Controller.getReminderStatusToInt(status))
     }
 
+    override fun toStringPDF(): String {
+        var retorn=""
+        retorn="\n     Measurement:  "+this.name+
+                "\n" +
+                "        Time: "+this.time.toString()+
+                "\n" +
+                "        Status:  "+this.status.name+"\n"
+        return retorn
+    }
+
+    override fun toStringPDF_calendar(): String {
+        var retorn=""
+        retorn="\n     Measurement:  "+this.name+
+                "\n" +
+                "        Date:  "+this.date.toString()+
+                "\n" +
+                "        Time: "+this.time.toString()+
+                "\n" +
+                "        Status:  "+this.status.name+"\n"
+        return retorn
+    }
+
     override fun getMilisFromNow(): Long {
         var result : Long = Calendar.getInstance().timeInMillis
         var date:Long

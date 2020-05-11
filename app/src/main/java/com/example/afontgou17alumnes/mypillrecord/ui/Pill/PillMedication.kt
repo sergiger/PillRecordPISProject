@@ -247,31 +247,31 @@ class PillMedication : AppCompatActivity() {
     // Valid Function
     fun getSearchResults(result: ArrayList<MyData>) {
         var pill = result[0]
-        println(pill)
 
         var name = pill.brand_name
         var editable:Editable = Editable.Factory.getInstance().newEditable(name)
+        this.medicine = name
         pill_search.text = editable
 
         var strength = pill.active_ingredients[0].strength
         val parts = strength.split(" ", "/")
-
         // Model of dosis is Int (!)
         var dosisInt = ""
         if (parts[0].contains(".")) {
             var dosisFloat = parts[0].split(".")
             dosisInt = dosisFloat[0]
-        }
-        else {
-            dosisInt = parts[0]
-        }
+        } else dosisInt = parts[0]
+
         var unit = parts[1]
 
-        // Refresh
+        // Refresh data and change UI
         this.dose = dosisInt.toInt()
         this.new_units = unit
         btn_dose.text = dosisInt
         btn_units.text = unit
+    }
+    fun resultsNotFound() {
+        Toast.makeText(this, "No matches found!", Toast.LENGTH_SHORT).show()
     }
 
     fun select_dose(){
