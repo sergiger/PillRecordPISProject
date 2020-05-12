@@ -8,7 +8,6 @@ import android.util.Log
 import com.example.afontgou17alumnes.mypillrecord.data.model.User
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
 import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.StatisticEntry
-import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.ActivityTherapy
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Therapy
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
@@ -29,7 +28,6 @@ import java.time.temporal.ChronoUnit
 import java.util.*
 import kotlin.Comparator
 import kotlin.collections.ArrayList
-import kotlin.coroutines.coroutineContext
 
 object Controller {
     val user = User("1","user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
@@ -356,9 +354,11 @@ object Controller {
                     if(map.containsKey("data")){
                         var data =map["data"] as String
                         controllerJSON.setStatisticssFromJSON(data)
+                        controllerSharePrefs.sharedUpLoadStatistics()
                     }
                 } else {
                     Log.d("statistics", "No such document")
+
                 }
             }
             .addOnFailureListener { exception ->
@@ -407,6 +407,7 @@ object Controller {
                     var data3 =map["Medicine"] as String
                     controllerJSON.setMedicineTherapyFronJSON(data3)
                 }
+                controllerSharePrefs.sharedUpLoadTherapy()
 
             } else {
                 Log.d("therapies", "No such document")
@@ -444,7 +445,7 @@ object Controller {
         Log.e("control", "control : ${control.toString()}")
         docRef.get().addOnSuccessListener { document ->
             if (document.data != null) {
-                Log.d("therapies", "DocumentSnapshot data: ${document.data}")
+                Log.d("reminders", "DocumentSnapshot data: ${document.data}")
                 var map= document.data as MutableMap<String, Any?>
                 if(map.containsKey("Activity")){
                     var data1 =map["Activity"] as String
@@ -458,6 +459,7 @@ object Controller {
                     var data3 =map["Medicine"] as String
                     controllerJSON.setMedicineReminderFromJSON(data3)
                 }
+                controllerSharePrefs.sharedUpLoadReminders()
 
             } else {
                 Log.d("reminders", "No such document")
@@ -480,10 +482,11 @@ object Controller {
 
 
     fun downloadDataFromFirebaseThinksFromUser(){//download general all data from firebase
+        controllerSharePrefs.sharedUpLoad()
         FirabasetoStatics()
         FirebasetoTherapies()
         FirebasetoReminders()
-        controllerSharePrefs.sharedUpLoad()
+
     }
 
 

@@ -1,11 +1,8 @@
 package com.example.afontgou17alumnes.mypillrecord.data.controller
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.widget.Toast
-import com.example.afontgou17alumnes.mypillrecord.ui.register.activity_Register4
-import com.google.gson.Gson
 
 
 class ControllerSharePrefs {
@@ -46,6 +43,33 @@ class ControllerSharePrefs {
 
 
         Log.d("hola","uploaded")*/
+    }
+    fun sharedUpLoadReminders() {
+        val editor = context.getSharedPreferences("Mydata", Context.MODE_PRIVATE).edit()
+        editor.putString("ActivityReminder", Controller.controllerJSON.getActivityReminderJSON())
+        editor.putString("MeasurementReminder", Controller.controllerJSON.getMeasurementReminderJSON())
+        editor.putString("MedicationReminder", Controller.controllerJSON.getMedicineReminderJSON())
+        editor.apply()
+        Log.d("ActivityReminder",Controller.controllerJSON.getActivityReminderJSON())
+        Log.d("MeasurementReminder",Controller.controllerJSON.getMeasurementReminderJSON())
+        Log.d("MedicationReminder",Controller.controllerJSON.getMedicineReminderJSON())
+    }
+
+    fun sharedUpLoadStatistics() {
+        val editor = context.getSharedPreferences("Mydata", Context.MODE_PRIVATE).edit()
+        editor.putString("Statistics", Controller.controllerJSON.getStatisticsJSON())
+        editor.apply()
+        Log.d("Statistics",Controller.controllerJSON.getStatisticsJSON())
+    }
+    fun sharedUpLoadTherapy() {
+        val editor = context.getSharedPreferences("Mydata", Context.MODE_PRIVATE).edit()
+        editor.putString("ActivityTherapy",Controller.controllerJSON.getActivityTherapyJSON())
+        editor.putString("MeasurementTherapy",Controller.controllerJSON.getMeasurementTherapyJSON())
+        editor.putString("MedicineTherapy",Controller.controllerJSON.getMedicineTherapyJSON())
+        editor.apply()
+        Log.d("ActivityTherapy",Controller.controllerJSON.getActivityTherapyJSON())
+        Log.d("MeasurementTherapy",Controller.controllerJSON.getMeasurementTherapyJSON())
+        Log.d("MedicineTherapy",Controller.controllerJSON.getMedicineTherapyJSON())
     }
 
     fun sharedDownloadLoad(){
