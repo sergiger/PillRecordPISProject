@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_therapy_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        app:contentInsetStart="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_arrow_back_white_24dp"
+            app:backgroundTint="@color/transparent"
+            app:elevation="0dp" />
+
+        <TextView
+            android:id="@+id/name_today_modify_reminder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\t\tName"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="56dp"
+            tools:layout_editor_absoluteY="14dp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/frequency_label_therapy_information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Frequency type"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/frquency_button_therapy_information"
+        app:layout_constraintStart_toStartOf="@id/frquency_button_therapy_information"
+        app:layout_constraintTop_toTopOf="@id/frquency_button_therapy_information" />
+
+    <Button
+        android:id="@+id/frquency_button_therapy_information"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:background="@color/transparent"
+        android:selectAllOnFocus="true"
+        android:shadowColor="#FFFFFF"
+        android:text="Select frequency"
+        android:textAlignment="textEnd"
+        android:textAllCaps="false"
+        android:textColor="@color/colorApp3"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_therapy_information"
+        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+        android:drawableTint="@color/colorApp3"/>
+
+    <Button
+        android:id="@+id/each_days_therapy_information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:text="Every X day(s)"
+        android:textColor="@color/colorApp3"
+        android:shadowColor="#FFFFFF"
+        android:textAlignment="textEnd"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/frquency_button_therapy_information"
+        app:layout_constraintTop_toBottomOf="@id/frquency_button_therapy_information"
+        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+        android:drawableTint="@color/colorApp3"/>
+
+
+    <LinearLayout
+        android:id="@+id/checkbox_days_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/each_days_therapy_information"
+        app:layout_constraintEnd_toEndOf="@id/frquency_button_therapy_information">
+
+        <CheckBox
+            android:id="@+id/checkBox_monday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Monday"
+            android:textSize="16sp"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorApp3"
+            android:drawableTint="@color/colorApp3"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+
+        <CheckBox
+            android:id="@+id/checkBox_tuesday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tuesday"
+            android:textSize="16sp"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorApp3"
+            android:drawableTint="@color/colorApp3"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+
+        <CheckBox
+            android:id="@+id/checkBox_wednesday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Wednesday"
+            android:textSize="16sp"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorApp3"
+            android:drawableTint="@color/colorApp3"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+
+        <CheckBox
+            android:id="@+id/checkBox_thursday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thursday"
+            android:textSize="16sp"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorApp3"
+            android:drawableTint="@color/colorApp3"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+
+        <CheckBox
+            android:id="@+id/checkBox_friday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Friday"
+            android:textSize="16sp"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorApp3"
+            android:drawableTint="@color/colorApp3"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+
+        <CheckBox
+            android:id="@+id/checkBox_saturday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Saturday"
+            android:textSize="16sp"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorApp3"
+            android:drawableTint="@color/colorApp3"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+
+        <CheckBox
+            android:id="@+id/checkBox_sunday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sunday"
+            android:textSize="16sp"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorApp3"
+            android:drawableTint="@color/colorApp3"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/hours_therapy_information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_days_layout"
+        app:layout_constraintEnd_toEndOf="@+id/frquency_button_therapy_information"/>
+
+    <TextView
+        android:id="@+id/info_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@id/info_button"
+        app:layout_constraintTop_toTopOf="@id/info_button"
+        app:layout_constraintBottom_toBottomOf="@id/info_button"/>
+
+    <Button
+        android:id="@+id/info_button"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:background="@color/transparent"
+        android:selectAllOnFocus="true"
+        android:shadowColor="#FFFFFF"
+        android:text="Default"
+        android:textAlignment="textEnd"
+        android:textAllCaps="false"
+        android:textColor="@color/colorApp3"
+        android:textSize="16sp"
+        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+        android:drawableTint="@color/colorApp3"
+        app:layout_constraintTop_toBottomOf="@id/hours_therapy_information"
+        tools:layout_editor_absoluteX="16dp"/>
+
+    <TextView
+        android:id="@+id/unit_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unit"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/unit_button_therapy_information"
+        app:layout_constraintStart_toStartOf="@id/unit_button_therapy_information"
+        app:layout_constraintTop_toTopOf="@id/unit_button_therapy_information" />
+
+    <Button
+        android:id="@+id/unit_button_therapy_information"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:background="@color/transparent"
+        android:selectAllOnFocus="true"
+        android:shadowColor="#FFFFFF"
+        android:text="Select unit"
+        android:textAlignment="textEnd"
+        android:textAllCaps="false"
+        android:textColor="@color/colorApp3"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/info_button"
+        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+        android:drawableTint="@color/colorApp3"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/save_changes_therapy_information"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/gris"
+            android:drawableTop="@drawable/ic_check_white_24dp"
+            android:drawableTint="#000000"
+            android:paddingTop="36dp"
+            android:paddingBottom="36dp"
+            android:text="Save changes"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/delete_therapy_information"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#E53935"
+            android:drawableTop="@drawable/ic_delete_black_24dp"
+            android:drawableTint="#ffffff"
+            android:paddingTop="36dp"
+            android:paddingBottom="36dp"
+            android:text="Delete"
+            android:textAllCaps="false"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

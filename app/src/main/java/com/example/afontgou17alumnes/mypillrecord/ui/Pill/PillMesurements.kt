@@ -19,38 +19,38 @@ class PillMesurements : AppCompatActivity() {
         }
         btn_arterialPressure.setOnClickListener {
             val intent = Intent(this,Pill_mesurements_info::class.java)
-            intent.putExtra("TitolMesurement","      ARTERIAL PRESSURE")
+            intent.putExtra("TitolMesurement","Arterial Pressure")
             intent.putExtra("UnitatsMesurement","mmHg")
             startActivity(intent)
         }
         btn_glucoseAfter.setOnClickListener {
             val intent = Intent(this,Pill_mesurements_info::class.java)
-            intent.putExtra("TitolMesurement","      GLUCOSA AFTER")
+            intent.putExtra("TitolMesurement","Glucose (after eating)")
             intent.putExtra("UnitatsMesurement","mg/dl")
             startActivity(intent)
 
         }
         btn_glucoseBefore.setOnClickListener {
             val intent = Intent(this,Pill_mesurements_info::class.java)
-            intent.putExtra("TitolMesurement","      GLUCOSA BEFORE")
+            intent.putExtra("TitolMesurement","Glucose (before eating)")
             intent.putExtra("UnitatsMesurement","mg/dl")
             startActivity(intent)
         }
         btn_heartRate.setOnClickListener {
             val intent = Intent(this,Pill_mesurements_info::class.java)
-            intent.putExtra("TitolMesurement","      HEART FREQUENCY")
+            intent.putExtra("TitolMesurement","Heart Rate")
             intent.putExtra("UnitatsMesurement","bpm")
             startActivity(intent)
         }
         btn_temperature.setOnClickListener {
             val intent = Intent(this,Pill_mesurements_info::class.java)
-            intent.putExtra("TitolMesurement","      TEMPERATURE")
+            intent.putExtra("TitolMesurement","Temperature")
             intent.putExtra("UnitatsMesurement","Cº")
             startActivity(intent)
         }
         btn_weight.setOnClickListener {
             val intent = Intent(this,Pill_mesurements_info::class.java)
-            intent.putExtra("TitolMesurement","      WEIGHT")
+            intent.putExtra("TitolMesurement","Weight")
             intent.putExtra("UnitatsMesurement","kg")
             startActivity(intent)
         }
