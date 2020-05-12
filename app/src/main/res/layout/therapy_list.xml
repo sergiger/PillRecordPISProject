@@ -19,6 +19,52 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/therapy_from_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="From:"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/therapy_name"
+        app:layout_constraintStart_toEndOf="@+id/therapy_list_image"/>
+
+    <TextView
+        android:id="@+id/therapy_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="00/00/0000"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/therapy_name"
+        app:layout_constraintStart_toEndOf="@+id/therapy_from_label"/>
+
+    <TextView
+        android:id="@+id/therapy_to_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="To:"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/therapy_name"
+        app:layout_constraintStart_toEndOf="@+id/therapy_from"/>
+
+    <TextView
+        android:id="@+id/therapy_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="00/00/0000"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/therapy_name"
+        app:layout_constraintStart_toEndOf="@+id/therapy_to_label"/>
+
+    <TextView
         android:id="@+id/therapy_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,7 +72,7 @@
         android:layout_marginTop="4dp"
         android:text="Information"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/therapy_name"
+        app:layout_constraintTop_toBottomOf="@id/therapy_frequency"
         app:layout_constraintStart_toEndOf="@+id/therapy_list_image"/>
 
     <TextView
@@ -37,8 +83,9 @@
         android:layout_marginTop="4dp"
         android:layout_marginBottom="2dp"
         android:text="Frequency"
+        android:textStyle="bold"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/therapy_info"
+        app:layout_constraintTop_toBottomOf="@id/therapy_from_label"
         app:layout_constraintStart_toEndOf="@+id/therapy_list_image"/>
 
     <ImageView

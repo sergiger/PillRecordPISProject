@@ -28,6 +28,8 @@ class TherapyListAdapter(
         val nameTextView : TextView = view.findViewById(R.id.therapy_name)
         val infoTextView : TextView = view.findViewById(R.id.therapy_info)
         val freqTextView : TextView = view.findViewById(R.id.therapy_frequency)
+        val fromTextView : TextView = view.findViewById(R.id.therapy_from)
+        val toTextView : TextView = view.findViewById(R.id.therapy_to)
         val image : ImageView = view.findViewById(R.id.therapy_list_image)
 
         var i = therapyList[p0]
@@ -40,6 +42,7 @@ class TherapyListAdapter(
         }else if (i is MeasurementTherapy){
             nameTextView.text = i.measurementType
             infoTextView.visibility = View.INVISIBLE
+            infoTextView.height = 0
             image.setImageResource(R.drawable.pulse)
         }else if (i is ActivityTherapy){
             nameTextView.text = i.activityType
@@ -62,6 +65,10 @@ class TherapyListAdapter(
             }
             4->freqTextView.text = "Punctual day(s), ${i.hours.size} time(s) a day"
         }
+
+        //Set from/to text
+        fromTextView.text = i.frequency.startDate
+        toTextView.text = i.frequency.endDate
 
         return view
     }
