@@ -31,8 +31,8 @@ android {
         enabled = true
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8 "1.8"
-        targetCompatibility = JavaVersion.VERSION_1_8 "1.8"
+        sourceCompatibility = "1.8"
+        targetCompatibility = "1.8"
     }
     buildToolsVersion = '29.0.3'
 // To inline the bytecode built with JVM target 1.8 into
