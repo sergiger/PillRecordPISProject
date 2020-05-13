@@ -14,11 +14,17 @@ import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.ActivityTherapy
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Frequency
+import com.google.android.material.textfield.TextInputEditText
+import kotlinx.android.synthetic.main.activity_pill_medication.*
 import kotlinx.android.synthetic.main.activity_pill_sports.*
+import kotlinx.android.synthetic.main.activity_pill_sports.btn_Save
+import kotlinx.android.synthetic.main.activity_pill_sports.btn_frequency
 import kotlinx.android.synthetic.main.activity_pill_sports.view.*
+import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
+import java.time.Duration
 import java.util.*
 
 class PillSports : AppCompatActivity() {
@@ -46,9 +52,22 @@ class PillSports : AppCompatActivity() {
             val From = bundle.get("From")
             val To = bundle.get("To")
             val Activity = bundle.get("Activity")
+            val duration1 = bundle.get("Duration")
             if(Activity!=null){
                 set_sports.text= Editable.Factory.getInstance().newEditable(Activity as CharSequence?)
                 new_activity=Activity as String
+            }
+            //duration
+            if(duration1!=null){
+                this.duration = duration1 as Int
+                btn_time.text=duration.toString()
+            }
+            //notes
+            val Notes = bundle?.get("Notes")
+            if(Notes != null){
+                this.notes = Notes as String
+                val NotesNoum = findViewById<TextInputEditText>(R.id.input_notes)
+                NotesNoum.text= Editable.Factory.getInstance().newEditable(Notes)
             }
 
             val RadioButtonValue = bundle.get("RadioButtonValue")
@@ -124,9 +143,13 @@ class PillSports : AppCompatActivity() {
             val intent = Intent(this, PillFrequency::class.java)
             val llista = w_hourListfrequency.toTypedArray()
             val activity = new_activity
+            val NotesNoum = findViewById<TextInputEditText>(R.id.input_notes)
+            notes=NotesNoum.text.toString()
             intent.putExtra("Activity",activity)
             intent.putExtra("Hours",llista)
             intent.putExtra("From","PillSports")
+            intent.putExtra("Duration",duration)
+            intent.putExtra("Notes",notes)
             startActivity(intent)
         }
         btn_Save.setOnClickListener {
@@ -142,6 +165,9 @@ class PillSports : AppCompatActivity() {
             else{
             Toast.makeText(this, "Missing Data", Toast.LENGTH_LONG).show()
            }
+        }
+        btn_time.setOnClickListener {
+            select_timeSports()
         }
 
         //inicialitzem la llista d'hores si no hi ha res
@@ -171,6 +197,34 @@ class PillSports : AppCompatActivity() {
     private fun save_activity(){
         this.new_activity=set_sports.text.toString()
     }//cal completar
+
+    fun select_timeSports(){
+        var new_dose=1
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
+        //Set Number Picker
+        mDialogView.number_Picker.minValue = 1
+        mDialogView.number_Picker.maxValue = 100
+        mDialogView.number_Picker.wrapSelectorWheel = false
+
+        //AlertDialogBuilder
+        val mBuilder = AlertDialog.Builder(this)
+            .setView(mDialogView)
+            .setTitle("Set duration")
+        val mAlertDialog = mBuilder.show()
+        mDialogView.number_Picker.setOnValueChangedListener { picker, oldVal, newVal ->
+            new_dose=newVal
+        }
+        mDialogView.OK.setOnClickListener {
+            this.duration=new_dose
+            btn_time.text=duration.toString()
+            Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
+            mAlertDialog.dismiss()
+        }
+        mDialogView.cancel.setOnClickListener {
+            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+            mAlertDialog.dismiss()
+        }
+    }
 
     private fun showPopupMenu(view: View) = PopupMenu(view.context, view).run {
         menuInflater.inflate(R.menu.activity_popup_menu, menu)

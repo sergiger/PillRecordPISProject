@@ -37,6 +37,7 @@ class PillFrequency : AppCompatActivity() {
     var Units = ""
     var Notes = ""
     var Hours = listOf<String>()
+    var Duration = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,11 +64,16 @@ class PillFrequency : AppCompatActivity() {
         if(Notes!= null){
             this.Notes = Notes as String
         }
+        val Duration = bundle?.get("Duration")
+        if(Duration!= null){
+            this.Duration = Duration as Int
+        }
         Log.e("Medicine",this.Medicine)
         Log.e("Hours",this.Hours.toString())
         Log.e("Dose",this.DoseIn.toString())
         Log.e("Units",this.Units)
         Log.e("Notes",this.Notes)
+        Log.e("Duration",this.Duration.toString())
         /*
         intent.putExtra("Medicine",medicine)
             intent.putExtra("Hours",llista)
@@ -264,6 +270,7 @@ class PillFrequency : AppCompatActivity() {
                 intent.putExtra("Dose",this.DoseIn)
                 intent.putExtra("Units",this.Units)
                 intent.putExtra("Notes",this.Notes)
+                intent.putExtra("Duration",this.Duration)
                 intent.putExtra("Activity",Activity as String)
                 startActivity(intent)
             }
