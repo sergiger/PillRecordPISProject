@@ -101,4 +101,8 @@ class ActivityTherapy(
                 "               "+
                 "Notes: "+this.notes+"\n"+"\n"
     }
+
+    override fun getName(): String {
+        return this.activityType
+    }
 }

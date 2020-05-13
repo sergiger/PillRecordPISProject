@@ -117,4 +117,8 @@ class MeasurementTherapy(
                 "Notes: "+this.notes+"\n"+"\n"
 
     }
+
+    override fun getName(): String {
+        return this.measurementType
+    }
 }

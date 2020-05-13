@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/daily"
+        android:title="Daily"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/each"
+
+        android:title="Each X days"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/specific_week_days"
+        android:title="Specific week days"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/punctual_days"
+        android:title="Punctual days"
+        app:showAsAction="never"/>
+
+</menu>

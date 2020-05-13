@@ -2,9 +2,10 @@ package com.example.afontgou17alumnes.mypillrecord.data.model.therapy
 
 import android.util.Log
 import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeTherapy.FakeFrequency
+import java.io.Serializable
 import java.time.LocalDate
 
-class Frequency{
+class Frequency: Serializable{
     var type : Int = 0
     var startDate: String = ""
     var endDate: String = ""

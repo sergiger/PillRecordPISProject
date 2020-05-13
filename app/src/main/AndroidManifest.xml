@@ -3,7 +3,7 @@
     package="com.example.afontgou17alumnes.mypillrecord">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -14,8 +14,13 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.today.TodayModifyReminder"></activity>
-        <activity android:name=".ui.calendar.Week.WeekModify"></activity>
+        <activity android:name=".ui.Pill.TherapyInformation"></activity>
+        <activity
+            android:name=".ui.Pill.PillTherapyInformation"
+            android:label="@string/title_activity_pill_therapy_information"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ui.today.TodayModifyReminder" />
+        <activity android:name=".ui.calendar.Week.WeekModify" />
         <activity
             android:name=".data.search.SearchActivity"
             android:exported="true"
@@ -111,11 +116,12 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="locked" />
+
         <receiver
             android:name=".notifications.recivers.AlarmReceiver"
             android:enabled="true"
-            android:exported="false">
-        </receiver>
+            android:exported="false"></receiver>
+
         <service
             android:name=".notifications.recivers.NotificationService"
             android:enabled="true" />

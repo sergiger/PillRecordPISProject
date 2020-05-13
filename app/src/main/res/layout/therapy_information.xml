@@ -27,7 +27,7 @@
             app:elevation="0dp" />
 
         <TextView
-            android:id="@+id/name_today_modify_reminder"
+            android:id="@+id/name_therapy_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="\t\tName"
@@ -37,6 +37,51 @@
             tools:layout_editor_absoluteX="56dp"
             tools:layout_editor_absoluteY="14dp" />
     </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/fromto_layout_therapy_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_therapy_information"
+        android:orientation="horizontal"
+        android:gravity="center|bottom"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:paddingVertical="19dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From:"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00/00/0000"
+            android:textSize="18sp"
+            android:textColor="@color/colorApp3"
+            android:layout_marginStart="8sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To:"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginStart="24sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00/00/0000"
+            android:textSize="18sp"
+            android:textColor="@color/colorApp3"
+            android:layout_marginStart="8sp"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/frequency_label_therapy_information"
@@ -62,7 +107,7 @@
         android:textAllCaps="false"
         android:textColor="@color/colorApp3"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_therapy_information"
+        app:layout_constraintTop_toBottomOf="@id/fromto_layout_therapy_information"
         android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
         android:drawableTint="@color/colorApp3"/>
 
@@ -71,16 +116,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/transparent"
-        android:text="Every X day(s)"
-        android:textColor="@color/colorApp3"
+        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+        android:drawableTint="@color/colorApp3"
+        android:minHeight="0dip"
+        android:paddingVertical="15dp"
         android:shadowColor="#FFFFFF"
+        android:text="Every X day(s)"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
+        android:textColor="@color/colorApp3"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@id/frquency_button_therapy_information"
-        app:layout_constraintTop_toBottomOf="@id/frquency_button_therapy_information"
-        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
-        android:drawableTint="@color/colorApp3"/>
+        app:layout_constraintTop_toBottomOf="@id/frquency_button_therapy_information" />
 
 
     <LinearLayout
@@ -176,12 +223,26 @@
             android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
     </LinearLayout>
 
+    <FrameLayout
+        android:id="@+id/punctual_days_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_days_layout">
+
+        <ListView
+            android:id="@+id/punctual_days_listview"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/colorApp"/>
+
+    </FrameLayout>
+
     <ListView
         android:id="@+id/hours_therapy_information"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/checkbox_days_layout"
-        app:layout_constraintEnd_toEndOf="@+id/frquency_button_therapy_information"/>
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/red"
+        app:layout_constraintTop_toBottomOf="@id/punctual_days_layout"/>
 
     <TextView
         android:id="@+id/info_label"

@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +10,11 @@ import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Therapy
 import kotlinx.android.synthetic.main.pill_fragment_fragment.*
 
 class Pill_fragment : Fragment() {
+    lateinit var actualTherapy : Therapy
 
     companion object {
         fun newInstance() =
@@ -36,6 +39,27 @@ class Pill_fragment : Fragment() {
         btn_add_therapy.setOnClickListener{
             val intent = Intent(activity,Pillplanificar::class.java)
             startActivity(intent)
+        }
+
+        therapy_list.setOnItemClickListener { adapterView, view, i, l ->
+            var therapy : Therapy = adapterView.adapter.getItem(i) as Therapy
+            actualTherapy = therapy
+            val intent = Intent(context, TherapyInformation::class.java)
+            intent.putExtra("Therapy", therapy)
+            startActivityForResult(intent, 1)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == 1){
+            if (resultCode == Activity.RESULT_OK) {
+                val result = data?.getSerializableExtra("Therapy") as Therapy
+                //Modify actualTherapy
+                createTherapyList()
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //do nothing
+            }
         }
     }
 
