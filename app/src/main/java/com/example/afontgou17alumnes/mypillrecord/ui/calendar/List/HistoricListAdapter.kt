@@ -21,7 +21,7 @@ class HistoricListAdapter (
     @SuppressLint("SetTextI18n", "ViewHolder")
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
         val view = View.inflate(activity.context, R.layout.historic_row_item, null)
-        val dateTextView : TextView = view.findViewById(R.id.txt_PillDate)
+        //val dateTextView : TextView = view.findViewById(R.id.txt_PillDate)
         val nameTextView : TextView = view.findViewById(R.id.txt_PillName)
         val infoTextView : TextView = view.findViewById(R.id.txt_PillInfo)
         val hourTextView : TextView = view.findViewById(R.id.txt_PillHour)
@@ -31,7 +31,7 @@ class HistoricListAdapter (
 
         // Comun a tots
         nameTextView.text = i.getReminderName()
-        dateTextView.text = i.date.toString()
+        //dateTextView.text = i.date.toString()
         hourTextView.text = i.time.toString()
         //De moment només està fet amb medicine a falta de configurar el model darrera
         if (i is MedicineReminder){

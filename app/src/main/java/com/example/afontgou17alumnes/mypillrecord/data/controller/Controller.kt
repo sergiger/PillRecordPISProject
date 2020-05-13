@@ -74,18 +74,20 @@ object Controller {
         val listAll = ArrayList<Any>()
         user.reminders.sortWith(Comparator { p1, p2 ->
             when {
-                p1.date > p2.date -> 1
-                p1.date < p2.date -> -1
+                p1.date > p2.date -> -1
+                p1.date < p2.date -> 1
                 p1.time > p2.time -> 1
                 p1.time < p2.time -> -1
                 else -> 0
             }
         })
         //Es podria substituir per cerca binaria
-        for(i in user.reminders){
-            if (listAll.contains(i.getReminderDate()))
-            else listAll.add(i.getReminderDate())
-            listAll.add(i)
+        for (i in user.reminders) {
+            if (i.getReminderDate() < LocalDate.now()) { // Historico
+                if (listAll.contains(i.getReminderDate()))
+                else listAll.add(i.getReminderDate())
+                listAll.add(i)
+            }
         }
         return listAll
     }

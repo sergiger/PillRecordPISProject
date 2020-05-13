@@ -1,6 +1,7 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.calendar.List
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +9,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.ActivityReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.MeasurementReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.MedicineReminder
-import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.Reminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
 import java.time.LocalDate
 import java.util.*
 
@@ -78,9 +76,10 @@ class CustomAdapter(context: Context?, reminderList: ArrayList<Any>) : BaseAdapt
             when (rowType) {
                 TYPE_ITEM -> {
                     convertView = mInflater.inflate(R.layout.historic_row_item, null)
-                    holder.textPillDate = convertView.findViewById<View>(R.id.txt_PillDate) as TextView
+                    // holder.textPillDate = convertView.findViewById<View>(R.id.txt_PillDate) as TextView
                     holder.textPillName = convertView.findViewById<View>(R.id.txt_PillName) as TextView
                     holder.textPillInfo = convertView.findViewById<View>(R.id.txt_PillInfo) as TextView
+                    holder.textPillHour = convertView.findViewById<View>(R.id.txt_PillHour) as TextView
                     holder.textPillCheck = convertView.findViewById<View>(R.id.txt_Check) as TextView
                     holder.imageReminder = convertView.findViewById<View>(R.id.image_reminder_list) as ImageView
 
@@ -100,9 +99,21 @@ class CustomAdapter(context: Context?, reminderList: ArrayList<Any>) : BaseAdapt
         if (rowType == TYPE_ITEM) {
             var i = mData[position]
             if (i is Reminder) {
-                holder.textPillDate?.text = i.getReminderDate().toString()
+                // holder.textPillDate?.text = i.getReminderDate().toString()
                 holder.textPillName?.text = i.getReminderName()
                 holder.textPillHour?.text = i.getHour().toString()
+                var status = i.getReminderStatus()
+                if (status == ReminderStatus.DONE) {
+                    holder.textPillCheck?.text = "✔"
+                } else if (status == ReminderStatus.TO_DO) {
+                    holder.textPillCheck?.text = "?"
+                    holder.textPillCheck?.setTextColor(Color.GRAY)
+                    holder.textPillHour?.visibility = View.INVISIBLE
+                } else if (status == ReminderStatus.OMITTED) {
+                    holder.textPillCheck?.text = "X"
+                    holder.textPillCheck?.setTextColor(Color.RED)
+                    holder.textPillHour?.visibility = View.INVISIBLE
+                }
                 if (i is MedicineReminder) {
                     holder.textPillInfo?.text = i.dose.toString() + " " + i.doseUnit
                     holder.imageReminder?.setImageResource(R.drawable.pill)
@@ -123,7 +134,7 @@ class CustomAdapter(context: Context?, reminderList: ArrayList<Any>) : BaseAdapt
 
     class ViewHolder {
         var dateSeparator: TextView? = null
-        var textPillDate: TextView? = null
+        //var textPillDate: TextView? = null
         var textPillName: TextView? = null
         var textPillInfo: TextView? = null
         var textPillHour: TextView? = null
