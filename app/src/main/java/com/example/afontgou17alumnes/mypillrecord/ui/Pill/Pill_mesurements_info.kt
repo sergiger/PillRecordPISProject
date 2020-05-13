@@ -2,6 +2,7 @@ package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageButton
@@ -15,6 +16,7 @@ import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Frequency
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MeasurementTherapy
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.pill_mesurements_activity.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
@@ -32,6 +34,7 @@ class Pill_mesurements_info : AppCompatActivity() {
     var titol=""
     var unitats=""
     var frequencyClass : Frequency? = null
+    var notes:String=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +55,14 @@ class Pill_mesurements_info : AppCompatActivity() {
             val From = bundle.get("From")
             val To = bundle.get("To")
             val RadioButtonValue = bundle.get("RadioButtonValue")
+            //notes
+            val Notes = bundle?.get("Notes")
+            if(Notes != null){
+                this.notes = Notes as String
+                val NotesNoum = findViewById<TextInputEditText>(R.id.input_notes)
+                NotesNoum.text= Editable.Factory.getInstance().newEditable(Notes)
+            }
+
             //el frequency ha retornat algo btn_frequency.text=
             when(id_RadioButton){
                 0->{
@@ -118,17 +129,22 @@ class Pill_mesurements_info : AppCompatActivity() {
             val intent = Intent(this, PillFrequency::class.java)
             //d'on vinc i informació
             val llista = w_hourListfrequency.toTypedArray()
+            val NotesNoum = findViewById<TextInputEditText>(R.id.input_notes)
+            notes=NotesNoum.text.toString()
             intent.putExtra("Hours",llista)
             intent.putExtra("From","PillMesurements")
             intent.putExtra("TitolMesurement",titol)
             intent.putExtra("UnitatsMesurement",unitats)
+            intent.putExtra("Notes",notes)
             startActivity(intent)
         }
         btn_Save.setOnClickListener {
             save_mesurement()
             if (frequencyClass != null ){
+                val NotesNoum = findViewById<TextInputEditText>(R.id.input_notes)
+                notes=NotesNoum.text.toString()
                 val freq:Frequency = frequencyClass!!
-                val therapy= MeasurementTherapy(freq,"", Controller.user.id,titol, w_hourListfrequency as ArrayList<String>)
+                val therapy= MeasurementTherapy(freq,notes, Controller.user.id,titol, w_hourListfrequency as ArrayList<String>)
                 Controller.addTherapy__CreateReminders(therapy)
                 Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
                 Log.e("THERAPY",therapy.toString())

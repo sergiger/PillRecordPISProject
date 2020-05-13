@@ -155,6 +155,8 @@ class PillSports : AppCompatActivity() {
         btn_Save.setOnClickListener {
             save_activity()
            if (frequencyClass != null && !new_activity.equals("")){
+               val NotesNoum = findViewById<TextInputEditText>(R.id.input_notes)
+               notes=NotesNoum.text.toString()
                val freq:Frequency = frequencyClass!!
                val therapy= ActivityTherapy(freq,this.notes, Controller.user.id,new_activity,this.duration, w_hourListfrequency as ArrayList<String>)
                Controller.addTherapy__CreateReminders(therapy)

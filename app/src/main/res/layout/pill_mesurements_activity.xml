@@ -95,7 +95,7 @@
             android:id="@+id/text_view_frequency"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="15"
+            android:layout_weight="11"
             android:text="(Frequency)"
             android:textSize="23dp"
             android:gravity="top|center"
@@ -138,7 +138,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="6"></TextView>
+            android:layout_weight="4"></TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="8"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="20">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:hint="Notes"
+                android:inputType="text"
+                android:layout_weight="19"
+                android:textColor="@color/cardview_dark_background"
+                android:textColorHint="@color/cardview_dark_background"
+                android:id="@+id/input_notes"
+                >
+            </com.google.android.material.textfield.TextInputEditText>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
