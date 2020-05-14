@@ -3,9 +3,12 @@ package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -15,17 +18,14 @@ import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.ActivityTherapy
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Frequency
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.activity_pill_medication.*
 import kotlinx.android.synthetic.main.activity_pill_sports.*
-import kotlinx.android.synthetic.main.activity_pill_sports.btn_Save
-import kotlinx.android.synthetic.main.activity_pill_sports.btn_frequency
 import kotlinx.android.synthetic.main.activity_pill_sports.view.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
-import java.time.Duration
 import java.util.*
+
 
 class PillSports : AppCompatActivity() {
 
@@ -42,8 +42,9 @@ class PillSports : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         setContentView(R.layout.activity_pill_sports)
-
+        text_view_frequency.setMovementMethod(ScrollingMovementMethod())
         //FROM FREQUENCY
         val bundle: Bundle? = intent?.extras
         val id_RadioButton = bundle?.get("RadioButton")

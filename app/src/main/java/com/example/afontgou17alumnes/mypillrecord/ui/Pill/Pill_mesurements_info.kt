@@ -3,6 +3,7 @@ package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageButton
@@ -17,7 +18,11 @@ import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Frequency
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MeasurementTherapy
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.android.synthetic.main.activity_pill_sports.*
 import kotlinx.android.synthetic.main.pill_mesurements_activity.*
+import kotlinx.android.synthetic.main.pill_mesurements_activity.btn_Save
+import kotlinx.android.synthetic.main.pill_mesurements_activity.btn_frequency
+import kotlinx.android.synthetic.main.pill_mesurements_activity.text_view_frequency
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
@@ -42,6 +47,7 @@ class Pill_mesurements_info : AppCompatActivity() {
 
         //agafem titol i unitats
         val bundle:Bundle = intent.extras
+        text_view_frequency.setMovementMethod(ScrollingMovementMethod())
         val title = bundle.get("TitolMesurement")
         titol=title as String
         val unitat =bundle.get("UnitatsMesurement")

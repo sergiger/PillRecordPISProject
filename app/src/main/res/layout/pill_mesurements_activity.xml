@@ -100,6 +100,7 @@
             android:textSize="23dp"
             android:gravity="top|center"
             android:textColor="@color/colorApp2"
+            android:scrollbars = "vertical"
             >
 
         </TextView>

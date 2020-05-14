@@ -42,166 +42,177 @@
                 android:textStyle="bold"></TextView>
         </androidx.appcompat.widget.Toolbar>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="20">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/set_sports"
-                android:focusable="false"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:hint="Activity"
-                android:inputType="text"
-                android:layout_weight="19"
-                android:textColor="@color/cardview_dark_background"
-                android:textColorHint="@color/cardview_dark_background"
-                >
-            </com.google.android.material.textfield.TextInputEditText>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="20">
-            <TextView
-                android:id="@+id/ferquency_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Frequency"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="@id/btn_frequency"
-                app:layout_constraintTop_toTopOf="@id/btn_frequency"
-                app:layout_constraintBottom_toBottomOf="@id/btn_frequency"/>
-
-            <Button
-                android:id="@+id/btn_frequency"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="19"
-                android:backgroundTint="@color/cardview_light_background"
-                android:text=""
-                android:textAlignment="textEnd"
-                android:textAllCaps="false"></Button>
-        </LinearLayout>
-        <TextView
-            android:id="@+id/text_view_frequency"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="8"
-            android:text="(Frequency)"
-            android:textSize="21dp"
-            android:gravity="top|center"
-            android:textColor="@color/colorApp2"
-            >
-
-        </TextView>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="42"
-            android:weightSum="42"
-            android:orientation="vertical"
-            android:background="@color/gris2" >
-            <ListView
-                android:id="@+id/lw_hours_medications"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="35"
-                android:scrollbarSize="@dimen/activity_vertical_margin"
-                >
-            </ListView>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="7"
-                android:weightSum="3"
-                android:gravity="right">
-                <Button
-                    android:id="@+id/btn_add_field_Sports"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#555"
-                    android:text="Add Field"
-                    android:textColor="#FFF"></Button>
-            </LinearLayout>
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0px"
-            android:layout_weight="14"
+            android:layout_weight="72"
+            android:gravity="center"
             android:orientation="vertical"
-            android:weightSum="20">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:hint="Notes"
-                android:inputType="text"
-                android:layout_weight="11"
-                android:textColor="@color/cardview_dark_background"
-                android:textColorHint="@color/cardview_dark_background"
-                android:id="@+id/input_notes"
-                >
-            </com.google.android.material.textfield.TextInputEditText>
+            android:weightSum="72"
+            android:scrollbars = "vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="10"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="20">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/set_sports"
+                    android:focusable="false"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:hint="Activity"
+                    android:inputType="text"
+                    android:layout_weight="19"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textColorHint="@color/cardview_dark_background"
+                    >
+                </com.google.android.material.textfield.TextInputEditText>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="20">
                 <TextView
-                    android:id="@+id/dose_label"
+                    android:id="@+id/ferquency_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Duration (min)"
+                    android:text="Frequency"
                     android:textColor="#000000"
                     android:textSize="24sp"
-                    app:layout_constraintStart_toStartOf="@id/btn_dose"
-                    app:layout_constraintTop_toTopOf="@id/btn_dose"
-                    app:layout_constraintBottom_toBottomOf="@id/btn_dose"/>
+                    app:layout_constraintStart_toStartOf="@id/btn_frequency"
+                    app:layout_constraintTop_toTopOf="@id/btn_frequency"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_frequency"/>
 
                 <Button
-                    android:id="@+id/btn_time"
+                    android:id="@+id/btn_frequency"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="19"
                     android:backgroundTint="@color/cardview_light_background"
                     android:text=""
-                    android:textAllCaps="false"
                     android:textAlignment="textEnd"
-                    ></Button>
+                    android:textAllCaps="false"></Button>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/text_view_frequency"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="8"
+                android:text="(Frequency)"
+                android:textSize="21dp"
+                android:gravity="top|center"
+                android:textColor="@color/colorApp2"
+                android:scrollbars = "vertical"
+                >
+
+            </TextView>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="42"
+                android:weightSum="42"
+                android:orientation="vertical"
+                android:background="@color/gris2" >
+                <ListView
+                    android:id="@+id/lw_hours_medications"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="35"
+                    android:scrollbarSize="@dimen/activity_vertical_margin"
+                    >
+                </ListView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="7"
+                    android:weightSum="3"
+                    android:gravity="right">
+                    <Button
+                        android:id="@+id/btn_add_field_Sports"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#555"
+                        android:text="Add Field"
+                        android:textColor="#FFF"></Button>
+                </LinearLayout>
             </LinearLayout>
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="20">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="14"
+                android:orientation="vertical"
+                android:weightSum="20">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:hint="Notes"
+                    android:inputType="text"
+                    android:layout_weight="11"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textColorHint="@color/cardview_dark_background"
+                    android:id="@+id/input_notes"
+                    >
+                </com.google.android.material.textfield.TextInputEditText>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="10"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="20">
+                    <TextView
+                        android:id="@+id/dose_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Duration (min)"
+                        android:textColor="#000000"
+                        android:textSize="24sp"
+                        app:layout_constraintStart_toStartOf="@id/btn_dose"
+                        app:layout_constraintTop_toTopOf="@id/btn_dose"
+                        app:layout_constraintBottom_toBottomOf="@id/btn_dose"/>
+
+                    <Button
+                        android:id="@+id/btn_time"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="19"
+                        android:backgroundTint="@color/cardview_light_background"
+                        android:text=""
+                        android:textAllCaps="false"
+                        android:textAlignment="textEnd"
+                        ></Button>
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="20">
 
 
-            <Button
-                android:id="@+id/btn_Save"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="6"
-                android:background="@drawable/button_background"
-                android:text="SAVE"
-                android:textAllCaps="false"
-                android:textAlignment="center"
-                android:textColor="@color/cardview_light_background"
-                ></Button>
+                <Button
+                    android:id="@+id/btn_Save"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:background="@drawable/button_background"
+                    android:text="SAVE"
+                    android:textAllCaps="false"
+                    android:textAlignment="center"
+                    android:textColor="@color/cardview_light_background"
+                    ></Button>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
