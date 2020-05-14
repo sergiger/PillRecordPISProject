@@ -30,42 +30,27 @@ class MeasurementTherapy(
                 units=unit_types[i]
             i++
         }
+        var dataString:String=frequency.getRealDateString(frequency.startDate)
+        var date = LocalDate.parse(dataString) //date està a la data inicial, i anirem modificant per anar generant els diferents reminders
+
+        dataString=frequency.getRealDateString(frequency.endDate)
+        var endDate = LocalDate.parse(dataString)
 
         if(this.frequency.type==1){
             //Dayly, x times per day
-            var dataString:String=frequency.getRealDateString(frequency.startDate)
-            var date = LocalDate.parse(dataString) //date està a la data inicial, i anirem modificant per anar generant els diferents reminders
-
-            dataString=frequency.getRealDateString(frequency.endDate)
-            var endDate = LocalDate.parse(dataString)
-
             while (date.isBefore(endDate) || date.isEqual(endDate)) {
-                for (hour in this.hours)
-                    Controller.addReminder(
-                        MeasurementReminder(
-                            this.measurementType, units, date, LocalTime.parse(hour),0F,
-                            ReminderStatus.TO_DO, this.id
-                        )
-                    )
+                if(date.isAfter(LocalDate.now())||date.isEqual(LocalDate.now()))
+                    for (hour in this.hours)
+                        createOneReminder(units,date,LocalTime.parse(hour))
                 date=date.plusDays(1)
             }
         }
         if(this.frequency.type==2) {
             //Every x days
-            var dataString:String=frequency.getRealDateString(frequency.startDate)
-            var date = LocalDate.parse(dataString) //date està a la data inicial, i anirem modificant per anar generant els diferents reminders
-
-            dataString=frequency.getRealDateString(frequency.endDate)
-            var endDate = LocalDate.parse(dataString)
-
             while (date.isBefore(endDate) || date.isEqual(endDate)) {
-                for (hour in this.hours)
-                    Controller.addReminder(
-                        MeasurementReminder(
-                            this.measurementType, units, date, LocalTime.parse(hour),0F,
-                            ReminderStatus.TO_DO, this.id
-                        )
-                    )
+                if(date.isAfter(LocalDate.now())||date.isEqual(LocalDate.now()))
+                    for (hour in this.hours)
+                        createOneReminder(units,date,LocalTime.parse(hour))
                 date=date.plusDays(this.frequency.eachtimedose.toLong())
             }
         }
@@ -73,21 +58,11 @@ class MeasurementTherapy(
             //Specific Week days
             var diesSetmana=this.frequency.getDiferenceBetweenDays()
 
-            var dataString:String=frequency.getRealDateString(frequency.startDate)
-            var date = LocalDate.parse(dataString) //date està a la data inicial, i anirem modificant per anar generant els diferents reminders
-
-            dataString=frequency.getRealDateString(frequency.endDate)
-            var endDate = LocalDate.parse(dataString)
-
             while (date.isBefore(endDate) || date.isEqual(endDate)) {
-                if(diesSetmana[date.dayOfWeek.value-1]==1)
-                    for (hour in this.hours)
-                        Controller.addReminder(
-                            MeasurementReminder(
-                                this.measurementType, units, date, LocalTime.parse(hour),0F,
-                                ReminderStatus.TO_DO, this.id
-                            )
-                        )
+                if(date.isAfter(LocalDate.now())||date.isEqual(LocalDate.now()))
+                    if(diesSetmana[date.dayOfWeek.value-1]==1)
+                        for (hour in this.hours)
+                            createOneReminder(units,date,LocalTime.parse(hour))
                 date=date.plusDays(1)
             }
         }
@@ -95,12 +70,7 @@ class MeasurementTherapy(
             //Punctual days
             for(dates in this.frequency.listofpuntualdays)
                 for(hour in this.hours)
-                    Controller.addReminder(
-                        MeasurementReminder(
-                            this.measurementType, units, LocalDate.parse(frequency.getRealDateString(dates)), LocalTime.parse(hour),0F,
-                            ReminderStatus.TO_DO, this.id
-                        )
-                    )
+                    createOneReminder(units,LocalDate.parse(frequency.getRealDateString(dates)),LocalTime.parse(hour))
         }
     }
 
@@ -120,5 +90,14 @@ class MeasurementTherapy(
 
     override fun getName(): String {
         return this.measurementType
+    }
+
+    fun createOneReminder(units:String,date:LocalDate,time:LocalTime){
+        Controller.addReminder(
+            MeasurementReminder(
+                this.measurementType, units, date, time,0F,
+                ReminderStatus.TO_DO, this.id
+            )
+        )
     }
 }

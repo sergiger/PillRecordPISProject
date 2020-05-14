@@ -205,7 +205,7 @@ open class User{
     fun deleteAllRemindersById(id: String) {
         var i=0
         for(reminder in this.reminders){
-            if(reminder.ID.equals(id))
+            if(reminder.ID.equals(id)&&reminder.status.equals(ReminderStatus.TO_DO))
                 this.reminders.removeAt(i)
             i+=1
         }
