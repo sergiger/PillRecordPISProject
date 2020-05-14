@@ -40,10 +40,11 @@ import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
+import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
     private val STORAGE_CODE: Int = 100;
-    var currentFragment=0
+    var currentFragment=-1
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener{
        item->
        when(item.itemId){
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity() {
                    Toast.makeText(this,"Today",Toast.LENGTH_SHORT).show()
                    toolbar.title = "TODAY"
                    currentFragment=0
+                   generarNextNotification()
                }
                return@OnNavigationItemSelectedListener true
            }
@@ -124,11 +126,11 @@ class MainActivity : AppCompatActivity() {
     }
     fun generarNextNotification(){
         if (Controller.user.areThereReminders()){
-            val mNotificationTime = Controller.user.getNextReminder().getMilisFromNow() //Set after 5 seconds
+            val mNotificationTime = Controller.user.getNextReminder().getMilisFromNow()
             NotificationUtils().setNotification(mNotificationTime, this@MainActivity)
         }
         else{
-            Toast.makeText(this,"There are no reminders",Toast.LENGTH_LONG).show()
+            //Toast.makeText(this,"There are no reminders",Toast.LENGTH_LONG).show()
         }
     }
     private fun replaceFragment(fragment: Fragment){

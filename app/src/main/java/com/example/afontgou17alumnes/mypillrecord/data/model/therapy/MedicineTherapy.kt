@@ -24,11 +24,15 @@ open class MedicineTherapy(
     }
 
     override fun createReminders() {
-        var dataString:String=frequency.getRealDateString(frequency.startDate)
-        var date = LocalDate.parse(dataString) //date està a la data inicial, i anirem modificant per anar generant els diferents reminders
+        var date=LocalDate.now()
+        var endDate=LocalDate.now()
+        if(this.frequency.type!=4){
+            var dataString:String=frequency.getRealDateString(frequency.startDate)
+            date = LocalDate.parse(dataString) //date està a la data inicial, i anirem modificant per anar generant els diferents reminders
 
-        dataString=frequency.getRealDateString(frequency.endDate)
-        var endDate = LocalDate.parse(dataString)
+            dataString=frequency.getRealDateString(frequency.endDate)
+            endDate = LocalDate.parse(dataString)
+        }
         if(this.frequency.type==1){
             //Dayly, x times per day
             while (date.isBefore(endDate) || date.isEqual(endDate)) {

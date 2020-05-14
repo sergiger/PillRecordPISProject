@@ -22,9 +22,6 @@ class NotificationService : IntentService("NotificationService") {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-            // Create the NotificationChannel, but only on API 26+ because
-            // the NotificationChannel class is new and not in the support library
-
             val context = this.applicationContext
             val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -43,8 +40,8 @@ class NotificationService : IntentService("NotificationService") {
 
     companion object {
 
-        const val CHANNEL_ID = "samples.notification.devdeeds.com.CHANNEL_ID"
-        const val CHANNEL_NAME = "Sample Notification"
+        const val CHANNEL_ID = "MyPillRecord"
+        const val CHANNEL_NAME = "MyPillRecord"
     }
 
 

@@ -73,7 +73,12 @@ open class MedicineReminder(
         var date:Long
         var time:Long
         time=this.time.hour.toLong()*60*60*1000+this.time.minute.toLong()*60*1000-(LocalTime.now().hour*60*60*1000+LocalTime.now().minute*60*1000)
-        date= ChronoUnit.DAYS.between(this.date,LocalDate.now())*24*60*60*1000
+        if(this.date.isBefore(LocalDate.now())){
+            date=-2*24*60*60*1000//Aquest número és simplement perque el resultat sigui més petit que 0
+        }
+        else {
+            date = ChronoUnit.DAYS.between(this.date, LocalDate.now()) * 24 * 60 * 60 * 1000
+        }
         result+=time+date
         return result
     }

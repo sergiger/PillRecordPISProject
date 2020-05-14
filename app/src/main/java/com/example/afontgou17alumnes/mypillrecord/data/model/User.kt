@@ -88,26 +88,28 @@ open class User{
             MeasurementReminder(
                 "Weight",
                 "kg",
-                LocalDate.now(),
-                LocalTime.now()
+                LocalDate.now().plusDays(1),
+                LocalTime.now().plusHours(1)
             )
+        var cont=0
         for(reminder in reminders){
-            if(reminder.getMilisFromNow()>Calendar.getInstance().timeInMillis)
-                if(reminder.getReminderStatus() == ReminderStatus.TO_DO){
-                    retorn=reminder
-                    break
-                }
+            var dif2=reminder.getMilisFromNow()-retorn.getMilisFromNow()
+            if(reminder.getMilisFromNow()>0 && dif2<0 && reminder.getReminderStatus().equals(ReminderStatus.TO_DO)){
+                retorn=reminder
+                cont+=1
+            }
         }
+        Log.d("hollll",cont.toString())
         return retorn
     }
     fun areThereReminders():Boolean{
         var retorn=false
         for(reminder in reminders){
-            Log.d("hh",reminder.time.toString())
+            //Log.d("hh",reminder.time.toString())
             if(reminder.getMilisFromNow()>Calendar.getInstance().timeInMillis) {
-                Log.d("hh2",reminder.time.toString())
+                //Log.d("hh2",reminder.time.toString())
                 if (reminder.getReminderStatus() == ReminderStatus.TO_DO) {
-                    Log.d("hh3",reminder.time.toString())
+                    //Log.d("hh3",reminder.time.toString())
                     retorn = true
                     break
                 }
