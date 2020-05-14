@@ -63,6 +63,7 @@ class TodayFragment : Fragment() {
                     is MeasurementReminder -> (actualReminder as MeasurementReminder).value = (result as MeasurementReminder).value
                     is ActivityReminder -> (actualReminder as ActivityReminder).duration = (result as ActivityReminder).duration
                 }
+                actualizeDB()
                 createTodayList()
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -77,5 +78,9 @@ class TodayFragment : Fragment() {
         if (medicineListView != null) {
             medicineListView.adapter = reminderAdapter
         }
+    }
+    fun actualizeDB(){
+        Controller.controllerSharePrefs.sharedUpLoadReminders()
+        Controller.RemindersToFirebase()
     }
 }

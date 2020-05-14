@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
 import kotlinx.android.synthetic.main.activity_today_modify_reminder.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
@@ -77,7 +78,6 @@ class TodayModifyReminder: AppCompatActivity() {
                     reminder.duration = infoValue
                     info_button.text = reminder.duration.toString() + " min"
                 }
-
                 Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
                 mAlertDialog.dismiss()
             }
@@ -102,7 +102,6 @@ class TodayModifyReminder: AppCompatActivity() {
             mDialogView.OK.setOnClickListener {
                 reminder.time = LocalTime.of(newHour, newMinute)
                 hour_button_today_modify_reminder.text = reminder.time.toString()
-
                 Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
                 mAlertDialog.dismiss()
             }
