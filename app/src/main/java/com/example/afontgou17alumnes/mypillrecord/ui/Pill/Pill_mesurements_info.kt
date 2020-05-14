@@ -3,6 +3,7 @@ package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageButton
@@ -42,6 +43,7 @@ class Pill_mesurements_info : AppCompatActivity() {
 
         //agafem titol i unitats
         val bundle:Bundle = intent.extras
+        text_view_frequency.movementMethod = ScrollingMovementMethod()
         val title = bundle.get("TitolMesurement")
         titol=title as String
         val unitat =bundle.get("UnitatsMesurement")
@@ -56,7 +58,7 @@ class Pill_mesurements_info : AppCompatActivity() {
             val To = bundle.get("To")
             val RadioButtonValue = bundle.get("RadioButtonValue")
             //notes
-            val Notes = bundle?.get("Notes")
+            val Notes = bundle.get("Notes")
             if(Notes != null){
                 this.notes = Notes as String
                 val NotesNoum = findViewById<TextInputEditText>(R.id.input_notes)

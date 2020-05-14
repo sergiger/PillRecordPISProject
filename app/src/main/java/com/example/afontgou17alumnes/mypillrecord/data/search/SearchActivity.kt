@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.R.id.search_src_text
 import com.example.afontgou17alumnes.mypillrecord.R.layout.activity_search
+import com.example.afontgou17alumnes.mypillrecord.ui.Pill.PillMedication
 import com.example.afontgou17alumnes.mypillrecord.ui.today.AddUnplannedMedicine
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.pill_child.view.*
@@ -25,11 +26,15 @@ class SearchActivity : AppCompatActivity(),
     OnPillsListener {
     var currentText: CharSequence = ""
     var displayList: MutableList<String> = ArrayList()
+    var mother_activity = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activity_search)
 
-        back_arrow_search.setOnClickListener{
+        val bundle:Bundle? = intent.extras
+        mother_activity = bundle?.get("mother_activity") as String
+
+        back_arrow_search.setOnClickListener {
             onBackPressed()
         }
 
@@ -116,8 +121,15 @@ class SearchActivity : AppCompatActivity(),
         val pill = displayList[position]
         Toast.makeText(this, pill, Toast.LENGTH_SHORT).show()
         searchEngine.setQuery(pill, true)
-        val intent = Intent(this, AddUnplannedMedicine::class.java)
-        intent.putExtra("Medicine", pill)
-        startActivity(intent)
+        if (mother_activity == "pill") {
+            val intent = Intent(this, PillMedication::class.java)
+            intent.putExtra("Medicine", pill)
+            startActivity(intent)
+        }
+        else if (mother_activity == "today") {
+            val intent = Intent(this, AddUnplannedMedicine::class.java)
+            intent.putExtra("Medicine", pill)
+            startActivity(intent)
+        }
     }
 }

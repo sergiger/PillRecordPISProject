@@ -14,10 +14,8 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.gson.Gson
@@ -25,9 +23,6 @@ import com.google.gson.reflect.TypeToken
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
-import java.util.*
-import kotlin.Comparator
-import kotlin.collections.ArrayList
 
 object Controller {
     val user = User("1","user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
@@ -36,7 +31,7 @@ object Controller {
     private var mAuth = FirebaseAuth.getInstance()
     val controllerJSON=ControllerJSON()//Serveix per a treballar amb els JSON
     var controllerSharePrefs=ControllerSharePrefs()//Serveix per treballar amb les share preferences
-    var connected = false;
+    var connected = false
     /*fun initUserSaved(){
         controllerSharePrefs.sharedDownloadLoad()
     }
@@ -69,8 +64,8 @@ object Controller {
         return datesListOfReminders
     }
 
-    /** Return the list of dates and reminder in a header-row format*/
-    fun getDatesAndReminders() : ArrayList<Any>{
+    /** Return the historic of dates and reminders in a header-row format*/
+    fun getHistoricDatesAndReminders() : ArrayList<Any>{
         val listAll = ArrayList<Any>()
         user.reminders.sortWith(Comparator { p1, p2 ->
             when {
@@ -84,6 +79,28 @@ object Controller {
         //Es podria substituir per cerca binaria
         for (i in user.reminders) {
             if (i.getReminderDate() < LocalDate.now()) { // Historico
+                if (listAll.contains(i.getReminderDate()))
+                else listAll.add(i.getReminderDate())
+                listAll.add(i)
+            }
+        }
+        return listAll
+    }
+    /** Return the plan of dates and reminders in a header-row format*/
+    fun getPlannedDatesAndReminders() : ArrayList<Any>{
+        val listAll = ArrayList<Any>()
+        user.reminders.sortWith(Comparator { p1, p2 ->
+            when {
+                p1.date > p2.date -> 1
+                p1.date < p2.date -> -1
+                p1.time > p2.time -> 1
+                p1.time < p2.time -> -1
+                else -> 0
+            }
+        })
+        //Es podria substituir per cerca binaria
+        for (i in user.reminders) {
+            if (i.getReminderDate() >= LocalDate.now()) { // Planned
                 if (listAll.contains(i.getReminderDate()))
                 else listAll.add(i.getReminderDate())
                 listAll.add(i)
@@ -348,7 +365,7 @@ object Controller {
     fun FirabasetoStatics(){
         val docRef = db.collection("statistics").document(user.id)
         val control = Controller.user
-        Log.e("control", "control : ${control.toString()}")
+        Log.e("control", "control : $control")
         docRef.get().addOnSuccessListener { document ->
                 if (document.data != null) {
                     Log.d("statistics", "DocumentSnapshot data: ${document.data}")
@@ -392,7 +409,7 @@ object Controller {
     fun FirebasetoTherapies(){
         val docRef = db.collection("therapies").document(user.id)
         val control = Controller.user
-        Log.e("control", "control : ${control.toString()}")
+        Log.e("control", "control : $control")
         docRef.get().addOnSuccessListener { document ->
             if (document.data != null) {
                 Log.d("therapies", "DocumentSnapshot data: ${document.data}")
@@ -444,7 +461,7 @@ object Controller {
     fun FirebasetoReminders(){
         val docRef = db.collection("reminders").document(user.id)
         val control = Controller.user
-        Log.e("control", "control : ${control.toString()}")
+        Log.e("control", "control : $control")
         docRef.get().addOnSuccessListener { document ->
             if (document.data != null) {
                 Log.d("reminders", "DocumentSnapshot data: ${document.data}")
@@ -491,225 +508,6 @@ object Controller {
 
     }
 
-
-    fun addStaticsValueToFirebase(type: String, statisticEntry: StatisticEntry) {
-        when(type){
-            "weightData"-> {
-                val localDate:LocalDate=statisticEntry.date
-                val date: Date = java.sql.Date.valueOf(localDate.toString())
-                val nestedData = hashMapOf(
-                    "data" to statisticEntry.value,
-                    "date" to Timestamp(date)
-                )
-                val doc2Data = hashMapOf(
-                    "weightData" to arrayListOf(nestedData)
-                )
-                //val data = hashMapOf("weightData" to statisticEntry)
-                //db.collection("statistics").document(user.id).set(data, SetOptions.merge())
-                val docRef = db.collection("statistics").document(user.id)
-                docRef.get().addOnSuccessListener { document ->
-                    if (document != null ) {
-                        var map= document.data as MutableMap<String, Any?>
-                        Log.e("data", "Cmap${map.containsKey("weightData")}")
-                        if(map.containsKey("weightData")){
-                            db.collection("statistics").document(user.id)
-                                .update("weightData", FieldValue.arrayUnion(nestedData))
-                                .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-                                .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-                        } else{
-                            db.collection("statistics").document(user.id).set(doc2Data,SetOptions.merge())
-                            Log.e("setData", "Creem arraylist")
-                        }
-
-                    } else {
-                        db.collection("statistics").document(user.id).set(nestedData, SetOptions.merge())
-                        Log.e("set data", "creem col·leció")
-                    }
-                }.addOnFailureListener { exception ->
-                    Log.e("getDatafromfirestore", "get failed with ", exception)
-                }
-            }
-            "heartRateData"-> {
-                val localDate:LocalDate=statisticEntry.date
-                val date: Date = java.sql.Date.valueOf(localDate.toString())
-                val nestedData = hashMapOf(
-                    "data" to statisticEntry.value,
-                    "date" to Timestamp(date)
-                )
-                val doc2Data = hashMapOf(
-                    "heartRateData" to arrayListOf(nestedData)
-                )
-                //val data = hashMapOf("weightData" to statisticEntry)
-                //db.collection("statistics").document(user.id).set(data, SetOptions.merge())
-                val docRef = db.collection("statistics").document(user.id)
-                docRef.get().addOnSuccessListener { document ->
-                    if (document != null ) {
-                        var map= document.data as MutableMap<String, Any?>
-                        Log.e("data", "Cmap${map.containsKey("heartRateData")}")
-                        if(map.containsKey("heartRateData")){
-                            db.collection("statistics").document(user.id)
-                                .update("heartRateData", FieldValue.arrayUnion(nestedData))
-                                .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-                                .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-                        } else{
-                            db.collection("statistics").document(user.id).set(doc2Data,SetOptions.merge())
-                            Log.e("setData", "Creem arraylist")
-                        }
-
-                    } else {
-                        db.collection("statistics").document(user.id).set(nestedData, SetOptions.merge())
-                        Log.e("set data", "creem col·leció")
-                    }
-                }.addOnFailureListener { exception ->
-                    Log.e("getDatafromfirestore", "get failed with ", exception)
-                }
-
-            }
-            "arterialPressureData"-> {
-                val localDate:LocalDate=statisticEntry.date
-                val date: Date = java.sql.Date.valueOf(localDate.toString())
-                val nestedData = hashMapOf(
-                    "data" to statisticEntry.value,
-                    "date" to Timestamp(date)
-                )
-                val doc2Data = hashMapOf(
-                    "arterialPressureData" to arrayListOf(nestedData)
-                )
-                //val data = hashMapOf("weightData" to statisticEntry)
-                //db.collection("statistics").document(user.id).set(data, SetOptions.merge())
-                val docRef = db.collection("statistics").document(user.id)
-                docRef.get().addOnSuccessListener { document ->
-                    if (document != null ) {
-                        var map= document.data as MutableMap<String, Any?>
-                        Log.e("data", "Cmap${map.containsKey("arterialPressureData")}")
-                        if(map.containsKey("arterialPressureData")){
-                            db.collection("statistics").document(user.id)
-                                .update("arterialPressureData", FieldValue.arrayUnion(nestedData))
-                                .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-                                .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-                        } else{
-                            db.collection("statistics").document(user.id).set(doc2Data,SetOptions.merge())
-                            Log.e("setData", "Creem arraylist")
-                        }
-
-                    } else {
-                        db.collection("statistics").document(user.id).set(nestedData, SetOptions.merge())
-                        Log.e("set data", "creem col·leció")
-                    }
-                }.addOnFailureListener { exception ->
-                    Log.e("getDatafromfirestore", "get failed with ", exception)
-                }
-
-            }
-            "glucoseBeforeData"-> {
-                val localDate:LocalDate=statisticEntry.date
-                val date: Date = java.sql.Date.valueOf(localDate.toString())
-                val nestedData = hashMapOf(
-                    "data" to statisticEntry.value,
-                    "date" to Timestamp(date)
-                )
-                val doc2Data = hashMapOf(
-                    "glucoseBeforeData" to arrayListOf(nestedData)
-                )
-                //val data = hashMapOf("weightData" to statisticEntry)
-                //db.collection("statistics").document(user.id).set(data, SetOptions.merge())
-                val docRef = db.collection("statistics").document(user.id)
-                docRef.get().addOnSuccessListener { document ->
-                    if (document != null ) {
-                        var map= document.data as MutableMap<String, Any?>
-                        Log.e("data", "Cmap${map.containsKey("glucoseBeforeData")}")
-                        if(map.containsKey("glucoseBeforeData")){
-                            db.collection("statistics").document(user.id)
-                                .update("glucoseBeforeData", FieldValue.arrayUnion(nestedData))
-                                .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-                                .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-                        } else{
-                            db.collection("statistics").document(user.id).set(doc2Data,SetOptions.merge())
-                            Log.e("setData", "Creem arraylist")
-                        }
-
-                    } else {
-                        db.collection("statistics").document(user.id).set(nestedData, SetOptions.merge())
-                        Log.e("set data", "creem col·leció")
-                    }
-                }.addOnFailureListener { exception ->
-                    Log.e("getDatafromfirestore", "get failed with ", exception)
-                }
-            }
-            "glucoseAfterData"-> {
-                val localDate:LocalDate=statisticEntry.date
-                val date: Date = java.sql.Date.valueOf(localDate.toString())
-                val nestedData = hashMapOf(
-                    "data" to statisticEntry.value,
-                    "date" to Timestamp(date)
-                )
-                val doc2Data = hashMapOf(
-                    "glucoseAfterData" to arrayListOf(nestedData)
-                )
-                //val data = hashMapOf("weightData" to statisticEntry)
-                //db.collection("statistics").document(user.id).set(data, SetOptions.merge())
-                val docRef = db.collection("statistics").document(user.id)
-                docRef.get().addOnSuccessListener { document ->
-                    if (document != null ) {
-                        var map= document.data as MutableMap<String, Any?>
-                        Log.e("data", "Cmap${map.containsKey("glucoseAfterData")}")
-                        if(map.containsKey("glucoseAfterData")){
-                            db.collection("statistics").document(user.id)
-                                .update("glucoseAfterData", FieldValue.arrayUnion(nestedData))
-                                .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-                                .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-                        } else{
-                            db.collection("statistics").document(user.id).set(doc2Data,SetOptions.merge())
-                            Log.e("setData", "Creem arraylist")
-                        }
-
-                    } else {
-                        db.collection("statistics").document(user.id).set(nestedData, SetOptions.merge())
-                        Log.e("set data", "creem col·leció")
-                    }
-                }.addOnFailureListener { exception ->
-                    Log.e("getDatafromfirestore", "get failed with ", exception)
-                }
-
-            }
-            "temperatureData"-> {
-                val localDate:LocalDate=statisticEntry.date
-                val date: Date = java.sql.Date.valueOf(localDate.toString())
-                val nestedData = hashMapOf(
-                    "data" to statisticEntry.value,
-                    "date" to Timestamp(date)
-                )
-                val doc2Data = hashMapOf(
-                    "temperatureData" to arrayListOf(nestedData)
-                )
-                //val data = hashMapOf("weightData" to statisticEntry)
-                //db.collection("statistics").document(user.id).set(data, SetOptions.merge())
-                val docRef = db.collection("statistics").document(user.id)
-                docRef.get().addOnSuccessListener { document ->
-                    if (document != null ) {
-                        var map= document.data as MutableMap<String, Any?>
-                        Log.e("data", "Cmap${map.containsKey("temperatureData")}")
-                        if(map.containsKey("temperatureData")){
-                            db.collection("statistics").document(user.id)
-                                .update("temperatureData", FieldValue.arrayUnion(nestedData))
-                                .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-                                .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-                        } else{
-                            db.collection("statistics").document(user.id).set(doc2Data,SetOptions.merge())
-                            Log.e("setData", "Creem arraylist")
-                        }
-
-                    } else {
-                        db.collection("statistics").document(user.id).set(nestedData, SetOptions.merge())
-                        Log.e("set data", "creem col·leció")
-                    }
-                }.addOnFailureListener { exception ->
-                    Log.e("getDatafromfirestore", "get failed with ", exception)
-                }
-
-            }
-        }
-    }
 
     fun clearUser() {
         user.clear()

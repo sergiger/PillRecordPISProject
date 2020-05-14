@@ -71,8 +71,7 @@ class FragmentThree : Fragment() {
     }
     fun createMedicineList() {
         // val medicineList = Controller.getRemindersData()
-        val medicineList = Controller.getDatesAndReminders() // New
-        println(medicineList)
+        val medicineList = Controller.getHistoricDatesAndReminders() // New
         val medicineListView : ListView? = view?.findViewById(R.id.historic_list)
         // New
         val reminderAdapter : CustomAdapter = CustomAdapter(this.context, medicineList) // Controller.getRemindersData()

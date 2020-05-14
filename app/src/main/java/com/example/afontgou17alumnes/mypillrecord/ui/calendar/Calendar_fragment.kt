@@ -34,9 +34,9 @@ class Calendar_fragment : Fragment() {
         tabLayout = view!!.findViewById<TabLayout>(R.id.tabLayout)
         viewPager = view!!.findViewById<ViewPager>(R.id.viewPager)
 
-        tabLayout!!.addTab(tabLayout!!.newTab().setText("Week"))
+        tabLayout!!.addTab(tabLayout!!.newTab().setText("Planned"))
         tabLayout!!.addTab(tabLayout!!.newTab().setText("Month"))
-        tabLayout!!.addTab(tabLayout!!.newTab().setText("List"))
+        tabLayout!!.addTab(tabLayout!!.newTab().setText("Historic"))
         tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
 
         val adapter = PagerAdapter(childFragmentManager)

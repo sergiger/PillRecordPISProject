@@ -9,7 +9,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -17,7 +16,6 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
@@ -28,10 +26,10 @@ import com.example.afontgou17alumnes.mypillrecord.ui.settings.ajustes_activity
 import com.example.afontgou17alumnes.mypillrecord.ui.statistics.Statistics_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.today.TodayFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.itextpdf.text.Document
 import com.itextpdf.text.Paragraph
 import com.itextpdf.text.pdf.PdfWriter
 import kotlinx.android.synthetic.main.activity_main.*
-import com.itextpdf.text.Document
 import kotlinx.android.synthetic.main.from_to_dialogue_pdf.view.*
 import kotlinx.android.synthetic.main.height_dialoge.view.*
 import kotlinx.android.synthetic.main.year_of_birth_dialoge.view.*
@@ -40,7 +38,6 @@ import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
-import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
     private val STORAGE_CODE: Int = 100;

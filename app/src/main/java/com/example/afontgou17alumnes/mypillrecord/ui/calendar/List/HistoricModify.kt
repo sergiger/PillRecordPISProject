@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.DatePicker
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -48,7 +47,7 @@ class HistoricModify : AppCompatActivity() {
             status = status_types[1]
         } else status = "Set ..."
         status_button.text = status
-        date_button.text = reminder.getReminderDate().toString()
+        //date_button.text = reminder.getReminderDate().toString()
 
         //Set Listeners
         info_button.setOnClickListener {
@@ -121,9 +120,9 @@ class HistoricModify : AppCompatActivity() {
             }
         }
         // Fer
-        date_button.setOnClickListener {
+        /*date_button.setOnClickListener {
             select_date(reminder)
-        }
+        }*/
 
         status_button.setOnClickListener {
             select_status(reminder)
@@ -148,6 +147,7 @@ class HistoricModify : AppCompatActivity() {
             finish()
         }
     }
+    /*
     fun select_date(reminder: Reminder){
         var new_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
         var new_month=Calendar.getInstance().get(Calendar.MONTH)
@@ -182,7 +182,7 @@ class HistoricModify : AppCompatActivity() {
             mAlertDialog.dismiss()
             Toast.makeText(this,"Cancel",Toast.LENGTH_SHORT).show()
         }
-    }
+    }*/
 
     fun select_status(reminder: Reminder) {
         var infoValue = 0

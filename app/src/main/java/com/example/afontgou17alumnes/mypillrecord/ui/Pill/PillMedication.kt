@@ -17,6 +17,7 @@ import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Frequency
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MedicineTherapy
 import com.example.afontgou17alumnes.mypillrecord.data.pills.MyData
 import com.example.afontgou17alumnes.mypillrecord.data.search.AsyncTaskHandler
+import com.example.afontgou17alumnes.mypillrecord.data.search.SearchActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
@@ -59,9 +60,9 @@ class PillMedication : AppCompatActivity() {
         //medicine
         val Medicine = bundle?.get("Medicine")
         if(Medicine!=null){
-            this.medicine= Medicine as String
-            val MedicineNoum = findViewById<TextInputEditText>(R.id.pill_search)
-            MedicineNoum.text= Editable.Factory.getInstance().newEditable(Medicine)
+            this.medicine = Medicine as String
+            val MedicineNoum = findViewById<Button>(R.id.pill_search)
+            MedicineNoum.text = medicine
         }
         //dose
         val Dose = bundle?.get("Dose")
@@ -154,7 +155,7 @@ class PillMedication : AppCompatActivity() {
         btn_frequency.setOnClickListener {
             val intent = Intent(this, PillFrequency::class.java)
             val llista = w_hourListfrequency.toTypedArray()
-            val MedicineNoum = findViewById<TextInputEditText>(R.id.pill_search)
+            val MedicineNoum = findViewById<Button>(R.id.pill_search)
             medicine=MedicineNoum.text.toString()
             val NotesNoum = findViewById<TextInputEditText>(R.id.input_notes)
             notes=NotesNoum.text.toString()
@@ -186,6 +187,11 @@ class PillMedication : AppCompatActivity() {
                 Toast.makeText(this, "Missing Data", Toast.LENGTH_LONG).show()
             }
 
+        }
+        pill_search.setOnClickListener{
+            val searchIntent = Intent(this, SearchActivity::class.java)
+            searchIntent.putExtra("mother_activity", "pill")
+            startActivity(searchIntent)
         }
 
         // Barcode Scanner implementatiton
@@ -247,7 +253,6 @@ class PillMedication : AppCompatActivity() {
     // Valid Function
     fun getSearchResults(result: ArrayList<MyData>) {
         var pill = result[0]
-
         var name = pill.brand_name
         var editable:Editable = Editable.Factory.getInstance().newEditable(name)
         this.medicine = name
@@ -261,7 +266,6 @@ class PillMedication : AppCompatActivity() {
             var dosisFloat = parts[0].split(".")
             dosisInt = dosisFloat[0]
         } else dosisInt = parts[0]
-
         var unit = parts[1]
 
         // Refresh data and change UI

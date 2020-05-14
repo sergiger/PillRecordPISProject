@@ -38,9 +38,9 @@ class AddUnplannedMedicine : AppCompatActivity() {
     var year=Calendar.getInstance().get(Calendar.YEAR)
     var hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
     var minute=Calendar.getInstance().get(Calendar.MINUTE)
-    var dose=1
-    var units="Botle"
-    var medicine="Dalsi"
+    var dose=0
+    var units=""
+    var medicine=""
 
     // API Implementation
     val url = "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:"
@@ -50,7 +50,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_unplanned_medicine)
 
-        hour_button_unplanned_medicine.text = "$hour:$minute";
+        hour_button_unplanned_medicine.text = "$hour:$minute"
 
         val bundle:Bundle? = intent.extras
         val Medicine = bundle?.get("Medicine")
@@ -58,18 +58,6 @@ class AddUnplannedMedicine : AppCompatActivity() {
             this.medicine = Medicine as String
             medicine_name_button.text = medicine
         }
-        //dose
-        /*val Dose = bundle?.get("Dose")
-        if(Dose != null){
-            this.dose = Dose as Int
-            dose_button.text = dose.toString()
-        }
-        //units
-        val Units = bundle?.get("Units")
-        if(Units != null){
-            this.units = Units as String
-            btn_unitss.text = new_units.toString()
-        }*/
 
         //Set Listeners
         back_arrow.setOnClickListener{
@@ -77,7 +65,6 @@ class AddUnplannedMedicine : AppCompatActivity() {
         }
         tick_unplanned_medicine.setOnClickListener{
             save()
-            go_home()
         }
         info_button.setOnClickListener{
             select_date()
@@ -93,6 +80,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
         }
         medicine_name_button.setOnClickListener{
             val searchIntent = Intent(this, SearchActivity::class.java)
+            searchIntent.putExtra("mother_activity", "today")
             startActivity(searchIntent)
         }
         // Barcode Scanner implementatiton
@@ -103,7 +91,6 @@ class AddUnplannedMedicine : AppCompatActivity() {
     }
     // Barcode Scanner implementatiton -> cut first and last number of the barcode
     // https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:0536-1149-41
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             val result: IntentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
@@ -119,9 +106,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
 
                     var asyncTask = AsyncTaskHandler()
                     asyncTask.setContextUnplanned(this)
-                    asyncTask.execute(url+format1+"+"+field+format2)
-                    //AsyncTaskHandler().execute(url+format1+"+"+field+format2)  // Final of implementation
-                    println(url+format1+"+"+field+format2)
+                    asyncTask.execute(url+format1+"+"+field+format2) // Final of implementation
                 }
             } else {
                 super.onActivityResult(requestCode, resultCode, data)
@@ -131,10 +116,9 @@ class AddUnplannedMedicine : AppCompatActivity() {
     // Valid Function
     fun getSearchResults(result: ArrayList<MyData>) {
         var pill = result[0]
-
         var name = pill.brand_name
         this.medicine = name
-        medicine_name_button.text = name //
+        medicine_name_button.text = name
 
         var strength = pill.active_ingredients[0].strength
         val parts = strength.split(" ", "/")
@@ -144,13 +128,11 @@ class AddUnplannedMedicine : AppCompatActivity() {
             var dosisFloat = parts[0].split(".")
             dosisInt = dosisFloat[0]
         } else dosisInt = parts[0]
-
         var unit = parts[1]
 
         // Refresh data and change UI
         this.dose = dosisInt.toInt()
         this.units = unit
-
         dose_button.text = dosisInt
         btn_unitss.text = unit
     }
@@ -162,7 +144,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
         menuInflater.inflate(R.menu.dose_unitats_popup_menu, menu)
         setOnMenuItemClickListener { item ->
             //Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
-            units=item.title.toString()
+            units = item.title.toString()
             view.btn_unitss.text = units.toString()
             true
         }
@@ -289,14 +271,16 @@ class AddUnplannedMedicine : AppCompatActivity() {
     }
 
     fun save(){
-        var newReminder=createMedicineReminder(this.medicine,this.dose,this.units,
-            LocalDate.of(this.year,this.month,this.day),LocalTime.of(this.hour,this.minute))
-        Controller.addReminder(newReminder)
+        if (!units.equals("") && !medicine.equals("") && dose != 0) {
+            var newReminder = createMedicineReminder(this.medicine, this.dose, this.units,
+                LocalDate.of(this.year, this.month, this.day), LocalTime.of(this.hour, this.minute))
+            Toast.makeText(this, "New unplanned medicine added", Toast.LENGTH_LONG).show()
+            Controller.addReminder(newReminder)
+            go_home()
+        } else Toast.makeText(this, "Missing Data", Toast.LENGTH_LONG).show()
         //Actualitza el shared preferences tmb
         /*val intent = Intent(this, LoginActivity::class.java)
         intent.putExtra("type_of_action","Save_and_go_home")
         startActivity(intent)*/
     }
-
-
 }

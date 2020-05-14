@@ -50,15 +50,16 @@
             android:orientation="horizontal"
             android:weightSum="20">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <Button
                 android:id="@+id/pill_search"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="12"
                 android:hint="Medicine"
+                android:drawableRight="@drawable/ic_search_white_24dp"
                 android:inputType="text"
                 android:textColor="@color/cardview_dark_background"
-                android:textColorHint="@color/cardview_dark_background"></com.google.android.material.textfield.TextInputEditText>
+                android:textColorHint="@color/cardview_dark_background"></Button>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -69,8 +70,11 @@
             <Button
                 android:id="@+id/btn_scan"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="5"
+                android:background="@color/colorApp2"
+                android:textColor="@color/cardview_light_background"
+                android:textColorHint="@color/cardview_light_background"
                 android:text="Scan"></Button>
 
         </LinearLayout>

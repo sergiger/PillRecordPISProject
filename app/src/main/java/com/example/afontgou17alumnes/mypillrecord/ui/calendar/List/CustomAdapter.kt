@@ -11,6 +11,7 @@ import android.widget.TextView
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
 import java.time.LocalDate
+import java.time.format.TextStyle
 import java.util.*
 
 /**
@@ -127,7 +128,14 @@ class CustomAdapter(context: Context?, reminderList: ArrayList<Any>) : BaseAdapt
             }
 
         } else if (rowType == TYPE_HEADER) {
-            holder.dateSeparator?.text = mData[position].toString()
+            var i = mData[position]
+            if (i is LocalDate) {
+                var day = i.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault()) + ", " +
+                        i.month.getDisplayName(TextStyle.FULL, Locale.getDefault()) + " " +
+                        i.dayOfMonth + "th " + i.year
+                holder.dateSeparator?.text = day
+            }
+            //holder.dateSeparator?.text = mData[position].toString()
         }
         return convertView
     }
