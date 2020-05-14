@@ -73,11 +73,9 @@ class ActivityTherapy(
         return "          "+"Activity:  "+this.activityType+"\n               "+
                 "Duration:  "+this.duration.toString()+"min"+"\n" +
                 "               "+
-                "From: "+this.frequency.startDate+"\n" +
-                "               "+
-                "To: "+this.frequency.endDate+"\n" +
-                "               "+
-                "Notes: "+this.notes+"\n"+"\n"
+                "Notes: "+this.notes+
+                "\n               "+
+                this.frequency.toStringPDF()
     }
 
     override fun getName(): String {

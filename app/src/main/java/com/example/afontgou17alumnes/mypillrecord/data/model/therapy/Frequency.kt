@@ -105,13 +105,60 @@ class Frequency: Serializable{
 
     fun isActive(): Boolean {
         var retorn=false
-        var inici=LocalDate.parse(this.getRealDateString(this.startDate))
-        var end=LocalDate.parse(this.getRealDateString(this.endDate))
+        var inici:LocalDate
+        var end:LocalDate
+        if(type!=4) {
+            inici = LocalDate.parse(this.getRealDateString(this.startDate))
+            end = LocalDate.parse(this.getRealDateString(this.endDate))
+        }else{
+            inici=minimOfPuntualDays()
+            end=maximumOfPuntualDays()
+        }
         var now=LocalDate.now()
         if((now.isEqual(inici)||now.isAfter(inici))&&(now.isEqual(end)||now.isBefore(end)))
             retorn=true
         return retorn
     }
 
+    fun toStringPDF():String{
+        when(type){
+            1-> return "StartDate: "+startDate + "\n               "+"EndDate "+ endDate+"\n\n"
+            2-> return "StartDate: "+startDate + "\n               "+ "EndDate "+ endDate + "\n               "+ "Eachtime: "+ eachtimedose+"\n\n"
+            3-> return "StartDate: "+startDate + "\n               "+"EndDate "+ endDate + "\n               "+"Specificweekdays: "+ specificweekdaysToString()+"\n\n"
+            4-> return "List of puntual days: "+ listOfPuntualDaysToString()+"\n\n"
+        }
+        return "error del ToString fun"
+    }
+
+    fun listOfPuntualDaysToString():String{
+        var retorn=""
+        for(elem in listofpuntualdays)
+            retorn+="\n                  "+elem
+        return retorn
+    }
+    fun specificweekdaysToString():String{
+        var retorn=""
+        for(elem in specificweekdays){
+            if(elem!="")
+                retorn+="\n                  "+elem
+        }
+        return retorn
+    }
+
+    fun minimOfPuntualDays():LocalDate{
+        var retorn=LocalDate.parse(this.getRealDateString(listofpuntualdays[0]))
+        for(date in listofpuntualdays)
+            if(retorn.isAfter(LocalDate.parse(this.getRealDateString(date))))
+                retorn=LocalDate.parse(this.getRealDateString(date))
+        return retorn
+    }
+
+    fun maximumOfPuntualDays():LocalDate{
+        var retorn=LocalDate.parse(this.getRealDateString(listofpuntualdays[0]))
+        for(date in listofpuntualdays)
+            if(retorn.isBefore(LocalDate.parse(this.getRealDateString(date))))
+                retorn=LocalDate.parse(this.getRealDateString(date))
+        return retorn
+    }
 
 }

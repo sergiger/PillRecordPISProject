@@ -83,12 +83,8 @@ class MeasurementTherapy(
     }
     override fun toStringPDF(): String {
         return  "          "+"Measurement:"+this.measurementType+"\n               "+
-
-                "From: "+this.frequency.startDate+"\n" +
-                "               "+
-                "To: "+this.frequency.endDate+"\n" +
-                "               "+
-                "Notes: "+this.notes+"\n"+"\n"
+                "Notes: "+this.notes+
+                "\n               "+ this.frequency.toStringPDF()
 
     }
 

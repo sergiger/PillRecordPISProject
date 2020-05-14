@@ -78,11 +78,9 @@ open class MedicineTherapy(
         return  "          "+"Medicine:  "+this.medicine+"\n               "+
                 "Dose:  "+this.dose.toString()+"min"+"\n               "+
                 "Units:"+this.units.toString()+"\n               "+
-                "From: "+this.frequency.startDate+"\n" +
-                "               "+
-                "To: "+this.frequency.endDate+"\n" +
-                "               "+
-                "Notes: "+this.notes+"\n"+"\n"
+                "Notes: "+this.notes+
+                "\n               "+
+                this.frequency.toStringPDF()
     }
 
     override fun getName(): String {

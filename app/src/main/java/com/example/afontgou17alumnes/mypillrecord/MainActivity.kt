@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -119,7 +120,6 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(TodayFragment())
         }
         generarNextNotification()
-
     }
     fun generarNextNotification(){
         if (Controller.user.areThereReminders()){
