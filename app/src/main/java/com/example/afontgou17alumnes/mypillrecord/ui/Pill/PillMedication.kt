@@ -253,7 +253,6 @@ class PillMedication : AppCompatActivity() {
     // Valid Function
     fun getSearchResults(result: ArrayList<MyData>) {
         var pill = result[0]
-
         var name = pill.brand_name
         var editable:Editable = Editable.Factory.getInstance().newEditable(name)
         this.medicine = name
@@ -267,7 +266,6 @@ class PillMedication : AppCompatActivity() {
             var dosisFloat = parts[0].split(".")
             dosisInt = dosisFloat[0]
         } else dosisInt = parts[0]
-
         var unit = parts[1]
 
         // Refresh data and change UI

@@ -34,7 +34,7 @@ class SearchActivity : AppCompatActivity(),
         val bundle:Bundle? = intent.extras
         mother_activity = bundle?.get("mother_activity") as String
 
-        back_arrow_search.setOnClickListener{
+        back_arrow_search.setOnClickListener {
             onBackPressed()
         }
 
