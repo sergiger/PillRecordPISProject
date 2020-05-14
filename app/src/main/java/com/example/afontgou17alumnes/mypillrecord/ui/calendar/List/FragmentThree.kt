@@ -37,16 +37,17 @@ class FragmentThree : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         createMedicineList()
+        // Para modificar (Aqui)
         historic_list.setOnItemClickListener { adapterView, view, i, l ->
             var reminder : Any = adapterView.adapter.getItem(i)
             if (reminder is LocalDate) Toast.makeText(context,"Date", Toast.LENGTH_SHORT).show()
             else if (reminder is Reminder){
                 actualReminder = reminder
                 Toast.makeText(context,"Reminder", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, HistoricModify::class.java)
+                intent.putExtra("Reminder", reminder)
+                startActivityForResult(intent, 1)
             }
-            /*val intent = Intent(context, HistoricModify::class.java)
-            intent.putExtra("Reminder", reminder)
-            startActivityForResult(intent, 1)*/
         }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -60,6 +61,8 @@ class FragmentThree : Fragment() {
                     is MeasurementReminder -> (actualReminder as MeasurementReminder).value = (result as MeasurementReminder).value
                     is ActivityReminder -> (actualReminder as ActivityReminder).duration = (result as ActivityReminder).duration
                 }
+                actualizeDB()
+                createMedicineList()
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //do nothing
@@ -67,19 +70,18 @@ class FragmentThree : Fragment() {
         }
     }
     fun createMedicineList() {
-        //val medicineList = Controller.getRemindersData()
+        // val medicineList = Controller.getRemindersData()
         val medicineList = Controller.getDatesAndReminders() // New
         println(medicineList)
         val medicineListView : ListView? = view?.findViewById(R.id.historic_list)
-        // Actual
-        /*val reminderAdapter : HistoricListAdapter = HistoricListAdapter(this, medicineList) // Controller.getRemindersData()
-        if (medicineListView != null) {
-            medicineListView.adapter = reminderAdapter
-        }*/
         // New
         val reminderAdapter : CustomAdapter = CustomAdapter(this.context, medicineList) // Controller.getRemindersData()
         if (medicineListView != null) {
             medicineListView.adapter = reminderAdapter
         }
+    }
+    fun actualizeDB(){
+        Controller.controllerSharePrefs.sharedUpLoadReminders()
+        Controller.RemindersToFirebase()
     }
 }

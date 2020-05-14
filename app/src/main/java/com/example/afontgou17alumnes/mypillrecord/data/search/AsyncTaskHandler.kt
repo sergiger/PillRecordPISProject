@@ -4,6 +4,7 @@ import android.os.AsyncTask
 import com.example.afontgou17alumnes.mypillrecord.data.pills.Active_ingredients
 import com.example.afontgou17alumnes.mypillrecord.data.pills.MyData
 import com.example.afontgou17alumnes.mypillrecord.ui.Pill.PillMedication
+import com.example.afontgou17alumnes.mypillrecord.ui.today.AddUnplannedMedicine
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.FileNotFoundException
@@ -13,10 +14,14 @@ import java.net.URL
 class AsyncTaskHandler: AsyncTask<String, String, String>() {
 
     var activity: PillMedication? = null
+    var activity2: AddUnplannedMedicine? = null
     val listOfPills = ArrayList<MyData>()
 
     fun setContext(act : PillMedication) {
         this.activity = act
+    }
+    fun setContextUnplanned(act : AddUnplannedMedicine) {
+        this.activity2 = act
     }
 
     override fun doInBackground(vararg url: String?): String {
@@ -64,9 +69,11 @@ class AsyncTaskHandler: AsyncTask<String, String, String>() {
                 listOfPills.add(pill)
                 i++
             }
-            activity?.getSearchResults(listOfPills) // Valid (current)
+            if (activity != null) activity?.getSearchResults(listOfPills) // Valid (current)
+            else if (activity2 != null) activity2?.getSearchResults(listOfPills)
         } else {
-            activity?.resultsNotFound() // Error case
+            if (activity != null) activity?.resultsNotFound() // Error case
+            else if (activity2 != null) activity2?.resultsNotFound()
         }
         //println(listOfPills)
     }

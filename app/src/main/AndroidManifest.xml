@@ -21,6 +21,7 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".ui.today.TodayModifyReminder" />
         <activity android:name=".ui.calendar.Week.WeekModify" />
+        <activity android:name=".ui.calendar.List.HistoricModify" />
         <activity
             android:name=".data.search.SearchActivity"
             android:exported="true"

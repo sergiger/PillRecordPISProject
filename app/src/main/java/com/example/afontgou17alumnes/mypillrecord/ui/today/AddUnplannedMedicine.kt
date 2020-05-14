@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.today
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +14,11 @@ import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller.createMedicineReminder
+import com.example.afontgou17alumnes.mypillrecord.data.pills.MyData
+import com.example.afontgou17alumnes.mypillrecord.data.search.AsyncTaskHandler
 import com.example.afontgou17alumnes.mypillrecord.data.search.SearchActivity
+import com.google.zxing.integration.android.IntentIntegrator
+import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.back_arrow
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.info_button
@@ -37,6 +42,10 @@ class AddUnplannedMedicine : AppCompatActivity() {
     var units="Botle"
     var medicine="Dalsi"
 
+    // API Implementation
+    val url = "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:"
+    val field = "packaging.package_ndc:"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_unplanned_medicine)
@@ -49,6 +58,18 @@ class AddUnplannedMedicine : AppCompatActivity() {
             this.medicine = Medicine as String
             medicine_name_button.text = medicine
         }
+        //dose
+        /*val Dose = bundle?.get("Dose")
+        if(Dose != null){
+            this.dose = Dose as Int
+            dose_button.text = dose.toString()
+        }
+        //units
+        val Units = bundle?.get("Units")
+        if(Units != null){
+            this.units = Units as String
+            btn_unitss.text = new_units.toString()
+        }*/
 
         //Set Listeners
         back_arrow.setOnClickListener{
@@ -73,22 +94,68 @@ class AddUnplannedMedicine : AppCompatActivity() {
         medicine_name_button.setOnClickListener{
             val searchIntent = Intent(this, SearchActivity::class.java)
             startActivity(searchIntent)
-            /*val mDialogView = LayoutInflater.from(this).inflate(R.layout.search_dialog, null)
-
-            //AlertDialogBuilder
-            val mBuilder = AlertDialog.Builder(this)
-                .setView(mDialogView)
-                .setTitle("Set medicine")
-            val mAlertDialog = mBuilder.show()
-            mDialogView.OK.setOnClickListener {
-                Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
-                mAlertDialog.dismiss()
-            }
-            mDialogView.cancel.setOnClickListener {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
-                mAlertDialog.dismiss()
-            }*/
         }
+        // Barcode Scanner implementatiton
+        btn_scan.setOnClickListener {
+            val scanner = IntentIntegrator(this)
+            scanner.initiateScan()
+        }
+    }
+    // Barcode Scanner implementatiton -> cut first and last number of the barcode
+    // https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:0536-1149-41
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            val result: IntentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+            if (result != null) {
+                if (result.contents == null) {
+                    Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+                    // API Implementation
+                    var ndc = result.contents.substring(1,result.contents.length - 1)
+                    var format1 = ndc.substring(0,4) + "-" + ndc.substring(4,8) + "-" + ndc.substring(8) // 4-4-2
+                    var format2 = ndc.substring(0,5) + "-" + ndc.substring(5,8) + "-" + ndc.substring(8) // 5-3-2
+
+                    var asyncTask = AsyncTaskHandler()
+                    asyncTask.setContextUnplanned(this)
+                    asyncTask.execute(url+format1+"+"+field+format2)
+                    //AsyncTaskHandler().execute(url+format1+"+"+field+format2)  // Final of implementation
+                    println(url+format1+"+"+field+format2)
+                }
+            } else {
+                super.onActivityResult(requestCode, resultCode, data)
+            }
+        }
+    }
+    // Valid Function
+    fun getSearchResults(result: ArrayList<MyData>) {
+        var pill = result[0]
+
+        var name = pill.brand_name
+        this.medicine = name
+        medicine_name_button.text = name //
+
+        var strength = pill.active_ingredients[0].strength
+        val parts = strength.split(" ", "/")
+        // Model of dosis is Int (!)
+        var dosisInt = ""
+        if (parts[0].contains(".")) {
+            var dosisFloat = parts[0].split(".")
+            dosisInt = dosisFloat[0]
+        } else dosisInt = parts[0]
+
+        var unit = parts[1]
+
+        // Refresh data and change UI
+        this.dose = dosisInt.toInt()
+        this.units = unit
+
+        dose_button.text = dosisInt
+        btn_unitss.text = unit
+    }
+    fun resultsNotFound() {
+        Toast.makeText(this, "No matches found!", Toast.LENGTH_SHORT).show()
     }
 
     private fun showPopupMenu_units(view: View) = PopupMenu(view.context, view).run {
