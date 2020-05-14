@@ -155,7 +155,7 @@ class PillMedication : AppCompatActivity() {
         btn_frequency.setOnClickListener {
             val intent = Intent(this, PillFrequency::class.java)
             val llista = w_hourListfrequency.toTypedArray()
-            val MedicineNoum = findViewById<TextInputEditText>(R.id.pill_search)
+            val MedicineNoum = findViewById<Button>(R.id.pill_search)
             medicine=MedicineNoum.text.toString()
             val NotesNoum = findViewById<TextInputEditText>(R.id.input_notes)
             notes=NotesNoum.text.toString()
