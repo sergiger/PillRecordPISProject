@@ -93,6 +93,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
         }
         medicine_name_button.setOnClickListener{
             val searchIntent = Intent(this, SearchActivity::class.java)
+            searchIntent.putExtra("mother_activity", "today")
             startActivity(searchIntent)
         }
         // Barcode Scanner implementatiton

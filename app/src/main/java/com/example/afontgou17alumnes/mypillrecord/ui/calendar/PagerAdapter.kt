@@ -24,9 +24,9 @@ class PagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
 
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
-            0-> { "Week"}
+            0-> { "Planned"}
             1-> { "Month"}
-            else -> return "List"
+            else -> return "Historic"
         }
     }
 
