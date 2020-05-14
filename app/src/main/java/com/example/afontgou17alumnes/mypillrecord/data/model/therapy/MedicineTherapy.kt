@@ -24,63 +24,37 @@ open class MedicineTherapy(
     }
 
     override fun createReminders() {
+        var dataString:String=frequency.getRealDateString(frequency.startDate)
+        var date = LocalDate.parse(dataString) //date està a la data inicial, i anirem modificant per anar generant els diferents reminders
+
+        dataString=frequency.getRealDateString(frequency.endDate)
+        var endDate = LocalDate.parse(dataString)
         if(this.frequency.type==1){
             //Dayly, x times per day
-            var dataString:String=frequency.getRealDateString(frequency.startDate)
-            var date = LocalDate.parse(dataString) //date està a la data inicial, i anirem modificant per anar generant els diferents reminders
-
-            dataString=frequency.getRealDateString(frequency.endDate)
-            var endDate = LocalDate.parse(dataString)
-
             while (date.isBefore(endDate) || date.isEqual(endDate)) {
-                for (hour in this.hours)
-                    Controller.addReminder(
-                        MedicineReminder(
-                            this.medicine, this.dose,this.units, date, LocalTime.parse(hour),
-                            ReminderStatus.TO_DO, this.id
-                        )
-                    )
+                if(date.isAfter(LocalDate.now())||date.isEqual(LocalDate.now()))
+                    for (hour in this.hours)
+                        createOneReminder(date,LocalTime.parse(hour))
                 date=date.plusDays(1)
             }
         }
         if(this.frequency.type==2) {
             //Every x days
-            var dataString:String=frequency.getRealDateString(frequency.startDate)
-            var date = LocalDate.parse(dataString) //date està a la data inicial, i anirem modificant per anar generant els diferents reminders
-
-            dataString=frequency.getRealDateString(frequency.endDate)
-            var endDate = LocalDate.parse(dataString)
-
             while (date.isBefore(endDate) || date.isEqual(endDate)) {
-                for (hour in this.hours)
-                    Controller.addReminder(
-                        MedicineReminder(
-                            this.medicine, this.dose,this.units, date, LocalTime.parse(hour),
-                            ReminderStatus.TO_DO, this.id
-                        )
-                    )
+                if(date.isAfter(LocalDate.now())||date.isEqual(LocalDate.now()))
+                    for (hour in this.hours)
+                        createOneReminder(date,LocalTime.parse(hour))
                 date=date.plusDays(this.frequency.eachtimedose.toLong())
             }
         }
         if(this.frequency.type==3){
             //Specific Week days
             var diesSetmana=this.frequency.getDiferenceBetweenDays()
-
-            var dataString:String=frequency.getRealDateString(frequency.startDate)
-            var date = LocalDate.parse(dataString) //date està a la data inicial, i anirem modificant per anar generant els diferents reminders
-
-            dataString=frequency.getRealDateString(frequency.endDate)
-            var endDate = LocalDate.parse(dataString)
-
             while (date.isBefore(endDate) || date.isEqual(endDate)) {
-                if(diesSetmana[date.dayOfWeek.value-1]==1)
-                    for (hour in this.hours)
-                        Controller.addReminder(
-                            MedicineReminder(
-                                this.medicine, this.dose,this.units, date, LocalTime.parse(hour),
-                                ReminderStatus.TO_DO, this.id
-                            )
-                        )
+                if(date.isAfter(LocalDate.now())||date.isEqual(LocalDate.now()))
+                    if(diesSetmana[date.dayOfWeek.value-1]==1)
+                        for (hour in this.hours)
+                            createOneReminder(date,LocalTime.parse(hour))
                 date=date.plusDays(1)
             }
         }
@@ -88,12 +62,7 @@ open class MedicineTherapy(
             //Punctual days
             for(dates in this.frequency.listofpuntualdays)
                 for(hour in this.hours)
-                    Controller.addReminder(
-                        MedicineReminder(
-                            this.medicine, this.dose,this.units, LocalDate.parse(frequency.getRealDateString(dates)), LocalTime.parse(hour),
-                            ReminderStatus.TO_DO, this.id
-                        )
-                    )
+                    createOneReminder(LocalDate.parse(frequency.getRealDateString(dates)),LocalTime.parse(hour))
         }
     }
 
@@ -114,5 +83,14 @@ open class MedicineTherapy(
 
     override fun getName(): String {
         return this.medicine
+    }
+
+    fun createOneReminder(date:LocalDate,time:LocalTime){
+        Controller.addReminder(
+            MedicineReminder(
+                this.medicine, this.dose,this.units, date, time,
+                ReminderStatus.TO_DO, this.id
+            )
+        )
     }
 }

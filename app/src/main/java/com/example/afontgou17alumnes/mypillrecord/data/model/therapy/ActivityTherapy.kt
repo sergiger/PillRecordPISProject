@@ -22,69 +22,43 @@ class ActivityTherapy(
     }
 
     override fun createReminders() {
-        if(this.frequency.type==1){
-            //Dayly, x times per day
-            var dataString:String=frequency.getRealDateString(frequency.startDate)
-            var date = LocalDate.parse(dataString) //date està a la data inicial, i anirem modificant per anar generant els diferents reminders
+        var dataString:String=frequency.getRealDateString(frequency.startDate)
+        var date = LocalDate.parse(dataString) //date està a la data inicial, i anirem modificant per anar generant els diferents reminders
 
-            dataString=frequency.getRealDateString(frequency.endDate)
-            var endDate = LocalDate.parse(dataString)
-
+        dataString=frequency.getRealDateString(frequency.endDate)
+        var endDate = LocalDate.parse(dataString)
+        if(this.frequency.type==1)//Dayly, x times per day
             while (date.isBefore(endDate) || date.isEqual(endDate)) {
-                for (hour in this.hours)
-                    Controller.addReminder(ActivityReminder(
-                        this.activityType, this.duration, date, LocalTime.parse(hour),
-                        ReminderStatus.TO_DO, this.id
-                    ))
+                if(date.isAfter(LocalDate.now())||date.isEqual(LocalDate.now()))
+                    for (hour in this.hours)
+                        createOneReminder(date, LocalTime.parse(hour))
                 date=date.plusDays(1)
             }
-        }
-        if(this.frequency.type==2) {
-            //Every x days
-            var dataString:String=frequency.getRealDateString(frequency.startDate)
-            var date = LocalDate.parse(dataString) //date està a la data inicial, i anirem modificant per anar generant els diferents reminders
 
-            dataString=frequency.getRealDateString(frequency.endDate)
-            var endDate = LocalDate.parse(dataString)
-
+        if(this.frequency.type==2) //Every x days
             while (date.isBefore(endDate) || date.isEqual(endDate)) {
-                for (hour in this.hours)
-                    Controller.addReminder(ActivityReminder(
-                        this.activityType, this.duration, date, LocalTime.parse(hour),
-                        ReminderStatus.TO_DO, this.id
-                    ))
+                if(date.isAfter(LocalDate.now())||date.isEqual(LocalDate.now()))
+                    for (hour in this.hours)
+                        createOneReminder(date, LocalTime.parse(hour))
                 date=date.plusDays(this.frequency.eachtimedose.toLong())
             }
-        }
+
         if(this.frequency.type==3){
-            //Specific Week days
+
             var diesSetmana=this.frequency.getDiferenceBetweenDays()
 
-            var dataString:String=frequency.getRealDateString(frequency.startDate)
-            var date = LocalDate.parse(dataString) //date està a la data inicial, i anirem modificant per anar generant els diferents reminders
-
-            dataString=frequency.getRealDateString(frequency.endDate)
-            var endDate = LocalDate.parse(dataString)
-
             while (date.isBefore(endDate) || date.isEqual(endDate)) {
-                if(diesSetmana[date.dayOfWeek.value-1]==1)
-                    for (hour in this.hours)
-                        Controller.addReminder(ActivityReminder(
-                            this.activityType, this.duration, date, LocalTime.parse(hour),
-                            ReminderStatus.TO_DO, this.id
-                        ))
+                if(date.isAfter(LocalDate.now())||date.isEqual(LocalDate.now()))
+                    if(diesSetmana[date.dayOfWeek.value-1]==1)
+                        for (hour in this.hours)
+                            createOneReminder(date, LocalTime.parse(hour))
                 date=date.plusDays(1)
             }
         }
-        if(this.frequency.type==4){
-            //Punctual days
+        if(this.frequency.type==4)//Punctual days
             for(dates in this.frequency.listofpuntualdays)
                 for(hour in this.hours)
-                    Controller.addReminder(ActivityReminder(
-                        this.activityType, this.duration, LocalDate.parse(frequency.getRealDateString(dates)), LocalTime.parse(hour),
-                        ReminderStatus.TO_DO, this.id
-                    ))
-        }
+                    createOneReminder(LocalDate.parse(frequency.getRealDateString(dates)), LocalTime.parse(hour))
     }
 
     override fun deleteReminders() {
@@ -104,5 +78,12 @@ class ActivityTherapy(
 
     override fun getName(): String {
         return this.activityType
+    }
+
+    fun createOneReminder(date:LocalDate,time:LocalTime){
+        Controller.addReminder(ActivityReminder(
+            this.activityType, this.duration, date, time,
+            ReminderStatus.TO_DO, this.id
+        ))
     }
 }
