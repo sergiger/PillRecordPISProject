@@ -31,7 +31,7 @@ object Controller {
     private var mAuth = FirebaseAuth.getInstance()
     val controllerJSON=ControllerJSON()//Serveix per a treballar amb els JSON
     var controllerSharePrefs=ControllerSharePrefs()//Serveix per treballar amb les share preferences
-    var connected = false;
+    var connected = false
     /*fun initUserSaved(){
         controllerSharePrefs.sharedDownloadLoad()
     }
@@ -365,7 +365,7 @@ object Controller {
     fun FirabasetoStatics(){
         val docRef = db.collection("statistics").document(user.id)
         val control = Controller.user
-        Log.e("control", "control : ${control.toString()}")
+        Log.e("control", "control : $control")
         docRef.get().addOnSuccessListener { document ->
                 if (document.data != null) {
                     Log.d("statistics", "DocumentSnapshot data: ${document.data}")
@@ -409,7 +409,7 @@ object Controller {
     fun FirebasetoTherapies(){
         val docRef = db.collection("therapies").document(user.id)
         val control = Controller.user
-        Log.e("control", "control : ${control.toString()}")
+        Log.e("control", "control : $control")
         docRef.get().addOnSuccessListener { document ->
             if (document.data != null) {
                 Log.d("therapies", "DocumentSnapshot data: ${document.data}")
@@ -461,7 +461,7 @@ object Controller {
     fun FirebasetoReminders(){
         val docRef = db.collection("reminders").document(user.id)
         val control = Controller.user
-        Log.e("control", "control : ${control.toString()}")
+        Log.e("control", "control : $control")
         docRef.get().addOnSuccessListener { document ->
             if (document.data != null) {
                 Log.d("reminders", "DocumentSnapshot data: ${document.data}")

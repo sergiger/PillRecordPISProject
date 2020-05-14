@@ -7,7 +7,6 @@ import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -44,7 +43,7 @@ class PillSports : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         setContentView(R.layout.activity_pill_sports)
-        text_view_frequency.setMovementMethod(ScrollingMovementMethod())
+        text_view_frequency.movementMethod = ScrollingMovementMethod()
         //FROM FREQUENCY
         val bundle: Bundle? = intent?.extras
         val id_RadioButton = bundle?.get("RadioButton")
@@ -64,7 +63,7 @@ class PillSports : AppCompatActivity() {
                 btn_time.text=duration.toString()
             }
             //notes
-            val Notes = bundle?.get("Notes")
+            val Notes = bundle.get("Notes")
             if(Notes != null){
                 this.notes = Notes as String
                 val NotesNoum = findViewById<TextInputEditText>(R.id.input_notes)

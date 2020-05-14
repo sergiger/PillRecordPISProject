@@ -50,7 +50,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_unplanned_medicine)
 
-        hour_button_unplanned_medicine.text = "$hour:$minute";
+        hour_button_unplanned_medicine.text = "$hour:$minute"
 
         val bundle:Bundle? = intent.extras
         val Medicine = bundle?.get("Medicine")

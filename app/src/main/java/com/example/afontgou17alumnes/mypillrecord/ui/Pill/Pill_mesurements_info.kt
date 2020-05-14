@@ -18,11 +18,7 @@ import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Frequency
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MeasurementTherapy
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.activity_pill_sports.*
 import kotlinx.android.synthetic.main.pill_mesurements_activity.*
-import kotlinx.android.synthetic.main.pill_mesurements_activity.btn_Save
-import kotlinx.android.synthetic.main.pill_mesurements_activity.btn_frequency
-import kotlinx.android.synthetic.main.pill_mesurements_activity.text_view_frequency
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
@@ -47,7 +43,7 @@ class Pill_mesurements_info : AppCompatActivity() {
 
         //agafem titol i unitats
         val bundle:Bundle = intent.extras
-        text_view_frequency.setMovementMethod(ScrollingMovementMethod())
+        text_view_frequency.movementMethod = ScrollingMovementMethod()
         val title = bundle.get("TitolMesurement")
         titol=title as String
         val unitat =bundle.get("UnitatsMesurement")
@@ -62,7 +58,7 @@ class Pill_mesurements_info : AppCompatActivity() {
             val To = bundle.get("To")
             val RadioButtonValue = bundle.get("RadioButtonValue")
             //notes
-            val Notes = bundle?.get("Notes")
+            val Notes = bundle.get("Notes")
             if(Notes != null){
                 this.notes = Notes as String
                 val NotesNoum = findViewById<TextInputEditText>(R.id.input_notes)
