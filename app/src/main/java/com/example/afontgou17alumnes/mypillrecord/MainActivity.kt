@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.Reminder
 import com.example.afontgou17alumnes.mypillrecord.notifications.NotificationUtils
 import com.example.afontgou17alumnes.mypillrecord.ui.Pill.Pill_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.calendar.Calendar_fragment

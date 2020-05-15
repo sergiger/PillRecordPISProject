@@ -94,7 +94,7 @@ open class User{
         var cont=0
         for(reminder in reminders){
             var dif2=reminder.getMilisFromNow()-retorn.getMilisFromNow()
-            if(reminder.getMilisFromNow()>0 && dif2<0 && reminder.getReminderStatus().equals(ReminderStatus.TO_DO)){
+            if(reminder.getMilisFromNow()>30000 && dif2<0 && reminder.getReminderStatus().equals(ReminderStatus.TO_DO)){
                 retorn=reminder
                 cont+=1
             }

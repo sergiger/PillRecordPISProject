@@ -63,7 +63,7 @@ class NotificationService : IntentService("NotificationService") {
 
 
             val context = this.applicationContext
-            var notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            var notificationManager= context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             val notifyIntent = Intent(this, MainActivity::class.java)
 
             val title = "You have a notification (Per canviar, linia 72 de la class NotificationService)"

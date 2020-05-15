@@ -116,16 +116,19 @@
             android:screenOrientation="locked" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="locked" />
+            android:screenOrientation="locked"
+            android:taskAffinity="" />
 
         <receiver
             android:name=".notifications.recivers.AlarmReceiver"
             android:enabled="true"
-            android:exported="false"></receiver>
+            android:exported="false"
+            ></receiver>
 
         <service
             android:name=".notifications.recivers.NotificationService"
-            android:enabled="true" />
+            android:enabled="true"
+            android:exported="false"/>
     </application>
 
 </manifest>
