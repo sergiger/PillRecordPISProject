@@ -91,39 +91,21 @@ open class User{
                 LocalDate.now().plusDays(30),
                 LocalTime.now()
             )
-        /*var cont=0
-        for(reminder in reminders){
-            var dif2=reminder.getMilisFromNow()-retorn.getMilisFromNow()
-            if(reminder.date.isAfter(LocalDate.now())||reminder.date.isEqual(LocalDate.now()))
-                if(reminder.getMilisFromNow()-Calendar.getInstance().timeInMillis>30000 && dif2<0 && reminder.getReminderStatus().equals(ReminderStatus.TO_DO)){
-                    retorn=reminder
-                    cont+=1
-                }
-        }*/
         for(reminder in reminders){
             if(reminder.getMilisFromNow()>Calendar.getInstance().timeInMillis) {
                 if(reminder.getMilisFromNow()<retorn.getMilisFromNow())
                     if (reminder.getReminderStatus() == ReminderStatus.TO_DO) {
-                        Log.d("next",reminder.toStringPDF())
-                        Log.d("next",reminder.date.toString())
                         retorn=reminder
                     }
             }
         }
-        Log.d("hollll",retorn.toStringPDF())
-        Log.d("ja",retorn.date.toString())
         return retorn
     }
     fun areThereReminders():Boolean{
         var retorn=false
         for(reminder in reminders){
-            //Log.d("hh",reminder.time.toString())
             if(reminder.getMilisFromNow()>Calendar.getInstance().timeInMillis) {
-                //Log.d("hh2",reminder.time.toString())
                 if (reminder.getReminderStatus() == ReminderStatus.TO_DO) {
-                    Log.d("getMilis",reminder.toStringPDF())
-                    Log.d("getMilis",reminder.date.toString())
-                    //Log.d("hh3",reminder.time.toString())
                     retorn = true
                     break
                 }

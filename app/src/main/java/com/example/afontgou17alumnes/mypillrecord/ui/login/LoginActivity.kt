@@ -36,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ControllerSharePrefs.setContext(this)
+        Controller.setContext(this)
         ProgressDialogInit()
         mAuth=FirebaseAuth.getInstance()
 
@@ -144,9 +145,9 @@ class LoginActivity : AppCompatActivity() {
                 //sharedDownloadLoad()
                 getdatafromfirebase(user)//All data------------------------------------------
                 ProgressDialogDisable()
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
                 finish()
+                val intent = Intent(this, WaitingActiviy::class.java)
+                startActivity(intent)
             }else{
                 Toast.makeText(this, "Please verify your email", Toast.LENGTH_SHORT).show()
                 ProgressDialogDisable()

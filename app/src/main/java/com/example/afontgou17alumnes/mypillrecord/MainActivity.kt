@@ -107,7 +107,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        Controller.setContext(this)
 
         navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         val bundle:Bundle? = intent.extras

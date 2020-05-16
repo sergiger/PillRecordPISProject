@@ -14,11 +14,12 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.Pill.TherapyInformation"></activity>
+        <activity android:name=".ui.login.WaitingActiviy"></activity>
+        <activity android:name=".ui.Pill.TherapyInformation" />
         <activity
             android:name=".ui.Pill.PillTherapyInformation"
             android:label="@string/title_activity_pill_therapy_information"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.today.TodayModifyReminder" />
         <activity android:name=".ui.calendar.Week.WeekModify" />
         <activity android:name=".ui.calendar.List.HistoricModify" />
@@ -122,13 +123,12 @@
         <receiver
             android:name=".notifications.recivers.AlarmReceiver"
             android:enabled="true"
-            android:exported="false"
-            ></receiver>
+            android:exported="false" />
 
         <service
             android:name=".notifications.recivers.NotificationService"
             android:enabled="true"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>

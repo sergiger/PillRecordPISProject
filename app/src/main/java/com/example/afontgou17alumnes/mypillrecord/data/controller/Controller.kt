@@ -2,16 +2,20 @@ package com.example.afontgou17alumnes.mypillrecord.data.controller
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
+import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.data.model.User
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
 import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.StatisticEntry
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Therapy
 import com.example.afontgou17alumnes.mypillrecord.notifications.NotificationUtils
+import com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation.extra_information
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -494,6 +498,10 @@ object Controller {
 
                 //Actualitza les notificacions
                 generarNextNotification()
+
+                //Refresh llista inici today
+                val intent = Intent(main, MainActivity::class.java)
+                startActivity(main,intent,null)
 
             } else {
                 Log.d("reminders", "No such document")
