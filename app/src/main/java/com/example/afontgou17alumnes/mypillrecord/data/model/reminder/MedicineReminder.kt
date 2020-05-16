@@ -77,7 +77,7 @@ open class MedicineReminder(
             date=-2*24*60*60*1000//Aquest número és simplement perque el resultat sigui més petit que 0
         }
         else {
-            date = ChronoUnit.DAYS.between(this.date, LocalDate.now()) * 24 * 60 * 60 * 1000
+            date = ChronoUnit.DAYS.between(LocalDate.now(),this.date) * 24 * 60 * 60 * 1000
         }
         result+=time+date
         return result

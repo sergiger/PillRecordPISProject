@@ -1,14 +1,17 @@
 package com.example.afontgou17alumnes.mypillrecord.data.controller
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.util.Log
+import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.data.model.User
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
 import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.StatisticEntry
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Therapy
+import com.example.afontgou17alumnes.mypillrecord.notifications.NotificationUtils
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -23,6 +26,9 @@ import com.google.gson.reflect.TypeToken
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
+import java.util.*
+import kotlin.Comparator
+import kotlin.collections.ArrayList
 
 object Controller {
     val user = User("1","user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
@@ -39,6 +45,11 @@ object Controller {
     fun savePreferences(){
         controllerSharePrefs.sharedUpLoad()
     }*/
+    private lateinit var main: Activity
+
+    fun setContext(con: Activity) {
+        main=con
+    }
 
 
     fun getRemindersData() : ArrayList<Reminder>{
@@ -213,6 +224,7 @@ object Controller {
         Log.d("hola:",user.reminders[user.reminders.size-1].toString())
         controllerSharePrefs.sharedUpLoad()
         RemindersToFirebase()
+        generarNextNotification()
     }
     fun createMedicineReminder(medicine:String,dose:Int,units:String,
     date:LocalDate,time: LocalTime
@@ -480,6 +492,9 @@ object Controller {
                 }
                 controllerSharePrefs.sharedUpLoadReminders()
 
+                //Actualitza les notificacions
+                generarNextNotification()
+
             } else {
                 Log.d("reminders", "No such document")
             }
@@ -526,6 +541,18 @@ object Controller {
         if(day<10)
             day_str="0"+day_str
         return LocalDate.parse(year_str+"-"+month_str+"-"+day_str)
+    }
+
+    //Notifications
+
+    fun generarNextNotification(){
+        if (this.user.areThereReminders()){
+            val mNotificationTime = this.user.getNextReminder().getMilisFromNow()-40000
+            NotificationUtils().setNotification(mNotificationTime, main)
+        }
+        else{
+            Toast.makeText(this.main,"There are no reminders",Toast.LENGTH_LONG).show()
+        }
     }
 
 

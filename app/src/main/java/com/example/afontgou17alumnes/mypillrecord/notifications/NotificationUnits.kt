@@ -16,7 +16,7 @@ class NotificationUtils {
             alarmIntent.putExtra("timestamp", timeInMilliSeconds)
 
             val pendingIntent = PendingIntent.getBroadcast(activity, 0, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT)
-            alarmManager.cancel(pendingIntent)
+            //alarmManager.cancel(pendingIntent)
             alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMilliSeconds, pendingIntent)
         }
     }

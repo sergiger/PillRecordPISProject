@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                    Toast.makeText(this,"Today",Toast.LENGTH_SHORT).show()
                    toolbar.title = "TODAY"
                    currentFragment=0
-                   generarNextNotification()
+                   //generarNextNotification()
                }
                return@OnNavigationItemSelectedListener true
            }
@@ -107,6 +107,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        Controller.setContext(this)
 
         navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         val bundle:Bundle? = intent.extras
@@ -119,16 +120,6 @@ class MainActivity : AppCompatActivity() {
         }
         else{
             replaceFragment(TodayFragment())
-        }
-        generarNextNotification()
-    }
-    fun generarNextNotification(){
-        if (Controller.user.areThereReminders()){
-            val mNotificationTime = Controller.user.getNextReminder().getMilisFromNow()
-            NotificationUtils().setNotification(mNotificationTime, this@MainActivity)
-        }
-        else{
-            //Toast.makeText(this,"There are no reminders",Toast.LENGTH_LONG).show()
         }
     }
     private fun replaceFragment(fragment: Fragment){

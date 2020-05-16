@@ -124,6 +124,8 @@ class ControllerSharePrefs {
             jsonList2=prefs.getString("ActivityTherapy","")
             Log.d("Therapy",jsonList2)
             Controller.controllerJSON.setActivityTherapyFronJSON(jsonList2)
+            //Actualitza les notificacions
+            Controller.generarNextNotification()
         }
     }
     fun closeSesion(){
