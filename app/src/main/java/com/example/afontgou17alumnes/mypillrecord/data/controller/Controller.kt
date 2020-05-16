@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.util.Log
+import android.widget.Toast
 import com.example.afontgou17alumnes.mypillrecord.data.model.User
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
 import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.StatisticEntry
@@ -16,6 +17,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.gson.Gson
@@ -527,6 +529,62 @@ object Controller {
         if(day<10)
             day_str="0"+day_str
         return LocalDate.parse(year_str+"-"+month_str+"-"+day_str)
+    }
+
+    fun share_to(new_email: String,context:Context){
+        val db = FirebaseFirestore.getInstance()
+        val users = db.collection("users").whereEqualTo("email", new_email).get()
+        db.collection("users")
+            .whereEqualTo("email", new_email)
+            .get()
+            .addOnSuccessListener { documents ->
+                //Log.e("DOCUMENTS EMPTY?", documents.isEmpty.toString())
+                if(documents.isEmpty){
+                    Toast.makeText(context,"Email does not exist", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    for (document in documents) {
+                        Log.e("DOCUMENTS", "${document.id} => ${document.data}")
+                        // configurant la base de dàdes.--------------------------------------------
+                        //introduim els pids en els documents
+                        val destinatari = document.data["uid"]
+                        val jo = Controller.user.id
+                        //Log.e("uid", "${destinatari}")
+
+                        val toMe = hashMapOf(
+                            "IShareTo" to arrayListOf(destinatari)
+                        )
+                        val toHim = hashMapOf(
+                            "SbShareToMe" to arrayListOf(jo)
+                        )
+                        //jo
+                        val docRef = Controller.db.collection("team").document(user.id)
+                        docRef.get().addOnSuccessListener { document ->
+                            if (document.data != null) {
+                                docRef.update("IShareTo", FieldValue.arrayUnion(destinatari))
+                                //docRef.set(toMe, SetOptions.merge())
+                            }else{
+                                docRef.set(toMe, SetOptions.merge())
+                            }
+                        }
+                        //ell
+                        val docRef2 = Controller.db.collection("team").document(destinatari.toString())
+                        docRef2.get().addOnSuccessListener { document ->
+                            if (document.data != null) {
+                                docRef2.update("SbShareToMe", FieldValue.arrayUnion(jo))
+                                //docRef2.set(toHim, SetOptions.merge())
+                            }else{
+                                docRef2.set(toHim, SetOptions.merge())
+                            }
+                        }
+
+                        // ------------------------------------------------------------------------
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("DOCUMENTS", "Error getting documents: ", exception)
+            }
     }
 
 

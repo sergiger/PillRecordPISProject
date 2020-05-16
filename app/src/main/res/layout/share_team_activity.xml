@@ -9,18 +9,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/cardview_light_background"
         android:gravity="top"
         android:orientation="vertical"
         android:weightSum="10"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="0dp"
-        android:background="@color/cardview_light_background">
+        tools:layout_editor_absoluteX="-26dp"
+        tools:layout_editor_absoluteY="-16dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar2"
             android:layout_width="match_parent"
             android:layout_height="0px"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
@@ -42,66 +42,77 @@
                 android:textSize="20dp"
                 android:textStyle="bold"></TextView>
         </androidx.appcompat.widget.Toolbar>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email:"/>
+                android:text="Email:"
+                android:layout_gravity="center"/>
+
             <EditText
+                android:id="@+id/input_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
                 android:hint="example@gmail.com"
-                android:id="@+id/input_email"></EditText>
+                android:inputType="textEmailAddress"
+                android:layout_gravity="center"></EditText>
 
         </LinearLayout>
 
         <RadioGroup
+            android:visibility="gone"
+            android:id="@+id/radio_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:id="@+id/radio_group">
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chose how much you want to share with that person"/>
-            <RadioButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Day"
-                android:id="@+id/radioButton_day"
-                android:onClick="radio_button_click"/>
-            <RadioButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Week"
-                android:id="@+id/radioButton_week"
-                android:onClick="radio_button_click"/>
+                android:text="Chose how much you want to share with that person" />
 
             <RadioButton
+                android:id="@+id/radioButton_day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Month"
-                android:id="@+id/radioButton_month"
-                android:onClick="radio_button_click"/>
+                android:onClick="radio_button_click"
+                android:text="Day" />
+
             <RadioButton
+                android:id="@+id/radioButton_week"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Specific dates"
+                android:onClick="radio_button_click"
+                android:text="Week" />
+
+            <RadioButton
+                android:id="@+id/radioButton_month"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="radio_button_click"
+                android:text="Month" />
+
+            <RadioButton
                 android:id="@+id/radioButton_dates"
-                android:onClick="radio_button_click"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="radio_button_click"
+                android:text="Specific dates" />
         </RadioGroup>
+
         <Button
             android:id="@+id/btn_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Accept"
-            />
+            android:layout_gravity="center"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
