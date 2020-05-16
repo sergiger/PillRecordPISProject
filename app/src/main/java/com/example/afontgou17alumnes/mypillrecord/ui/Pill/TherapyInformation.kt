@@ -122,7 +122,7 @@ class TherapyInformation : AppCompatActivity() {
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
         }
-
+/*
         checkBox_monday.setOnCheckedChangeListener { compoundButton, b ->
             if(b) therapy.frequency.specificweekdays[0] = weekDays[0]
             else therapy.frequency.specificweekdays[0] = ""
@@ -150,7 +150,7 @@ class TherapyInformation : AppCompatActivity() {
         checkBox_sunday.setOnCheckedChangeListener { compoundButton, b ->
             if(b) therapy.frequency.specificweekdays[6] = weekDays[6]
             else therapy.frequency.specificweekdays[6] = ""
-        }
+        }*/
     }
 
     fun createHoursList(){
@@ -413,6 +413,17 @@ class TherapyInformation : AppCompatActivity() {
         }
     }
 
+    fun setDaysOfWeek(){
+        val boxes = arrayOf(checkBox_monday, checkBox_tuesday, checkBox_wednesday, checkBox_thursday,
+            checkBox_friday, checkBox_saturday, checkBox_sunday)
+        val array = arrayOf("","","","","","","")
+        for( i in boxes.indices){
+            if(boxes[i].isChecked)
+                array[i] = weekDays[i]
+        }
+        therapy.frequency.specificweekdays = array
+    }
+
     fun fromToButton(){
         var ini_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
         var ini_month=Calendar.getInstance().get(Calendar.MONTH)+1
@@ -505,6 +516,7 @@ class TherapyInformation : AppCompatActivity() {
             3->{
                 if(therapy.frequency.startDate == "" || therapy.frequency.endDate == "")
                     return false
+                setDaysOfWeek()
                 therapy.frequency = Frequency(therapy.frequency.startDate, therapy.frequency.endDate,
                     therapy.frequency.specificweekdays)
             }
