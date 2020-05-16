@@ -57,6 +57,10 @@ class Pill_fragment : Fragment() {
                 //Modify actualTherapy
                 createTherapyList()
             }
+            else if (resultCode == 2){
+                val result = data?.getSerializableExtra("Therapy") as Therapy
+                //Eliminar therapy
+            }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //do nothing
             }

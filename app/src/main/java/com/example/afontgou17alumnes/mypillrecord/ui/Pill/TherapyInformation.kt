@@ -1,5 +1,7 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.Pill
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +27,7 @@ import kotlin.collections.ArrayList
 
 class TherapyInformation : AppCompatActivity() {
     lateinit var therapy : Therapy
+    val weekDays = arrayOf("Mon","Tue","Wed","Thu","Fri","Sat","Sun")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,6 +107,53 @@ class TherapyInformation : AppCompatActivity() {
         fromto_layout_therapy_information.setOnClickListener {
             fromToButton()
         }
+
+        delete_therapy_information.setOnClickListener {
+            if(checkAllData()){
+                val returnIntent = Intent()
+                returnIntent.putExtra("Therapy", therapy)
+                setResult(2, returnIntent) //ResultCode 2 = delete
+                finish()
+            }else Toast.makeText(this, "Missing Data", Toast.LENGTH_LONG).show()
+
+        }
+
+        save_changes_therapy_information.setOnClickListener {
+            therapy.notes = input_note_therapy_infromation.toString()
+            val returnIntent = Intent()
+            returnIntent.putExtra("Therapy", therapy)
+            setResult(Activity.RESULT_OK, returnIntent)
+            finish()
+        }
+
+        checkBox_monday.setOnCheckedChangeListener { compoundButton, b ->
+            if(b) therapy.frequency.specificweekdays[0] = weekDays[0]
+            else therapy.frequency.specificweekdays[0] = ""
+        }
+        checkBox_tuesday.setOnCheckedChangeListener { compoundButton, b ->
+            if(b) therapy.frequency.specificweekdays[1] = weekDays[1]
+            else therapy.frequency.specificweekdays[1] = ""
+        }
+        checkBox_wednesday.setOnCheckedChangeListener { compoundButton, b ->
+            if(b) therapy.frequency.specificweekdays[2] = weekDays[2]
+            else therapy.frequency.specificweekdays[2] = ""
+        }
+        checkBox_thursday.setOnCheckedChangeListener { compoundButton, b ->
+            if(b) therapy.frequency.specificweekdays[3] = weekDays[3]
+            else therapy.frequency.specificweekdays[3] = ""
+        }
+        checkBox_friday.setOnCheckedChangeListener { compoundButton, b ->
+            if(b) therapy.frequency.specificweekdays[4] = weekDays[4]
+            else therapy.frequency.specificweekdays[4] = ""
+        }
+        checkBox_saturday.setOnCheckedChangeListener { compoundButton, b ->
+            if(b) therapy.frequency.specificweekdays[5] = weekDays[5]
+            else therapy.frequency.specificweekdays[5] = ""
+        }
+        checkBox_sunday.setOnCheckedChangeListener { compoundButton, b ->
+            if(b) therapy.frequency.specificweekdays[6] = weekDays[6]
+            else therapy.frequency.specificweekdays[6] = ""
+        }
     }
 
     fun createHoursList(){
@@ -165,6 +215,8 @@ class TherapyInformation : AppCompatActivity() {
     }
 
     private fun freqDailySelected(){
+        therapy.frequency.type = 1
+
         frquency_button_therapy_information.text = "Daily"
         fromto_layout_therapy_information.visibility =  View.VISIBLE
         each_days_therapy_information.visibility = View.GONE
@@ -173,6 +225,8 @@ class TherapyInformation : AppCompatActivity() {
     }
 
     private fun freqEachXDaysSelected(){
+        therapy.frequency.type = 2
+
         frquency_button_therapy_information.text = "Each X days"
         fromto_layout_therapy_information.visibility =  View.VISIBLE
         each_days_therapy_information.visibility = View.VISIBLE
@@ -186,6 +240,8 @@ class TherapyInformation : AppCompatActivity() {
     }
 
     private fun freqSpecificDaysSelected(){
+        therapy.frequency.type = 3
+
         frquency_button_therapy_information.text = "Specific week days"
         fromto_layout_therapy_information.visibility =  View.VISIBLE
         each_days_therapy_information.visibility = View.GONE
@@ -195,6 +251,8 @@ class TherapyInformation : AppCompatActivity() {
     }
 
     private fun freqPunctualDaysSelected(){
+        therapy.frequency.type = 4
+
         frquency_button_therapy_information.text =  "Punctual days"
         fromto_layout_therapy_information.visibility =  View.GONE
         each_days_therapy_information.visibility = View.GONE
@@ -422,6 +480,8 @@ class TherapyInformation : AppCompatActivity() {
         val dateStart = LocalDate.parse(data_ini, DateTimeFormatter.ofPattern("d/M/y"))
         val dateEnd = LocalDate.parse(data_end, DateTimeFormatter.ofPattern("d/M/y"))
         if(dateStart<=dateEnd){
+            therapy.frequency.startDate = data_ini
+            therapy.frequency.endDate = data_end
             from_therapy_information.text = data_ini
             to_therapy_information.text = data_end
             return 0
@@ -429,5 +489,28 @@ class TherapyInformation : AppCompatActivity() {
         else{
             return 1
         }
+    }
+
+    private fun checkAllData() : Boolean{
+        when(therapy.frequency.type){
+            1 ->{
+                if(therapy.frequency.startDate == "" || therapy.frequency.endDate == "")
+                    return false
+            }
+            2->{
+                if(therapy.frequency.startDate == "" || therapy.frequency.endDate == "" ||
+                        therapy.frequency.eachtimedose == 0)
+                    return false
+            }
+            3->{
+                if(therapy.frequency.startDate == "" || therapy.frequency.endDate == "")
+                    return false
+            }
+            4->{
+                if(therapy.frequency.listofpuntualdays.isEmpty())
+                    return false
+            }
+        }
+        return true
     }
 }
