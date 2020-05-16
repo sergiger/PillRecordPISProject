@@ -9,7 +9,7 @@ import com.example.afontgou17alumnes.mypillrecord.R
 
 class PunctualDaysListAdapter(
     val activity: TherapyInformation,
-    var daysList : Array<String>
+    var daysList : ArrayList<String>
 ) : BaseAdapter() {
 
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
@@ -22,7 +22,8 @@ class PunctualDaysListAdapter(
         }
         else{
             button.setOnClickListener {
-                (activity.therapy.frequency.listofpuntualdays as MutableList<*>).removeAt(p0)
+                daysList.removeAt(p0)
+                activity.refreshDaysList(daysList)
                 activity.createPunctualDaysList()
             }
         }
