@@ -34,7 +34,7 @@ class MeasurementReminder(
     }
 
     override fun createFakeReminder(): FakeReminder {
-        return FakeMeasurementReminder(name,unit,date.toString(),time.toString(),value, Controller.getReminderStatusToInt(status))
+        return FakeMeasurementReminder(name,unit,date.toString(),time.toString(),value, Controller.getReminderStatusToInt(status),ID)
     }
 
     override fun toStringPDF(): String {

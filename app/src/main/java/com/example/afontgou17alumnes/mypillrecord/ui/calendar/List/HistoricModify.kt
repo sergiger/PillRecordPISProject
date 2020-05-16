@@ -119,10 +119,6 @@ class HistoricModify : AppCompatActivity() {
                 mAlertDialog.dismiss()
             }
         }
-        // Fer
-        /*date_button.setOnClickListener {
-            select_date(reminder)
-        }*/
 
         status_button.setOnClickListener {
             select_status(reminder)
@@ -147,42 +143,6 @@ class HistoricModify : AppCompatActivity() {
             finish()
         }
     }
-    /*
-    fun select_date(reminder: Reminder){
-        var new_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-        var new_month=Calendar.getInstance().get(Calendar.MONTH)
-        var new_year=Calendar.getInstance().get(Calendar.YEAR)
-
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.date_dialoge, null)
-        //AlertDialogBuilder
-        val mBuilder = AlertDialog.Builder(this)
-            .setView(mDialogView)
-            .setTitle("Set specific dates")
-        //show dialog
-        val  mAlertDialog = mBuilder.show()
-        //Aqui guardo la data INI seleccionada
-        //i també poso la data correcta al DatePicker de INICI amb la data d'avui
-        val datePicker_ini = mDialogView.findViewById<DatePicker>(R.id.date_Picker)
-        val date = reminder.date
-        datePicker_ini.init(date.year, date.monthValue-1, date.dayOfMonth) { view, year, month, day ->
-            new_day=day
-            new_month=month+1
-            new_year=year
-            //val msg = "You Selected: $day/$month/$year"
-            //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-        }
-
-        //Aqui faig els listeners dels dos botons
-        mDialogView.OK.setOnClickListener {
-            Toast.makeText(this,"work in progress",Toast.LENGTH_LONG).show()
-            date_button.text = new_day.toString() +"/"+ new_month.toString()+"/"+ new_year.toString()
-            mAlertDialog.dismiss()
-        }
-        mDialogView.cancel.setOnClickListener {
-            mAlertDialog.dismiss()
-            Toast.makeText(this,"Cancel",Toast.LENGTH_SHORT).show()
-        }
-    }*/
 
     fun select_status(reminder: Reminder) {
         var infoValue = 0

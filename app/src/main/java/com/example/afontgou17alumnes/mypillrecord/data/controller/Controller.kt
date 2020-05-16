@@ -144,7 +144,7 @@ object Controller {
         //Es podria substituir per cerca binaria
         for(i in user.reminders){
             if(i.getReminderDate() == date) remindersToday.add(i)
-            else if (i.getReminderDate() > LocalDate.now()) break
+            else if (i.getReminderDate() > date) break
         }
         return remindersToday
     }
@@ -567,6 +567,16 @@ object Controller {
         }
         else{
             Toast.makeText(this.main,"There are no reminders",Toast.LENGTH_LONG).show()
+        }
+    }
+    fun deleteTherapyByID(id : String){
+        var t : Therapy
+        for (therapy in this.user.therapies){
+            if(therapy.id == id){
+                t = therapy
+                this.user.therapies.remove(t)
+                break
+            }
         }
     }
 

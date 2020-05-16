@@ -36,7 +36,7 @@ open class MedicineReminder(
 
     override fun createFakeReminder(): FakeReminder {
         return FakeMedicationReminder(name,dose,doseUnit,date.toString(),time.toString(),
-            Controller.getReminderStatusToInt(status))
+            Controller.getReminderStatusToInt(status),ID)
     }
 
     override fun toStringPDF(): String {

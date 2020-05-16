@@ -201,11 +201,15 @@ open class User{
     }
 
     fun deleteAllRemindersById(id: String) {
-        var i=0
-        for(reminder in this.reminders){
-            if(reminder.ID.equals(id)&&reminder.status.equals(ReminderStatus.TO_DO))
-                this.reminders.removeAt(i)
-            i+=1
+        var mList = arrayListOf<Int>()
+        for(i in 0 until this.reminders.size){
+            if(this.reminders[i].ID == id && this.reminders[i].status == ReminderStatus.TO_DO){
+                //this.reminders.removeAt(i)
+                mList.add(i)
+            }
+        }
+        for(i in mList){
+            this.reminders.removeAt(i)
         }
     }
 
