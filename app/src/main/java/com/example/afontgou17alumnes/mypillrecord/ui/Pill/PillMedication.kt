@@ -174,7 +174,7 @@ class PillMedication : AppCompatActivity() {
             //MedicineTherapy(freq,notes, Controller.user.id,dose,new_units,medicine)
             if (frequencyClass != null && dose != 0 && !new_units.equals("") && !medicine.equals("")){
                 val freq:Frequency = frequencyClass!!
-                val therapy= MedicineTherapy(freq,notes, Controller.user.id,dose,new_units,medicine, w_hourListfrequency as ArrayList<String>)
+                val therapy= MedicineTherapy(freq,notes, Calendar.getInstance().timeInMillis.toString(),dose,new_units,medicine, w_hourListfrequency as ArrayList<String>)
                 //Controller.user.therapies.add(therapy)
                 Controller.addTherapy__CreateReminders(therapy)
                 Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()

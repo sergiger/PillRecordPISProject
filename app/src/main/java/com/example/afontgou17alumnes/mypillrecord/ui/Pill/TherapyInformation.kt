@@ -10,10 +10,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.ActivityTherapy
-import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MeasurementTherapy
-import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MedicineTherapy
-import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Therapy
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.therapy_information.*
@@ -496,19 +493,25 @@ class TherapyInformation : AppCompatActivity() {
             1 ->{
                 if(therapy.frequency.startDate == "" || therapy.frequency.endDate == "")
                     return false
+                therapy.frequency = Frequency(therapy.frequency.startDate, therapy.frequency.endDate)
             }
             2->{
                 if(therapy.frequency.startDate == "" || therapy.frequency.endDate == "" ||
                         therapy.frequency.eachtimedose == 0)
                     return false
+                therapy.frequency = Frequency(therapy.frequency.startDate, therapy.frequency.endDate,
+                    therapy.frequency.eachtimedose)
             }
             3->{
                 if(therapy.frequency.startDate == "" || therapy.frequency.endDate == "")
                     return false
+                therapy.frequency = Frequency(therapy.frequency.startDate, therapy.frequency.endDate,
+                    therapy.frequency.specificweekdays)
             }
             4->{
                 if(therapy.frequency.listofpuntualdays.isEmpty())
                     return false
+                therapy.frequency = Frequency(therapy.frequency.listofpuntualdays)
             }
         }
         return true

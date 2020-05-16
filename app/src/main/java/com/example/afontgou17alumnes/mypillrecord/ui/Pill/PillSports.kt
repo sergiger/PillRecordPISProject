@@ -158,7 +158,7 @@ class PillSports : AppCompatActivity() {
                val NotesNoum = findViewById<TextInputEditText>(R.id.input_notes)
                notes=NotesNoum.text.toString()
                val freq:Frequency = frequencyClass!!
-               val therapy= ActivityTherapy(freq,this.notes, Controller.user.id,new_activity,this.duration, w_hourListfrequency as ArrayList<String>)
+               val therapy= ActivityTherapy(freq,this.notes, Calendar.getInstance().timeInMillis.toString(),new_activity,this.duration, w_hourListfrequency as ArrayList<String>)
                Controller.addTherapy__CreateReminders(therapy)
                Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
                Log.e("THERAPY",therapy.toString())

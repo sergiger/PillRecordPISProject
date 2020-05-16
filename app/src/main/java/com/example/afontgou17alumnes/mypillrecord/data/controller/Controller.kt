@@ -528,5 +528,16 @@ object Controller {
         return LocalDate.parse(year_str+"-"+month_str+"-"+day_str)
     }
 
+    fun deleteTherapyByID(id : String){
+        var t : Therapy
+        for (therapy in this.user.therapies){
+            if(therapy.id == id){
+                t = therapy
+                this.user.therapies.remove(t)
+                break
+            }
+        }
 
+
+    }
 }
