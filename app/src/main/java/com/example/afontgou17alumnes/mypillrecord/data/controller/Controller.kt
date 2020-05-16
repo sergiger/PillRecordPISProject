@@ -123,7 +123,7 @@ object Controller {
         //Es podria substituir per cerca binaria
         for(i in user.reminders){
             if(i.getReminderDate() == date) remindersToday.add(i)
-            else if (i.getReminderDate() > LocalDate.now()) break
+            else if (i.getReminderDate() > date) break
         }
         return remindersToday
     }
