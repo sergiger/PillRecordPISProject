@@ -13,8 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".ui.login.WaitingActiviy"></activity>
+        android:theme="@style/AppTheme"
+        android:launchMode="singleInstance">
+        <activity android:name=".ui.login.WaitingActiviy"
+            android:launchMode="singleTask"></activity>
         <activity android:name=".ui.Pill.TherapyInformation" />
         <activity
             android:name=".ui.Pill.PillTherapyInformation"
@@ -117,7 +119,7 @@
             android:screenOrientation="locked" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="locked"
+            android:screenOrientation="portrait"
             android:taskAffinity="" />
 
         <receiver

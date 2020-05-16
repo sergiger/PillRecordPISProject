@@ -37,13 +37,16 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         ControllerSharePrefs.setContext(this)
         Controller.setContext(this)
+        val bundle:Bundle? = intent.extras
+        val actions = bundle?.get("crea nova notificaió")//Això ens permet accedir al shared preferences, potser és una manera molt cutre, però és la única que consegueixo que funcioni
+        if(actions!=null && actions==true)
+            Controller.generarNextNotification()
         ProgressDialogInit()
         mAuth=FirebaseAuth.getInstance()
 
         val currentUser = mAuth.currentUser
         Log.e("CURRENT USER", "USER: ${currentUser?.uid}")
-
-        if(currentUser != null){
+        if(currentUser != null&&Controller.app_iniciada!=true){
             if(Controller.internet(this.applicationContext)){
                 Log.e("INTERNET", "SI--------------------------------")
                 updateUI(currentUser)
@@ -55,7 +58,11 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-
+        if(Controller.app_iniciada){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        Controller.app_iniciada=true
         setContentView(R.layout.activity_login)
         /*
         val bundle:Bundle? = intent.extras
@@ -145,7 +152,7 @@ class LoginActivity : AppCompatActivity() {
                 //sharedDownloadLoad()
                 getdatafromfirebase(user)//All data------------------------------------------
                 ProgressDialogDisable()
-                finish()
+                //finish()
                 val intent = Intent(this, WaitingActiviy::class.java)
                 startActivity(intent)
             }else{

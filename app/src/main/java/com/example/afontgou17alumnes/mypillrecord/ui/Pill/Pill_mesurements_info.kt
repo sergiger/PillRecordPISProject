@@ -146,7 +146,7 @@ class Pill_mesurements_info : AppCompatActivity() {
                 val NotesNoum = findViewById<TextInputEditText>(R.id.input_notes)
                 notes=NotesNoum.text.toString()
                 val freq:Frequency = frequencyClass!!
-                val therapy= MeasurementTherapy(freq,notes, Controller.user.id,titol, w_hourListfrequency as ArrayList<String>)
+                val therapy= MeasurementTherapy(freq,notes, Calendar.getInstance().timeInMillis.toString(),titol, w_hourListfrequency as ArrayList<String>)
                 Controller.addTherapy__CreateReminders(therapy)
                 Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
                 Log.e("THERAPY",therapy.toString())

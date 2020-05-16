@@ -36,7 +36,7 @@ class ActivityReminder(
     }
 
     override fun createFakeReminder(): FakeReminder {
-        return FakeActivityReminder(name,duration,date.toString(),time.toString(),Controller.getReminderStatusToInt(status))
+        return FakeActivityReminder(name,duration,date.toString(),time.toString(),Controller.getReminderStatusToInt(status),ID)
     }
 
     override fun toStringPDF(): String {

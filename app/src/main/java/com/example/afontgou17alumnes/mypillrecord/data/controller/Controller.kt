@@ -42,6 +42,7 @@ object Controller {
     val controllerJSON=ControllerJSON()//Serveix per a treballar amb els JSON
     var controllerSharePrefs=ControllerSharePrefs()//Serveix per treballar amb les share preferences
     var connected = false
+    var app_iniciada=false
     /*fun initUserSaved(){
         controllerSharePrefs.sharedDownloadLoad()
     }
@@ -53,6 +54,11 @@ object Controller {
 
     fun setContext(con: Activity) {
         main=con
+    }
+    private lateinit var wait: Activity
+
+    fun setContext_wait(con: Activity) {
+        wait=con
     }
 
 
@@ -500,6 +506,7 @@ object Controller {
                 generarNextNotification()
 
                 //Refresh llista inici today
+                wait.finish()
                 val intent = Intent(main, MainActivity::class.java)
                 startActivity(main,intent,null)
 
@@ -555,7 +562,7 @@ object Controller {
 
     fun generarNextNotification(){
         if (this.user.areThereReminders()){
-            val mNotificationTime = this.user.getNextReminder().getMilisFromNow()-40000
+            val mNotificationTime = this.user.getNextReminder().getMilisFromNow()
             NotificationUtils().setNotification(mNotificationTime, main)
         }
         else{
