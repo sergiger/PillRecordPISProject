@@ -53,8 +53,8 @@
             <Button
                 android:id="@+id/pill_search"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="12"
+                android:layout_height="70dp"
+                android:layout_weight="13"
                 android:hint="Medicine"
                 android:drawableRight="@drawable/ic_search_white_24dp"
                 android:inputType="text"
@@ -67,15 +67,13 @@
                 <!--per separar-->
             </TextView>
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_scan"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:background="@color/colorApp2"
-                android:textColor="@color/cardview_light_background"
-                android:textColorHint="@color/cardview_light_background"
-                android:text="Scan"></Button>
+                android:layout_height="60dp"
+                android:layout_weight="4"
+                android:src="@drawable/ic_scan_white_24dp"
+                android:background="@color/colorApp2"></ImageButton>
 
         </LinearLayout>
         <LinearLayout

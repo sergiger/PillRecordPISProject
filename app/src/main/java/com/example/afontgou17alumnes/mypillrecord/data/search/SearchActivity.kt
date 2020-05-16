@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.R.id.search_src_text
 import com.example.afontgou17alumnes.mypillrecord.R.layout.activity_search
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Frequency
 import com.example.afontgou17alumnes.mypillrecord.ui.Pill.PillMedication
 import com.example.afontgou17alumnes.mypillrecord.ui.today.AddUnplannedMedicine
 import kotlinx.android.synthetic.main.activity_search.*
@@ -27,12 +28,56 @@ class SearchActivity : AppCompatActivity(),
     var currentText: CharSequence = ""
     var displayList: MutableList<String> = ArrayList()
     var mother_activity = ""
+    //values from PillMedication
+    var Medicine = ""
+    var DoseIn = 0
+    var Units = ""
+    var Notes = ""
+    var Hours = listOf<String>()
+    var frequencyClass : Frequency? = null
+
+    // from AddUnplannedMedicine
+    /*var dateUnplanned = ""
+    var hourUnplanned = ""*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activity_search)
 
         val bundle:Bundle? = intent.extras
         mother_activity = bundle?.get("mother_activity") as String
+
+        val Medicine = bundle?.get("Medicine")
+        if(Medicine!= null){
+            this.Medicine= Medicine as String
+        }
+        val Hours = bundle?.get("Hours")
+        if(Hours != null){
+            this.Hours = (Hours as Array<String>).toList()
+        }
+        val Dose = bundle?.get("Dose")
+        if(Dose!= 0){
+            this.DoseIn = Dose as Int
+        }
+        val Units = bundle?.get("Units")
+        if(Units != null){
+            this.Units = Units as String
+        }
+        val Notes = bundle?.get("Notes")
+        if(Notes!= null){
+            this.Notes = Notes as String
+        }
+        val Frequency = bundle?.get("Frequency")
+        if(Frequency!= null){
+            this.frequencyClass = Frequency as Frequency
+        }
+        /*val Date = bundle?.get("DateAdd")
+        if(Date!= null){
+            this.dateUnplanned = Date as String
+        }
+        val HourAdd = bundle?.get("HourAdd")
+        if(HourAdd!= null){
+            this.hourUnplanned = HourAdd as String
+        }*/
 
         back_arrow_search.setOnClickListener {
             onBackPressed()
@@ -124,11 +169,18 @@ class SearchActivity : AppCompatActivity(),
         if (mother_activity == "pill") {
             val intent = Intent(this, PillMedication::class.java)
             intent.putExtra("Medicine", pill)
+            intent.putExtra("Hours",this.Hours.toTypedArray())
+            // Falta frequency
+            if (DoseIn != 0) intent.putExtra("Dose",this.DoseIn)
+            intent.putExtra("Units",this.Units)
+            intent.putExtra("Notes",this.Notes)
             startActivity(intent)
         }
         else if (mother_activity == "today") {
             val intent = Intent(this, AddUnplannedMedicine::class.java)
             intent.putExtra("Medicine", pill)
+            if (DoseIn != 0) intent.putExtra("Dose",this.DoseIn)
+            if (Units != null) intent.putExtra("UnitsAdd",this.Units)
             startActivity(intent)
         }
     }

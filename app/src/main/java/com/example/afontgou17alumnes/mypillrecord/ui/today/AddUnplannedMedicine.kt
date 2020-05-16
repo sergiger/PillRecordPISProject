@@ -39,7 +39,7 @@ class AddUnplannedMedicine : AppCompatActivity() {
     var hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
     var minute=Calendar.getInstance().get(Calendar.MINUTE)
     var dose=0
-    var units=""
+    var units = ""
     var medicine=""
 
     // API Implementation
@@ -57,6 +57,21 @@ class AddUnplannedMedicine : AppCompatActivity() {
         if (Medicine != null) {
             this.medicine = Medicine as String
             medicine_name_button.text = medicine
+        }
+        //dose
+        val Dose = bundle?.get("Dose")
+        if(Dose != null){
+            this.dose = Dose as Int
+            dose_button.text = dose.toString()
+        }
+        //units
+        val Units = bundle?.get("UnitsAdd")
+        if (Units != null) {
+            var str = Units as String
+            if (str.length != 0) {
+                this.units = str
+                btn_unitss.text = units
+            }
         }
 
         //Set Listeners
@@ -81,6 +96,8 @@ class AddUnplannedMedicine : AppCompatActivity() {
         medicine_name_button.setOnClickListener{
             val searchIntent = Intent(this, SearchActivity::class.java)
             searchIntent.putExtra("mother_activity", "today")
+            searchIntent.putExtra("Dose",this.dose)
+            searchIntent.putExtra("Units",this.units)
             startActivity(searchIntent)
         }
         // Barcode Scanner implementatiton
