@@ -29,8 +29,9 @@ class FragmentTwo : Fragment() {
 
     val c = Calendar.getInstance()
     var day = c.get(Calendar.DAY_OF_MONTH)
-    var month = c.get(Calendar.MONTH) + 1
+    var month = c.get(Calendar.MONTH)+1
     var year= c.get(Calendar.YEAR)
+    var iniciat=false
 
 
 
@@ -44,29 +45,27 @@ class FragmentTwo : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         createCalendarDialog()
         createMonthList()
+        month-=1
     }
 
     @SuppressLint("SetTextI18n")
     fun createCalendarDialog() {
         val datePickerDialog = DatePickerDialog(context, DatePickerDialog.OnDateSetListener {
                 view, myear, monthOfYear, dayOfMonth ->
-            val monthOfYear = monthOfYear + 1
+            val monthOfYear = monthOfYear+1
             txt_datePicked.text = "$dayOfMonth/$monthOfYear/$myear"
-
             day = dayOfMonth
             month = monthOfYear
             year = myear
 
             createMonthList()
         }, year, month, day)
-
-
         select_date_month_layout.setOnClickListener {
             datePickerDialog.show()
         }
+
     }
 
     fun createMonthList() {

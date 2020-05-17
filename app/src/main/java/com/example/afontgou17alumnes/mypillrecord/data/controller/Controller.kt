@@ -509,14 +509,13 @@ object Controller {
                 //Actualitza les notificacions
                 generarNextNotification()
 
-                //Refresh llista inici today
-                wait.finish()
-                val intent = Intent(main, MainActivity::class.java)
-                startActivity(main,intent,null)
-
             } else {
                 Log.d("reminders", "No such document")
             }
+            //Refresh llista inici today
+            wait.finish()
+            val intent = Intent(main, MainActivity::class.java)
+            startActivity(main,intent,null)
         }
             .addOnFailureListener { exception ->
                 Log.d("reminders", "get failed with ", exception)
