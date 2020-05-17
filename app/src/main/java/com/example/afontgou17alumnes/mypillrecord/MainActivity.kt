@@ -364,8 +364,8 @@ class MainActivity : AppCompatActivity() {
         //Mostrar el camí al document, perquè sinó pot costar molt de trobar-lo
         Toast.makeText(this, "$mFileName.pdf\nis saved to\n$mFilePath", Toast.LENGTH_LONG)
             .show()
-        val path = Environment.getRootDirectory().toString() + "/" + mFileName
-        openFile(Uri.parse(mFilePath)) // No m'en surto de obrir els documents, per tant, ara per ara simplement guardarem els documents
+        //val path = Environment.getRootDirectory().toString() + "/" + mFileName
+        //openFile(Uri.parse(mFilePath)) // No m'en surto de obrir els documents, per tant, ara per ara simplement guardarem els documents
     }
 
     val PICK_PDF_FILE = 2
