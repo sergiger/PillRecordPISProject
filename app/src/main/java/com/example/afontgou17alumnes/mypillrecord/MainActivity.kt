@@ -386,8 +386,6 @@ class MainActivity : AppCompatActivity() {
         val activities = pm.queryIntentActivities(intent, 0)
         if (activities.size > 0) {
             startActivity(intent)
-        }else{
-            Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
         }
     }
 
