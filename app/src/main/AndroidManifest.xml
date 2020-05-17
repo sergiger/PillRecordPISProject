@@ -127,7 +127,8 @@
         <receiver
             android:name=".notifications.recivers.AlarmReceiver"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="false" >
+        </receiver>
 
         <service
             android:name=".notifications.recivers.NotificationService"

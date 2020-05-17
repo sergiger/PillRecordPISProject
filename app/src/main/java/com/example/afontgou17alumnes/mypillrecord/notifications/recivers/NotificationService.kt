@@ -58,65 +58,65 @@ class NotificationService : IntentService("NotificationService") {
 
 
 
-            val context = this.applicationContext
-            var notificationManager= context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            val notifyIntent = Intent(this, LoginActivity::class.java)
+        val context = this.applicationContext
+        var notificationManager= context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notifyIntent = Intent(this, LoginActivity::class.java)
 
-            val title = "You have a notification (Per canviar, linia 72 de la class NotificationService)"
-            val message = "Click here to see what you have to do"
+        val title = "You have a notification (Per canviar, linia 72 de la class NotificationService)"
+        val message = "Click here to see what you have to do"
 
-            notifyIntent.putExtra("title", title)
-            notifyIntent.putExtra("message", message)
-            notifyIntent.putExtra("notification", true)
-            notifyIntent.putExtra("crea nova notificaió",true)
+        notifyIntent.putExtra("title", title)
+        notifyIntent.putExtra("message", message)
+        notifyIntent.putExtra("notification", true)
+        notifyIntent.putExtra("crea nova notificaió",true)
 
-            notifyIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        notifyIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
 
-            val calendar = Calendar.getInstance()
-            calendar.timeInMillis = timestamp
-
-
-            val pendingIntent = PendingIntent.getActivity(context, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-            val res = this.resources
-            val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = timestamp
 
 
-                mNotification = Notification.Builder(this, CHANNEL_ID)
-                    // Set the intent that will fire when the user taps the notification
-                    .setContentIntent(pendingIntent)
-                    .setSmallIcon(R.drawable.pill_logo)
-                    .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.pill_logo))
-                    .setAutoCancel(true)
-                    .setContentTitle(title)
-                    .setStyle(Notification.BigTextStyle()
-                        .bigText(message))
-                    .setContentText(message).build()
+        val pendingIntent = PendingIntent.getActivity(context, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val res = this.resources
+        val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
-            } else {
-
-                mNotification = Notification.Builder(this)
-                    // Set the intent that will fire when the user taps the notification
-                    .setContentIntent(pendingIntent)
-                    .setSmallIcon(R.drawable.pill_logo)
-                    .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.pill_logo))
-                    .setAutoCancel(true)
-                    .setPriority(Notification.PRIORITY_MAX)
-                    .setContentTitle(title)
-                    .setStyle(Notification.BigTextStyle()
-                        .bigText(message))
-                    .setSound(uri)
-                    .setContentText(message).build()
-
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
 
+            mNotification = Notification.Builder(this, CHANNEL_ID)
+                // Set the intent that will fire when the user taps the notification
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(R.drawable.pill_logo)
+                .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.pill_logo))
+                .setAutoCancel(true)
+                .setContentTitle(title)
+                .setStyle(Notification.BigTextStyle()
+                    .bigText(message))
+                .setContentText(message).build()
 
-            notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            // mNotificationId is a unique int for each notification that you must define
-            notificationManager.notify(mNotificationId, mNotification)
+        } else {
+
+            mNotification = Notification.Builder(this)
+                // Set the intent that will fire when the user taps the notification
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(R.drawable.pill_logo)
+                .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.pill_logo))
+                .setAutoCancel(true)
+                .setPriority(Notification.PRIORITY_MAX)
+                .setContentTitle(title)
+                .setStyle(Notification.BigTextStyle()
+                    .bigText(message))
+                .setSound(uri)
+                .setContentText(message).build()
+
         }
+
+
+
+        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        // mNotificationId is a unique int for each notification that you must define
+        notificationManager.notify(mNotificationId, mNotification)
+    }
 
 
 
