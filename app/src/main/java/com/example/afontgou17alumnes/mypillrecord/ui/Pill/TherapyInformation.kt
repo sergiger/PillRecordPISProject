@@ -116,41 +116,13 @@ class TherapyInformation : AppCompatActivity() {
         }
 
         save_changes_therapy_information.setOnClickListener {
-            therapy.notes = input_note_therapy_infromation.toString()
+            therapy.notes = input_note_therapy_infromation.text.toString()
             val returnIntent = Intent()
             returnIntent.putExtra("Therapy", therapy)
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
         }
-/*
-        checkBox_monday.setOnCheckedChangeListener { compoundButton, b ->
-            if(b) therapy.frequency.specificweekdays[0] = weekDays[0]
-            else therapy.frequency.specificweekdays[0] = ""
-        }
-        checkBox_tuesday.setOnCheckedChangeListener { compoundButton, b ->
-            if(b) therapy.frequency.specificweekdays[1] = weekDays[1]
-            else therapy.frequency.specificweekdays[1] = ""
-        }
-        checkBox_wednesday.setOnCheckedChangeListener { compoundButton, b ->
-            if(b) therapy.frequency.specificweekdays[2] = weekDays[2]
-            else therapy.frequency.specificweekdays[2] = ""
-        }
-        checkBox_thursday.setOnCheckedChangeListener { compoundButton, b ->
-            if(b) therapy.frequency.specificweekdays[3] = weekDays[3]
-            else therapy.frequency.specificweekdays[3] = ""
-        }
-        checkBox_friday.setOnCheckedChangeListener { compoundButton, b ->
-            if(b) therapy.frequency.specificweekdays[4] = weekDays[4]
-            else therapy.frequency.specificweekdays[4] = ""
-        }
-        checkBox_saturday.setOnCheckedChangeListener { compoundButton, b ->
-            if(b) therapy.frequency.specificweekdays[5] = weekDays[5]
-            else therapy.frequency.specificweekdays[5] = ""
-        }
-        checkBox_sunday.setOnCheckedChangeListener { compoundButton, b ->
-            if(b) therapy.frequency.specificweekdays[6] = weekDays[6]
-            else therapy.frequency.specificweekdays[6] = ""
-        }*/
+
     }
 
     fun createHoursList(){

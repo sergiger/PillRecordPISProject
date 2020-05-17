@@ -124,6 +124,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
         val bundle:Bundle? = intent.extras
         //medicine
         val goTo = bundle?.get("goTo")
