@@ -58,7 +58,6 @@ class MainActivity : AppCompatActivity() {
                if(Controller.main_activity_fragment!=0){
                    findViewById<ImageView>(R.id.pdf_item).isVisible=true
                    replaceFragment(TodayFragment())
-                   Toast.makeText(this,"Today",Toast.LENGTH_SHORT).show()
                    toolbar.title = "TODAY"
                    currentFragment=0
                    //generarNextNotification()
@@ -69,7 +68,6 @@ class MainActivity : AppCompatActivity() {
                if(Controller.main_activity_fragment!=1){
                    findViewById<ImageView>(R.id.pdf_item).isVisible=true
                    replaceFragment(Calendar_fragment())
-                   Toast.makeText(this,"Calendar",Toast.LENGTH_SHORT).show()
                    toolbar.title ="CALENDAR"
                    currentFragment=1
                }
@@ -79,7 +77,6 @@ class MainActivity : AppCompatActivity() {
                if(Controller.main_activity_fragment!=3) {
                    findViewById<ImageView>(R.id.pdf_item).isVisible=false
                    Controller.internet(this)
-                   Toast.makeText(this,"Team",Toast.LENGTH_SHORT).show()
                    if (Controller.connected) {
                        replaceFragment(Team_fragment())
                    } else {
@@ -94,7 +91,6 @@ class MainActivity : AppCompatActivity() {
                if(Controller.main_activity_fragment!=4){
                    findViewById<ImageView>(R.id.pdf_item).isVisible=true
                    replaceFragment(Pill_fragment())
-                   Toast.makeText(this,"Add",Toast.LENGTH_SHORT).show()
                    toolbar.title ="THERAPY"
                    currentFragment=3
                }
@@ -109,7 +105,6 @@ class MainActivity : AppCompatActivity() {
                    } else {
                        go_To_Statistics(0)
                    }
-                   Toast.makeText(this, "Statistics", Toast.LENGTH_SHORT).show()
                    toolbar.title = "STATISTICS"
                    currentFragment = 4
                }
@@ -152,7 +147,6 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id = item?.itemId
         if(id == R.id.options_item){
-            Toast.makeText(this,"opcions",Toast.LENGTH_SHORT).show()
             val intent = Intent(this, ajustes_activity::class.java)
             startActivity(intent)
         }
@@ -244,7 +238,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 //cancel button click of custom layout
                 mDialogView.cancell.setOnClickListener {
-                    Toast.makeText(this,"cancel",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"Cancelled",Toast.LENGTH_SHORT).show()
                     //dismiss dialog
                     mAlertDialog.dismiss()
                 }

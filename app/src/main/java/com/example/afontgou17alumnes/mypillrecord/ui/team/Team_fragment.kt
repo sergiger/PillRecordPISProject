@@ -46,7 +46,6 @@ class Team_fragment : Fragment() {
         btn_agenda.setOnClickListener {
             //val intent = Intent(activity, agenda_team::class.java)
             //startActivity(intent)
-            Toast.makeText(activity,"Agenda", Toast.LENGTH_SHORT).show()
         }
         listHasChanged(Controller.SbShareToMe.keys.toMutableList())
     }
