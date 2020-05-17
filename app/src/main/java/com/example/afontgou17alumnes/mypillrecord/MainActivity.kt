@@ -2,6 +2,7 @@ package com.example.afontgou17alumnes.mypillrecord
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -19,6 +20,7 @@ import android.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -362,36 +364,30 @@ class MainActivity : AppCompatActivity() {
         //Mostrar el camí al document, perquè sinó pot costar molt de trobar-lo
         Toast.makeText(this, "$mFileName.pdf\nis saved to\n$mFilePath", Toast.LENGTH_LONG)
             .show()
-        val path = Environment.getExternalStorageDirectory().toString() + "/" + mFileName
-        //openFile(path.toUri()) // No m'en surto de obrir els documents, per tant, ara per ara simplement guardarem els documents
+        val path = Environment.getRootDirectory().toString() + "/" + mFileName
+        openFile(Uri.parse(path)) // No m'en surto de obrir els documents, per tant, ara per ara simplement guardarem els documents
 
     }
-
 
     val PICK_PDF_FILE = 2
 
     fun openFile(pickerInitialUri: Uri) {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+        /*val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "application/pdf"
             putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
         }
 
         startActivityForResult(intent, PICK_PDF_FILE)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        when(requestCode){
-            STORAGE_CODE -> {
-                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    //Ja tenim permisos per utilitzar el sotrage i per tant podem generar i guardar el PDF
-                    savePdf()
-                }
-                else{
-                    //Permisos denegats per accedir al storage del mobil
-                    Toast.makeText(this, "Permission denied...!", Toast.LENGTH_SHORT).show()
-                }
-            }
+        */
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT, pickerInitialUri)
+        intent.setDataAndType(pickerInitialUri, "application/pdf")
+        val pm = packageManager
+        val activities = pm.queryIntentActivities(intent, 0)
+        if (activities.size > 0) {
+            startActivity(intent)
+        }else{
+            Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
         }
     }
 
