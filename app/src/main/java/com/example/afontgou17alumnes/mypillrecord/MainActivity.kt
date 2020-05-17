@@ -53,8 +53,6 @@ class MainActivity : AppCompatActivity() {
        item->
        when(item.itemId){
            R.id.action_Today->{
-               if(!Controller.user.email.equals("Joanorteu99@gmail.com"))
-                   findViewById<ImageView>(R.id.eliminarRemindersITherapys).isVisible=false
                if(Controller.main_activity_fragment!=0){
                    findViewById<ImageView>(R.id.pdf_item).isVisible=true
                    replaceFragment(TodayFragment())
@@ -145,6 +143,8 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
+        if(!Controller.user.email.equals("joanorteu99@gmail.com"))
+            findViewById<ImageView>(R.id.eliminarRemindersITherapys).isVisible=false
         return super.onCreateOptionsMenu(menu)
     }
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
