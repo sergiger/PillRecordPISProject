@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/eliminarRemindersITherapys"
+        android:icon="@drawable/restart_icon"
+        android:title="Reset"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/pdf_item"
+        android:icon="@drawable/pdf_icon"
+        android:title="PDF"
+        app:showAsAction="ifRoom"
+        android:visible="true"/>
+    <item
+        android:id="@+id/options_item"
+        android:icon="@drawable/ic_settings_white_24dp"
+        android:title="Settings"
+        app:showAsAction="ifRoom" />
+</menu>
