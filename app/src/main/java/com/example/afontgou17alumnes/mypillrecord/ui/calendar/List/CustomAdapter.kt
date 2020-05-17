@@ -106,14 +106,16 @@ class CustomAdapter(context: Context?, reminderList: ArrayList<Any>) : BaseAdapt
                 var status = i.getReminderStatus()
                 if (status == ReminderStatus.DONE) {
                     holder.textPillCheck?.text = "✔"
+                    holder.textPillCheck?.setTextColor(Color.GREEN)
+                    holder.textPillHour?.setTextColor(Color.GREEN)
                 } else if (status == ReminderStatus.TO_DO) {
                     holder.textPillCheck?.text = "?"
                     holder.textPillCheck?.setTextColor(Color.GRAY)
-                    holder.textPillHour?.visibility = View.INVISIBLE
+                    holder.textPillHour?.setTextColor(Color.GRAY)
                 } else if (status == ReminderStatus.OMITTED) {
                     holder.textPillCheck?.text = "X"
                     holder.textPillCheck?.setTextColor(Color.RED)
-                    holder.textPillHour?.visibility = View.INVISIBLE
+                    holder.textPillHour?.setTextColor(Color.RED)
                 }
                 if (i is MedicineReminder) {
                     holder.textPillInfo?.text = i.dose.toString() + " " + i.doseUnit
