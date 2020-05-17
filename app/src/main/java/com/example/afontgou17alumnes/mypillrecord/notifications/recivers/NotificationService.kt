@@ -20,7 +20,6 @@ class NotificationService : IntentService("NotificationService") {
     @SuppressLint("NewApi")
     private fun createChannel() {
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
             val context = this.applicationContext
@@ -57,10 +56,6 @@ class NotificationService : IntentService("NotificationService") {
             timestamp = intent.extras!!.getLong("timestamp")
         }
 
-
-
-
-        if (timestamp > 0) {
 
 
             val context = this.applicationContext
@@ -124,5 +119,5 @@ class NotificationService : IntentService("NotificationService") {
         }
 
 
-    }
+
 }
