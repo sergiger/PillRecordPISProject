@@ -30,8 +30,8 @@
                     android:layout_weight="4"/>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_height="0dp"
+                    android:layout_weight="7"
                     android:weightSum="20"
                     android:gravity="center"
                     android:orientation="vertical"
@@ -63,18 +63,19 @@
                         ></Button>
                 </LinearLayout>
                 <TextView
+                    android:layout_weight="3"
+                    android:textColor="#000"
+                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:text="      Following:">
                 </TextView>
+
                 <ListView
                     android:id="@+id/planed_list"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginTop="?attr/actionBarSize"
-                    android:layout_marginBottom="?attr/actionBarSize"
-                    android:layout_weight="34"
-                    />
+                    android:layout_weight="25" />
             </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
