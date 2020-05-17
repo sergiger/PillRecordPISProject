@@ -48,8 +48,7 @@ class share_team : AppCompatActivity() {
             // Get the checked radio button id from radio group
             var new_email=input_email.text.toString()
             Controller.share_to(new_email,this)
-            Toast.makeText(applicationContext,"Shared", Toast.LENGTH_SHORT).show()
-            onBackPressed()
+            input_email.text.clear()
             /*if(new_email_exists(new_email)) {
                 /*var id: Int = radio_group.checkedRadioButtonId
                 if (id!=-1){ // If any radio button checked from radio group

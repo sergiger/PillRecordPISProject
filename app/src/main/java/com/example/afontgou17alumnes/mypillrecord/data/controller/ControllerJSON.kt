@@ -55,6 +55,18 @@ class ControllerJSON {
             }
         }
     }
+    fun setActivityReminderFromJSONfollower(json:String){
+        val gson = Gson()
+        var tipusArray: Type
+
+        if(json!=""){
+            var tipusArray = object : TypeToken<Array<FakeActivityReminder>>() {}.type
+            var reminder_list1: Array<FakeReminder> = gson.fromJson(json, tipusArray)
+            for(reminder in reminder_list1){
+                Controller.temporalReminders.add(reminder.createRealReminder())
+            }
+        }
+    }
     fun setMeasurementReminderFromJSON(json:String){
         val gson = Gson()
         var tipusArray: Type
@@ -67,6 +79,18 @@ class ControllerJSON {
             }
         }
     }
+    fun setMeasurementReminderFromJSONfollower(json:String){
+        val gson = Gson()
+        var tipusArray: Type
+
+        if(json!=""){
+            tipusArray = object : TypeToken<Array<FakeMeasurementReminder>>() {}.type
+            var reminder_list2 : Array<FakeReminder> = gson.fromJson(json, tipusArray)
+            for(reminder in reminder_list2){
+                Controller.temporalReminders.add(reminder.createRealReminder())
+            }
+        }
+    }
     fun setMedicineReminderFromJSON(json:String){
         val gson = Gson()
         var tipusArray: Type
@@ -76,6 +100,18 @@ class ControllerJSON {
             var reminder_list3:Array<FakeReminder> = gson.fromJson(json, tipusArray)
             for(reminder in reminder_list3){
                 Controller.user.reminders.add(reminder.createRealReminder())
+            }
+        }
+    }
+    fun setMedicineReminderFromJSONfollowers(json:String){
+        val gson = Gson()
+        var tipusArray: Type
+
+        if(json!=""){
+            tipusArray = object : TypeToken<Array<FakeMedicationReminder>>() {}.type
+            var reminder_list3:Array<FakeReminder> = gson.fromJson(json, tipusArray)
+            for(reminder in reminder_list3){
+                Controller.temporalReminders.add(reminder.createRealReminder())
             }
         }
     }

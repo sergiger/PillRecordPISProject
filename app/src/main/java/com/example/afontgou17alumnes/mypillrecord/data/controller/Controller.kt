@@ -11,12 +11,14 @@ import android.view.View
 import android.webkit.WebSettings
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
+import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.data.model.User
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
 import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.StatisticEntry
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Therapy
 import com.example.afontgou17alumnes.mypillrecord.notifications.NotificationUtils
+import com.example.afontgou17alumnes.mypillrecord.ui.team.team_follower_page
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -45,6 +47,7 @@ object Controller {
     var SbShareToMe = mutableMapOf<String,String>()
     var app_iniciada=false
     var main_activity_fragment=0
+    var temporalReminders=ArrayList<Reminder>()
     /*fun initUserSaved(){
         controllerSharePrefs.sharedDownloadLoad()
     }
@@ -613,6 +616,7 @@ object Controller {
 
                         // ------------------------------------------------------------------------
                     }
+                    Toast.makeText(context,"Shared", Toast.LENGTH_SHORT).show()
                 }
             }
             .addOnFailureListener { exception ->
@@ -747,6 +751,100 @@ object Controller {
         RemindersToFirebase()
         TherapiesToFirebase()
     }
+
+    //TEAM CALENDAR--------------------------------------------------------
+    fun team_calendar_getPlannedDatesAndReminders() : ArrayList<Any>{
+        val listAll = ArrayList<Any>()
+        temporalReminders.sortWith(Comparator { p1, p2 ->
+            when {
+                p1.date > p2.date -> 1
+                p1.date < p2.date -> -1
+                p1.time > p2.time -> 1
+                p1.time < p2.time -> -1
+                else -> 0
+            }
+        })
+        //Es podria substituir per cerca binaria
+        for (i in temporalReminders) {
+            if (i.getReminderDate() >= LocalDate.now()) { // Planned
+                if (listAll.contains(i.getReminderDate()))
+                else listAll.add(i.getReminderDate())
+                listAll.add(i)
+            }
+        }
+        return listAll
+    }
+    fun FirebasetofollowReminders(uid:String,email:String,activity:Fragment){
+        temporalReminders.clear()
+        val docRef = db.collection("reminders").document(uid)
+        docRef.get().addOnSuccessListener { document ->
+            if (document.data != null) {
+                Log.d("reminders", "DocumentSnapshot data: ${document.data}")
+                var map= document.data as MutableMap<String, Any?>
+                if(map.containsKey("Activity")){
+                    var data1 =map["Activity"] as String
+                    controllerJSON.setActivityReminderFromJSONfollower(data1)
+                }
+                if(map.containsKey("Measurement")){
+                    var data2 =map["Measurement"] as String
+                    controllerJSON.setMeasurementReminderFromJSONfollower(data2)
+                }
+                if(map.containsKey("Medicine")){
+                    var data3 =map["Medicine"] as String
+                    controllerJSON.setMedicineReminderFromJSONfollowers(data3)
+                }
+
+            } else {
+                Log.d("reminders", "No such document")
+            }
+        }
+            .addOnFailureListener { exception ->
+                Log.d("reminders", "get failed with ", exception)
+            }
+        Log.e("USER INSIDE firebase to statics", "get failed with ${user.id}")
+    }
+
+    fun team_calendar_getRemindersByDate(date : LocalDate) : ArrayList<Reminder>{
+        val remindersToday = ArrayList<Reminder>()
+        temporalReminders.sortWith(Comparator { p1, p2 ->
+            when {
+                p1.date > p2.date -> 1
+                p1.date < p2.date -> -1
+                p1.time > p2.time -> 1
+                p1.time < p2.time -> -1
+                else -> 0
+            }
+        })
+        //Es podria substituir per cerca binaria
+        for(i in temporalReminders){
+            if(i.getReminderDate() == date) remindersToday.add(i)
+            else if (i.getReminderDate() > date) break
+        }
+        return remindersToday
+    }
+
+    fun team_calendar_getHistoricDatesAndReminders() : ArrayList<Any>{
+        val listAll = ArrayList<Any>()
+        temporalReminders.sortWith(Comparator { p1, p2 ->
+            when {
+                p1.date > p2.date -> -1
+                p1.date < p2.date -> 1
+                p1.time > p2.time -> 1
+                p1.time < p2.time -> -1
+                else -> 0
+            }
+        })
+        //Es podria substituir per cerca binaria
+        for (i in temporalReminders) {
+            if (i.getReminderDate() < LocalDate.now()) { // Historico
+                if (listAll.contains(i.getReminderDate()))
+                else listAll.add(i.getReminderDate())
+                listAll.add(i)
+            }
+        }
+        return listAll
+    }
+
 
 
 }
