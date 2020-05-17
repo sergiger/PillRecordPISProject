@@ -2,6 +2,7 @@ package com.example.afontgou17alumnes.mypillrecord.ui.team
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.share_team_activity.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.weight_dialoge.view.cancel
@@ -44,8 +47,10 @@ class share_team : AppCompatActivity() {
         btn_share.setOnClickListener{
             // Get the checked radio button id from radio group
             var new_email=input_email.text.toString()
-            if(new_email_exists(new_email)) {
-                var id: Int = radio_group.checkedRadioButtonId
+            Controller.share_to(new_email,this)
+            onBackPressed()
+            /*if(new_email_exists(new_email)) {
+                /*var id: Int = radio_group.checkedRadioButtonId
                 if (id!=-1){ // If any radio button checked from radio group
                     // Get the instance of radio button using id
                     val radio:RadioButton = findViewById(id)
@@ -69,10 +74,10 @@ class share_team : AppCompatActivity() {
                     // If no radio button checked in this radio group
                     Toast.makeText(applicationContext,"On button click : nothing selected",
                         Toast.LENGTH_SHORT).show()
-                }
+                }*/
             }else{
                 Toast.makeText(this,"Email does not exist",Toast.LENGTH_SHORT).show()
-            }
+            }*/
         }
     }
 
@@ -162,11 +167,6 @@ class share_team : AppCompatActivity() {
         this.ini_year=ini_year
     }
 
-    fun new_email_exists(new_email: String) :Boolean{
-        var retorn= true
-        //Aqui conectariem amb la base de dades i buscariem si aquest email existeix
-        //Ara per ara simplement li poso true per a poder treballar i fer proves
-        return retorn
-    }
+
 
 }

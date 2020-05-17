@@ -26,6 +26,8 @@ import com.example.afontgou17alumnes.mypillrecord.ui.Pill.Pill_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.calendar.Calendar_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.settings.ajustes_activity
 import com.example.afontgou17alumnes.mypillrecord.ui.statistics.Statistics_fragment
+import com.example.afontgou17alumnes.mypillrecord.ui.team.Team_fragment
+import com.example.afontgou17alumnes.mypillrecord.ui.team.noConnectionShareTeam
 import com.example.afontgou17alumnes.mypillrecord.ui.today.TodayFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.itextpdf.text.Document
@@ -67,11 +69,18 @@ class MainActivity : AppCompatActivity() {
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_team->{
-               Toast.makeText(this,"Team (In next version",Toast.LENGTH_SHORT).show()
-               /*replaceFragment(Team_fragment())
+               Controller.internet(this)
+               //Toast.makeText(this,"Team (In next version",Toast.LENGTH_SHORT).show()
+               if(Controller.connected){
+                   replaceFragment(Team_fragment())
+               }
+               else{
+                   replaceFragment(noConnectionShareTeam())
+               }
 
-               toolbar.title ="TEAM"*/
-               //currentFragment=2
+
+               toolbar.title ="TEAM"
+               currentFragment=2
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_pills->{
