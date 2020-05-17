@@ -40,8 +40,8 @@ class Team_fragment : Fragment() {
             //Toast.makeText(activity,"Share With", Toast.LENGTH_SHORT).show()
         }
         btn_agenda.setOnClickListener {
-            val intent = Intent(activity, agenda_team::class.java)
-            startActivity(intent)
+            //val intent = Intent(activity, agenda_team::class.java)
+            //startActivity(intent)
             Toast.makeText(activity,"Agenda", Toast.LENGTH_SHORT).show()
         }
     }

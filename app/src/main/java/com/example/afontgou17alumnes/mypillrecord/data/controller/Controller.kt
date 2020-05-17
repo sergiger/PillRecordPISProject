@@ -34,6 +34,8 @@ object Controller {
     val controllerJSON=ControllerJSON()//Serveix per a treballar amb els JSON
     var controllerSharePrefs=ControllerSharePrefs()//Serveix per treballar amb les share preferences
     var connected = false
+    var IShareTo = mutableMapOf<String,String>()
+    var SbShareToMe = mutableMapOf<String,String>()
     /*fun initUserSaved(){
         controllerSharePrefs.sharedDownloadLoad()
     }
@@ -508,6 +510,9 @@ object Controller {
         FirabasetoStatics()
         FirebasetoTherapies()
         FirebasetoReminders()
+        //team--------------------------------
+        Controller.sharerealtimedata()
+        getFromFirebaseshareData()
 
     }
 
@@ -532,7 +537,7 @@ object Controller {
     }
 
     fun share_to(new_email: String,context:Context){
-        val db = FirebaseFirestore.getInstance()
+        //val db = FirebaseFirestore.getInstance()
         val users = db.collection("users").whereEqualTo("email", new_email).get()
         db.collection("users")
             .whereEqualTo("email", new_email)
@@ -550,18 +555,19 @@ object Controller {
                         val destinatari = document.data["uid"]
                         val jo = Controller.user.id
                         //Log.e("uid", "${destinatari}")
+                        val emaildell=document.data["email"]
 
                         val toMe = hashMapOf(
-                            "IShareTo" to arrayListOf(destinatari)
+                            "IShareTo" to arrayListOf(destinatari,document.data["email"])
                         )
                         val toHim = hashMapOf(
-                            "SbShareToMe" to arrayListOf(jo)
+                            "SbShareToMe" to arrayListOf(jo,user.email)
                         )
                         //jo
                         val docRef = Controller.db.collection("team").document(user.id)
                         docRef.get().addOnSuccessListener { document ->
                             if (document.data != null) {
-                                docRef.update("IShareTo", FieldValue.arrayUnion(destinatari))
+                                docRef.update("IShareTo", FieldValue.arrayUnion(destinatari,emaildell))
                                 //docRef.set(toMe, SetOptions.merge())
                             }else{
                                 docRef.set(toMe, SetOptions.merge())
@@ -571,7 +577,7 @@ object Controller {
                         val docRef2 = Controller.db.collection("team").document(destinatari.toString())
                         docRef2.get().addOnSuccessListener { document ->
                             if (document.data != null) {
-                                docRef2.update("SbShareToMe", FieldValue.arrayUnion(jo))
+                                docRef2.update("SbShareToMe", FieldValue.arrayUnion(jo,user.email))
                                 //docRef2.set(toHim, SetOptions.merge())
                             }else{
                                 docRef2.set(toHim, SetOptions.merge())
@@ -587,5 +593,93 @@ object Controller {
             }
     }
 
+    fun sharerealtimedata() {
+        val docRef = db.collection("team").document(user.id)
+        docRef.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.w("snapshot", "Listen failed.", e)
+                return@addSnapshotListener
+            }
+
+            if (snapshot != null && snapshot.exists()) {
+                Log.e("SNAPSHOT-----------", "Current data: ${snapshot.data}")
+                val map = snapshot.data as MutableMap<String, Any?>
+                if(map.containsKey("IShareTo")){
+                    var data =map["IShareTo"] as ArrayList<*>
+                    //Log.e("team", data.toString())
+                    var map = mutableMapOf<String,String>()
+                    for (i in 0..data.size -1  step 2) {
+                        //println(i)
+                        map.put(data[i+1] as String,data[i] as String)
+                    }
+                    IShareTo = map
+                    Log.d("IShareTo:", "DocumentSnapshot data: ${IShareTo.toString()}")
+                }
+                if(map.containsKey("SbShareToMe")){
+                    var data =map["SbShareToMe"] as ArrayList<*>
+                    //Log.e("team", data.toString())
+                    var map = mutableMapOf<String,String>()
+                    for (i in 0..data.size -1  step 2) {
+                        //println(i)
+                        map.put(data[i+1] as String,data[i] as String)
+                    }
+                    SbShareToMe = map
+                    Log.d("SbShareToMe:", "DocumentSnapshot data: ${SbShareToMe.toString()}")
+                }
+
+            } else {
+                Log.d("snapshot", "Current data: null")
+            }
+        }
+    }
+
+
+
+    fun getFromFirebaseshareData(){
+        val docRef = db.collection("team").document(user.id)
+        docRef.get().addOnSuccessListener { document ->
+            if (document.data != null) {
+                Log.d("team:", "DocumentSnapshot data: ${document.data}")
+                var map= document.data as MutableMap<String, Any?>
+                if(map.containsKey("IShareTo")){
+                    var data =map["IShareTo"] as ArrayList<*>
+                    //Log.e("team", data.toString())
+                    var map = mutableMapOf<String,String>()
+                    for (i in 0..data.size -1  step 2) {
+                        //println(i)
+                        map.put(data[i+1] as String,data[i] as String)
+                    }
+                    IShareTo = map
+                    Log.d("IShareTo:", "DocumentSnapshot data: ${IShareTo.toString()}")
+                }
+                if(map.containsKey("SbShareToMe")){
+                    var data =map["SbShareToMe"] as ArrayList<*>
+                    //Log.e("team", data.toString())
+                    var map = mutableMapOf<String,String>()
+                    for (i in 0..data.size -1  step 2) {
+                        //println(i)
+                        map.put(data[i+1] as String,data[i] as String)
+                    }
+                    SbShareToMe = map
+                    Log.d("SbShareToMe:", "DocumentSnapshot data: ${SbShareToMe.toString()}")
+                }
+            } else {
+                Log.d("team", "No such document")
+
+            }
+        }
+            .addOnFailureListener { exception ->
+                Log.d("team", "get failed with ", exception)
+            }
+    }
+    fun deleteshareto(email :String,vid:String){
+        Log.e("DELETE:", " ${vid} email: ${email}")
+        //jo
+        val deleteArray = db.collection("team").document(user.id)
+        deleteArray.update("IShareTo", FieldValue.arrayRemove(vid,email))
+        //l'altre
+        val deleteArray2 = db.collection("team").document(vid)
+        deleteArray2.update("SbShareToMe", FieldValue.arrayRemove(user.id,user.email))
+    }
 
 }
