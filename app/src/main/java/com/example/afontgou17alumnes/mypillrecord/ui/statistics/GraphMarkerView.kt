@@ -19,11 +19,12 @@ class GraphMarkerView(context: Context, layoutResource: Int) : MarkerView(contex
 
 
     override fun refreshContent(e: Entry?, highlight: Highlight?) {
-        super.refreshContent(e, highlight)
+
         value.text = e!!.y.toString()
 
         val day: LocalDate = LocalDate.now().minusDays(0 - e.x.toInt().toLong()) //Today is 0
         date.text = day.toString()
+        super.refreshContent(e, highlight)
     }
 
     override fun getOffset(): MPPointF {
