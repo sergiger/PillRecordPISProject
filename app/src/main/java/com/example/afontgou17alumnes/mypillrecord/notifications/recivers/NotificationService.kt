@@ -23,7 +23,7 @@ class NotificationService : IntentService("NotificationService") {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
             val context = this.applicationContext
-            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
             val importance = NotificationManager.IMPORTANCE_HIGH
             val notificationChannel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, importance)

@@ -52,7 +52,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private val STORAGE_CODE: Int = 100;
     var currentFragment=-1
-    var hosts= arrayOf("joanorteu99@gmail.com","alendinez4@gmail.com","sergiger00@gmail.com")
+    var hosts= arrayOf("joanrteu99@gmail.com","alendinez4@gmail.com","sergiger00@gmail.com")
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener{
        item->
        when(item.itemId){
