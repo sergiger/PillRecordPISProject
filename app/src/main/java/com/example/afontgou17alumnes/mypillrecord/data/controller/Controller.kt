@@ -734,6 +734,12 @@ object Controller {
         }
     }
 
+    fun clearRemindersAndTherapysFromFirebaseAndShare(){
+        user.reminders.clear()
+        user.therapies.clear()
+        RemindersToFirebase()
+        TherapiesToFirebase()
+    }
 
 
 }

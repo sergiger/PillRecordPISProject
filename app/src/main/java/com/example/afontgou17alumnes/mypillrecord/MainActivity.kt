@@ -13,11 +13,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.Toast
 import android.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
@@ -52,6 +54,7 @@ class MainActivity : AppCompatActivity() {
        when(item.itemId){
            R.id.action_Today->{
                if(Controller.main_activity_fragment!=0){
+                   findViewById<ImageView>(R.id.pdf_item).isVisible=true
                    replaceFragment(TodayFragment())
                    Toast.makeText(this,"Today",Toast.LENGTH_SHORT).show()
                    toolbar.title = "TODAY"
@@ -62,6 +65,7 @@ class MainActivity : AppCompatActivity() {
            }
            R.id.action_calendar->{
                if(Controller.main_activity_fragment!=1){
+                   findViewById<ImageView>(R.id.pdf_item).isVisible=true
                    replaceFragment(Calendar_fragment())
                    Toast.makeText(this,"Calendar",Toast.LENGTH_SHORT).show()
                    toolbar.title ="CALENDAR"
@@ -71,6 +75,7 @@ class MainActivity : AppCompatActivity() {
            }
            R.id.action_team->{
                if(Controller.main_activity_fragment!=3) {
+                   findViewById<ImageView>(R.id.pdf_item).isVisible=false
                    Controller.internet(this)
                    Toast.makeText(this,"Team",Toast.LENGTH_SHORT).show()
                    if (Controller.connected) {
@@ -85,6 +90,7 @@ class MainActivity : AppCompatActivity() {
            }
            R.id.action_pills->{
                if(Controller.main_activity_fragment!=4){
+                   findViewById<ImageView>(R.id.pdf_item).isVisible=true
                    replaceFragment(Pill_fragment())
                    Toast.makeText(this,"Add",Toast.LENGTH_SHORT).show()
                    toolbar.title ="THERAPY"
@@ -94,6 +100,7 @@ class MainActivity : AppCompatActivity() {
            }
            R.id.action_statistcs-> {
                if(Controller.main_activity_fragment!=2) {
+                   findViewById<ImageView>(R.id.pdf_item).isVisible=true
                    if (Controller.ja_iniciat == false) {
                        replaceFragment(Statistics_fragment())
                        Controller.ja_iniciat = true
