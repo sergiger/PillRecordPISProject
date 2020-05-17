@@ -143,8 +143,8 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
-        if(!Controller.user.email.equals("joanorteu99@gmail.com"))
-            findViewById<ImageView>(R.id.eliminarRemindersITherapys).isVisible=false
+        //if(!Controller.user.email.equals("janorteu99@gmail.com"))
+        //    findViewById<ImageView>(R.id.eliminarRemindersITherapys).isVisible=false
         return super.onCreateOptionsMenu(menu)
     }
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -177,9 +177,9 @@ class MainActivity : AppCompatActivity() {
                 savePdf()
             }
         }
-        if(id == R.id.eliminarRemindersITherapys){
+        /*if(id == R.id.eliminarRemindersITherapys){
             Controller.clearRemindersAndTherapysFromFirebaseAndShare()
-        }
+        }*/
         return super.onOptionsItemSelected(item)
     }
     fun go_To_Statistics(id:Int){
