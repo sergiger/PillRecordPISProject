@@ -724,7 +724,7 @@ object Controller {
         }
     }
     fun deleteTherapyByID(id : String){
-        var t : Therapy
+        val t : Therapy
         for (therapy in this.user.therapies){
             if(therapy.id == id){
                 t = therapy

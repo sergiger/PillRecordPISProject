@@ -58,8 +58,7 @@ class Pill_fragment : Fragment() {
                 //Modify actualTherapy
                 actualTherapy.deleteReminders()
                 Controller.deleteTherapyByID(actualTherapy.id)
-                Controller.addTherapy(result)
-                result.createReminders()
+                Controller.addTherapy__CreateReminders(result)
             }
             else if (resultCode == 2){
                 //Eliminar therapy
