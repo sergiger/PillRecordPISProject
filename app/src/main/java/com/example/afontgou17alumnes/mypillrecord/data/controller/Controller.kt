@@ -65,7 +65,11 @@ object Controller {
     fun setContext_wait(con: Activity) {
         wait=con
     }
+    private lateinit var team_fragment: Activity
 
+    fun setTeam_fragment(con: Activity) {
+        team_fragment=con
+    }
 
     fun getRemindersData() : ArrayList<Reminder>{
         return user.reminders
@@ -793,6 +797,9 @@ object Controller {
                     var data3 =map["Medicine"] as String
                     controllerJSON.setMedicineReminderFromJSONfollowers(data3)
                 }
+                val intent = Intent(main, team_follower_page::class.java)
+                intent.putExtra("follower",email)
+                startActivity(main,intent,null)
 
             } else {
                 Log.d("reminders", "No such document")

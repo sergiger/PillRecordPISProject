@@ -107,9 +107,6 @@ class Team_fragment : Fragment() {
     }
     fun InicializateLayout(user: String) {
         Controller.FirebasetofollowReminders(Controller.SbShareToMe[user]!!,user,this)
-        val intent = Intent(activity, team_follower_page::class.java)
-        intent.putExtra("follower",user)
-        startActivity(intent)
         //aqui es descordina------------------------------------------------------------
     }
 
