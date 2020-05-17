@@ -45,9 +45,9 @@ class FragmentTwo : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        createCalendarDialog()
         createMonthList()
         month-=1
+        createCalendarDialog()
     }
 
     @SuppressLint("SetTextI18n")
@@ -79,3 +79,4 @@ class FragmentTwo : Fragment() {
 
     }
 }
+
