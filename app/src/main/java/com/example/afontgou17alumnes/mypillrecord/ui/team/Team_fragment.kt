@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.google.firebase.firestore.FirebaseFirestore
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import kotlinx.android.synthetic.main.team_fragment_fragment.*
 
 class Team_fragment : Fragment() {
@@ -28,6 +30,7 @@ class Team_fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Controller.main_activity_fragment=3
         return inflater.inflate(R.layout.team_fragment_fragment, container, false)
     }
 

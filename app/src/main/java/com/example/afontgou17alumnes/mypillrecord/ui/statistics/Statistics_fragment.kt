@@ -38,6 +38,7 @@ class Statistics_fragment : Fragment(),
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Controller.main_activity_fragment=2
         return inflater.inflate(R.layout.statistics_fragment_fragment, container, false)
     }
 

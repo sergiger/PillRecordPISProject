@@ -15,7 +15,8 @@
             android:id="@+id/pdf_item"
             android:icon="@drawable/pdf_icon"
             android:title="PDF"
-            app:showAsAction="ifRoom"/>
+            app:showAsAction="ifRoom"
+            android:visible="true"/>
         <item
             android:id="@+id/options_item"
             android:icon="@drawable/ic_settings_white_24dp"

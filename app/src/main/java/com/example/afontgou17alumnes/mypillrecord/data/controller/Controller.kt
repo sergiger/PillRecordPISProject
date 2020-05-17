@@ -44,6 +44,7 @@ object Controller {
     var IShareTo = mutableMapOf<String,String>()
     var SbShareToMe = mutableMapOf<String,String>()
     var app_iniciada=false
+    var main_activity_fragment=0
     /*fun initUserSaved(){
         controllerSharePrefs.sharedDownloadLoad()
     }
@@ -731,7 +732,7 @@ object Controller {
         }
     }
     fun deleteTherapyByID(id : String){
-        var t : Therapy
+        val t : Therapy
         for (therapy in this.user.therapies){
             if(therapy.id == id){
                 t = therapy

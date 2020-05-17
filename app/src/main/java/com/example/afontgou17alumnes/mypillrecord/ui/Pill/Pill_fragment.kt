@@ -26,6 +26,7 @@ class Pill_fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Controller.main_activity_fragment=4
         //Button btn1 = (Button) view.findViewById()
         return inflater.inflate(R.layout.pill_fragment_fragment, container, false)
     }
@@ -57,8 +58,7 @@ class Pill_fragment : Fragment() {
                 //Modify actualTherapy
                 actualTherapy.deleteReminders()
                 Controller.deleteTherapyByID(actualTherapy.id)
-                Controller.addTherapy(result)
-                result.createReminders()
+                Controller.addTherapy__CreateReminders(result)
             }
             else if (resultCode == 2){
                 //Eliminar therapy

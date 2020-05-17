@@ -47,7 +47,7 @@ class ajustes_activity : AppCompatActivity() {
         else if(position==2){//close Session
             //close from firebase
             FirebaseAuth.getInstance().signOut()
-
+            Controller.app_iniciada=false
             val intent = Intent(this, LoginActivity::class.java)
             intent.putExtra("type_of_action","close_sesion")
             startActivity(intent)
