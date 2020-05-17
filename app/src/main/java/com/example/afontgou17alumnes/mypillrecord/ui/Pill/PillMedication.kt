@@ -83,6 +83,12 @@ class PillMedication : AppCompatActivity() {
             val NotesNoum = findViewById<TextInputEditText>(R.id.input_notes)
             NotesNoum.text= Editable.Factory.getInstance().newEditable(Notes)
         }
+        // From SearchActivty
+        val Frequency = bundle?.get("Frequency")
+        if(Frequency != null){
+            this.frequencyClass = Frequency as Frequency
+            btn_frequency.text= frequencyClass.toString() //From.toString()+" to "+To.toString()
+        }
         //Frequency
         val id_RadioButton = bundle?.get("RadioButton")
         if(id_RadioButton!=null){
@@ -174,7 +180,7 @@ class PillMedication : AppCompatActivity() {
             //MedicineTherapy(freq,notes, Controller.user.id,dose,new_units,medicine)
             if (frequencyClass != null && dose != 0 && !new_units.equals("") && !medicine.equals("")){
                 val freq:Frequency = frequencyClass!!
-                val therapy= MedicineTherapy(freq,notes, Controller.user.id,dose,new_units,medicine, w_hourListfrequency as ArrayList<String>)
+                val therapy= MedicineTherapy(freq,notes, Calendar.getInstance().timeInMillis.toString(),dose,new_units,medicine, w_hourListfrequency as ArrayList<String>)
                 //Controller.user.therapies.add(therapy)
                 Controller.addTherapy__CreateReminders(therapy)
                 Toast.makeText(this, "New plan added", Toast.LENGTH_LONG).show()
@@ -189,9 +195,16 @@ class PillMedication : AppCompatActivity() {
 
         }
         pill_search.setOnClickListener{
-            val searchIntent = Intent(this, SearchActivity::class.java)
-            searchIntent.putExtra("mother_activity", "pill")
-            startActivity(searchIntent)
+            val intent = Intent(this, SearchActivity::class.java)
+            intent.putExtra("mother_activity", "pill")
+            intent.putExtra("Medicine",medicine)
+            intent.putExtra("Hours",w_hourListfrequency.toTypedArray())
+            intent.putExtra("Dose",this.dose)
+            intent.putExtra("Units",new_units)
+            intent.putExtra("Notes",notes)
+            intent.putExtra("Frequency", frequencyClass)
+            intent.putExtra("From","PillMedication")
+            startActivity(intent)
         }
 
         // Barcode Scanner implementatiton

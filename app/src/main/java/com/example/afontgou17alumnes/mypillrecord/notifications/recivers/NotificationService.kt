@@ -10,6 +10,7 @@ import android.media.RingtoneManager
 import android.os.Build
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import java.util.*
 
 class NotificationService : IntentService("NotificationService") {
@@ -63,8 +64,8 @@ class NotificationService : IntentService("NotificationService") {
 
 
             val context = this.applicationContext
-            var notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            val notifyIntent = Intent(this, MainActivity::class.java)
+            var notificationManager= context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notifyIntent = Intent(this, LoginActivity::class.java)
 
             val title = "You have a notification (Per canviar, linia 72 de la class NotificationService)"
             val message = "Click here to see what you have to do"
@@ -72,6 +73,7 @@ class NotificationService : IntentService("NotificationService") {
             notifyIntent.putExtra("title", title)
             notifyIntent.putExtra("message", message)
             notifyIntent.putExtra("notification", true)
+            notifyIntent.putExtra("crea nova notificaió",true)
 
             notifyIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
 

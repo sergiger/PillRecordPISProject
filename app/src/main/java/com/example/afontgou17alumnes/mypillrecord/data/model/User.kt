@@ -88,28 +88,24 @@ open class User{
             MeasurementReminder(
                 "Weight",
                 "kg",
-                LocalDate.now().plusDays(1),
-                LocalTime.now().plusHours(1)
+                LocalDate.now().plusDays(30),
+                LocalTime.now()
             )
-        var cont=0
         for(reminder in reminders){
-            var dif2=reminder.getMilisFromNow()-retorn.getMilisFromNow()
-            if(reminder.getMilisFromNow()>0 && dif2<0 && reminder.getReminderStatus().equals(ReminderStatus.TO_DO)){
-                retorn=reminder
-                cont+=1
+            if(reminder.getMilisFromNow()>Calendar.getInstance().timeInMillis) {
+                if(reminder.getMilisFromNow()<retorn.getMilisFromNow())
+                    if (reminder.getReminderStatus() == ReminderStatus.TO_DO) {
+                        retorn=reminder
+                    }
             }
         }
-        Log.d("hollll",cont.toString())
         return retorn
     }
     fun areThereReminders():Boolean{
         var retorn=false
         for(reminder in reminders){
-            //Log.d("hh",reminder.time.toString())
             if(reminder.getMilisFromNow()>Calendar.getInstance().timeInMillis) {
-                //Log.d("hh2",reminder.time.toString())
                 if (reminder.getReminderStatus() == ReminderStatus.TO_DO) {
-                    //Log.d("hh3",reminder.time.toString())
                     retorn = true
                     break
                 }
@@ -205,11 +201,15 @@ open class User{
     }
 
     fun deleteAllRemindersById(id: String) {
-        var i=0
-        for(reminder in this.reminders){
-            if(reminder.ID.equals(id)&&reminder.status.equals(ReminderStatus.TO_DO))
-                this.reminders.removeAt(i)
-            i+=1
+        var mList = arrayListOf<Int>()
+        for(i in 0 until this.reminders.size){
+            if(this.reminders[i].ID == id && this.reminders[i].status == ReminderStatus.TO_DO){
+                //this.reminders.removeAt(i)
+                mList.add(i)
+            }
+        }
+        for(i in mList){
+            this.reminders.removeAt(i)
         }
     }
 

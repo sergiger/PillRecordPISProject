@@ -10,10 +10,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.ActivityTherapy
-import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MeasurementTherapy
-import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.MedicineTherapy
-import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Therapy
+import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.therapy_information.*
@@ -125,7 +122,7 @@ class TherapyInformation : AppCompatActivity() {
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
         }
-
+/*
         checkBox_monday.setOnCheckedChangeListener { compoundButton, b ->
             if(b) therapy.frequency.specificweekdays[0] = weekDays[0]
             else therapy.frequency.specificweekdays[0] = ""
@@ -153,7 +150,7 @@ class TherapyInformation : AppCompatActivity() {
         checkBox_sunday.setOnCheckedChangeListener { compoundButton, b ->
             if(b) therapy.frequency.specificweekdays[6] = weekDays[6]
             else therapy.frequency.specificweekdays[6] = ""
-        }
+        }*/
     }
 
     fun createHoursList(){
@@ -416,6 +413,17 @@ class TherapyInformation : AppCompatActivity() {
         }
     }
 
+    fun setDaysOfWeek(){
+        val boxes = arrayOf(checkBox_monday, checkBox_tuesday, checkBox_wednesday, checkBox_thursday,
+            checkBox_friday, checkBox_saturday, checkBox_sunday)
+        val array = arrayOf("","","","","","","")
+        for( i in boxes.indices){
+            if(boxes[i].isChecked)
+                array[i] = weekDays[i]
+        }
+        therapy.frequency.specificweekdays = array
+    }
+
     fun fromToButton(){
         var ini_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
         var ini_month=Calendar.getInstance().get(Calendar.MONTH)+1
@@ -496,19 +504,26 @@ class TherapyInformation : AppCompatActivity() {
             1 ->{
                 if(therapy.frequency.startDate == "" || therapy.frequency.endDate == "")
                     return false
+                therapy.frequency = Frequency(therapy.frequency.startDate, therapy.frequency.endDate)
             }
             2->{
                 if(therapy.frequency.startDate == "" || therapy.frequency.endDate == "" ||
                         therapy.frequency.eachtimedose == 0)
                     return false
+                therapy.frequency = Frequency(therapy.frequency.startDate, therapy.frequency.endDate,
+                    therapy.frequency.eachtimedose)
             }
             3->{
                 if(therapy.frequency.startDate == "" || therapy.frequency.endDate == "")
                     return false
+                setDaysOfWeek()
+                therapy.frequency = Frequency(therapy.frequency.startDate, therapy.frequency.endDate,
+                    therapy.frequency.specificweekdays)
             }
             4->{
                 if(therapy.frequency.listofpuntualdays.isEmpty())
                     return false
+                therapy.frequency = Frequency(therapy.frequency.listofpuntualdays)
             }
         }
         return true

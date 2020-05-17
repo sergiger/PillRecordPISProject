@@ -1,15 +1,21 @@
 package com.example.afontgou17alumnes.mypillrecord.data.controller
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
+import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.data.model.User
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
 import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.StatisticEntry
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Therapy
+import com.example.afontgou17alumnes.mypillrecord.notifications.NotificationUtils
+import com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation.extra_information
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -25,6 +31,9 @@ import com.google.gson.reflect.TypeToken
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
+import java.util.*
+import kotlin.Comparator
+import kotlin.collections.ArrayList
 
 object Controller {
     val user = User("1","user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
@@ -36,6 +45,7 @@ object Controller {
     var connected = false
     var IShareTo = mutableMapOf<String,String>()
     var SbShareToMe = mutableMapOf<String,String>()
+    var app_iniciada=false
     /*fun initUserSaved(){
         controllerSharePrefs.sharedDownloadLoad()
     }
@@ -43,6 +53,16 @@ object Controller {
     fun savePreferences(){
         controllerSharePrefs.sharedUpLoad()
     }*/
+    private lateinit var main: Activity
+
+    fun setContext(con: Activity) {
+        main=con
+    }
+    private lateinit var wait: Activity
+
+    fun setContext_wait(con: Activity) {
+        wait=con
+    }
 
 
     fun getRemindersData() : ArrayList<Reminder>{
@@ -217,6 +237,7 @@ object Controller {
         Log.d("hola:",user.reminders[user.reminders.size-1].toString())
         controllerSharePrefs.sharedUpLoad()
         RemindersToFirebase()
+        generarNextNotification()
     }
     fun createMedicineReminder(medicine:String,dose:Int,units:String,
     date:LocalDate,time: LocalTime
@@ -484,6 +505,14 @@ object Controller {
                 }
                 controllerSharePrefs.sharedUpLoadReminders()
 
+                //Actualitza les notificacions
+                generarNextNotification()
+
+                //Refresh llista inici today
+                wait.finish()
+                val intent = Intent(main, MainActivity::class.java)
+                startActivity(main,intent,null)
+
             } else {
                 Log.d("reminders", "No such document")
             }
@@ -681,5 +710,29 @@ object Controller {
         val deleteArray2 = db.collection("team").document(vid)
         deleteArray2.update("SbShareToMe", FieldValue.arrayRemove(user.id,user.email))
     }
+
+    //Notifications
+
+    fun generarNextNotification(){
+        if (this.user.areThereReminders()){
+            val mNotificationTime = this.user.getNextReminder().getMilisFromNow()
+            NotificationUtils().setNotification(mNotificationTime, main)
+        }
+        else{
+            Toast.makeText(this.main,"There are no reminders",Toast.LENGTH_LONG).show()
+        }
+    }
+    fun deleteTherapyByID(id : String){
+        var t : Therapy
+        for (therapy in this.user.therapies){
+            if(therapy.id == id){
+                t = therapy
+                this.user.therapies.remove(t)
+                break
+            }
+        }
+    }
+
+
 
 }

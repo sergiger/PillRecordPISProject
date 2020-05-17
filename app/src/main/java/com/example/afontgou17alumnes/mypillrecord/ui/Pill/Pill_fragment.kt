@@ -55,16 +55,21 @@ class Pill_fragment : Fragment() {
             if (resultCode == Activity.RESULT_OK) {
                 val result = data?.getSerializableExtra("Therapy") as Therapy
                 //Modify actualTherapy
-                createTherapyList()
+                actualTherapy.deleteReminders()
+                Controller.deleteTherapyByID(actualTherapy.id)
+                Controller.addTherapy(result)
+                result.createReminders()
             }
             else if (resultCode == 2){
-                val result = data?.getSerializableExtra("Therapy") as Therapy
                 //Eliminar therapy
+                actualTherapy.deleteReminders()
+                Controller.deleteTherapyByID(actualTherapy.id)
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //do nothing
             }
         }
+        createTherapyList()
     }
 
     fun createTherapyList(){

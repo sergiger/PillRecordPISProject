@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord.data.model.reminder
 
+import android.util.Log
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeReminder.FakeActivityReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.supportClasses.fakeReminder.FakeReminder
@@ -35,7 +36,7 @@ class ActivityReminder(
     }
 
     override fun createFakeReminder(): FakeReminder {
-        return FakeActivityReminder(name,duration,date.toString(),time.toString(),Controller.getReminderStatusToInt(status))
+        return FakeActivityReminder(name,duration,date.toString(),time.toString(),Controller.getReminderStatusToInt(status),ID)
     }
 
     override fun toStringPDF(): String {
@@ -73,9 +74,17 @@ class ActivityReminder(
             date=-2*24*60*60*1000//Aquest número és simplement perque el resultat sigui més petit que 0
         }
         else {
-            date = ChronoUnit.DAYS.between(this.date, LocalDate.now()) * 24 * 60 * 60 * 1000
+            date = ChronoUnit.DAYS.between(LocalDate.now(),this.date) * 24 * 60 * 60 * 1000
         }
         result+=time+date
+        if(this.date.equals(LocalDate.now().plusDays(1))) {
+            Log.d("time", time.toString())
+            Log.d("date", date.toString())
+            Log.d("result", result.toString())
+            Log.d("real,", Calendar.getInstance().timeInMillis.toString())
+            Log.d("reminder", this.toStringPDF())
+            Log.d("diference in minutes",((result-Calendar.getInstance().timeInMillis)/(60.0*1000*60)).toString())
+        }
         return result
     }
 
