@@ -614,6 +614,7 @@ object Controller {
 
                         // ------------------------------------------------------------------------
                     }
+                    Toast.makeText(context,"Shared", Toast.LENGTH_SHORT).show()
                 }
             }
             .addOnFailureListener { exception ->

@@ -172,7 +172,7 @@ class activity_Register4 : AppCompatActivity() {
         //local errors
         var cont =0
 
-        this.email=text_input_email.text.toString().trim()
+        this.email=text_input_email.text.toString().toLowerCase().trim()
         this.username=text_input_username.text.toString().trim()
         this.password=text_input_password.text.toString().trim()
         this.password_repeat=text_input_repeat_password.text.toString().trim()
