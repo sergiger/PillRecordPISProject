@@ -19,6 +19,7 @@ import android.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -49,6 +50,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private val STORAGE_CODE: Int = 100;
     var currentFragment=-1
+    var hosts= arrayOf("joanorteu99@gmail.com")
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener{
        item->
        when(item.itemId){
@@ -139,17 +141,16 @@ class MainActivity : AppCompatActivity() {
     private fun replaceFragment(fragment: Fragment){
         val fragmentTransaction  = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit()
-
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
-        if(!Controller.user.email.equals("joanorteu99@gmail.com"))
-            findViewById<ImageView>(R.id.eliminarRemindersITherapys).isVisible=false
+        if(this.hosts.contains(Controller.user.email))
+            menuInflater.inflate(R.menu.toolbar_menu_host, menu)
+        else
+            menuInflater.inflate(R.menu.toolbar_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id = item?.itemId
-
         if(id == R.id.options_item){
             Toast.makeText(this,"opcions",Toast.LENGTH_SHORT).show()
             val intent = Intent(this, ajustes_activity::class.java)
