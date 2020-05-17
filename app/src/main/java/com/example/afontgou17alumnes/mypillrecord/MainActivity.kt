@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
        item->
        when(item.itemId){
            R.id.action_Today->{
-               if(currentFragment!=0){
+               if(Controller.main_activity_fragment!=0){
                    replaceFragment(TodayFragment())
                    Toast.makeText(this,"Today",Toast.LENGTH_SHORT).show()
                    toolbar.title = "TODAY"
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_calendar->{
-               if(currentFragment!=1){
+               if(Controller.main_activity_fragment!=1){
                    replaceFragment(Calendar_fragment())
                    Toast.makeText(this,"Calendar",Toast.LENGTH_SHORT).show()
                    toolbar.title ="CALENDAR"
@@ -70,20 +70,21 @@ class MainActivity : AppCompatActivity() {
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_team->{
-               Controller.internet(this)
-               //Toast.makeText(this,"Team (In next version",Toast.LENGTH_SHORT).show()
-               if(Controller.connected){
-                   replaceFragment(Team_fragment())
+               if(Controller.main_activity_fragment!=3) {
+                   Controller.internet(this)
+                   Toast.makeText(this,"Team",Toast.LENGTH_SHORT).show()
+                   if (Controller.connected) {
+                       replaceFragment(Team_fragment())
+                   } else {
+                       replaceFragment(noConnectionShareTeam())
+                   }
+                   toolbar.title = "TEAM"
+                   currentFragment = 2
                }
-               else{
-                   replaceFragment(noConnectionShareTeam())
-               }
-               toolbar.title ="TEAM"
-               currentFragment=2
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_pills->{
-               if(currentFragment!=3){
+               if(Controller.main_activity_fragment!=4){
                    replaceFragment(Pill_fragment())
                    Toast.makeText(this,"Add",Toast.LENGTH_SHORT).show()
                    toolbar.title ="THERAPY"
@@ -92,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                return@OnNavigationItemSelectedListener true
            }
            R.id.action_statistcs-> {
-               if(currentFragment!=4) {
+               if(Controller.main_activity_fragment!=2) {
                    if (Controller.ja_iniciat == false) {
                        replaceFragment(Statistics_fragment())
                        Controller.ja_iniciat = true
@@ -146,7 +147,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         if(id == R.id.pdf_item){
-            if(currentFragment!=2)
+            if(Controller.main_activity_fragment!=3)
                 Toast.makeText(this,"PDF is being generated",Toast.LENGTH_LONG).show()
             //we need to handle runtime permission for devices with marshmallow and above
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
@@ -192,7 +193,7 @@ class MainActivity : AppCompatActivity() {
             //get text from EditText i.e. textEt
             var mText = "Holaa"
             var mFileName = "MyPillrecord:"+LocalDate.now().toString()
-            if(currentFragment==0){//Today
+            if(Controller.main_activity_fragment==0){//Today
                 mText="Toady Reminders:\n\n"
                 mFileName="MyPillRecord_Today:"+LocalDate.now().toString()
                 for(reminder in Controller.user.getTodayReminders()){
@@ -200,7 +201,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 printPDF(mText,mFileName)
             }
-            else if(currentFragment==1){//Estem a Calendar
+            else if(Controller.main_activity_fragment==1){//Estem a Calendar
                 mFileName="MyPillRecord_Calendar:"+LocalDate.now().toString()
                 //Inflate the dialog with custom view
                 val mDialogView = LayoutInflater.from(this).inflate(R.layout.from_to_dialogue_pdf, null)
@@ -236,7 +237,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }
-            else if(currentFragment==3){//Therapies
+            else if(Controller.main_activity_fragment==4){//Therapies
                 mFileName="MyPillRecord_ActiveTherapies:"+LocalDate.now().toString()
                 mText="Current Therapies:\n\n"
                 for(terapia in Controller.user.therapies){
@@ -245,7 +246,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 printPDF(mText,mFileName)
             }
-            else if(currentFragment==4){//Statistics
+            else if(Controller.main_activity_fragment==2){//Statistics
                 mFileName="MyPillRecord_Statistics:"+LocalDate.now().toString()
                 mText="Statistics:\n"
                 var cont=0

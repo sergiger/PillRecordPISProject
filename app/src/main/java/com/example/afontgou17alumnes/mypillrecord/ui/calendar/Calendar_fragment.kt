@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.example.afontgou17alumnes.mypillrecord.R
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.google.android.material.tabs.TabLayout
 
 class Calendar_fragment : Fragment() {
@@ -22,6 +23,7 @@ class Calendar_fragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
+        Controller.main_activity_fragment=1
         return inflater.inflate(R.layout.calendar_fragment_fragment, container, false)
     }
 

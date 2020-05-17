@@ -26,6 +26,7 @@ class Pill_fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Controller.main_activity_fragment=4
         //Button btn1 = (Button) view.findViewById()
         return inflater.inflate(R.layout.pill_fragment_fragment, container, false)
     }

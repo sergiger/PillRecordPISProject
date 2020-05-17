@@ -31,6 +31,7 @@ class TodayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Controller.main_activity_fragment=0
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.today__fragment, container, false)
     }

@@ -46,6 +46,7 @@ object Controller {
     var IShareTo = mutableMapOf<String,String>()
     var SbShareToMe = mutableMapOf<String,String>()
     var app_iniciada=false
+    var main_activity_fragment=0
     /*fun initUserSaved(){
         controllerSharePrefs.sharedDownloadLoad()
     }
