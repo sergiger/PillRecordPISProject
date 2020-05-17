@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -77,8 +78,6 @@ class MainActivity : AppCompatActivity() {
                else{
                    replaceFragment(noConnectionShareTeam())
                }
-
-
                toolbar.title ="TEAM"
                currentFragment=2
                return@OnNavigationItemSelectedListener true
@@ -116,7 +115,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
         navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         val bundle:Bundle? = intent.extras
         //medicine
@@ -148,7 +146,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         if(id == R.id.pdf_item){
-            Toast.makeText(this,"PDF is being generated",Toast.LENGTH_LONG).show()
+            if(currentFragment!=2)
+                Toast.makeText(this,"PDF is being generated",Toast.LENGTH_LONG).show()
             //we need to handle runtime permission for devices with marshmallow and above
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
                 //system OS >= Marshmallow(6.0), check permission is enabled or not
