@@ -203,11 +203,11 @@ object Controller {
 
         val setComp1 = LineDataSet(formattedValues, label)
         setComp1.axisDependency = YAxis.AxisDependency.LEFT
-        setComp1.color = Color.rgb(250,0,0)
+        setComp1.color = color
         setComp1.lineWidth = 3f
         setComp1.circleRadius = 6f
-        setComp1.setCircleColor(Color.rgb(250,0,0))
-        setComp1.highLightColor = Color.RED
+        setComp1.setCircleColor(color)
+        setComp1.highLightColor = color
         setComp1.setDrawValues(false)
 
         return setComp1

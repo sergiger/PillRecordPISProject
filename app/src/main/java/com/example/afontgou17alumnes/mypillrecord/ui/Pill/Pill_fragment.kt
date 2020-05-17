@@ -68,6 +68,8 @@ class Pill_fragment : Fragment() {
             if (resultCode == Activity.RESULT_CANCELED) {
                 //do nothing
             }
+            Controller.TherapiesToFirebase()
+            Controller.RemindersToFirebase()
         }
         createTherapyList()
     }
