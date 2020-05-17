@@ -12,6 +12,12 @@
             app:actionViewClass="androidx.appcompat.widget.SearchView"/>
             -->
         <item
+            android:id="@+id/eliminarRemindersITherapys"
+            android:icon="@drawable/restart_icon"
+            app:showAsAction="ifRoom"
+            android:visible="true"
+            android:title="Reset Therapy i Reminder"/>
+        <item
             android:id="@+id/pdf_item"
             android:icon="@drawable/pdf_icon"
             android:title="PDF"
@@ -22,4 +28,5 @@
             android:icon="@drawable/ic_settings_white_24dp"
             android:title="Settings"
             app:showAsAction="ifRoom" />
+
 </menu>
