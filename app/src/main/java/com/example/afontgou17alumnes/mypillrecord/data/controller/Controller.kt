@@ -174,12 +174,12 @@ object Controller {
         //Agafem les dades que ens interessen segons quin grafic muntarem
         val dataSets: MutableList<ILineDataSet> = ArrayList()
         when(select){
-            0-> dataSets.add(getLineDataSet(user.statistics.weightData, "Weight", Color.YELLOW))
+            0-> dataSets.add(getLineDataSet(user.statistics.weightData, "Weight", Color.RED))
             1 -> dataSets.add(getLineDataSet(user.statistics.heartRateData, "Heart Rate", Color.RED))
-            2 -> dataSets.add(getLineDataSet(user.statistics.arterialPressureData, "Arterial Pressure", Color.rgb(255,165,0)))
-            3 ->{dataSets.add(getLineDataSet(user.statistics.glucoseBeforeData, "Glucose (before eating)", Color.MAGENTA))
-                dataSets.add(getLineDataSet(user.statistics.glucoseAfterData, "Glucose (after eating)", Color.BLUE))}
-            4 -> dataSets.add(getLineDataSet(user.statistics.temperatureData, "Temperature", Color.GREEN))
+            2 -> dataSets.add(getLineDataSet(user.statistics.arterialPressureData, "Arterial Pressure", Color.RED))
+            3 ->{dataSets.add(getLineDataSet(user.statistics.glucoseBeforeData, "Glucose (before eating)", Color.RED))
+                dataSets.add(getLineDataSet(user.statistics.glucoseAfterData, "Glucose (after eating)", Color.rgb(60,120,173)))}
+            4 -> dataSets.add(getLineDataSet(user.statistics.temperatureData, "Temperature", Color.RED))
         }
         return LineData(dataSets)
     }
