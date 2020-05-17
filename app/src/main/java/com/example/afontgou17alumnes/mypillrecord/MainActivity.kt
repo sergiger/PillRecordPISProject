@@ -53,6 +53,8 @@ class MainActivity : AppCompatActivity() {
        item->
        when(item.itemId){
            R.id.action_Today->{
+               if(!Controller.user.email.equals("Joanorteu99@gmail.com"))
+                   findViewById<ImageView>(R.id.eliminarRemindersITherapys).isVisible=false
                if(Controller.main_activity_fragment!=0){
                    findViewById<ImageView>(R.id.pdf_item).isVisible=true
                    replaceFragment(TodayFragment())
@@ -124,7 +126,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
         val bundle:Bundle? = intent.extras
         //medicine
         val goTo = bundle?.get("goTo")
@@ -175,6 +176,9 @@ class MainActivity : AppCompatActivity() {
                 //system OS < marshmallow, call savePdf() method
                 savePdf()
             }
+        }
+        if(id == R.id.eliminarRemindersITherapys){
+            Controller.clearRemindersAndTherapysFromFirebaseAndShare()
         }
         return super.onOptionsItemSelected(item)
     }
