@@ -8,13 +8,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.afontgou17alumnes.mypillrecord.R
-import com.google.firebase.firestore.FirebaseFirestore
+import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import kotlinx.android.synthetic.main.team_fragment_fragment.*
 
 class Team_fragment : Fragment() {
+    var timeListViewfrequency : ListView? = null
 
     companion object {
         fun newInstance() =
@@ -44,6 +46,7 @@ class Team_fragment : Fragment() {
             //startActivity(intent)
             Toast.makeText(activity,"Agenda", Toast.LENGTH_SHORT).show()
         }
+        listHasChanged(Controller.SbShareToMe.keys.toMutableList())
     }
     fun ChoseShare(){
         val llista = arrayListOf<String>("Share with","Stop sharing with") /*, "Follow-up request to"*/
@@ -81,6 +84,29 @@ class Team_fragment : Fragment() {
                                 Log.e("DOCUMENTS", "Error getting documents: ", exception)
                             }
          */
+    }
+
+    fun listHasChanged( llista: MutableList<String>){
+        val arraylocal = llista.toTypedArray()
+        val listsharecontacts: ListView? = view?.findViewById(R.id.planed_list)
+        val timeAdapter: followingAdapter = followingAdapter(context!!, llista.toTypedArray(),this)
+        if (listsharecontacts != null) {
+            listsharecontacts.adapter = timeAdapter
+        }
+        timeListViewfrequency = listsharecontacts
+        Log.e("timeListViewfrequency", timeListViewfrequency.toString())
+        if(llista.size > 1){
+            Toast.makeText(context, "Added", Toast.LENGTH_LONG).show()
+        }
+        timeListViewfrequency?.setOnItemClickListener { adapterView, view, i, l ->
+            Log.e("POSITION", timeAdapter?.getItem(i).toString())
+            //var text : TextView = view.findViewById(R.id.tw_hour)
+        }
+    }
+    fun InicializateLayout(user: String) {
+        val intent = Intent(activity, team_follower_page::class.java)
+        intent.putExtra("follower",user)
+        startActivity(intent)
     }
 
 

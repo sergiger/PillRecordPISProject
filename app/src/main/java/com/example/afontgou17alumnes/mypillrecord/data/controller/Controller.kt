@@ -7,6 +7,8 @@ import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.util.Log
+import android.view.View
+import android.webkit.WebSettings
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
@@ -15,7 +17,6 @@ import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
 import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.StatisticEntry
 import com.example.afontgou17alumnes.mypillrecord.data.model.therapy.Therapy
 import com.example.afontgou17alumnes.mypillrecord.notifications.NotificationUtils
-import com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation.extra_information
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -31,9 +32,6 @@ import com.google.gson.reflect.TypeToken
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
-import java.util.*
-import kotlin.Comparator
-import kotlin.collections.ArrayList
 
 object Controller {
     val user = User("1","user@gmail.com", "PillRecord", "123", "Male", 1999, 50F, 160F)
@@ -710,6 +708,16 @@ object Controller {
         val deleteArray2 = db.collection("team").document(vid)
         deleteArray2.update("SbShareToMe", FieldValue.arrayRemove(user.id,user.email))
     }
+    fun deletefollowing(email :String,vid:String){
+        Log.e("DELETE:", " ${vid} email: ${email}")
+        //jo
+        val deleteArray = db.collection("team").document(user.id)
+        deleteArray.update("SbShareToMe", FieldValue.arrayRemove(vid,email))
+        //l'altre
+        val deleteArray2 = db.collection("team").document(vid)
+        deleteArray2.update("IShareTo", FieldValue.arrayRemove(user.id,user.email))
+    }
+
 
     //Notifications
 
