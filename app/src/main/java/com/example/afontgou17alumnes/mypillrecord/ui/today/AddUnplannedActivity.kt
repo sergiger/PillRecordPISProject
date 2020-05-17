@@ -169,7 +169,6 @@ class AddUnplannedActivity : AppCompatActivity() {
 
         //Aqui faig els listeners dels dos botons
         mDialogView.OK.setOnClickListener {
-            Toast.makeText(this,"work in progress",Toast.LENGTH_LONG).show()
             set_ok_date(new_day,new_month,new_year,it)
             mAlertDialog.dismiss()
         }
@@ -209,7 +208,6 @@ class AddUnplannedActivity : AppCompatActivity() {
     private fun showPopupMenu(view: View) = PopupMenu(view.context, view).run {
         menuInflater.inflate(R.menu.activity_popup_menu, menu)
         setOnMenuItemClickListener { item ->
-            Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
             new_activity=item.title.toString()
             view.activity_name_button.text = new_activity.toString()
             true
