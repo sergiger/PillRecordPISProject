@@ -23,7 +23,7 @@ class ajustes_activity : AppCompatActivity() {
             onBackPressed()
         }
         val arrayAdapter: ArrayAdapter<*>
-        val users = arrayOf("My Account", "Change Notifications", "Close Session",
+        val users = arrayOf("My Account"/*, "Change Notifications"*/, "Close Session",
             "Legal information","Version B.34.53")
 
         // access the listView from xml file

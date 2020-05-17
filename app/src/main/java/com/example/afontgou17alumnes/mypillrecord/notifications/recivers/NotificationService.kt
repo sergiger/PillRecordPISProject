@@ -62,8 +62,8 @@ class NotificationService : IntentService("NotificationService") {
         var notificationManager= context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notifyIntent = Intent(this, LoginActivity::class.java)
 
-        val title = "You have a notification (Per canviar, linia 72 de la class NotificationService)"
-        val message = "Click here to see what you have to do"
+        val title = "Take care of youself"
+        val message = "Go to the app to see what you have arranged arranged"
 
         notifyIntent.putExtra("title", title)
         notifyIntent.putExtra("message", message)
