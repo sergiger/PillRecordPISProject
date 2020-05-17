@@ -124,7 +124,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
         val bundle:Bundle? = intent.extras
         //medicine
         val goTo = bundle?.get("goTo")
@@ -144,6 +143,8 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
+        if(!Controller.user.email.equals("joanorteu99@gmail.com"))
+            findViewById<ImageView>(R.id.eliminarRemindersITherapys).isVisible=false
         return super.onCreateOptionsMenu(menu)
     }
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -175,6 +176,9 @@ class MainActivity : AppCompatActivity() {
                 //system OS < marshmallow, call savePdf() method
                 savePdf()
             }
+        }
+        if(id == R.id.eliminarRemindersITherapys){
+            Controller.clearRemindersAndTherapysFromFirebaseAndShare()
         }
         return super.onOptionsItemSelected(item)
     }
