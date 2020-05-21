@@ -76,7 +76,7 @@ class Pill_fragment : Fragment() {
 
     fun createTherapyList(){
         val therapyListView = view?.findViewById<ListView>(R.id.therapy_list)
-        val therapyAdapter = TherapyListAdapter(this, Controller.user.therapies)
+        val therapyAdapter = TherapyListAdapter(this, Controller.getActiveTherapies())
         if(therapyListView != null){
             therapyListView.adapter = therapyAdapter
         }

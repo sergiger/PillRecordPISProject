@@ -852,6 +852,15 @@ object Controller {
         return listAll
     }
 
+    fun getActiveTherapies() : ArrayList<Therapy>{
+        val active = arrayListOf<Therapy>()
+        for(therapy in this.user.therapies){
+            if(therapy.frequency.isActive())
+                active.add(therapy)
+        }
+        return active
+    }
+
 
 
 }
