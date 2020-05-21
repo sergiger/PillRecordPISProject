@@ -23,8 +23,8 @@ class ajustes_activity : AppCompatActivity() {
             onBackPressed()
         }
         val arrayAdapter: ArrayAdapter<*>
-        val users = arrayOf("My Account"/*, "Change Notifications"*/, "Close Session",
-            "Legal information","Version B.34.53")
+        val users = arrayOf("My Account", "Change Notifications", "Close Session",
+            /*"Legal information",*/"Version B.34.53")
 
         // access the listView from xml file
         var mListView = findViewById<ListView>(R.id.opcions_menu)
@@ -54,11 +54,11 @@ class ajustes_activity : AppCompatActivity() {
             Toast.makeText(this,"sesion closed", Toast.LENGTH_SHORT).show()
             Controller.controllerSharePrefs.closeSesion()
         }
-        else if(position==3){//Legal information
+        else if(position==55){//Legal information
             val intent = Intent(this, legal_main::class.java)
             startActivity(intent)
         }
-        else if(position==4){//versió, aquí no sé que posar-hi ara
+        else if(position==3){//versió, aquí no sé que posar-hi ara
             Toast.makeText(this,"Ueeeep, piloooootes!!!",Toast.LENGTH_SHORT).show()
         }
     }

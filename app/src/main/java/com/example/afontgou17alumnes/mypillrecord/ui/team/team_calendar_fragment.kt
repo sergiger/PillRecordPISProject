@@ -25,7 +25,6 @@ class team_calendar_fragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        Controller.main_activity_fragment=1
         return inflater.inflate(R.layout.activity_team_calendar_fragment, container, false)
     }
 
