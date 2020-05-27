@@ -2,32 +2,25 @@ package com.example.afontgou17alumnes.mypillrecord
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.provider.DocumentsContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
-import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.Reminder
-import com.example.afontgou17alumnes.mypillrecord.notifications.NotificationUtils
 import com.example.afontgou17alumnes.mypillrecord.ui.Pill.Pill_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.calendar.Calendar_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.settings.ajustes_activity
@@ -36,23 +29,20 @@ import com.example.afontgou17alumnes.mypillrecord.ui.team.Team_fragment
 import com.example.afontgou17alumnes.mypillrecord.ui.team.noConnectionShareTeam
 import com.example.afontgou17alumnes.mypillrecord.ui.today.TodayFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.inappmessaging.display.internal.layout.util.BackButtonHandler
 import com.itextpdf.text.Document
 import com.itextpdf.text.Paragraph
 import com.itextpdf.text.pdf.PdfWriter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.from_to_dialogue_pdf.view.*
-import kotlinx.android.synthetic.main.height_dialoge.view.*
-import kotlinx.android.synthetic.main.year_of_birth_dialoge.view.*
 import kotlinx.android.synthetic.main.year_of_birth_dialoge.view.OK
 import java.io.FileOutputStream
-import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private val STORAGE_CODE: Int = 100;
     var currentFragment=-1
-    var hosts= arrayOf("joanrteu99@gmail.com","alendinez4@gmail.com","sergiger00@gmail.com")
+    var hosts= arrayOf("joanorteu99@gmail.com","alendinez4@gmail.com","sergiger00@gmail.com")
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener{
        item->
        when(item.itemId){
@@ -384,5 +374,6 @@ class MainActivity : AppCompatActivity() {
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP;
         startActivity(intent)
     }
+
 
 }
