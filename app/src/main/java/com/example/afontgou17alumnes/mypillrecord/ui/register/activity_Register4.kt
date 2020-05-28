@@ -84,10 +84,12 @@ class activity_Register4 : AppCompatActivity() {
                             if (task.isSuccessful) {
                                 // Sign in success, update UI with the signed-in user's information
                                 val intent = Intent(this, LoginActivity::class.java)
+                                intent.putExtra("register","yes")
                                 val user: FirebaseUser? = mAuth.currentUser
                                 user?.sendEmailVerification()
                                 //Controller.createAccount( user!!.uid,this.email,this.username,this.password,this.gender,this.year_Birth,this.weight,this.height)
                                 createuserfirebasedatabase(user!!.uid,this.email,this.username,this.password,this.gender,this.year_Birth,this.weight,this.height)
+                                FirebaseAuth.getInstance().signOut()
                                 startActivity(intent)
 
                             } else {
