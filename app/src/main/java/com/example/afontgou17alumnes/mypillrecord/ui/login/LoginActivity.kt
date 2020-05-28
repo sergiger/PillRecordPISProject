@@ -64,22 +64,6 @@ class LoginActivity : AppCompatActivity() {
         }
         Controller.app_iniciada=true
         setContentView(R.layout.activity_login)
-        /*
-        val bundle:Bundle? = intent.extras
-        val actions = bundle?.get("type_of_action")//Això ens permet accedir al shared preferences, potser és una manera molt cutre, però és la única que consegueixo que funcioni
-        if(actions!=null && actions=="Save_Share_and_go_back")
-            sharedUpLoad_and_go_back()
-        else if(actions!=null && actions=="close_sesion")
-            closeSesion()
-        else if(actions!=null && actions=="Save_share_Create_Account_Go_Home")
-            createAccount()
-        else if(actions!=null && actions=="Save_and_go_home")
-            sharedUpLoad_and_go_home()
-        else
-            sharedDownloadLoad()
-
-         */
-
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
@@ -154,6 +138,7 @@ class LoginActivity : AppCompatActivity() {
                 ProgressDialogDisable()
                 //finish()
                 val intent = Intent(this, WaitingActiviy::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)// Això ho faig per a que al apretar la fletxa cap enrere, no puguis anar al log in sense voler, ara quan vas a la activity wait nno et queda altra que wait
                 startActivity(intent)
             }else{
                 Toast.makeText(this, "Please verify your email", Toast.LENGTH_SHORT).show()

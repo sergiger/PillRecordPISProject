@@ -36,9 +36,9 @@ class ControllerSharePrefs {
         editor.putString("MeasurementTherapy",Controller.controllerJSON.getMeasurementTherapyJSON())
         editor.putString("MedicineTherapy",Controller.controllerJSON.getMedicineTherapyJSON())
         editor.apply()
-        Log.d("therapy1",Controller.controllerJSON.getActivityTherapyJSON())
-        Log.d("therapy2",Controller.controllerJSON.getMedicineTherapyJSON())
-        Log.d("therapy3",Controller.controllerJSON.getMeasurementTherapyJSON())
+        //Log.d("therapy1",Controller.controllerJSON.getActivityTherapyJSON())
+        //Log.d("therapy2",Controller.controllerJSON.getMedicineTherapyJSON())
+        //Log.d("therapy3",Controller.controllerJSON.getMeasurementTherapyJSON())
         /*var prefs =context.getSharedPreferences("Mydata", Context.MODE_PRIVATE)
 
 
