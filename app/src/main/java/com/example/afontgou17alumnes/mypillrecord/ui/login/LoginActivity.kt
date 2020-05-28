@@ -39,6 +39,11 @@ class LoginActivity : AppCompatActivity() {
         Controller.setContext(this)
         val bundle:Bundle? = intent.extras
         val actions = bundle?.get("crea nova notificaió")//Això ens permet accedir al shared preferences, potser és una manera molt cutre, però és la única que consegueixo que funcioni
+        val register = bundle?.get("register")
+        var register2 = "no"
+        if(register!=null){
+            register2 = (register as String)
+        }
         if(actions!=null && actions==true)
             Controller.generarNextNotification()
         ProgressDialogInit()
@@ -46,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
 
         val currentUser = mAuth.currentUser
         Log.e("CURRENT USER", "USER: ${currentUser?.uid}")
-        if(currentUser != null&&Controller.app_iniciada!=true){
+        if(currentUser != null && Controller.app_iniciada!=true && register2.equals("no")){
             if(Controller.internet(this.applicationContext)){
                 Log.e("INTERNET", "SI--------------------------------")
                 updateUI(currentUser)
@@ -58,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-        if(Controller.app_iniciada){
+        if(Controller.app_iniciada && register2.equals("no")){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
