@@ -1,5 +1,6 @@
 package com.example.afontgou17alumnes.mypillrecord.data.model.therapy
 
+import android.util.Log
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.ActivityReminder
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.MeasurementReminder
@@ -21,15 +22,19 @@ class MeasurementTherapy(
     }
 
     override fun createReminders() {
-        val measurement_types = arrayOf("Weight", "Heart rate","Arterial pressure","Temperature","Glucose level(before eating)","Glucose level(after eating)")
+        val measurement_types = arrayOf("Weight", "Heart Rate","Arterial Pressure","Temperature","Glucose (before eating)","Glucose (after eating)")
         val unit_types=arrayOf("Kg","bpm","mmHg","Cº","mg/dl","mg/dl")
         var units:String="kg"
         var i=0
+        Log.d("Type de measurement",this.measurementType)
         for (type in measurement_types){
-            if(type==this.measurementType)
+            if(type.equals(this.measurementType)){
                 units=unit_types[i]
+                Log.d("he entrar","bingo")
+            }
             i++
         }
+
         var date=LocalDate.now()
         var endDate=LocalDate.now()
         if(this.frequency.type!=4){

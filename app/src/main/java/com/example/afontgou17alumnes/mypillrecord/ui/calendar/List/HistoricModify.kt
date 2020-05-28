@@ -31,7 +31,10 @@ class HistoricModify : AppCompatActivity() {
             info_button.text = reminder.dose.toString() + " " + reminder.doseUnit
         } else if(reminder is MeasurementReminder){
             info_label.text = "Value"
-            info_button.text = "Enter a value"
+            if(reminder.value!=0F)
+                info_button.text = reminder.value.toString()+reminder.unit
+            else
+                info_button.text = "Enter a value"
         }else if(reminder is ActivityReminder) {
             info_label.text = "Duration"
             info_button.text = reminder.duration.toString() + " min"
@@ -80,6 +83,7 @@ class HistoricModify : AppCompatActivity() {
                 else if(reminder is MeasurementReminder){
                     reminder.value = infoValue.toFloat()
                     info_button.text = reminder.value.toString() + " " + reminder.unit
+                    reminder.status=ReminderStatus.DONE
                 }
                 else if(reminder is ActivityReminder){
                     reminder.duration = infoValue
@@ -90,6 +94,7 @@ class HistoricModify : AppCompatActivity() {
                 mAlertDialog.dismiss()
             }
             mDialogView.cancel.setOnClickListener {
+                reminder.status=ReminderStatus.OMITTED
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
                 mAlertDialog.dismiss()
             }
