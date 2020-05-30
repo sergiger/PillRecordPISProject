@@ -4,51 +4,51 @@
 
     <item
         android:id="@+id/botella"
-        android:title="Botle"
+        android:title="bottle(s)"
         app:showAsAction="never"/>
     <item
         android:id="@+id/grams"
-        android:title="Grams(g)"
+        android:title="grams(g)"
         app:showAsAction="never"/>
     <item
         android:id="@+id/miligrams"
-        android:title="miligrams(mg)"
+        android:title="milligrams(mg)"
         app:showAsAction="never"/>
     <item
         android:id="@+id/pastilles"
-        android:title="Pills"
+        android:title="pill(s)"
         app:showAsAction="never"/>
     <item
         android:id="@+id/litres"
-        android:title="Liters(l)"
+        android:title="liters(l)"
         app:showAsAction="never"/>
     <item
         android:id="@+id/mililitres"
-        android:title="miliLiters(ml)"
+        android:title="milliliters(ml)"
         app:showAsAction="never"/>
     <item
         android:id="@+id/injeccio"
-        android:title="Injeccion"
+        android:title="injection(s)"
         app:showAsAction="never"/>
     <item
         android:id="@+id/esprai"
-        android:title="inhaler"
+        android:title="inhaler(s)"
         app:showAsAction="never"/>
     <item
         android:id="@+id/paquet"
-        android:title="Package"
+        android:title="package(s)"
         app:showAsAction="never"/>
     <item
         android:id="@+id/cullera"
-        android:title="Spoon"
+        android:title="tablespoon(s)"
         app:showAsAction="never"/>
     <item
         android:id="@+id/aplicació"
-        android:title="Application"
+        android:title="application(s)"
         app:showAsAction="never"/>
     <item
         android:id="@+id/got"
-        android:title="Cup"
+        android:title="cup(s)"
         app:showAsAction="never"/>
 
 </menu>
