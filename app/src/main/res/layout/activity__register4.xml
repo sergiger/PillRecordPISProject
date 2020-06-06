@@ -10,6 +10,7 @@
     android:background="@color/colorApp3"
     tools:context=".ui.register.activity_Register4"
     android:padding="10dp">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -205,4 +206,5 @@
             tools:ignore="OnClick"
             android:id="@+id/btn_confirm_register"></Button>
     </LinearLayout>
+
 </androidx.appcompat.widget.LinearLayoutCompat>

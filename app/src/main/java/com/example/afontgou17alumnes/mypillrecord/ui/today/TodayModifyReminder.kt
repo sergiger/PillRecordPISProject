@@ -40,7 +40,13 @@ class TodayModifyReminder: AppCompatActivity() {
 
         // View elements
         name_today_modify_reminder.text = reminder.getReminderName()
-        hour_button_today_modify_reminder.text = reminder.getHour().toString()
+        if(reminder.getHour().minute < 10) {
+            val h = reminder.getHour().hour
+            val m = reminder.getHour().minute
+            hour_button_today_modify_reminder.text = "$h:0$m"
+        }else{
+            hour_button_today_modify_reminder.text = reminder.getHour().toString()
+        }
 
         //Set Listeners
         info_button.setOnClickListener {

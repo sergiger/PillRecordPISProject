@@ -14,7 +14,10 @@ import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.*
+import kotlinx.android.synthetic.main.activity_add_unplanned_activity.back_arrow
+import kotlinx.android.synthetic.main.activity_add_unplanned_activity.info_button
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.view.*
+import kotlinx.android.synthetic.main.activity_add_unplanned_measurement.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
@@ -38,7 +41,11 @@ class AddUnplannedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_unplanned_activity)
 
-        hour_button_unplanned_activity.text = "$hour:$minute"
+        if(minute < 10) {
+            hour_button_unplanned_activity.text = "$hour:0$minute"
+        }else{
+            hour_button_unplanned_activity.text = "$hour:$minute"
+        }
 
         back_arrow.setOnClickListener{
             go_back()

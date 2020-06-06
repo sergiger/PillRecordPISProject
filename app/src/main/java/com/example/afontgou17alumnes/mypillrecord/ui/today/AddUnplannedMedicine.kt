@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_add_unplanned_activity.back_arrow
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.info_button
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.view.*
+import kotlinx.android.synthetic.main.activity_today_modify_reminder.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
@@ -50,7 +51,11 @@ class AddUnplannedMedicine : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_unplanned_medicine)
 
-        hour_button_unplanned_medicine.text = "$hour:$minute"
+        if(minute < 10) {
+            hour_button_unplanned_medicine.text = "$hour:0$minute"
+        }else{
+            hour_button_unplanned_medicine.text = "$hour:$minute"
+        }
 
         val bundle:Bundle? = intent.extras
         val Medicine = bundle?.get("Medicine")

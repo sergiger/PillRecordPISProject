@@ -13,6 +13,9 @@ import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import kotlinx.android.synthetic.main.activity_add_unplanned_measurement.*
+import kotlinx.android.synthetic.main.activity_add_unplanned_measurement.back_arrow
+import kotlinx.android.synthetic.main.activity_add_unplanned_measurement.info_button
+import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
 import kotlinx.android.synthetic.main.time_dialog.view.*
@@ -37,7 +40,12 @@ class AddUnplannedMeasurement : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_unplanned_measurement)
 
-        hour_button_today_modify_reminder.text = "$hour:$minute"
+
+        if(minute < 10) {
+            hour_button_today_modify_reminder.text = "$hour:0$minute"
+        }else{
+            hour_button_today_modify_reminder.text = "$hour:$minute"
+        }
 
         back_arrow.setOnClickListener{
             go_back()
