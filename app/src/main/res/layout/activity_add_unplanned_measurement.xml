@@ -47,7 +47,7 @@
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@id/measurement_spinner"
         app:layout_constraintTop_toTopOf="@id/measurement_spinner"
-        app:layout_constraintBottom_toBottomOf="@id/measurement_spinner"/>
+        />
 
     <Spinner
         android:id="@+id/measurement_spinner"
