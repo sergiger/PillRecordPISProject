@@ -49,7 +49,7 @@ class myAccount : AppCompatActivity() {
         arrayAdapter2 = ArrayAdapter(this,android.R.layout.simple_list_item_1, users3)
         opcions_menuu_actual.adapter = arrayAdapter2
         val arrayAdapter: ArrayAdapter<*>
-        val users = arrayOf("Change Pasword", "Extra information","Username","Email","Year of birth","Gender", "Height","Weight")
+        val users = arrayOf("Change password", "Extra information","Username","Email","Year of birth","Gender", "Height","Weight")
         // access the listView from xml file
         var mListView = findViewById<ListView>(R.id.opcions_menu)
         arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, users)
@@ -75,7 +75,7 @@ class myAccount : AppCompatActivity() {
             //AlertDialogBuilder
             val mBuilder = AlertDialog.Builder(this)
                 .setView(mDialogView)
-                .setTitle("Change pasword")
+                .setTitle("Change password")
             //show dialog
             val  mAlertDialog = mBuilder.show()
             //login button click of custom layout
@@ -96,13 +96,13 @@ class myAccount : AppCompatActivity() {
                         }
                     }
                     else{
-                        Toast.makeText(this,"Wrong repeated pasword",Toast.LENGTH_LONG).show()
+                        Toast.makeText(this,"Wrong repeated password",Toast.LENGTH_LONG).show()
                     }
                 }
                 else{
                     Log.e("---------------------", "1 data: ${old_pasword}")
                     Log.e("---------------------", "2 data: $password")
-                    Toast.makeText(this,"Wrong old pasword",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this,"Wrong old password",Toast.LENGTH_LONG).show()
                     mAlertDialog.dismiss()
                 }
             }
