@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_add_unplanned_activity.back_arrow
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.info_button
 import kotlinx.android.synthetic.main.activity_add_unplanned_medicine.view.*
+import kotlinx.android.synthetic.main.height_dialoge.view.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.cancel
@@ -169,31 +170,35 @@ class AddUnplannedMedicine : AppCompatActivity() {
     }
 
     fun select_dose(){
-        var new_dose=1
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
-        //Set Number Picker
-        mDialogView.number_Picker.minValue = 1
-        mDialogView.number_Picker.maxValue = 100
-        mDialogView.number_Picker.wrapSelectorWheel = false
-
+        var new_dose=1F
+        //Inflate the dialog with custom view
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.dose_dialogue, null)
         //AlertDialogBuilder
         val mBuilder = AlertDialog.Builder(this)
             .setView(mDialogView)
-            .setTitle("Set dose")
-        val mAlertDialog = mBuilder.show()
-        mDialogView.number_Picker.setOnValueChangedListener { picker, oldVal, newVal ->
-            new_dose=newVal
+            .setTitle("Dose")
+        //show dialog
+        val  mAlertDialog = mBuilder.show()
+        //login button click of custom layout
+        mDialogView.OK_height.setOnClickListener {
+            val new_height = mDialogView.input_height.text.toString() //aquesta variable servirà per actualitzar l'edat
+            if(!new_height.equals("")) {
+                Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show()
+                new_dose=new_height.toFloat()
+                this.dose=new_dose.toInt()
+                dose_button.text=dose.toString()
+                Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
+                //dismiss dialog
+                mAlertDialog.dismiss()
+            }
         }
-        mDialogView.OK.setOnClickListener {
-            this.dose=new_dose
-            dose_button.text=dose.toString()
-            Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
-            mAlertDialog.dismiss()
-        }
+        //cancel button click of custom layout
         mDialogView.cancel.setOnClickListener {
-            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"cancel",Toast.LENGTH_SHORT).show()
+            //dismiss dialog
             mAlertDialog.dismiss()
         }
+
     }
 
     fun select_time(){
