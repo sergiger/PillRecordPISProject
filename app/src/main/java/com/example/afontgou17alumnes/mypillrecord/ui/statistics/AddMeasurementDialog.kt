@@ -10,6 +10,8 @@ import androidx.fragment.app.DialogFragment
 import com.example.afontgou17alumnes.mypillrecord.MainActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
+import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.MeasurementReminder
+import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.ReminderStatus
 import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.StatisticEntry
 import kotlinx.android.synthetic.main.add_measure_dialog.*
 import java.time.LocalDate
@@ -19,7 +21,7 @@ import kotlin.math.roundToInt
 class AddMeasurementDialog : DialogFragment() {
     var value:Float= Controller.user.weight
     var date:LocalDate= LocalDate.now()
-    var time:LocalTime = LocalTime.now()
+    var time:LocalTime = LocalTime.of(LocalTime.now().hour, LocalTime.now().minute)
     var unit="kg"
     var type:String="Weight"
 
@@ -146,6 +148,8 @@ class AddMeasurementDialog : DialogFragment() {
             }
         }
         //Controller.controllerSharePrefs.sharedUpLoad()
+        Controller.addReminder(MeasurementReminder(this.type,this.unit,LocalDate.of(datePicker.year,datePicker.month+1,datePicker.dayOfMonth),this.time,value,ReminderStatus.DONE))
+        Controller.RemindersToFirebase()
         Controller.StatisticToFirebase()
     }
     fun setType(id:Int){

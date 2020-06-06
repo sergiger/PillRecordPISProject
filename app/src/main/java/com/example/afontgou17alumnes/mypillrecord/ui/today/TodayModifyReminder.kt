@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
+import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.StatisticEntry
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.*
 import kotlinx.android.synthetic.main.activity_today_modify_reminder.*
 import kotlinx.android.synthetic.main.activity_today_modify_reminder.back_arrow
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.number_dialog.view.OK
 import kotlinx.android.synthetic.main.number_dialog.view.cancel
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.time_dialog.view.*
+import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*
 
@@ -178,6 +180,8 @@ class TodayModifyReminder: AppCompatActivity() {
         }
         today_modify_reminder_confirm.setOnClickListener {
             reminder.status = ReminderStatus.DONE
+            if(reminder is MeasurementReminder)
+                addStatistic(reminder)
             val returnIntent = Intent()
             returnIntent.putExtra("Reminder", reminder)
             setResult(Activity.RESULT_OK, returnIntent)
@@ -196,5 +200,37 @@ class TodayModifyReminder: AppCompatActivity() {
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
         }
+    }
+
+    private fun addStatistic(reminder: MeasurementReminder){
+        when(reminder.name){
+            "Weight"-> {
+                Controller.user.statistics.weightData.add(
+                    StatisticEntry(reminder.value,reminder.date)
+                )
+            }
+            "Heart rate"-> {
+                Controller.user.statistics.heartRateData.add(
+                    StatisticEntry(reminder.value, reminder.date)
+                )
+            }
+            "Arterial pressure"-> {Controller.user.statistics.arterialPressureData.add(
+                StatisticEntry(reminder.value,reminder.date)
+            )
+            }
+            "Glucose (before eating)"-> {Controller.user.statistics.glucoseBeforeData.add(
+                StatisticEntry(reminder.value,reminder.date)
+            )
+            }
+            "Glucose (after eating)"-> {Controller.user.statistics.glucoseAfterData.add(
+                StatisticEntry(reminder.value,reminder.date)
+            )
+            }
+            "Temperature"-> {Controller.user.statistics.temperatureData.add(
+                StatisticEntry(reminder.value,reminder.date)
+            )
+            }
+        }
+        Controller.StatisticToFirebase()
     }
 }
