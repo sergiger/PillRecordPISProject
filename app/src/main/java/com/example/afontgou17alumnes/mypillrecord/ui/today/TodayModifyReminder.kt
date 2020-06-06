@@ -119,7 +119,7 @@ class TodayModifyReminder: AppCompatActivity() {
                 }
             }
             else{
-            var infoValue = 0
+            var infoValue = 1
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
             //Set Number Picker
             mDialogView.number_Picker.minValue = 1
@@ -144,14 +144,6 @@ class TodayModifyReminder: AppCompatActivity() {
                 if(reminder is MedicineReminder){
                     reminder.dose = infoValue
                     info_button.text = reminder.dose.toString() + " " + reminder.doseUnit
-                }
-                else if(reminder is MeasurementReminder){
-                    reminder.value = infoValue.toFloat()
-                    info_button.text = reminder.value.toString() + " " + reminder.unit
-                }
-                else if(reminder is ActivityReminder){
-                    reminder.duration = infoValue
-                    info_button.text = reminder.duration.toString() + " min"
                 }
                 Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
                 mAlertDialog.dismiss()
