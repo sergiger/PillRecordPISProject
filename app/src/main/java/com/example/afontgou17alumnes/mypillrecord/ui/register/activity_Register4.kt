@@ -193,12 +193,12 @@ class activity_Register4 : AppCompatActivity() {
 
         }
         if(password.isEmpty()){
-            text_input_password.error = "Pasword is Required"
+            text_input_password.error = "Password is required"
             cont++
 
         }
         if(password_repeat.isEmpty()){
-            text_input_repeat_password.error = "Pasword is Required"
+            text_input_repeat_password.error = "Password is required"
             cont++
 
         }

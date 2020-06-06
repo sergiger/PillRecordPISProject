@@ -75,9 +75,6 @@
             android:name=".ui.settings.legalInformation.myAccount"
             android:screenOrientation="locked" />
         <activity
-            android:name=".ui.settings.legalInformation.extra_information"
-            android:screenOrientation="locked" />
-        <activity
             android:name=".ui.settings.legalInformation.privacy"
             android:screenOrientation="locked" />
         <activity

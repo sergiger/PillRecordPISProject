@@ -116,11 +116,13 @@ class TherapyInformation : AppCompatActivity() {
         }
 
         save_changes_therapy_information.setOnClickListener {
-            therapy.notes = input_note_therapy_infromation.text.toString()
-            val returnIntent = Intent()
-            returnIntent.putExtra("Therapy", therapy)
-            setResult(Activity.RESULT_OK, returnIntent)
-            finish()
+            if(checkAllData()) {
+                therapy.notes = input_note_therapy_infromation.text.toString()
+                val returnIntent = Intent()
+                returnIntent.putExtra("Therapy", therapy)
+                setResult(Activity.RESULT_OK, returnIntent)
+                finish()
+            }else Toast.makeText(this, "Missing Data", Toast.LENGTH_LONG).show()
         }
 
     }

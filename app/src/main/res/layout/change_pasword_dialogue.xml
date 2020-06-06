@@ -10,19 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:hint="Old pasword"
+        android:hint="Old password"
         android:id="@+id/input_old_pasword"></EditText>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:hint="New pasword"
+        android:hint="New password"
         android:id="@+id/input_new_pasword"></EditText>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:hint="New pasword"
+        android:hint="New password"
         android:id="@+id/input_repeat_new_pasword"></EditText>
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,6 +1,5 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -30,7 +29,6 @@ class myAccount : AppCompatActivity() {
     var password=Controller.user.pasword
     var new_gender=gender.toString()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_account_activity)
@@ -40,8 +38,7 @@ class myAccount : AppCompatActivity() {
         Log.e("myAcount", "pwd:  ${Controller.user}")
         val arrayAdapter2: ArrayAdapter<*>
 
-
-        val users2= arrayOf("", "",username,email,birth_year,gender, height,weight)
+        val users2= arrayOf("", "", username, email, birth_year, gender, height,weight)
         val users3=users2 as Array<Any>
         //getActualMyAccount()
         // access the listView from xml file
@@ -49,7 +46,7 @@ class myAccount : AppCompatActivity() {
         arrayAdapter2 = ArrayAdapter(this,android.R.layout.simple_list_item_1, users3)
         opcions_menuu_actual.adapter = arrayAdapter2
         val arrayAdapter: ArrayAdapter<*>
-        val users = arrayOf("Change Pasword", "Extra information","Username","Email","Year of birth","Gender", "Height","Weight")
+        val users = arrayOf("Change password", "Extra information","Username","Email","Year of birth","Gender", "Height","Weight")
         // access the listView from xml file
         var mListView = findViewById<ListView>(R.id.opcions_menu)
         arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, users)
@@ -75,7 +72,7 @@ class myAccount : AppCompatActivity() {
             //AlertDialogBuilder
             val mBuilder = AlertDialog.Builder(this)
                 .setView(mDialogView)
-                .setTitle("Change pasword")
+                .setTitle("Change password")
             //show dialog
             val  mAlertDialog = mBuilder.show()
             //login button click of custom layout
@@ -96,13 +93,13 @@ class myAccount : AppCompatActivity() {
                         }
                     }
                     else{
-                        Toast.makeText(this,"Wrong repeated pasword",Toast.LENGTH_LONG).show()
+                        Toast.makeText(this,"Wrong repeated password",Toast.LENGTH_LONG).show()
                     }
                 }
                 else{
                     Log.e("---------------------", "1 data: ${old_pasword}")
                     Log.e("---------------------", "2 data: $password")
-                    Toast.makeText(this,"Wrong old pasword",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this,"Wrong old password",Toast.LENGTH_LONG).show()
                     mAlertDialog.dismiss()
                 }
             }
@@ -113,13 +110,9 @@ class myAccount : AppCompatActivity() {
                 mAlertDialog.dismiss()
             }
         }
-        else if(position==1){//Extra information
-            val intent = Intent(this, extra_information::class.java)
-            startActivity(intent)
-            //Aqui s'haurà de posar que el user i la contrassenya son null, per a que no puguis tornar
-            //a entrar a la conta amb el mateix user
+        else if(position==1) { // Extra information
         }
-        else if(position==5){//Gender
+        else if(position==5) { //Gender
             //Inflate the dialog with custom view
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.gender_dialoge, null)
             //AlertDialogBuilder

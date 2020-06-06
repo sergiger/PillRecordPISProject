@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/fisical_training"
-        android:title="Fisical training"
+        android:title=" Physical training"
         app:showAsAction="never" />
     <item
         android:id="@+id/Walking"
@@ -11,16 +11,16 @@
         app:showAsAction="never"/>
     <item
         android:id="@+id/Fisiotherapy"
-        android:title="Fisiotherapy"
-        app:showAsAction="never"/>
+        android:title=" Physiotherapy"
+        app:showAsAction="never" />
     <item
         android:id="@+id/Running"
         android:title="Running"
         app:showAsAction="never"/>
     <item
         android:id="@+id/Cicling"
-        android:title="Cicling"
-        app:showAsAction="never"/>
+        android:title="Cycling"
+        app:showAsAction="never" />
     <item
         android:id="@+id/Other"
         android:title="Other"
