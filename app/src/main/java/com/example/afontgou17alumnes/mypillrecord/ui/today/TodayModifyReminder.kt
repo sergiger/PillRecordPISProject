@@ -77,8 +77,6 @@ class TodayModifyReminder: AppCompatActivity() {
                         //dismiss dialog
                         mAlertDialog.dismiss()
                     }
-
-
                 }
                 //cancel button click of custom layout
                 mDialogView.cancel.setOnClickListener {
@@ -118,7 +116,7 @@ class TodayModifyReminder: AppCompatActivity() {
                     mAlertDialog.dismiss()
                 }
             }
-            else{
+            if(reminder is MedicineReminder){
             var infoValue = 1
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
             //Set Number Picker
