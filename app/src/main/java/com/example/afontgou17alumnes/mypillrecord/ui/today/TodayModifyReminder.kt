@@ -11,10 +11,15 @@ import com.example.afontgou17alumnes.mypillrecord.R
 import com.example.afontgou17alumnes.mypillrecord.data.controller.Controller
 import com.example.afontgou17alumnes.mypillrecord.data.model.reminder.*
 import com.example.afontgou17alumnes.mypillrecord.data.model.statistics.StatisticEntry
+import kotlinx.android.synthetic.main.activity_add_unplanned_activity.*
 import kotlinx.android.synthetic.main.activity_today_modify_reminder.*
+import kotlinx.android.synthetic.main.activity_today_modify_reminder.back_arrow
+import kotlinx.android.synthetic.main.activity_today_modify_reminder.info_button
+import kotlinx.android.synthetic.main.height_dialoge.view.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.number_dialog.view.OK
 import kotlinx.android.synthetic.main.number_dialog.view.cancel
+import kotlinx.android.synthetic.main.specific_dates_dialoge.view.*
 import kotlinx.android.synthetic.main.time_dialog.view.*
 import java.time.LocalDate
 import java.time.LocalTime
@@ -52,6 +57,70 @@ class TodayModifyReminder: AppCompatActivity() {
 
         //Set Listeners
         info_button.setOnClickListener {
+            if(reminder is MeasurementReminder){
+                //Height
+                //Inflate the dialog with custom view
+                val mDialogView = LayoutInflater.from(this).inflate(R.layout.value_dialoge, null)
+                //AlertDialogBuilder
+                val mBuilder = AlertDialog.Builder(this)
+                    .setView(mDialogView)
+                    .setTitle("Value")
+                //show dialog
+                val  mAlertDialog = mBuilder.show()
+                //login button click of custom layout
+                mDialogView.OK_height.setOnClickListener {
+                    val new_height = mDialogView.input_height.text.toString() //aquesta variable servirà per actualitzar l'edat
+                    if(!new_height.equals("")) {
+                        if(reminder is MeasurementReminder){
+                            Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show()
+                            reminder.value=new_height.toFloat()
+                            info_button.text = reminder.value.toString() + " " + reminder.unit
+                        }
+                        //dismiss dialog
+                        mAlertDialog.dismiss()
+                    }
+
+
+                }
+                //cancel button click of custom layout
+                mDialogView.cancel.setOnClickListener {
+                    Toast.makeText(this,"cancel",Toast.LENGTH_SHORT).show()
+                    //dismiss dialog
+                    mAlertDialog.dismiss()
+                }
+
+            }
+            if(reminder is ActivityReminder){
+                var new_duration=reminder.duration
+                //Duration
+                //Inflate the dialog with custom view
+                val mDialogView = android.view.LayoutInflater.from(this).inflate(com.example.afontgou17alumnes.mypillrecord.R.layout.duration_dialoge, null)
+                //AlertDialogBuilder
+                val mBuilder = androidx.appcompat.app.AlertDialog.Builder(this)
+                    .setView(mDialogView)
+                    .setTitle("Duration")
+                //show dialog
+                val  mAlertDialog = mBuilder.show()
+                //login button click of custom layout
+                mDialogView.OK_height.setOnClickListener {
+                    val new_height = mDialogView.input_height.text.toString() //aquesta variable servirà per actualitzar l'edat
+                    if(!new_height.equals("")) {
+                        android.widget.Toast.makeText(this,"Added", android.widget.Toast.LENGTH_SHORT).show()
+                        new_duration=new_height.toInt()
+                        reminder.duration=new_duration
+                        info_button.text = reminder.duration.toString() + " min"
+                        //dismiss dialog
+                        mAlertDialog.dismiss()
+                    }
+                }
+                //cancel button click of custom layout
+                mDialogView.cancel.setOnClickListener {
+                    android.widget.Toast.makeText(this,"cancel", android.widget.Toast.LENGTH_SHORT).show()
+                    //dismiss dialog
+                    mAlertDialog.dismiss()
+                }
+            }
+            else{
             var infoValue = 0
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
             //Set Number Picker
@@ -93,6 +162,7 @@ class TodayModifyReminder: AppCompatActivity() {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
                 mAlertDialog.dismiss()
             }
+        }
         }
         hour_button_today_modify_reminder.setOnClickListener {
             var newHour= Calendar.getInstance().get(Calendar.HOUR_OF_DAY)

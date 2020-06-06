@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_add_unplanned_activity.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.back_arrow
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.info_button
 import kotlinx.android.synthetic.main.activity_add_unplanned_activity.view.*
+import kotlinx.android.synthetic.main.height_dialoge.view.*
 import kotlinx.android.synthetic.main.activity_add_unplanned_measurement.*
 import kotlinx.android.synthetic.main.number_dialog.view.*
 import kotlinx.android.synthetic.main.specific_dates_dialoge.view.OK
@@ -85,31 +86,35 @@ class AddUnplannedActivity : AppCompatActivity() {
 
     fun select_duration(){
         var new_duration=this.duration
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.number_dialog, null)
-        //Set Number Picker
-        mDialogView.number_Picker.minValue = 1
-        mDialogView.number_Picker.maxValue = 100
-        mDialogView.number_Picker.wrapSelectorWheel = false
-        mDialogView.number_Picker.value=this.duration
-
+        //Duration
+        //Inflate the dialog with custom view
+        val mDialogView = android.view.LayoutInflater.from(this).inflate(com.example.afontgou17alumnes.mypillrecord.R.layout.duration_dialoge, null)
         //AlertDialogBuilder
-        val mBuilder = AlertDialog.Builder(this)
+        val mBuilder = androidx.appcompat.app.AlertDialog.Builder(this)
             .setView(mDialogView)
-            .setTitle("Set duration")
-        val mAlertDialog = mBuilder.show()
-        mDialogView.number_Picker.setOnValueChangedListener { picker, oldVal, newVal ->
-            new_duration=newVal
+            .setTitle("Duration")
+        //show dialog
+        val  mAlertDialog = mBuilder.show()
+        //login button click of custom layout
+        mDialogView.OK_height.setOnClickListener {
+            val new_height = mDialogView.input_height.text.toString() //aquesta variable servirà per actualitzar l'edat
+            if(!new_height.equals("")) {
+                android.widget.Toast.makeText(this,"Added", android.widget.Toast.LENGTH_SHORT).show()
+                new_duration=new_height.toInt()
+                this.duration=new_duration
+                duration_button.text=this.duration.toString()+" min"
+                Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
+                //dismiss dialog
+                mAlertDialog.dismiss()
+            }
         }
-        mDialogView.OK.setOnClickListener {
-            this.duration=new_duration
-            duration_button.text=this.duration.toString()+" min"
-            Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
-            mAlertDialog.dismiss()
-        }
+        //cancel button click of custom layout
         mDialogView.cancel.setOnClickListener {
-            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+            android.widget.Toast.makeText(this,"cancel", android.widget.Toast.LENGTH_SHORT).show()
+            //dismiss dialog
             mAlertDialog.dismiss()
         }
+
     }
 
     fun select_time(){
