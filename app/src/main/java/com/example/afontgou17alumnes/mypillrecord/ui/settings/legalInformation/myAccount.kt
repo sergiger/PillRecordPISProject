@@ -1,6 +1,5 @@
 package com.example.afontgou17alumnes.mypillrecord.ui.settings.legalInformation
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -30,7 +29,6 @@ class myAccount : AppCompatActivity() {
     var password=Controller.user.pasword
     var new_gender=gender.toString()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_account_activity)
@@ -40,8 +38,7 @@ class myAccount : AppCompatActivity() {
         Log.e("myAcount", "pwd:  ${Controller.user}")
         val arrayAdapter2: ArrayAdapter<*>
 
-
-        val users2= arrayOf("", "",username,email,birth_year,gender, height,weight)
+        val users2= arrayOf("", "", username, email, birth_year, gender, height,weight)
         val users3=users2 as Array<Any>
         //getActualMyAccount()
         // access the listView from xml file
@@ -113,13 +110,9 @@ class myAccount : AppCompatActivity() {
                 mAlertDialog.dismiss()
             }
         }
-        else if(position==1){//Extra information
-            val intent = Intent(this, extra_information::class.java)
-            startActivity(intent)
-            //Aqui s'haurà de posar que el user i la contrassenya son null, per a que no puguis tornar
-            //a entrar a la conta amb el mateix user
+        else if(position==1) { // Extra information
         }
-        else if(position==5){//Gender
+        else if(position==5) { //Gender
             //Inflate the dialog with custom view
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.gender_dialoge, null)
             //AlertDialogBuilder
