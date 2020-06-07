@@ -24,7 +24,7 @@ class ajustes_activity : AppCompatActivity() {
         }
         val arrayAdapter: ArrayAdapter<*>
         val users = arrayOf("My Account", "Change Notifications", "Close Session",
-            /*"Legal information",*/"Version B.34.53")
+            /*"Legal information",*/"Version 53.9.26")
 
         // access the listView from xml file
         var mListView = findViewById<ListView>(R.id.opcions_menu)
